@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block content %}
+
+
+<div class="row">  
+    <div class="col-12">        
+    <h1>Lista de Empréstimos Pagos</h1>        
+    </div>
+    </div>
+
+    <table class="table table table-hover">
+        <thead class="thead-light">
+            <tr>                    
+                <th scope="col">valor_pago</th>
+                <th scope="col">data_pagamento </th> 
+            </tr>
+        </thead>
+        <tbody>
+            {% for emprestimo in emprestimos %} 
+                <tr> 
+                         
+                    <th 
+                        scope="row">R$ {{ emprestimo.valor_pago }}
+                    </th> 
+
+                    <td>
+                        {{ emprestimo.data_pagamento }}
+                    </td>
+
+                </tr> 
+            {% endfor %}    
+        </tbody>
+    </table> 
+   
+</div>  
+</div>
+
+
+
+
+
+
+
+
+
+  
+{% endblock content %}

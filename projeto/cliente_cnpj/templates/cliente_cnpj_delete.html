@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Tem certeza que quer deletar: {{ object }}</h2>
+
+<div class="row">   
+    <div class="col">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-danger" value="Sim">
+            <a href="{% url 'cliente_cnpj:cliente_cnpj_list' %}" class="btn btn-primary">Não</a>
+        </form>
+    </div>
+</div>
+  
+{% endblock content %}
+

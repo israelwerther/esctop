@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block js %}{% endblock js %}
+
+
+{% block content %}
+    <div class="jumbotron">
+        <div class="container">
+            <h1>O Cliente já possui Fiador cadastrado?</h1>  
+            <span class="pull-center">
+                <a href="{% url 'cliente:cliente_add' %}" type="button" class="btn btn-secondary">SIM</a>                
+                <a href="{% url 'cliente:fiador_add' %}" type="button" class="btn btn-secondary">NÃO</a>                
+            </span>            
+        </div>        
+    </div>
+{% endblock content %}
+
+            

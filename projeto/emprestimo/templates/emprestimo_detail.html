@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<span class="pull-right">
+    <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-secondary">Voltar</a>
+    <a href="{% url 'emprestimo:emprestimo_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
+    <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
+   
+    <div class="btn-group" role="group" >        
+    {% if object.cliente %}    
+        <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>    
+    {% endif %}
+        <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-warning">Promissória</a>
+        <a href="{% url 'emprestimo:emprestimo_contrato' object.pk %}" target="_blank" type="button" class="btn btn-warning">Contrato</a>        
+    </div>
+    <br>
+    <br>
+    <div class="btn-group pull-right" role="group" >        
+    {% if object.cliente %}    
+    {% endif %}
+
+    {% if object.cliente_cnpj %}  
+        <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-info"> Contrato </a>
+    {% endif %}
+
+    {% if object.cliente %}
+        <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-info"> Contrato </a>
+    {% endif %}
+    </div>        
+</span>
+
+<h1>Emprestimo Nº {{ object.n_contrato }}</h1>
+
+<div class="col-sm-6">
+    <table class="table table-user-information">
+        <tbody>
+            <tr>
+                <th class="text-right">funcionario</th>
+                <td>{{ object.funcionario }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Nº Contrato</th>
+                <td>{{ object.n_contrato }}</td>
+            </tr>
+            {% if object.cliente %}
+            <tr>
+                <th class="text-right">Cliente</th>
+                <td>{{ object.cliente }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <th class="text-right">Cliente</th>
+                <td>{{ object.cliente_cnpj }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <th class="text-right">Valor</th>
+                <td>{{ object.valor_emprestado }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Parcelas</th>
+                <td>{{ object.qtd_parcelas }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Prestacao</th>
+                <td>{{ object.valor_prestacao }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Data do Empréstimo</th>
+                <td type="form-control">{{ object.dt_emprestimo }}</td>                               
+            </tr>            
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

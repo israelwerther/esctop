@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="jumbotron jumbotron-fluid shadow rounded">
+        <div class="container">
+            <h1>Escolha um Cliente</h1>           
+
+            <span class="pull-center">
+                <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">CPF</a>                
+                <a href="{% url 'cliente_cnpj:cliente_cnpj_list' %}" type="button" class="btn btn-secondary">CNPJ</a>                
+            </span>            
+        </div>        
+    </div>
+{% endblock content %}

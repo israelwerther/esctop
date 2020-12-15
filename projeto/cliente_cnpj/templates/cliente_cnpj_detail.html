@@ -1,0 +1,392 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+
+<style>
+
+
+@media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }    
+    @page {
+        margin: 0.5cm;
+    }    
+    label {
+        font-size: 9pt; 
+        padding: 0px;
+    }
+    h2{
+        font-weight: bold;
+        padding: 0px;
+        font-size: 13pt; 
+    }    
+    div{
+        columns:90px 1; 
+        margin: 0px,0px,0px,0px;        
+    }
+    input.form-control{
+        font-size: 9pt;  
+        border: none;
+        /* left: -10px; */
+        padding: 0px;
+    }    
+    @media all {
+        .page-break { display: none; }
+    }
+    @media print {
+        .page-break { display: block; page-break-before: always; }
+    }
+}  
+
+</style>
+
+<span class="pull-right">
+    <a href="{% url 'cliente_cnpj:cliente_cnpj_list' %}" type="button" class="btn btn-secondary no-print">Voltar</a>
+    <a href="{% url 'cliente_cnpj:cliente_cnpjupdate' object.pk %}" type="button" class="btn btn-info no-print">Editar</a>
+    <a href="{% url 'cliente_cnpj:cliente_cnpj_delete' object.pk %}" type="button" class="btn btn-danger no-print">Deletar</a>
+    <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>
+    <!-- <button onclick="window.print()">Print this page</button> -->
+</span>
+
+<h2>DETALHES(CNPJ)  {{ object.razao_social }}</h2>
+<div class="row">       
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Razão Social</label>
+            <input value="{{ object.razao_social }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Nome Fantasia</label>
+            <input  value="{{ object.nome_fantasia }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>CNPJ</label>
+            <input type="text" value="{{ object.cnpj }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Fundação</label>
+            <input type="text" value="{{ object.fundacao }}" readonly class="form-control">
+        </div>
+    </div>    
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Inscrição Estadual</label>
+            <input type="text" value="{{ object.inscricao_estadual }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Inscrição Municipal</label>
+            <input type="text" value="{{ object.inscricao_municipal }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Fiador</label>
+            <input type="text" value="{{ object.fiador }}" readonly class="form-control">
+        </div>
+    </div>
+</div>
+<h2> ENDEREÇO </h2>
+<div class="row"> 
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>CEP</label>
+            <input type="text" value="{{ object.cep }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Rua</label>
+            <input type="text" value="{{ object.rua }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Bairro</label>
+            <input type="text" value="{{ object.bairro }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Cidade</label>
+            <input type="text" value="{{ object.cidade }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Estado</label>
+            <input type="text" value="{{ object.uf }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Nº</label>
+            <input type="text" value="{{ object.numero_casa }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Ponto de Referencia</label>
+            <input type="text" value="{{ object.ponto_referencia }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Complemento</label>
+            <input type="text" value="{{ object.complemento }}" readonly class="form-control">
+        </div>
+    </div>
+</div>
+
+<h2> CONTATO </h2>
+<div class="row">
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" value="{{ object.email }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" value="{{ object.email }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Contato 1</label>
+            <input type="text" value="{{ object.contato1 }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Contato 2</label>
+            <input type="text" value="{{ object.contato2 }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Celular 1</label>
+            <input type="text" value="{{ object.celular1 }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Celular 2</label>
+            <input type="text" value="{{ object.celular2 }}" readonly class="form-control">
+        </div>
+    </div>
+</div>
+
+<h2> DADOS BANCÁRIOS </h2>
+<div class="row"> 
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>banco</label>
+            <input type="text" value="{{ object.banco }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Agência</label>
+            <input type="text" value="{{ object.n_operacao }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>conta</label>
+            <input type="text" value="{{ object.tipo_de_conta }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>obs_bancaria</label>
+            <input type="text" value="{{ object.agencia }}" readonly class="form-control">
+        </div>
+    </div> 
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>obs_bancaria</label>
+            <input type="text" value="{{ object.conta }}" readonly class="form-control">
+        </div>
+    </div>   
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h2> REPRESENTANTE </h2><br>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Nome</label>
+            <input type="text" value="{{ object.rep_nome }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>CPF</label>
+            <input type="text" value="{{ object.rep_cpf }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>RG</label>
+            <input type="text" value="{{ object.rep_rg }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Orgão Emissor</label>
+            <input type="text" value="{{ object.rep_orgao_emissor }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Data de Nascimento</label>
+            <input type="text" value="{{ object.rep_data_nasc }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Naturalidade</label>
+            <input type="text" value="{{ object.rep_naturalidade }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Nacionalidade</label>
+            <input type="text" value="{{ object.rep_nacionalidade }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Estado Civil</label>
+            <input type="text" value="{{ object.rep_estado_civil }}" readonly class="form-control">
+        </div>
+    </div>
+    {% if object.rep_estado_civil == 'casado' %}
+        <div class="col-sm-6"> 
+            <div class="form-group">
+                <label>Nome Cônjuge</label>
+                <input type="text" value="{{ object.rep_conjuge_nome }}" readonly class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6"> 
+            <div class="form-group">
+                <label>CPF Cônjuge</label>
+                <input type="text" value="{{ object.rep_conjuge_cpf }}" readonly class="form-control">
+            </div>
+        </div>
+        <div class="col-sm-6"> 
+            <div class="form-group">
+                <label>Tel Fixo</label>
+                <input type="text" value="{{ object.rep_conjuge_telefone }}" readonly class="form-control">
+            </div>
+        </div>    
+    {% endif %}
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Tel Fixo</label>
+            <input type="text" value="{{ object.rep_contato1 }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Celular 1</label>
+            <input type="text" value="{{ object.rep_celular1 }}" readonly class="form-control">
+        </div>
+    </div>
+    {% if "{{ object.rep_celular2 }}" != null %}    
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Celular 2</label>
+            <input type="text" value="{{ object.rep_celular2 }}" readonly class="form-control">
+        </div>
+    </div>
+    {% endif %}
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" value="{{ object.rep_email }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>CEP</label>
+            <input type="text" value="{{ object.rep_cep }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Rua</label>
+            <input type="text" value="{{ object.rep_rua }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Bairro</label>
+            <input type="text" value="{{ object.rep_bairro }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Cidade</label>
+            <input type="text" value="{{ object.rep_cidade }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Estado</label>
+            <input type="text" value="{{ object.rep_uf }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Nº Casa</label>
+            <input type="text" value="{{ object.rep_numero_casa }}" readonly class="form-control">
+        </div>
+    </div>
+    <div class="col-sm-6"> 
+        <div class="form-group">
+            <label>Ponto de Referencia</label>
+            <input type="text" value="{{ object.rep_ponto_referencia }}" readonly class="form-control">
+        </div>
+    </div>
+</div>
+
+<script>
+    var dt = new Date()
+    var ndt = new Date()
+
+    var dia_semana = ndt.getDay()
+    var dia = ndt.getDate()
+    var mes = ndt.getMonth()
+    var ano = ndt.getFullYear()
+
+    var horas = ndt.getHours()
+    var minutos = ndt.getMinutes()
+    var segundos = ndt.getSeconds()
+
+
+    var meses = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho" ,"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
+    var semanas = new Array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado")
+
+
+    document.write(semanas[dia_semana] + ", " + dia + " de " + meses[mes] + " de " + ano + "<br/>")
+    document.write(horas + ":" + minutos + ":" + segundos)
+    
+</script>
+
+{% endblock content %}

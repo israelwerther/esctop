@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html charset="UTF-8">
+<head>    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="robots" content="noindex">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    
+    
+<style>
+    body {
+        font-family: "Arial"; 
+        margin:0;
+        padding:0;
+        line-height: 1.4em;     
+    }
+    
+    .document {
+        margin: auto auto;
+        width: 236mm;
+        height: 108mm;
+        background-color: #fff;
+        padding-bottom: 150px;
+    }   
+    h2{
+        text-align: center;
+        padding: 10px;  
+        text-decoration: underline;
+    }
+    .fontmenor{
+        font-size: 18px;
+        padding: 5px; 
+        margin: 30px; 
+        text-align: justify;
+    }
+    div.num_contrato{        
+        word-break: normal;
+        width: 360px;        
+        left: 80px;
+        top: 75px;
+        position: absolute;
+        font-size: 17px; 
+        text-align:center;
+        border: 1px solid black;        
+    }    
+    div.credito{        
+        word-break: normal;
+        width: 360px;        
+        left: 480px;
+        top: 75px;
+        position: absolute;
+        font-size: 17px;
+        text-align:center;    
+        border: 1px solid black;       
+    }    
+    div.quadro {
+        word-break: normal;   
+        left: 0px;       
+        position: relative;
+        font-size: 17px;
+        text-align: justify;
+        padding: 10px; 
+        border: 1px solid black;
+        border-collapse:initial
+    }
+    div.titulo_quadro {
+        text-align: center;
+        padding: 10px;  
+        border: 1px solid black;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    div.paragrafo {
+        word-break: normal;   
+        left: 0px;       
+        position: relative;
+        font-size: 17px;
+        text-align: justify;
+        padding: 10px;         
+    }
+    
+    table {
+        text-align: center;
+        width: 80%;
+        position: center;
+        border-collapse: collapse;        
+        margin-left: 90px;        
+    } 
+    .maiusculo {
+        text-transform: capitalize;
+    }
+    /*CSS para impressão*/
+    
+    @media print {
+        p { 
+            page-break-inside: avoid; 
+        }
+    }    
+    td {
+        
+        margin: 0px;
+    }
+
+    .paginacao1{        
+        margin-top: 1100px;
+        margin-left: 850px;
+        position: absolute;
+    }
+    .paginacao2{        
+        margin-top: 2310px;
+        margin-left: 850px;
+        position: absolute;
+    }
+    .paginacao3{        
+        margin-top: 3500px;
+        margin-left: 850px;
+        position: absolute;
+    }
+    .paginacao4{        
+        margin-top: 4600px;
+        margin-left: 850px;
+        position: absolute;
+    }
+    .datacao{
+        margin-right: 40px;
+    }
+   
+    
+    /* <button class="print">Print</button> */
+    
+</style>
+</head>
+<body>
+    
+    <div class="document">
+        <div id = "contrato" class="col-sm-6">
+           
+        </div>
+    </div>  
+    
+<script>
+
+function toFixed(num, fixed) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -2) + '})?');
+    return num.toString().match(re)[0];
+}
+
+window.onload = function imprimir(){     
+        var valor_emprestado   = Number({{object.valor_emprestado}})
+        var qtd_parcelas       = Number({{object.qtd_parcelas}})
+        var prestacao          = Number({{object.valor_prestacao}})
+        var n_contrato         = Number({{object.n_contrato}})        
+        var principal          = valor_emprestado/qtd_parcelas  
+        var mes_do_emprestimo  = Number({{object.dt_emprestimo.month}})
+    
+        var iof_inicial       = 0
+        var iof_diario        = 0.0041        
+        var qtd_dias          = 0
+        var iof_adicional     = 0.0038  
+
+        var aux1 = 0
+        var aux2 = 0
+        var aux3 = 0
+        var aux4 = 0
+        var aux5 = 0
+    
+    //CALCULA O IOF_INICIAL (1º PASSO)
+    for (var i = 0 ; i < qtd_parcelas; i++){
+        if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
+            qtd_dias += 31
+        }else{
+            qtd_dias +=30
+        }
+        if(mes_do_emprestimo == 13){
+            mes_do_emprestimo = 1
+        }
+
+        var aux = 0 
+        iof_inicial += ((principal*(qtd_dias*0.0041))/100)
+        aux2 += Number(toFixed((qtd_dias*iof_diario), 2))
+        aux1 = principal*iof_adicional        
+        iof_inicial = Number(toFixed(iof_inicial, 4)) 
+        iof_inicial += principal*iof_adicional
+        
+        aux1 = principal*iof_adicional
+        iof_inicial = Number(toFixed(iof_inicial, 2))
+        mes_do_emprestimo++
+    }    
+    
+    //CALCULA O IOF_REAL (2º PASSO)   
+        var iof_real = 0    
+        iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
+        iof_real = Number(toFixed(iof_real, 3))    
+    
+    //CALCULA O VALOR DA PARCELA(3º PASSO)
+        var valor_emprestado   = Number({{object.valor_emprestado}})                
+        var qtd_parcelas       = Number({{object.qtd_parcelas}})
+        var prestacao          = Number({{object.valor_prestacao}})
+        var cap_iof = iof_real+valor_emprestado
+
+        var valor_parcela = 0
+        var valor_devido = 0 
+               
+        valor_parcela = (cap_iof*(1+(qtd_parcelas*9.5)/100))/qtd_parcelas
+        valor_parcela = String(toFixed(valor_parcela, 2))  
+
+        valor_devido = valor_parcela
+        var valor_total_devido = 0
+        valor_total_devido = String(toFixed(valor_parcela*qtd_parcelas, 2))
+    
+
+    //VARIÁVEIS DA DATA DO EMPRESTIMO
+    var contador_meses = 0
+    var contador_anos  = 0
+    var meses = new Array("01", "02", "03", "04", "05", "06" ,"07", "08", "09", "10", "11", "12")
+    var dataEmprestimo = "{{ object.dt_emprestimo}}"
+    var dt = new Date(dataEmprestimo)
+   		
+    var dia
+    var mes
+    var ano
+    var aux_dia = {{object.dt_emprestimo.day}}
+    var aux_mes = {{object.dt_emprestimo.month}}
+    var aux_ano = {{object.dt_emprestimo.year}}
+
+    var trinta_e_um = 0
+    
+    dia  = aux_dia
+    mes  = aux_mes+contador_meses
+    ano  = aux_ano
+
+    //VARIÁVEIS DO EMPRESTIMO
+    var aux_qtd_parccela = {{object.qtd_parcelas}}
+    var dinheiro = 0
+    dinheiro = "{{object.valor_prestacao}}"
+    
+    var qtd_parcelas = parseInt("{{object.qtd_parcelas}}")
+    qtd_parcelas_extenso = String(qtd_parcelas).extenso()
+
+    var data_emissao = "{{object.dt_emprestimo|date:"d/m/Y"}}"
+    var valor_da_parcela = parseFloat("{{object.valor_emprestado|floatformat:2}}".replace(',', '.'))
+    var valor_da_parcela_int = parseInt("{{object.valor_emprestado|floatformat:2}}".replace(',', '.'))
+    
+    var valor_multa = parseFloat((valor_da_parcela*0.020)).toFixed(2)			
+    var valor_juros_dia = (valor_da_parcela*0.0066).toFixed(2)
+    var contador_parcela = 0
+    
+    
+    //VARIÁVEIS DO CLIENTE CNPJ
+    var cliente_cnpj         = "{{object.cliente_cnpj.razao_social}}"
+    var fundacao             = "{{object.cliente_cnpj.fundacao}}"
+    var razao_social         = "{{object.cliente_cnpj.razao_social}}"
+    var cnpj                 = "{{object.cliente_cnpj.cnpj}}"
+    var cnpj_cep             = "{{object.cliente_cnpj.cep}}"
+    var cnpj_rua             = "{{object.cliente_cnpj.rua}}"
+    var cnpj_bairro          = "{{object.cliente_cnpj.bairro}}"
+    var cnpj_cidade          = "{{object.cliente_cnpj.cidade}}"
+    var cnpj_uf              = "{{object.cliente_cnpj.uf}}"
+    var cnpj_numero_casa     = "{{object.cliente_cnpj.numero_casa}}"
+    var cnpj_celular1        = "{{object.cliente_cnpj.celular1}}"
+    var cnpj_email           = "{{object.cliente_cnpj.email}}"
+
+    //VARIÁVEIS DO CLIENTE CNPJ(REPRESENTANTE)
+    var representante               = "{{object.cliente_cnpj.rep_nome}}"
+    var representante_cpf           = "{{object.cliente_cnpj.rep_cpf}}"
+    var representante_rg            = "{{object.cliente_cnpj.rep_rg}}"    
+    var rep_orgao_emissor            = "{{object.cliente_cnpj.rep_orgao_emissor}}"    
+    var rep_estado_civil            = "{{object.cliente_cnpj.rep_estado_civil}}" 
+    var rep_nacionalidade           = "{{object.cliente_cnpj.rep_nacionalidade}}"
+    var representante_cep           = "{{object.cliente_cnpj.rep_cep}}"
+    var representante_rua           = "{{object.cliente_cnpj.rep_rua}}"
+    var representante_bairro        = "{{object.cliente_cnpj.rep_bairro}}"
+    var representante_cidade        = "{{object.cliente_cnpj.rep_cidade}}"
+    var representante_uf            = "{{object.cliente_cnpj.rep_uf}}"
+    var representante_numero_casa   = "{{object.cliente_cnpj.rep_numero_casa}}"
+    var representante_contato1      = "{{object.cliente_cnpj.rep_contato1}}"
+
+    //VARIÁVEIS DO FIADOR CNPJ
+    var fiador                 = "{{object.cliente_cnpj.fiador.fiador_nome}}"
+    var fiador_cpf             = "{{object.cliente_cnpj.fiador.fiador_cpf}}"
+    var fiador_rg              = "{{object.cliente_cnpj.fiador.fiador_rg}}"
+    var fiador_org_emissor     = "{{object.cliente_cnpj.fiador.fiador_org_emissor}}"
+    var fiador_nacionalidade   = "{{object.cliente_cnpj.fiador.fiador_nacionalidade}}"
+    var fiador_estado_civil    = "{{object.cliente_cnpj.fiador.fiador_estado_civil}}"
+    var fiador_cep             = "{{object.cliente_cnpj.fiador.fiador_cep}}"
+    var fiador_rua             = "{{object.cliente_cnpj.fiador.fiador_rua}}"
+    var fiador_bairro          = "{{object.cliente_cnpj.fiador.fiador_bairro}}"
+    var fiador_cidade          = "{{object.cliente_cnpj.fiador.fiador_cidade}}"
+    var fiador_uf              = "{{object.cliente_cnpj.fiador.fiador_uf}}"
+    var fiador_numero_casa     = "{{object.cliente_cnpj.fiador.fiador_numero_casa}}"
+
+    //VARIÁVEIS DO FIADOR CPF
+    var fiador_                = "{{object.cliente.fiador.nome}}"
+
+    //CORREÇÃO DO VALOR TOTAL
+    var valorTotal = parseFloat("{{object.valor_prestacao|floatformat:2}}".replace(',', '.'))
+    var parceTotal = parseInt("{{object.qtd_parcelas|floatformat:2}}".replace(',', '.'))
+
+    var resultado = 0 
+    resultado = parseFloat(valorTotal*parceTotal).toFixed(2)
+    resultado_ext = resultado
+    resultado_int = parseInt(resultado_ext)
+    resultado = resultado.replace('.', ',')
+
+    var real = parseInt(resultado_ext)	
+    real = String(real).extenso()
+    
+    var centavos = parseFloat((resultado_ext-resultado_int)).toFixed(2)	
+    centavos = String(centavos).extenso()        
+    
+    //ENTRA NO CONTRATO QUANDO É CLIENTE CNPJ COM REPRESENTANTE
+    if(cliente_cnpj){
+        contrato.innerHTML +=
+        `
+        <p class="paginacao1">
+            1/4 
+        </p>
+        <p class="paginacao2">
+            2/4 
+        </p>
+        <p class="paginacao3">
+            3/4 
+        </p> 
+        <p class="paginacao4">
+            4/4 
+        </p>   
+        <h2>CONTRATO DE MÚTUO FINANCEIRO</h2><br><br>
+    `
+    }
+    if(cliente_cnpj){
+        contrato.innerHTML +=
+        `
+        <div class="num_contrato" > 
+            <strong> Nº DO CONTRATO </strong> <br>
+            ${n_contrato}
+        </div>
+        <br>
+        `
+    }
+    if(cliente_cnpj){
+        contrato.innerHTML +=
+        `
+        <div class="credito" >
+            <strong> VALOR DO CRÉDITO </strong><br>
+            R$ ${"{{object.valor_emprestado}}"}
+        </div>
+
+        <div class="titulo_quadro">QUADRO 01 - PARTES </div>
+        <div class="quadro" >    
+            <strong> I-CONTRATANTE MUTUANTE</strong><br>
+            Nome/Razão Social: ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA 
+            CNPJ: 35.297.061/0001-47 
+            Endereço:   Av. das Fronteiras, 1287, Bairro: Nsa Sra da Apresentação, 
+            Cidade: Natal RN- 
+            CEP:  59114-275
+            Telefone: (84)9 9461-9962
+            E-mail: esctoprn@gmail.com            
+        </div>
+
+        <div class="quadro" > 
+            <strong> II-CONTRATANTE MUTUÁRIA </strong><br>
+            Nome/Razão Social: <a class="maiusculo">${razao_social}</a>,
+            CNPJ: ${cnpj},
+            Endereço: ${cnpj_rua}, ${cnpj_numero_casa}, ${cnpj_bairro}, ${cnpj_cidade}-${cnpj_uf} CEP: ${cnpj_cep},
+            Telefone: ${cnpj_celular1},
+            E-mail: ${cnpj_email} 
+        </div>
+
+        <div class="quadro" > 
+            <strong> II.1-REPRESENTANTE MUTUÁRIA </strong><br>
+            Nome: ${representante},
+            CPF:  ${representante_cpf},
+            RG/órgão Emissor: ${representante_rg}, ${rep_orgao_emissor}, Nacionalidade: ${rep_nacionalidade}, Estado Civil: ${rep_estado_civil}
+            Endereço: ${representante_rua}, ${representante_numero_casa}, ${representante_bairro}, 
+            ${representante_cidade}-${representante_uf}, CEP: ${representante_cep}
+        </div>
+        `
+    }
+    if(!fiador && cliente_cnpj ){
+        contrato.innerHTML +=       
+        `
+        <div class="quadro" > 
+            <strong> III-DO GARANTIDOR - FIADOR </strong><br>
+            Nome: ${representante},
+            CPF:  ${representante_cpf},
+            RG/órgão Emissor: ${representante_rg}, ${rep_orgao_emissor}, Nacionalidade: ${rep_nacionalidade}, Estado Civil: ${rep_estado_civil}
+            Endereço: ${representante_rua}, ${representante_numero_casa}, ${representante_bairro}, 
+            ${representante_cidade}-${representante_uf}, CEP: ${representante_cep}
+        </div>
+        `
+    }
+    if(fiador){
+        contrato.innerHTML +=       
+         `
+        <div class="quadro" > 
+            <strong> III-DO GARANTIDOR - FIADOR  </strong><br>
+            Nome: ${fiador},
+            CPF: ${fiador_cpf}    RG/órgão Emissor: ${fiador_rg} ${fiador_org_emissor}  
+            Nacionalidade: ${fiador_nacionalidade} 
+            Estado Civil: ${fiador_estado_civil} 
+            Endereço: ${fiador_rua} ${fiador_numero_casa}  Bairro: ${fiador_bairro}  Cidade: ${fiador_cidade}-${fiador_uf} - CEP: ${fiador_cep}   
+        </div>
+        <br>         
+        `
+    }
+    if(cliente_cnpj){
+        contrato.innerHTML +=       
+        `
+        <div class="titulo_quadro">QUADRO 02 - CRONOGRAMA DE REEMBOLSO</div><br> 
+        <table cellspacing="0" cellpadding="0" border="1">       
+            <tr>
+                <td width="33%">
+                    <b>Nº PARCELAS</b>
+                </td>
+                <td width="33%">
+                    <b>VENCIMENTO</b>
+                </td>
+                <td width="39%">
+                    <b>VALOR</b>
+                </td>						
+            </tr>
+        </table>
+        `
+        for(var i=0; i<{{object.qtd_parcelas}}; i++){
+            contador_parcela++
+            mes++
+
+            //AJUSTA A DATA QUANDO O MES É FEVEREIRO 
+            if(dia == 1 && mes == 4){
+                dia = 30 
+                mes = 3
+            }
+            if(dia == 30 && mes == 2){
+                dia = 1 
+                mes = 3
+            }
+            
+            //AJUSTA MESES E ANOS 
+            if(mes == 13){
+                contador_meses = 0
+                aux_mes = 1
+                mes = 1	
+                aux_ano++
+                ano++				
+            }
+            
+        contrato.innerHTML +=
+        `
+            <table cellspacing="0" cellpadding="0" border="1" >       
+                <tr >
+                    <td width="33%">
+                        ${contador_parcela}/${aux_qtd_parccela}
+                    </td>
+                    <td width="33%">
+                        ${dia}/${meses[mes-1]}/${ano}
+                    </td>
+                    <td width="39%">
+                        R$ ${"{{ object.valor_prestacao}}"}
+                </tr>
+            </table>
+        `
+        }
+        contrato.innerHTML +=
+        `
+        <p style="page-break-after:always"></p>
+        <h2>QUADRO 03 - GARANTIA(S)</h2>
+        <div class="quadro" >    
+            (X) NOTAS PROMISSÓRIAS &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp  
+            ( ) GARANTIA REAL            
+        </div>
+        <div class="quadro" >
+            DESCRIÇÃO DA GARANTIA REAL:
+        </div>
+        <div class="quadro" >
+            <br>
+        </div>
+
+        <div class="paragrafo" > 
+            Por este instrumento particular, as partes acima qualificadas, justas e acertadas, celebram o 
+            presente <strong>CONTRATO DE MÚTUO FINANCEIRO</strong>, que se regerá pelo art. 586, do Código Civil Brasileiro, 
+            pela Lei Complementar nº 167/2019 e pelas cláusulas e condições abaixo descritas:
+        </div> 
+
+        <div class="paragrafo" >
+            <strong>DA COMPOSIÇÃO DO CRÉDITO</strong>
+        </div>
+
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 1ª. </strong> A integralidade do crédito é composta da seguinte forma: Valor mutuado R$ 
+            ${"{{ object.valor_mutuado }}".replace(',', '.')}, Taxa de Juros a.m 
+            ${"{{ object.juros_ao_mes }}".replace(',', '.')}%, taxa de juros moratório 
+            ${"{{ object.juros_moratorio }}".replace(',', '.')}% ao dia, multa por atraso: 
+            ${"{{ object.multa_por_atraso }}".replace(',', '.')}%, valor do IOF total: R$ 
+            ${"{{ object.iof_real }}".replace(',', '.')}, Valor total devido: R$ 
+            ${"{{ object.valor_devido }}".replace(',', '.')}.
+        </div>
+        <div class="paragrafo" >
+            <strong> DO CRÉDITO </strong>            
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 2ª. </strong> A CONTRATADA MUTUANTE concedeu à CONTRATANTE MUTUÁRIA um 
+            empréstimo no valor descrito na cláusula 1ª – Composição do Crédito, que será restituído nas 
+            épocas próprias e nas condições fixadas neste CONTRATO 
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 3ª. </strong> A restituição do valor mutuado, pela <strong> CONTRATANTE MUTUÁRIA</strong>, 
+            será feito conforme Cronograma de Reembolso acima.  
+        </div>
+        <div class="paragrafo" >
+            <strong> DA FORMA E PRAZO DE PAGAMENTO </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 4ª. </strong> A <strong> CONTRATANTE MUTUÁRIA </strong>fica obrigada a pagar à CONTRATADA MUTUANTE, 
+            nas datas especificadas no Quadro 02 – Cronograma de Reembolso, o valor correspondente ao saldo devedor principal 
+            acrescido dos encargos financeiros pactuados e demais acessórios, quando houver.
+        </div>
+        <div class="paragrafo" >
+            <strong> DO PAGAMENTO ANTECIPADO </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 5ª. </strong> A <strong> CONTRATANTE MUTUÁRIA </strong> poderá amortizar ou liquidar o débito 
+            antecipadamente, a qualquer tempo, com incidência de desconto, nos encargos, em até o limite de aproximadamente, 
+            cinquenta por cento dos valores correspondentes ao que deveria pagar na normalidade do contrato sem antecipação, 
+            a depender de cada caso.  
+        </div>
+        <div class="paragrafo" >
+            <strong> DO VENCIMENTO ANTECIPADO DA DÍVIDA </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 6ª. </strong>Em caso de não pagamento pontual das parcelas devidas, a 
+            <strong> CONTRATADA MUTUANTE </strong> poderá considerar vencidas antecipadamente, de pleno direito, 
+            todas as demais parcelas ainda vincendas, exigindo o pagamento total da dívida independentemente de 
+            aviso extrajudicial ou interpelação judicial. Também poderá ser considerada integralmente 
+            vencida e exigível a dívida: 
+        </div>
+        <div class="paragrafo" >
+            <strong> a) </strong>no caso de apuração de falsidade, fraude ou inexatidão de qualquer declaração, informação ou documento que 
+            houver sido prestador ou apresentado pela <strong> CONTRATANTE MUTUÁRIA </strong>, seus representantes legais e/ou garantidores;
+        </div>
+        <div class="paragrafo" >
+            <strong> b) </strong>caso a <strong> CONTRATANTE MUTUÁRIA </strong>ajuizar pedido de falência ou recuperação judicial.  
+        </div>
+        <p style="page-break-after:always"></p>
+        <div class="paragrafo" >
+            <strong> DOS ENCARGOS FINANCEIROS </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 7ª. </strong>  Sobre a valor mutuado incidirá juros conforme cláusula 1ª – Composição do Crédito, os quais serão 
+            calculados de forma exponencial, com capitalização diária baseada em um ano de 365 (trezentos e sessenta e cinco) dias.  
+        </div>
+        <div class="paragrafo" >            
+            <strong> CLÁUSULA 8ª. </strong>  Na operação não incidirá qualquer valor relativo a tarifas ou taxas de empréstimo.
+        </div>
+        <div class="paragrafo" >
+            <strong> DO INADIMPLEMENTO </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong>CLÁUSULA 9ª. </strong>Em caso de descumprimento de qualquer obrigação legal ou convencional, ou no caso de vencimento 
+            antecipado da operação, serão exigidos, a partir do inadimplemento, calculados sobre o salvo devedor, capitalizados 
+            diariamente e devidos cumulativamente, os encargos financeiros a seguir: 
+            I- atualização monetária pelo INPC-IBGE;
+            II-  juros remuneratórios, à taxa contratada no período de normalidade contratual;
+            III- juros de mora de 0,66% ao dia;
+            IV- multa de 2% (dois por cento) sobre o valor da parcela não paga. 
+        </div>
+        <div class="paragrafo" >
+            <strong> Parágrafo único. </strong> Em caso de cobrança judicial e/ou extrajudicial serão devidas custas, emolumentos e 
+            honorários advocatícios, estes fixados em 10% (dez por cento) sobre o valor total devido. 
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 10ª. </strong> A constituição em mora ocorrerá independentemente de qualquer aviso ou notificação, resultando 
+            do simples descumprimento das obrigações previstas neste <strong> CONTRATO </strong> . 
+        </div>
+        <div class="paragrafo" >
+            <strong> DAS GARANTIAS </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 11. </strong> Para garantir o cumprimento das obrigações deste CONTRATO, são constituídas em favor da 
+            CONTRATADA MUTUANTE a(s) garantia(s) referida(s) no Quadro 03 – Garantia(s), quando houver. 
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 12ª. </strong> As obrigações constituídas por este instrumento são extensivas e obrigatórias aos herdeiros, 
+            sucessores e cessionários ou promitentes cessionários da <strong> CONTRATANTE MUTUÁRIA </strong> . E na impossibilidade de 
+            adimplemento pela pessoa jurídica o débito será de responsabilidade da pessoa física titular da mesma, 
+            <strong> inclusive em caso de falecimento até o limite do patrimônio transferido </strong>.  
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 13ª. </strong> Independentemente da modalidade de garantia ofertada – quando houver - a 
+            <strong> CONTRATANTE MUTUÁRIA </strong> obriga-se a pagar o saldo remanescente, caso a importância 
+            recebida na realização da garantia não seja suficiente para pagar o crédito da 
+            <strong> CONTRATADA MUTUANTE </strong>, bem como as demais despesas previstas neste <strong> CONTRATO </strong>. 
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 14ª. </strong> A <strong> CONTRATANTE MUTUÁRIA </strong> declara que as garantias ofertadas – 
+            quando houver - estão livres de quaisquer ônus, dividas e/ou gravames de qualquer natureza, assim devendo 
+            permanecer até a liquidação da dívida, sob pena de caracterização de fraude, bem como vencimento antecipado da dívida. 
+        </div>
+        <div class="paragrafo" >
+            <strong> DO DEVEDOR SOLIDÁRIO E DO FIADOR – QUANDO HOUVER </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 15ª </strong>. Assina(m) este <strong> CONTRATO </strong> na qualidade fiador(es) com obrigação 
+            sobre a totalidade da dívida principal e acessórias, se houver, na forma da legislação pertinente, a(s) pessoa(s), 
+            todos na qualidade de garantidores, conforme descrito no Quadro 01 – Parte, Item III. Assina também o presente 
+            contrato o Fiador qualificado no Quadro Resumo, como principal pagador, solidariamente responsável pelo fiel 
+            cumprimento de todas as obrigações, inclusive as acessórias e encargos em geral. 
+        </div>
+        <div class="paragrafo" >
+            <strong> DA COBRANÇA TERCEIRIZADA </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 16ª </strong>. Em caso de inadimplemento deste <strong> CONTRATO </strong>, a 
+            <strong> CONTRATADA MUTUANTE </strong> poderá realizar, a seu critério, 
+            cobrança por meio de empresa terceirizada, seja no âmbito de telecobrança ou cobrança especializada.
+        </div>
+        <p style="page-break-after:always"></p>
+        <div class="paragrafo" >
+            <strong> DAS DISPOSIÇÕES GERAIS </strong>
+        </div>
+        <div class="paragrafo" >            
+            <strong> CLÁUSULA 17ª </strong>. A tolerância de uma das partes, quanto ao inadimplemento das obrigações assumidas pela outra, 
+            não implica em novação ou modificação das cláusulas aqui ajustadas, constituindo-se mera liberalidade.
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 18ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong>, seus representantes legais e/ou garantidores asseguram a veracidade de 
+            todas as informações passadas à <strong> CONTRATADA MUTUANTE </strong>, especialmente acerca da licitude da origem da renda e 
+            patrimônio, bem como declaram estar cientes das disposições previstas na Lei n° 9.613/98. 
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 19ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong> se compromete a informar à 
+            <strong> CONTRATADA MUTUANTE </strong> sobre eventuais alterações 
+            em seus dados cadastrais, sendo de sua responsabilidade todas as consequências decorrentes do descumprimento dessa 
+            obrigação. A <strong> CONTRATADA MUTUANTE </strong>poderá, sempre que necessário, solicitar a atualização dos dados cadastrais 
+            das partes envolvidas neste CONTRATO, inclusive do(s) garantidor(es) e fiadores quando houver.
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 20ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong>autoriza a <strong> CONTRATADA MUTUANTE </strong> a:<br>  
+                I- transmitir e consultar informações, inclusive as relativas a esta operação de Empréstimo, à Centrais de Risco de Crédito, 
+                podendo utilizá-las para análise de capacidade de crédito;<br> 
+                II- fornecer tais informações a terceiros contratados para prestar serviços de controle e cobrança, por quaisquer meios, 
+                das obrigações assumidas neste <strong> CONTRATO </strong>;<br> 
+                III- levar a registro este <strong> CONTRATO </strong>em Entidade Registradora autorizada pelo Banco Central; e <br> 
+                IV- em caso de inadimplência, inserir seu nome e de seus garantidores nos cadastros de proteção ao crédito.
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 21 </strong>. A <strong> CONTRATADA MUTUANTE </strong> declara estar sujeita à mecanismos de controle para fins de prevenção contra 
+            lavagem de dinheiro e ao dever de comunicação ao Conselho de Controle de Atividades Financeiras (COAF) de 
+            operações que possam estar configuradas na Lei nº 9.613/98 (Lei de Lavagem de Dinheiro) e demais leis pertinentes.
+        </div>
+        <div class="paragrafo" >
+            <strong>DO FORO DE ELEIÇÃO </strong>
+        </div>
+        <div class="paragrafo" >
+            <strong> CLÁUSULA 22 </strong>. As partes elegem o foro da sede da <strong> CONTRATADA MUTUANTE </strong> para solucionar qualquer controvérsia decorrente 
+            deste contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.  
+            E, por estarem assim justas e acertadas, firmam o presente instrumento em 02 (duas) vias de igual teor, para que surta 
+            seus efeitos legais, podendo ser requeridas a presença de testemunha (s).
+        </div>
+        
+        <div class="paragrafo" style="text-align:center">
+            Natal-RN, ${dataEmprestimo} .
+        </div>
+
+        <div class="paragrafo" style="text-align:center">
+            ____________________________________________________________<br>
+            <strong> ${razao_social} </strong><br>
+            CONTRATANTE MUTUÁRIA            
+        </div>
+        <div class="paragrafo" style="text-align:center">
+            ______________________________________________________________<br>
+            <strong>ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA 35.297.061/0001-47</strong><br>
+            CONTRATADA MUTUANTE
+        </div>
+        `
+    }    
+}
+
+
+String.prototype.extenso = function(c){
+    var ex = [
+        ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"],
+        ["dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"],
+        ["cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"],
+        ["mil", "milhão", "bilhão", "trilhão", "quadrilhão", "quintilhão", "sextilhão", "setilhão", "octilhão", "nonilhão", "decilhão", "undecilhão", "dodecilhão", "tredecilhão", "quatrodecilhão", "quindecilhão", "sedecilhão", "septendecilhão", "octencilhão", "nonencilhão"]
+    ];
+    var a, n, v, i, n = this.replace(c ? /[^,\d]/g : /\D/g, "").split(","), e = " e ", $ = "real", d = "centavo", sl;
+    for(var f = n.length - 1, l, j = -1, r = [], s = [], t = ""; ++j <= f; s = []){
+        j && (n[j] = (("." + n[j]) * 1).toFixed(2).slice(2));
+        if(!(a = (v = n[j]).slice((l = v.length) % 3).match(/\d{3}/g), v = l % 3 ? [v.slice(0, l % 3)] : [], v = a ? v.concat(a) : v).length) continue;
+        for(a = -1, l = v.length; ++a < l; t = ""){
+            if(!(i = v[a] * 1)) continue;
+            i % 100 < 20 && (t += ex[0][i % 100]) ||
+            i % 100 + 1 && (t += ex[1][(i % 100 / 10 >> 0) - 1] + (i % 10 ? e + ex[0][i % 10] : ""));
+            s.push((i < 100 ? t : !(i % 100) ? ex[2][i == 100 ? 0 : i / 100 >> 0] : (ex[2][i / 100 >> 0] + e + t)) +
+            ((t = l - a - 2) > -1 ? " " + (i > 1 && t > 0 ? ex[3][t].replace("ão", "ões") : ex[3][t]) : ""));
+        }
+        a = ((sl = s.length) > 1 ? (a = s.pop(), s.join(" ") + e + a) : s.join("") || ((!j && (n[j + 1] * 1 > 0) || r.length) ? "" : ex[0][0]));
+        a && r.push(a + (c ? (" " + (v.join("") * 1 > 1 ? j ? d + "s" : (/0{6,}$/.test(n[0]) ? "de " : "") + $.replace("l", "is") : j ? d : $)) : ""));
+    }
+    return r.join(e);
+}
+
+function toFixed(num, fixed) {
+    var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
+    return num.toString().match(re)[0];
+}  
+
+</script>
+</body>
+</html>
+
+{% comment %} function somar(){
+    var tvalor_emprestado = document.getElementById('valor_emprestado')
+    var tqtd_parcelas     = document.getElementById('qtd_parcelas')
+    var tprestacao        = document.getElementById('prestacao')     
+
+    var valor_emprestado   = Number(tvalor_emprestado.value)                
+    var qtd_parcelas       = Number(tqtd_parcelas.value)
+    var prestacao          = Number(tprestacao.value)
+    
+    var principal          = valor_emprestado/qtd_parcelas         
+
+    var mes_do_emprestimo  = Number({{object.dt_emprestimo.month}})
+
+    var iof_inicial       = 0
+    var iof_diario        = 0.0041        
+    var qtd_dias          = 0
+    var iof_adicional     = 0.0038   
+
+//CALCULA O IOF_INICIAL (1º PASSO)
+for (var i = 0 ; i < qtd_parcelas; i++){
+    if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
+        qtd_dias += 31
+    }else{
+        qtd_dias +=30
+    }
+    var aux = 0 
+    iof_inicial += ((principal*(qtd_dias*0.0041))/100)        
+    iof_inicial = Number(toFixed(iof_inicial, 4)) 
+    iof_inicial += principal*iof_adicional    
+    iof_inicial = Number(toFixed(iof_inicial, 2))
+    mes_do_emprestimo++
+}    
+
+//CALCULA O IOF_REAL (2º PASSO)   
+    var iof_real = 0
+
+    iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
+    iof_real = Number(toFixed(iof_real, 3))    
+
+//CALCULA O VALOR DA PARCELA(3º PASSO)
+    var valor_emprestado   = Number(tvalor_emprestado.value)                
+    var qtd_parcelas       = Number(tqtd_parcelas.value)
+    var prestacao          = Number(tprestacao.value)
+    var cap_iof = iof_real+valor_emprestado
+    var valor_parcela = 0
+    valor_parcela = (cap_iof*(1+(qtd_parcelas*9.5)/100))/qtd_parcelas
+    valor_parcela = String(toFixed(valor_parcela, 2))  
+
+document.getElementById('prestacao').value = valor_parcela
+
+}  {% endcomment %}

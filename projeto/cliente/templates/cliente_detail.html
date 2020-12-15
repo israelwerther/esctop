@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<span class="pull-right">
+    <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
+    <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
+    <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
+</span>
+
+<h1>{{ object }}</h1>
+
+<div class="col-sm-6 maiusculo">
+    <table class="table table-user-information">
+        <tbody>
+            <tr>
+                <th class="text-right">Nome</th>
+                <td>{{ object.nome }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">RG</th>
+                <td>{{ object.rg }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">CPF</th>
+                <td>{{ object.cpf }}</td>
+            </tr>                      
+            <tr>
+                <th class="text-right">Telefone</th>
+                <td>{{ object.contato1 }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Telefone</th>
+                <td>{{ object.contato2 }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Telefone</th>
+                <td>{{ object.celular1 }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Telefone</th>
+                <td>{{ object.celular2 }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">E-mail</th>
+                <td>{{ object.email }}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
