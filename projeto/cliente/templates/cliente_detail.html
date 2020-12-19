@@ -1,53 +1,150 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<span class="pull-right">
-    <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
-    <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
-    <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
-</span>
+<style> 
+    .table td, .table th {      
+        font-size: 12px;       
+        padding-left: 10px;
+        padding-top: 0px;  
+        padding-bottom: 0px;  
+        /* border-top: 1px solid #000000;            
+        border-bottom: 1px solid #000000;            
+        border-left: 1px solid #000000;            
+        border-right: 1px solid #000000;                     */
+    }  
+    .color{
+        background-color: rgb(156, 156, 156);
+    }  
+    h5{
+        padding: 5px;
+        margin-left: 20px;
+    }
+    
+</style>
 
-<h1>{{ object }}</h1>
-
-<div class="col-sm-6 maiusculo">
-    <table class="table table-user-information">
-        <tbody>
-            <tr>
-                <th class="text-right">Nome</th>
-                <td>{{ object.nome }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">RG</th>
-                <td>{{ object.rg }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">CPF</th>
-                <td>{{ object.cpf }}</td>
-            </tr>                      
-            <tr>
-                <th class="text-right">Telefone</th>
-                <td>{{ object.contato1 }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Telefone</th>
-                <td>{{ object.contato2 }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Telefone</th>
-                <td>{{ object.celular1 }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Telefone</th>
-                <td>{{ object.celular2 }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">E-mail</th>
-                <td>{{ object.email }}</td>
-            </tr>
-            
-        </tbody>
-    </table>
+    <div class="row">        
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <table class="table table-striped">    
+                <h5>DADOS PESSOAIS</h5>   
+                <tbody>                    
+                    <tr>
+                        <th class="text-right" style="width:30%">Nome</th> 
+                        <th class="text-left" style="width:70%">{{ object.nome }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">CPF</th> 
+                        <th class="text-left" style="width:70%">{{ object.cpf }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%">RG</th> 
+                        <th class="text-left" style="width:70%">{{ object.rg }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Orgão Emissor</th> 
+                        <th class="text-left" style="width:70%">{{ object.orgao_emissor }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Data de Nascimento</th> 
+                        <th class="text-left" style="width:70%">{{ object.data_nasc }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Naturalidade</th> 
+                        <th class="text-left" style="width:70%">{{ object.naturalidade }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%">Nacionalidade</th> 
+                        <th class="text-left" style="width:70%">{{ object.nacionalidade }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Estado Civil</th> 
+                        <th class="text-left" style="width:70%">{{ object.estado_civil }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Conjuge</th> 
+                        <th class="text-left" style="width:70%">{{ object.conjuge_nome }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">CPF Conjuge</th> 
+                        <th class="text-left" style="width:70%">{{ object.conjuge_cpf }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Telefone Conjuge</th> 
+                        <th class="text-left" style="width:70%">{{ object.conjuge_telefone }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Nome da Mãe</th> 
+                        <th class="text-left" style="width:70%">{{ object.nome_da_mae }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%">Nome do Pai</th> 
+                        <th class="text-left" style="width:70%">{{ object.nome_do_pai }}</th>
+                    </tr>                                    
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <table class="table table-striped">
+                <h5>ENDEREÇO</h5>
+                <tbody>
+                    <tr>
+                        <th class="text-right" style="width:30%">CEP</th> 
+                        <th class="text-left" style="width:70%">{{ object.cep }}</th>
+                    </tr> 
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.rua }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.bairro }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.cidade }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.uf }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.numero_casa }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.ponto_referencia }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object.complemento }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object. }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object. }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object. }}</th>
+                    </tr>  
+                    <tr>
+                        <th class="text-right" style="width:30%"></th> 
+                        <th class="text-left" style="width:70%">{{ object. }}</th>
+                    </tr>  
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <span class="pull-left">
+        <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
+        <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
+        <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
+    </span>
 </div>
 
 {% endblock content %}
