@@ -3,14 +3,14 @@
 
 <style> 
     .table td, .table th {      
-        font-size: 12px;       
+        font-size: 13px;       
         padding-left: 10px;
         padding-top: 0px;  
         padding-bottom: 0px;  
-        border-top: 1px solid #000000;            
+        /* border-top: 1px solid #000000;            
         border-bottom: 1px solid #000000;            
         border-left: 1px solid #000000;            
-        border-right: 1px solid #000000;                    
+        border-right: 1px solid #000000;                     */
     }  
     .color{
         background-color: rgb(156, 156, 156);
@@ -19,8 +19,56 @@
         padding: 5px;
         margin-left: 20px;
     }
+
+    @media print
+{    
+    .no-print, .no-print *
+    {
+        display: none !important;
+    }    
+    @page {
+        margin: 0.5cm;
+    }    
+    label {
+        font-size: 9pt; 
+        padding: 0px;
+    }
+    h2{
+        font-weight: bold;
+        padding: 0px;
+        font-size: 13pt; 
+    }    
+    div{
+        columns:90px 1; 
+        margin: 0px,0px,0px,0px;        
+    }
+    input.form-control{
+        font-size: 9pt;  
+        border: none;
+        /* left: -10px; */
+        padding: 0px;
+    }    
+    @media all {
+        .page-break { display: none; }
+    }
+    @media print {
+        .page-break { display: block; page-break-before: always; }
+    }
+}  
     
 </style>
+    <div class="row">
+        <div class="col-sm-11">
+            <span class="pull-right no-print">
+                <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
+                <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
+                <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
+                <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>
+            </span>
+        </div>
+    </div>
+    <br>
+    <br>
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
@@ -135,6 +183,11 @@
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12">                    
+                   
+                        
+                </div>
+            <div class="row">
+                <div class="col-sm-12">                    
                     <table class="table table-striped">
                         <h5>CONTATO</h5>
                         <tbody>
@@ -192,7 +245,7 @@
         </div>
     </div>
 
-    <h5>____________________________________________________________________________________________________</h5>
+    <hr></hr>
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
@@ -309,13 +362,7 @@
                 </div>
             </div>  
         </div>
-    </div>
-      
-    <span class="pull-left">
-        <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
-        <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
-        <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
-    </span>
+    </div>    
 </div>
 
 {% endblock content %}
