@@ -86,8 +86,7 @@
         <div class="col-sm-12">
             <span class="pull-right no-print">
                 <a href="{% url 'cliente:cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
-                <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
-                <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
+                <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>                
                 <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>
             </span>
         </div>
@@ -490,12 +489,16 @@
             </div>  
         </div>
     </div>      
-    <div class="pull-right">
+    <div class="pull-left">
         <h6> Data da Impressão</h6> 
         <output id="data" style="font-size: 12px;"></output></br>
         <output id="hora" style="font-size: 12px;"></output>				
     </div>
-   
+    
+    <br>		
+    <div class="pull-right">
+        <a href="{% url 'cliente:cliente_delete' object.pk %}" type="button" class="btn btn-danger">Deletar Cliente</a>	
+    </div>
     
 </div>
 
