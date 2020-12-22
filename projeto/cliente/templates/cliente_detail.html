@@ -80,35 +80,49 @@
                 <div class="col-sm-12">
                     <table class="table table-striped">    
                         <h5>DADOS PESSOAIS</h5>
-                        <tbody>                    
-                            <tr>
-                                <th class="text-right" style="width:30%">Nome</th> 
-                                <th class="text-left" style="width:70%">{{ object.nome }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">CPF</th> 
-                                <th class="text-left" style="width:70%">{{ object.cpf }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">RG</th> 
-                                <th class="text-left" style="width:70%">{{ object.rg }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Orgão Emissor</th> 
-                                <th class="text-left" style="width:70%">{{ object.orgao_emissor }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Data de Nascimento</th> 
-                                <th class="text-left" style="width:70%">{{ object.data_nasc }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Naturalidade</th> 
-                                <th class="text-left" style="width:70%">{{ object.naturalidade }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Nacionalidade</th> 
-                                <th class="text-left" style="width:70%">{{ object.nacionalidade }}</th>
-                            </tr> 
+                        <tbody>         
+                            {% if object.nome %}           
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nome</th> 
+                                    <th class="text-left" style="width:70%">{{ object.nome }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.cpf %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">CPF</th> 
+                                    <th class="text-left" style="width:70%">{{ object.cpf }}</th>
+                                </tr>  
+                            {% endif %}
+                            {% if object.rg %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">RG</th> 
+                                    <th class="text-left" style="width:70%">{{ object.rg }}</th>
+                                </tr>   
+                            {% endif %}
+                            {% if object.orgao_emissor %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Orgão Emissor</th> 
+                                    <th class="text-left" style="width:70%">{{ object.orgao_emissor }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.data_nasc %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Data de Nascimento</th> 
+                                    <th class="text-left" style="width:70%">{{ object.data_nasc }}</th>
+                                </tr>                              
+                            {% endif %}
+                            {% if object. %} 
+                                <tr>
+                                    <th class="text-right" style="width:30%">Naturalidade</th> 
+                                    <th class="text-left" style="width:70%">{{ object.naturalidade }}</th>
+                                </tr>    
+                            {% endif %}
+                            {% if object. %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nacionalidade</th> 
+                                    <th class="text-left" style="width:70%">{{ object.nacionalidade }}</th>
+                                </tr> 
+                            {% endif %}
                             {% if object.estado_civil %}
                                 <tr>
                                     <th class="text-right" style="width:30%">Estado Civil</th> 
@@ -132,15 +146,19 @@
                                     <th class="text-right" style="width:30%">Telefone Conjuge</th> 
                                     <th class="text-left" style="width:70%">{{ object.conjuge_telefone }}</th>
                                 </tr> 
-                            {% endif %}
+                            {% endif %} 
+                            {% if object.nome_da_mae %}
                             <tr>
                                 <th class="text-right" style="width:30%">Nome da Mãe</th> 
                                 <th class="text-left" style="width:70%">{{ object.nome_da_mae }}</th>
-                            </tr> 
+                            </tr>   
+                            {% endif %}
+                            {% if object.nome_do_pai %}
                             <tr>
                                 <th class="text-right" style="width:30%">Nome do Pai</th> 
                                 <th class="text-left" style="width:70%">{{ object.nome_do_pai }}</th>
-                            </tr>                                    
+                            </tr>  
+                            {% endif %}                              
                         </tbody>
                     </table>
                 </div>
@@ -367,8 +385,9 @@
         </div>
     </div>      
     <div class="pull-right">
-        <output id="data" style="font-family: 'arial black', 'avant garde'; font-size: 12px;"></output></br>
-        <output id="hora" style="font-family: 'arial black', 'avant garde'; font-size: 12px;"></output>				
+        <h6> Data da Impressão</h6> 
+        <output id="data" style="font-size: 12px;"></output></br>
+        <output id="hora" style="font-size: 12px;"></output>				
     </div>
    
     
