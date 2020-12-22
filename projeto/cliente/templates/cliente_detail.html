@@ -21,41 +21,61 @@
         background-color: #ccc;
     }
 
-    @media print
-{    
-    .no-print, .no-print *
-    {
-        display: none !important;
-    }    
-    @page {
-        margin: 0.5cm;
-    }    
-    label {
-        font-size: 9pt; 
-        padding: 0px;
+    @media print{    
+        .no-print, .no-print *
+        {
+            display: none !important;
+        }    
+        @page {
+            margin: 0.5cm;
+        }    
+        label {
+            font-size: 9pt; 
+            padding: 0px;
+        }
+        h2{
+            font-weight: bold;
+            padding: 0px;
+            font-size: 13pt; 
+        }    
+        div{
+            columns:90px 1; 
+            margin: 0px,0px,0px,0px;        
+        }
+        input.form-control{
+            font-size: 9pt;  
+            border: none;
+            /* left: -10px; */
+            padding: 0px;
+        }    
+        @media all {
+            .page-break { display: none; }
+        }
+        @media print {
+            .page-break { display: block; page-break-before: always; }
+        }
+    }  
+    hr {
+        -moz-border-bottom-colors: none;
+        -moz-border-image: none;
+        -moz-border-left-colors: none;
+        -moz-border-right-colors: none;
+        -moz-border-top-colors: none;
+        border-color: #EEEEEE -moz-use-text-color #FFFFFF;
+        border-style: solid none;
+        border-width: 1px 0;
+        margin: 18px 0;
     }
-    h2{
-        font-weight: bold;
-        padding: 0px;
-        font-size: 13pt; 
-    }    
-    div{
-        columns:90px 1; 
-        margin: 0px,0px,0px,0px;        
+    .myDiv {
+        border: 5px outset rgb(121, 121, 121);
+        height: 350px;       
+        
     }
-    input.form-control{
-        font-size: 9pt;  
-        border: none;
-        /* left: -10px; */
-        padding: 0px;
-    }    
-    @media all {
-        .page-break { display: none; }
+    .myDiv1 {
+        border: 5px outset rgb(121, 121, 121);
+        height: 200px;       
+       
     }
-    @media print {
-        .page-break { display: block; page-break-before: always; }
-    }
-}  
     
 </style>
     <!-- BOTÕES -->
@@ -77,7 +97,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-12 mydiv">
                     <table class="table table-striped">    
                         <h5>DADOS PESSOAIS</h5>
                         <tbody>         
@@ -162,42 +182,58 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-12 mydiv">
                     <table class="table table-striped">
                         <h5>ENDEREÇO</h5>
                         <tbody>
-                            <tr>
-                                <th class="text-right" style="width:30%">CEP</th> 
-                                <th class="text-left" style="width:70%">{{ object.cep }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Rua</th> 
-                                <th class="text-left" style="width:70%">{{ object.rua }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Bairro</th> 
-                                <th class="text-left" style="width:70%">{{ object.bairro }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Cidade</th> 
-                                <th class="text-left" style="width:70%">{{ object.cidade }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Estado</th> 
-                                <th class="text-left" style="width:70%">{{ object.uf }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Nº</th> 
-                                <th class="text-left" style="width:70%">{{ object.numero_casa }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Ponto de Referência</th> 
-                                <th class="text-left" style="width:70%">{{ object.ponto_referencia }}</th>
-                            </tr>  
-                            <tr>
-                                <th class="text-right" style="width:30%">Complemento</th> 
-                                <th class="text-left" style="width:70%">{{ object.complemento }}</th>
-                            </tr> 
+                            {% if object.cep %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">CEP</th> 
+                                    <th class="text-left" style="width:70%">{{ object.cep }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.rua %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Rua</th> 
+                                    <th class="text-left" style="width:70%">{{ object.rua }}</th>
+                                </tr>   
+                            {% endif %}
+                            {% if object.bairro %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Bairro</th> 
+                                    <th class="text-left" style="width:70%">{{ object.bairro }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.cidade %} 
+                                <tr>
+                                    <th class="text-right" style="width:30%">Cidade</th> 
+                                    <th class="text-left" style="width:70%">{{ object.cidade }}</th>
+                                </tr>  
+                            {% endif %}
+                            {% if object.uf %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Estado</th> 
+                                    <th class="text-left" style="width:70%">{{ object.uf }}</th>
+                                </tr>  
+                            {% endif %}
+                            {% if object.numero_casa %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nº</th> 
+                                    <th class="text-left" style="width:70%">{{ object.numero_casa }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ponto_referencia %} 
+                                <tr>
+                                    <th class="text-right" style="width:30%">Ponto de Referência</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ponto_referencia }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.complemento %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Complemento</th> 
+                                    <th class="text-left" style="width:70%">{{ object.complemento }}</th>
+                                </tr> 
+                            {% endif %}
                         </tbody>
                     </table>
                 </div>
@@ -205,128 +241,171 @@
         </div>
         <div class="col-sm-6">
             <div class="row">
-                <div class="col-sm-12">
-                </div>
-            <div class="row"></div>
-                <div class="col-sm-12">                    
+                <div class="col-sm-12 mydiv">                    
                     <table class="table table-striped">
                         <h5>CONTATO</h5>
-                        <tbody>
-                            <tr>
-                                <th class="text-right" style="width:30%">Contato</th> 
-                                <th class="text-left" style="width:70%">{{ object.contato1 }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Contato 2</th> 
-                                <th class="text-left" style="width:70%">{{ object.contato2 }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Celular 1</th> 
-                                <th class="text-left" style="width:70%">{{ object.celular1 }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">Celular 2</th> 
-                                <th class="text-left" style="width:70%">{{ object.celular2 }}</th>
-                            </tr> 
-                            <tr>
-                                <th class="text-right" style="width:30%">E-MAIL</th> 
-                                <th class="text-left" style="width:70%">{{ object.email }}</th>
-                            </tr>                         
+                        <tbody>                            
+                            {% if object.contato1 %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato</th> 
+                                    <th class="text-left" style="width:70%">{{ object.contato1 }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.contato2 %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato 2</th> 
+                                    <th class="text-left" style="width:70%">{{ object.contato2 }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.celular1 %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Celular 1</th> 
+                                    <th class="text-left" style="width:70%">{{ object.celular1 }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.celular2 %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Celular 2</th> 
+                                    <th class="text-left" style="width:70%">{{ object.celular2 }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.email %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">E-MAIL</th> 
+                                    <th class="text-left" style="width:70%">{{ object.email }}</th>
+                                </tr>
+                            {% endif %}            
                         </tbody>
                     </table>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-12 mydiv">
                     <table class="table table-striped">
-                            <h5>DADOS BANCÁRIOS</h5>
-                            <tbody>
+                        <h5>DADOS BANCÁRIOS</h5>
+                        <tbody>
+                            {% if object.banco %}
                                 <tr>
                                     <th class="text-right" style="width:30%">Banco</th> 
                                     <th class="text-left" style="width:70%">{{ object.banco }}</th>
-                                </tr> 
+                                </tr>
+                            {% endif %}
+                            {% if object.n_operacao %}
                                 <tr>
                                     <th class="text-right" style="width:30%">Nº da Operação</th> 
                                     <th class="text-left" style="width:70%">{{ object.n_operacao }}</th>
-                                </tr> 
+                                </tr>
+                            {% endif %}
+                            {% if object.agencia %}
                                 <tr>
                                     <th class="text-right" style="width:30%">Agência</th> 
                                     <th class="text-left" style="width:70%">{{ object.agencia }}</th>
-                                </tr> 
+                                </tr>
+                            {% endif %}
+                            {% if object.conta %}
                                 <tr>
                                     <th class="text-right" style="width:30%">Conta</th> 
                                     <th class="text-left" style="width:70%">{{ object.conta }}</th>
-                                </tr> 
+                                </tr>
+                            {% endif %}
+                            {% if object.tipo_de_conta %}
                                 <tr>
                                     <th class="text-right" style="width:30%">Tipo de Conta</th> 
                                     <th class="text-left" style="width:70%">{{ object.tipo_de_conta }}</th>
-                                </tr>                        
-                            </tbody>
+                                </tr>
+                            {% endif %}                
+                        </tbody>
                     </table>                    
                 </div>
             </div>
         </div>
     </div>
 
-    <hr></hr>
+    <hr>
     <div class="row">
         <div class="col-sm-6">
             <div class="row">
                 <div class="col-sm-12">                    
                     <table class="table table-striped">
-                    <h5>DADOS DO LOCAL DE TRABALHO</h5>
-                    <tbody>
-                        <tr>
-                            <th class="text-right" style="width:30%">Nome Fantasia</th> 
-                            <th class="text-left" style="width:70%">{{ object.nome_fantasia }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Contato 1</th> 
-                            <th class="text-left" style="width:70%">{{ object.contato1_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Contato 2</th> 
-                            <th class="text-left" style="width:70%">{{ object.contato2_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Celular 1</th> 
-                            <th class="text-left" style="width:70%">{{ object.celular1_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Celular 2</th> 
-                            <th class="text-left" style="width:70%">{{ object.celular1_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">CEP</th> 
-                            <th class="text-left" style="width:70%">{{ object.cep_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Rua</th> 
-                            <th class="text-left" style="width:70%">{{ object.rua_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Bairro</th> 
-                            <th class="text-left" style="width:70%">{{ object.bairro_trabalho }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Cidade</th> 
-                            <th class="text-left" style="width:70%">{{ object.cidade_trabalho }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Estado</th> 
-                            <th class="text-left" style="width:70%">{{ object.uf_trabalho }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Nº</th> 
-                            <th class="text-left" style="width:70%">{{ object.numero_casa_trabalho }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Ponto de Referência</th> 
-                            <th class="text-left" style="width:70%">{{ object.referencia_trabalho }}</th>
-                        </tr> 
-                        <tr>
-                            <th class="text-right" style="width:30%">Observações</th> 
-                            <th class="text-left" style="width:70%">{{ object.obs_trabalho }}</th>
-                        </tr> 
-                    </tbody>
+                        <h5>DADOS DO LOCAL DE TRABALHO</h5>
+                        <tbody>
+                            {% if object.nome_fantasia %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nome Fantasia</th> 
+                                    <th class="text-left" style="width:70%">{{ object.nome_fantasia }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.contato1_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato 1</th> 
+                                    <th class="text-left" style="width:70%">{{ object.contato1_trabalho }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.contato2_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato 2</th> 
+                                    <th class="text-left" style="width:70%">{{ object.contato2_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.celular1_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Celular 1</th> 
+                                    <th class="text-left" style="width:70%">{{ object.celular1_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.celular1_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Celular 2</th> 
+                                    <th class="text-left" style="width:70%">{{ object.celular1_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.cep_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">CEP</th> 
+                                    <th class="text-left" style="width:70%">{{ object.cep_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.rua_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Rua</th> 
+                                    <th class="text-left" style="width:70%">{{ object.rua_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.bairro_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Bairro</th> 
+                                    <th class="text-left" style="width:70%">{{ object.bairro_trabalho }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.cidade_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Cidade</th> 
+                                    <th class="text-left" style="width:70%">{{ object.cidade_trabalho }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.uf_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Estado</th> 
+                                    <th class="text-left" style="width:70%">{{ object.uf_trabalho }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.numero_casa_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nº</th> 
+                                    <th class="text-left" style="width:70%">{{ object.numero_casa_trabalho }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.referencia_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Ponto de Referência</th> 
+                                    <th class="text-left" style="width:70%">{{ object.referencia_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                            {% if object.obs_trabalho %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Observações</th> 
+                                    <th class="text-left" style="width:70%">{{ object.obs_trabalho }}</th>
+                                </tr> 
+                            {% endif %}
+                        </tbody>
                     </table>
                 </div>
             </div>  
@@ -335,50 +414,69 @@
             <div class="row">
                 <div class="col-sm-12">                    
                     <table class="table table-striped">
-                    <h5>REFERÊNCIAS PESSOAIS</h5>
-                    <tbody>
-                        <tr>
-                            <th class="text-right" style="width:30%">Nome</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref1_nome }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Contato</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref1_contato }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Parentesco</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref1_parentesco }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Nome</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref2_nome }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Contato</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref2_contato }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Parentesco</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref2_parentesco }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Nome</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref3_nome }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Contato</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref3_contato }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Parentesco</th> 
-                            <th class="text-left" style="width:70%">{{ object.ref3_parentesco }}</th>
-                        </tr>
-                        <tr>
-                            <th class="text-right" style="width:30%">Fiador</th> 
-                            <th class="text-left" style="width:70%">{{ object.fiador }}</th>
-                        </tr> 
-                        
-                    </tbody>
+                        <h5>REFERÊNCIAS PESSOAIS</h5>
+                        <tbody>                            
+                            {% if object.ref1_nome %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nome</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref1_nome }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref1_contato %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref1_contato }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref1_parentesco %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Parentesco</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref1_parentesco }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref2_nome %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nome</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref2_nome }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref2_contato %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref2_contato }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref2_parentesco %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Parentesco</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref2_parentesco }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref3_nome %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Nome</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref3_nome }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref3_contato %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Contato</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref3_contato }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.ref3_parentesco %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Parentesco</th> 
+                                    <th class="text-left" style="width:70%">{{ object.ref3_parentesco }}</th>
+                                </tr>
+                            {% endif %}
+                            {% if object.fiador %}
+                                <tr>
+                                    <th class="text-right" style="width:30%">Fiador</th> 
+                                    <th class="text-left" style="width:70%">{{ object.fiador }}</th>
+                                </tr> 
+                            {% endif %}  
+                        </tbody>
                     </table>
                 </div>
             </div>  
