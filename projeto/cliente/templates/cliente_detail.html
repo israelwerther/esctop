@@ -66,16 +66,16 @@
         border-width: 1px 0;
         margin: 18px 0;
     }
-    .myDiv {
+    /* .myDiv {
         border: 5px outset rgb(121, 121, 121);
         height: 350px;       
         text-transform: uppercase;
-    }
-    .myDiv1 {
+    } */
+    /* .myDiv1 {
         border: 5px outset rgb(121, 121, 121);
         height: 200px;       
        
-    }
+    } */
     div.a {
         text-transform: uppercase;
     }
@@ -426,9 +426,9 @@
                         <tbody>                            
                             {% if object.ref1_nome %}
                                 <tr>
-                                    <th class="text-right" style="width:30%">Nome</th> 
-                                    <th class="text-left" style="width:70%">{{ object.ref1_nome }}</th>
-                                </tr>
+                                    <th class="text-right" style="border-top: 1px solid #000000;">Nome</th> 
+                                    <th class="text-left" style="border-top: 1px solid #000000;">{{ object.ref1_nome }}</th>
+                                </tr>                                
                             {% endif %}
                             {% if object.ref1_contato %}
                                 <tr>
@@ -438,14 +438,14 @@
                             {% endif %}
                             {% if object.ref1_parentesco %}
                                 <tr>
-                                    <th class="text-right" style="width:30%">Parentesco</th> 
+                                    <th class="text-right" style="width:30%" style="border-top: 1px solid #000000;">Parentesco</th> 
                                     <th class="text-left" style="width:70%">{{ object.ref1_parentesco }}</th>
-                                </tr>
+                                </tr>                            
                             {% endif %}
                             {% if object.ref2_nome %}
                                 <tr>
-                                    <th class="text-right" style="width:30%">Nome</th> 
-                                    <th class="text-left" style="width:70%">{{ object.ref2_nome }}</th>
+                                    <th class="text-right" style="border-top: 1px solid #000000;">Nome</th> 
+                                    <th class="text-left" style="border-top: 1px solid #000000;">{{ object.ref2_nome }}</th>
                                 </tr>
                             {% endif %}
                             {% if object.ref2_contato %}
@@ -462,8 +462,8 @@
                             {% endif %}
                             {% if object.ref3_nome %}
                                 <tr>
-                                    <th class="text-right" style="width:30%">Nome</th> 
-                                    <th class="text-left" style="width:70%">{{ object.ref3_nome }}</th>
+                                    <th class="text-right" style="border-top: 1px solid #000000;">Nome</th> 
+                                    <th class="text-left" style="border-top: 1px solid #000000;">{{ object.ref3_nome }}</th>
                                 </tr>
                             {% endif %}
                             {% if object.ref3_contato %}
@@ -480,8 +480,8 @@
                             {% endif %}
                             {% if object.fiador %}
                                 <tr>
-                                    <th class="text-right" style="width:30%">Fiador</th> 
-                                    <th class="text-left" style="width:70%">{{ object.fiador }}</th>
+                                    <th class="text-right" style="border-top: 1px solid #000000;">Fiador</th> 
+                                    <th class="text-left" style="border-top: 1px solid #000000;">{{ object.fiador }}</th>
                                 </tr> 
                             {% endif %}  
                         </tbody>
