@@ -17,8 +17,7 @@
         background-color: rgb(156, 156, 156);
     }  
     h5{
-        padding: 5px;
-        margin-left: 20px;
+        padding: 5px;        
         background-color: #ccc;
     }
 
@@ -84,25 +83,25 @@
 </style>
 
 
-    <!-- BOTÕES -->
-    <div class="row">
-        <div class="col-sm-12">
-            <span class="pull-right no-print">
-                <a href="{% url 'cliente_cnpj:cliente_cnpj_list' %}" type="button" class="btn btn-secondary no-print">Voltar</a>
-                <a href="{% url 'cliente_cnpj:cliente_cnpjupdate' object.pk %}" type="button" class="btn btn-info no-print">Editar</a>
-                <a href="{% url 'cliente_cnpj:cliente_cnpj_delete' object.pk %}" type="button" class="btn btn-danger no-print">Deletar Cliente</a>
-                <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>    
-            </span>
-        </div>
+<!-- BOTÕES -->
+<div class="row">
+    <div class="col-sm-12">
+        <span class="pull-right no-print">
+            <a href="{% url 'cliente_cnpj:cliente_cnpj_list' %}" type="button" class="btn btn-secondary no-print">Voltar</a>
+            <a href="{% url 'cliente_cnpj:cliente_cnpjupdate' object.pk %}" type="button" class="btn btn-info no-print">Editar</a>
+            <a href="{% url 'cliente_cnpj:cliente_cnpj_delete' object.pk %}" type="button" class="btn btn-danger no-print">Deletar Cliente</a>
+            <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>    
+        </span>
     </div>
-    <div class="row">
-        <div class="col-sm-12 a">
-            <h1>{{ object.razao_social }}</h1>
-        </div>
+</div>
+<div class="row">
+    <div class="col-sm-12 a">
+        <h1>{{ object.razao_social }}</h1>
     </div>
-    <br>
-    <br>
-    <!-- BOTÕES -->
+</div>
+<br>
+<br>
+<!-- BOTÕES -->
 
 <div class="row">
     <div class="col-sm-6">
@@ -201,48 +200,127 @@
                                 <th class="text-right" style="width:30%">complemento</th> 
                                 <th class="text-left" style="width:70%">{{ object.complemento }}</th>
                             </tr> 
-                        {% endif %}
-                        {% if object. %}           
+                        {% endif %}                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12 a">                    
+                <table class="table table-striped">
+                    <h5>CONTATO</h5>
+                    <tbody>
+                        {% if object.contato1 %}           
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
+                                <th class="text-right" style="width:30%">contato 1</th> 
+                                <th class="text-left" style="width:70%">{{ object.contato1 }}</th>
                             </tr> 
                         {% endif %}
-                        {% if object. %}           
+                        {% if object.contato2 %}           
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
+                                <th class="text-right" style="width:30%">contato 2</th> 
+                                <th class="text-left" style="width:70%">{{ object.contato2 }}</th>
                             </tr> 
                         {% endif %}
-                        {% if object. %}           
+                        {% if object.celular1 %}           
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
+                                <th class="text-right" style="width:30%">celular 1</th> 
+                                <th class="text-left" style="width:70%">{{ object.celular1 }}</th>
                             </tr> 
                         {% endif %}
-                        {% if object. %}           
+                        {% if object.celular2 %}           
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
+                                <th class="text-right" style="width:30%">celular 2</th> 
+                                <th class="text-left" style="width:70%">{{ object.celular2 }}</th>
                             </tr> 
                         {% endif %}
-                        {% if object. %}           
+                        {% if object.email %}           
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
+                                <th class="text-right" style="width:30%">e-mail</th> 
+                                <th class="text-left" style="width:70%">{{ object.email }}</th>
                             </tr> 
+                        {% endif %}                                          
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 a">
+                <table class="table table-striped">
+                    <h5>DADOS BANCÁRIOS</h5>
+                    <tbody>
+                        {% if object.banco %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Banco</th> 
+                                <th class="text-left" style="width:70%">{{ object.banco }}</th>
+                            </tr>
                         {% endif %}
-                        {% if object. %}           
+                        {% if object.n_operacao %}
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
-                            </tr> 
+                                <th class="text-right" style="width:30%">Nº da Operação</th> 
+                                <th class="text-left" style="width:70%">{{ object.n_operacao }}</th>
+                            </tr>
                         {% endif %}
-                        {% if object. %}           
+                        {% if object.tipo_de_conta %}
                             <tr>
-                                <th class="text-right" style="width:30%"></th> 
-                                <th class="text-left" style="width:70%">{{ object. }}</th>
-                            </tr> 
+                                <th class="text-right" style="width:30%">Tipo de Conta</th> 
+                                <th class="text-left" style="width:70%">{{ object.tipo_de_conta }}</th>
+                            </tr>
+                        {% endif %}                
+                        {% if object.agencia %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Agência</th> 
+                                <th class="text-left" style="width:70%">{{ object.agencia }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if object.conta %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Conta</th> 
+                                <th class="text-left" style="width:70%">{{ object.conta }}</th>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>                    
+            </div>   
+            <div class="col-sm-12 a">                    
+                <table class="table table-striped">                   
+                    {% if object.ref1_nome %}
+                    <h5>REFERÊNCIAS PESSOAIS</h5>
+                    <tbody>                            
+                            <tr>
+                                <th class="text-right" style="border-top: 1px solid #000000;">Nome</th> 
+                                <th class="text-left" style="border-top: 1px solid #000000;">{{ object.ref1_nome }}</th>
+                            </tr>                                
+                        {% endif %}
+                        {% if object.ref1_contato %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Contato</th> 
+                                <th class="text-left" style="width:70%">{{ object.ref1_contato }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if object.ref1_parentesco %}
+                            <tr>
+                                <th class="text-right" style="width:30%" style="border-top: 1px solid #000000;">Parentesco</th> 
+                                <th class="text-left" style="width:70%">{{ object.ref1_parentesco }}</th>
+                            </tr>                            
+                        {% endif %}
+                        {% if object.ref2_nome %}
+                            <tr>
+                                <th class="text-right" style="border-top: 1px solid #000000;">Nome</th> 
+                                <th class="text-left" style="border-top: 1px solid #000000;">{{ object.ref2_nome }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if object.ref2_contato %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Contato</th> 
+                                <th class="text-left" style="width:70%">{{ object.ref2_contato }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if object.ref2_parentesco %}
+                            <tr>
+                                <th class="text-right" style="border-bottom: 1px solid #000000;">Parentesco</th> 
+                                <th class="text-left" style="border-bottom: 1px solid #000000;">{{ object.ref2_parentesco }}</th>
+                            </tr>
                         {% endif %}
                     </tbody>
                 </table>
@@ -251,27 +329,133 @@
     </div>
 </div>
 
-<script>
-    var dt = new Date()
-    var ndt = new Date()
+<hr>
 
-    var dia_semana = ndt.getDay()
-    var dia = ndt.getDate()
-    var mes = ndt.getMonth()
-    var ano = ndt.getFullYear()
+<div class="row">
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12 a">
+                <table class="table table-striped">    
+                    <h5>representante</h5>
+                    {% if object.rep_nome %}
+                        <tr>
+                            <th class="text-right" style="width:30%">nome</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_nome }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_cpf %}
+                        <tr>
+                            <th class="text-right" style="width:30%">cpf</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_cpf }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_rg %}
+                        <tr>
+                            <th class="text-right" style="width:30%">rg</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_rg }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_orgao_emissor %}
+                        <tr>
+                            <th class="text-right" style="width:30%">ORGÃO EMISSOR</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_orgao_emissor }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_data_nasc %}
+                        <tr>
+                            <th class="text-right" style="width:30%">DATA DE NASCIMENTO</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_data_nasc }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_naturalidade %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_naturalidade }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object. %}
+                        <tr>
+                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                        </tr>
+                    {% endif %}
+                    <tbody> 
+                </table>
+            </div>
+        </div>
+    </div>
+</div>            
 
-    var horas = ndt.getHours()
-    var minutos = ndt.getMinutes()
-    var segundos = ndt.getSeconds()
-
-
-    var meses = new Array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho" ,"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro")
-    var semanas = new Array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado")
-
-
-    document.write(semanas[dia_semana] + ", " + dia + " de " + meses[mes] + " de " + ano + "<br/>")
-    document.write(horas + ":" + minutos + ":" + segundos)
-    
-</script>
+<div class="pull-right">
+    <h6> Data da Impressão</h6> 
+    <output id="data" style="font-size: 12px;"></output></br>
+    <output id="hora" style="font-size: 12px;"></output>				
+</div>
 
 {% endblock content %}
