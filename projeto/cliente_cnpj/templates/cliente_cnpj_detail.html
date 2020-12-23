@@ -19,6 +19,7 @@
     h5{
         padding: 5px;        
         background-color: #ccc;
+        text-transform: uppercase;
     }
 
     @media print{    
@@ -335,8 +336,8 @@
     <div class="col-sm-6">
         <div class="row">
             <div class="col-sm-12 a">
+            <h5>representante</h5>  
                 <table class="table table-striped">    
-                    <h5>representante</h5>
                     {% if object.rep_nome %}
                         <tr>
                             <th class="text-right" style="width:30%">nome</th> 
@@ -369,82 +370,122 @@
                     {% endif %}
                     {% if object.rep_naturalidade %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
+                            <th class="text-right" style="width:30%">naturalidade</th> 
                             <th class="text-left" style="width:70%">{{ object.rep_naturalidade }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_nacionalidade %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">nacionalidade</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_nacionalidade }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_estado_civil %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">ESTADO CIVIL</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_estado_civil }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_conjuge_nome %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">CONJUGE</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_conjuge_nome }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_conjuge_cpf %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">CPF CONJUGE</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_conjuge_cpf }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_conjuge_telefone %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">TELEFONE CONJUGE</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_conjuge_telefone }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_contato1 %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">contato 1</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_contato1 }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_celular1 %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">celular 1</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_celular1 }}</th>
+                        </tr>
+                    {% endif %}                   
+                    {% if object.rep_celular2 %}
+                        <tr>
+                            <th class="text-right" style="width:30%">celular 2</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_celular2 }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_email %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">e-mail</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_email }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_cep %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">cep</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_cep }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_rua %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">rua</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_rua }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_bairro %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">bairro</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_bairro }}</th>
                         </tr>
                     {% endif %}
-                    {% if object. %}
+                    {% if object.rep_cidade %}
                         <tr>
-                            <th class="text-right" style="width:30%"></th> 
-                            <th class="text-left" style="width:70%">{{ object. }}</th>
+                            <th class="text-right" style="width:30%">cidade</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_cidade }}</th>
                         </tr>
                     {% endif %}
+                    {% if object.rep_uf %}
+                        <tr>
+                            <th class="text-right" style="width:30%">estado</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_uf }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_numero_casa %}
+                        <tr>
+                            <th class="text-right" style="width:30%">n°</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_numero_casa }}</th>
+                        </tr>
+                    {% endif %}
+                    {% if object.rep_ponto_referencia %}
+                        <tr>
+                            <th class="text-right" style="width:30%">PONTO DE REFERÊNCIA</th> 
+                            <th class="text-left" style="width:70%">{{ object.rep_ponto_referencia }}</th>
+                        </tr>
+                    {% endif %}
+                    <tbody> 
+                </table>
+            </div>
+        </div>
+    </div><div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12 a">
+            <h5>fiador</h5>  
+                <table class="table table-striped">    
+                    {% if object.fiador %}
+                        <tr>
+                            <th class="text-right" style="width:30%">nome</th> 
+                            <th class="text-left" style="width:70%">{{ object.fiador }}</th>
+                        </tr>
+                    {% endif %}
+                    
                     <tbody> 
                 </table>
             </div>
