@@ -45,11 +45,36 @@
     <a href="{% url 'cliente_cnpj:cliente_cnpj_list' %}" type="button" class="btn btn-secondary no-print">Voltar</a>
     <a href="{% url 'cliente_cnpj:cliente_cnpjupdate' object.pk %}" type="button" class="btn btn-info no-print">Editar</a>
     <a href="{% url 'cliente_cnpj:cliente_cnpj_delete' object.pk %}" type="button" class="btn btn-danger no-print">Deletar Cliente</a>
-    <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>
-    <!-- <button onclick="window.print()">Print this page</button> -->
+    <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>    
 </span>
 
-<h2>DETALHES(CNPJ) {{ object.razao_social }} </h2>
+<div class="row">
+    <div class="col-sm-12 a">
+        <h1>{{ object.nome }}</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="row">
+            <div class="col-sm-12 a">
+                <table class="table table-striped">    
+                    <h5>DADOS PESSOAIS</h5>
+                    <tbody>        
+                        {% if object.razao_social %}           
+                            <tr>
+                                <th class="text-right" style="width:30%">razão social</th> 
+                                <th class="text-left" style="width:70%">{{ object.razao_social }}</th>
+                            </tr> 
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="row">       
     <div class="col-sm-6"> 
         <div class="form-group">
