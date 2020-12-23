@@ -477,9 +477,9 @@
     </div><div class="col-sm-6">
         <div class="row">
             <div class="col-sm-12 a">
+            {% if object.fiador %}
             <h5>fiador</h5>  
                 <table class="table table-striped">    
-                    {% if object.fiador %}
                         <tr>
                             <th class="text-right" style="width:30%">nome</th> 
                             <th class="text-left" style="width:70%">{{ object.fiador }}</th>
