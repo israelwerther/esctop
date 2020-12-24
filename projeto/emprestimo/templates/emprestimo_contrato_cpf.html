@@ -163,6 +163,12 @@
                 mes = 3
             }
     
+            // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 01
+            if(mes == 11 && trinta_e_um == 31){
+                dia--
+            }
+            
+
             // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
             if(mes == 11 && trinta_e_um == 31){
                 dia--
