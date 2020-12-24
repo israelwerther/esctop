@@ -12,6 +12,7 @@ urlpatterns = [
     
     
     path('<int:pk>/impress/', login_required(v.EmprestimoImpress.as_view()), name='emprestimo_impress'),
+    path('<int:pk>/carne/', login_required(v.EmprestimoCarne.as_view()), name='emprestimo_carne'),
     path('<int:pk>/promissoria/', login_required(v.EmprestimoPromissoria.as_view()), name='emprestimo_promissoria'),
     path('<int:pk>/contrato/', login_required(v.EmprestimoContrato.as_view()), name='emprestimo_contrato'),
     path('<int:pk>/contrato_cnpj/', login_required(v.EmprestimoContratoCNPJ.as_view()), name='emprestimo_contrato_cnpj'),
