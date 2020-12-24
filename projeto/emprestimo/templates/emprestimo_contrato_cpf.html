@@ -24,7 +24,7 @@
         var ano
         var aux_dia = {{object.dt_emprestimo.day}}
         var aux_mes = {{object.dt_emprestimo.month}}
-        var aux_ano = {{object.dt_emprestimo.year}}
+        var aux_ano = {{object.dt_emprestimo.year}}        
     
         var trinta_e_um = 0
         
@@ -141,61 +141,63 @@
             </tr>
         </table >
         `
-    
-        for(var i=0; i<{{object.qtd_parcelas}}; i++){   
-            mes++
-    
+        var primeiro = false
+
+        for(var i=0; i<{{object.qtd_parcelas}}; i++){ 
+            mes++      
+            
+            if(dia == 1 && mes == 2){
+                primeiro = true
+            }
+
             if(dia == 31){
                 trinta_e_um = 31
             }
-    
-            //AJUSTA A DATA QUANDO O MES É FEVEREIRO 
-            if(dia == 1 && mes == 4){
-                dia = 30 
-                mes = 3
-            }
-            if(dia == 30 && mes == 2){
-                dia = 1 
-                mes = 3
-            }
-            if(dia == 31 && mes == 2){
-                dia = 1 
-                mes = 3
-            }
-    
-            // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 01
-            if(mes == 11 && trinta_e_um == 31){
-                dia--
-            }
             
+            if(primeiro == false){
 
-            // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
-            if(mes == 11 && trinta_e_um == 31){
-                dia--
-            }
-            if(dia == 30 && mes == 12 && trinta_e_um == 31){
-                dia++
-            }
-            if(dia == 30 && mes == 3 && trinta_e_um == 31){
-                dia++
-            }
-            if(mes == 4 && trinta_e_um == 31){
-                dia--
-            }
-            if(mes == 5 && trinta_e_um == 31){
-                dia++
-            }
-            if(mes == 6 && trinta_e_um == 31){
-                dia--
-            }
-            if(mes == 7 && trinta_e_um == 31){
-                dia++
-            }
-            if(mes == 9 && trinta_e_um == 31){
-                dia--
-            }
-            if(mes == 10 && trinta_e_um == 31){
-                dia++
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
+                if(dia == 1 && mes == 4){
+                    dia = 30 
+                    mes = 3                
+                }
+                if(dia == 30 && mes == 2){
+                    dia = 1 
+                    mes = 3
+                }
+                if(dia == 31 && mes == 2){
+                    dia = 1 
+                    mes = 3
+                }            
+    
+                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
+                if(mes == 11 && trinta_e_um == 31){
+                    dia--
+                }
+                if(dia == 30 && mes == 12 && trinta_e_um == 31){
+                    dia++
+                }
+                if(dia == 30 && mes == 3 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 4 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 5 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 6 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 7 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 9 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 10 && trinta_e_um == 31){
+                    dia++
+                }
             }
             
             

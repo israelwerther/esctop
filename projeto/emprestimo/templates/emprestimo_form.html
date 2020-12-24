@@ -257,6 +257,12 @@
         var multa_por_atraso   = parseFloat(0.020)
         var valor_devido       = parseFloat(0)
 
+        var primeiro           = document.getElementById('dataselecionada')
+        
+        if(primeiro == 1){
+            primeiro = true
+        }        
+
         //CALCULA O IOF_INICIAL (1º PASSO)
         for (var i = 0 ; i < qtd_parcelas; i++){
             if(mes_num == 1 || mes_num == 3 || mes_num == 5 || mes_num == 7 || mes_num == 8 || mes_num == 10 || mes_num == 12){

@@ -28,8 +28,7 @@ class Emprestimo(models.Model):
     juros_moratorio      = models.DecimalField("Juros Moratório", max_digits=10, decimal_places=4, null=True, blank=True)
     multa_por_atraso     = models.DecimalField("Multa por atraso", max_digits=10, decimal_places=3, null=True, blank=True)
     iof_real             = models.DecimalField("IOF real", max_digits=10, decimal_places=2, null=True, blank=True)
-    valor_devido         = models.DecimalField("Valor devido", max_digits=10, decimal_places=2, null=True, blank=True)
-
+    valor_devido         = models.DecimalField("Valor devido", max_digits=10, decimal_places=2, null=True, blank=True)    
 
     class Meta:
         ordering = ('-dt_emprestimo',)        
