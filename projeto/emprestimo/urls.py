@@ -8,9 +8,7 @@ app_name='emprestimo'
 urlpatterns = [
     path('', v.emprestimo_list, name='emprestimo_list'),
     path('add/', login_required(v.EmprestimoCreate.as_view()), name='emprestimo_add'),
-    path('<int:pk>/delete/', login_required(v.EmprestimoDelete.as_view()), name='emprestimo_delete'),  
-    
-    
+    path('<int:pk>/delete/', login_required(v.EmprestimoDelete.as_view()), name='emprestimo_delete'),
     path('<int:pk>/impress/', login_required(v.EmprestimoImpress.as_view()), name='emprestimo_impress'),
     path('<int:pk>/carne/', login_required(v.EmprestimoCarne.as_view()), name='emprestimo_carne'),
     path('<int:pk>/promissoria/', login_required(v.EmprestimoPromissoria.as_view()), name='emprestimo_promissoria'),
@@ -18,8 +16,6 @@ urlpatterns = [
     path('<int:pk>/contrato_cnpj/', login_required(v.EmprestimoContratoCNPJ.as_view()), name='emprestimo_contrato_cnpj'),
     path('<int:pk>/contrato_cpf/', login_required(v.EmprestimoContratoCPF.as_view()), name='emprestimo_contrato_cpf'),
     path('<int:pk>/', v.emprestimo_detail, name='emprestimo_detail'),
-    
-    
     path('<int:pk>/edit/', login_required(v.EmprestimoUpdate.as_view()), name='emprestimo_edit'),  
     path('<int:pk>/pagamento_add/', v.emprestimo_pagamento_add, name='emprestimo_pagamento_add'),
     path('<int:pk>/pagamento/', v.emprestimo_pagamento, name='emprestimo_pagamento'),

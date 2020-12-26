@@ -422,65 +422,19 @@ window.onload = function imprimir(){
             </tr>
         </table>
         `
-        var primeiro = false
+        for(var i=0; i<{{object.qtd_parcelas}}; i++){
+            contador_parcela++
+            mes++
 
-        for(var i=0; i<{{object.qtd_parcelas}}; i++){ 
-            mes++      
-            
-            if(dia == 1 && mes == 2){
-                primeiro = true
+            //AJUSTA A DATA QUANDO O MES É FEVEREIRO 
+            if(dia == 1 && mes == 4){
+                dia = 30 
+                mes = 3
             }
-
-            if(dia == 31){
-                trinta_e_um = 31
+            if(dia == 30 && mes == 2){
+                dia = 1 
+                mes = 3
             }
-            
-            if(primeiro == false){
-
-                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
-                if(dia == 1 && mes == 4){
-                    dia = 30 
-                    mes = 3                
-                }
-                if(dia == 30 && mes == 2){
-                    dia = 1 
-                    mes = 3
-                }
-                if(dia == 31 && mes == 2){
-                    dia = 1 
-                    mes = 3
-                }            
-    
-                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
-                if(mes == 11 && trinta_e_um == 31){
-                    dia--
-                }
-                if(dia == 30 && mes == 12 && trinta_e_um == 31){
-                    dia++
-                }
-                if(dia == 30 && mes == 3 && trinta_e_um == 31){
-                    dia++
-                }
-                if(mes == 4 && trinta_e_um == 31){
-                    dia--
-                }
-                if(mes == 5 && trinta_e_um == 31){
-                    dia++
-                }
-                if(mes == 6 && trinta_e_um == 31){
-                    dia--
-                }
-                if(mes == 7 && trinta_e_um == 31){
-                    dia++
-                }
-                if(mes == 9 && trinta_e_um == 31){
-                    dia--
-                }
-                if(mes == 10 && trinta_e_um == 31){
-                    dia++
-                }
-            }
-            
             
             //AJUSTA MESES E ANOS 
             if(mes == 13){
@@ -491,22 +445,21 @@ window.onload = function imprimir(){
                 ano++				
             }
             
-            contrato.innerHTML +=
-            `
-                <table cellspacing="0" cellpadding="0" border="1" >       
-                    <tr >
-                        <td width="33%">
-                            ${i+1}/${"{{ object.qtd_parcelas}}"}
-                        </td>
-                        <td width="33%">
-                            ${dia}/${meses[mes-1]}/${ano}
-                        </td>
-                        <td width="39%">
-                            R$ ${"{{ object.valor_prestacao}}"} 
-                        </td>
-                    </tr>
-                </table>
-            `
+        contrato.innerHTML +=
+        `
+            <table cellspacing="0" cellpadding="0" border="1" >       
+                <tr >
+                    <td width="33%">
+                        ${contador_parcela}/${aux_qtd_parccela}
+                    </td>
+                    <td width="33%">
+                        ${dia}/${meses[mes-1]}/${ano}
+                    </td>
+                    <td width="39%">
+                        R$ ${"{{ object.valor_prestacao}}"}
+                </tr>
+            </table>
+        `
         }
         contrato.innerHTML +=
         `

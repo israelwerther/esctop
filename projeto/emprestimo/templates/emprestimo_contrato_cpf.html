@@ -3,11 +3,11 @@
 {% block js %}{% endblock js %}
 {% block content %}
        
-    <div class="document">
-        <div id = "contrato" >
-           
-        </div>
-    </div>      
+<div class="document">
+    <div id = "contrato" >
+        
+    </div>
+</div>      
 
 <script>
     window.onload = function imprimir(){        
@@ -17,17 +17,14 @@
         var contador_anos  = 0
         var meses = new Array("01", "02", "03", "04", "05", "06" ,"07", "08", "09", "10", "11", "12")
         var dataEmprestimo = "{{ object.dt_emprestimo}}"
-        var dt = new Date(dataEmprestimo)
-               
+        var dt = new Date(dataEmprestimo)               
         var dia
         var mes
         var ano
         var aux_dia = {{object.dt_emprestimo.day}}
         var aux_mes = {{object.dt_emprestimo.month}}
-        var aux_ano = {{object.dt_emprestimo.year}}        
-    
+        var aux_ano = {{object.dt_emprestimo.year}}  
         var trinta_e_um = 0
-        
         dia  = aux_dia
         mes  = aux_mes+contador_meses
         ano  = aux_ano
@@ -198,8 +195,7 @@
                 if(mes == 10 && trinta_e_um == 31){
                     dia++
                 }
-            }
-            
+            }            
             
             //AJUSTA MESES E ANOS 
             if(mes == 13){
