@@ -27,9 +27,9 @@
                 {% for object in object_list  %}   
                 <tr>
                 {% if object.cliente %}
-                    <td style="text-align:center">{{ object.cliente }}(CPF)</td>
+                    <td style="text-align:left">{{ object.cliente }}(CPF)</td>
                 {% else %}
-                    <td style="text-align:center">{{ object.cliente_cnpj }}(CNPJ)</td>
+                    <td style="text-align:left">{{ object.cliente_cnpj }}(CNPJ)</td>
                 {% endif %}
                     <td style="text-align:center">{{ object.n_contrato }}</td>
                     <td style="text-align:center">{{ object.valor_emprestado }}</td>
