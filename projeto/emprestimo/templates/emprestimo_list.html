@@ -8,11 +8,11 @@
         <a href="{% url 'emprestimo:emprestimo_add' %}" type="button" class="btn btn-success">Novo Empréstimo</a>
     </div>
     <div>
-        <h2>Lista de Empréstimos</h2>
+        <h2 class="maiusculo">Lista de Empréstimos</h2>
     </div>
     
     {% if object_list %}
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover maiusculo">
             <thead class="thead">
                 <tr>
                     <th>Cliente</th>                    
@@ -27,15 +27,15 @@
                 {% for object in object_list  %}   
                 <tr>
                 {% if object.cliente %}
-                    <td class="maiusculo" style="text-align:left">{{ object.cliente }}(CPF)</td>
+                    <td style="text-align:center">{{ object.cliente }}(CPF)</td>
                 {% else %}
-                    <td class="maiusculo" style="text-align:left">{{ object.cliente_cnpj }}(CNPJ)</td>
+                    <td style="text-align:center">{{ object.cliente_cnpj }}(CNPJ)</td>
                 {% endif %}
-                    <td class="maiusculo" style="text-align:center">{{ object.n_contrato }}</td>
-                    <td class="maiusculo" style="text-align:center">{{ object.valor_emprestado }}</td>
-                    <td class="maiusculo" style="text-align:center">{{ object.qtd_parcelas }}x</td>  
-                    <td class="maiusculo" style="text-align:center">{{ object.valor_prestacao }}</td>  
-                    <td class="maiusculo" style="text-align:center"> 
+                    <td style="text-align:center">{{ object.n_contrato }}</td>
+                    <td style="text-align:center">{{ object.valor_emprestado }}</td>
+                    <td style="text-align:center">{{ object.qtd_parcelas }}x</td>  
+                    <td style="text-align:center">{{ object.valor_prestacao }}</td>  
+                    <td style="text-align:center"> 
                         <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a>
                     </td>                     
                 </tr>
