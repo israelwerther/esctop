@@ -20,19 +20,35 @@
         font-family: "Arial";     
         margin: auto auto;       
         background-color: #fff;
-    }   
-   
+    }
     p {
         padding: 2px;
         padding-left: 8px;
-    }  
-      
+    }
     .box {
         float: left;
         width: 100px;
         height: 40px;
         margin: 4px;
         border: 1px solid black;
+        text-align: center;
+    }
+    .boxCliente {			
+        width: 450px;
+        height: 25px;
+        margin: 2px;				
+        margin-left: 350px;	
+        margin-top: 130px;	
+        position: absolute;
+        text-align: center;
+    }
+    .boxHorarioDeFuncionamento {			
+        width: 450px;
+        height: 25px;
+        margin: 2px;				
+        margin-left: 350px;	
+        margin-top: 160px;	
+        position: absolute;
         text-align: center;
     }
 
@@ -47,25 +63,117 @@
 <script>	
 	
 	window.onload = function imprimir(){ 
+        var contador_meses = 0
+        var contador_anos  = 0
+        var meses = new Array("01", "02", "03", "04", "05", "06" ,"07", "08", "09", "10", "11", "12")
+        var dataEmprestimo = "{{ object.dt_emprestimo}}"
+        var dt = new Date(dataEmprestimo)               
+        var dia
+        var mes
+        var ano
+        var aux_dia = {{object.dt_emprestimo.day}}
+        var aux_mes = {{object.dt_emprestimo.month}}
+        var aux_ano = {{object.dt_emprestimo.year}}  
+        var trinta_e_um = 0
+        dia  = aux_dia
+        mes  = aux_mes+contador_meses
+        ano  = aux_ano
+
+        var primeiro = false
+
         for(var i = 1 ; i <= {{object.qtd_parcelas}}; i++){
+            mes++      
+            
+            if(dia == 1 && mes == 2){
+                primeiro = true
+            }
+
+            if(dia == 31){
+                trinta_e_um = 31
+            }
+            
+            if(primeiro == false){
+
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
+                if(dia == 1 && mes == 4){
+                    dia = 30 
+                    mes = 3                
+                }
+                if(dia == 30 && mes == 2){
+                    dia = 1 
+                    mes = 3
+                }
+                if(dia == 31 && mes == 2){
+                    dia = 1 
+                    mes = 3
+                }            
+    
+                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
+                if(mes == 11 && trinta_e_um == 31){
+                    dia--
+                }
+                if(dia == 30 && mes == 12 && trinta_e_um == 31){
+                    dia++
+                }
+                if(dia == 30 && mes == 3 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 4 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 5 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 6 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 7 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 9 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 10 && trinta_e_um == 31){
+                    dia++
+                }
+            }            
+            
+            //AJUSTA MESES E ANOS 
+            if(mes == 13){
+                contador_meses = 0
+                aux_mes = 1
+                mes = 1	
+                aux_ano++
+                ano++				
+            }
+            
             contracapa.innerHTML+=
             `
             <div class="box">			
-                1º Parcela <strong>20/02/1986</strong>
+                ${i}º Parcela <strong>${dia}/${meses[mes-1]}/${ano}</strong>
             </div>	
             
             `
             if(i==3 || i==6 || i==9){
                 contracapa.innerHTML +=
                 `
-                    <br>
-                    <br>
-                    <br>
+                <br>
+                <br>
+                <br>
                     
                 `
             }
         }
     }
+    contracapa.innerHTML+=
+    `
+    <div class="boxCliente">			
+        <strong> {{object.cliente.nome}} </strong>
+    </div>
+    <div class="boxHorarioDeFuncionamento">			
+        Segunda a Sexta-feira das 14h às 18h
+    </div>
+    `
 
 </script>
 
