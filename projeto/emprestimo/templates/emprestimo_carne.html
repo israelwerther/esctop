@@ -30,7 +30,25 @@
         margin: auto auto;
         border-collapse: collapse;
     }
-    
+    body {
+        font-family: "Arial";
+    }
+    th.canhoto{
+        font-weight: normal;
+        font-size: 14px;
+        width: 140px;
+    }
+    th.meio{
+        font-weight: normal;
+        font-size: 14px;
+        width: 420px;        
+    }
+    th.canhotoDaEmpresa{
+        font-weight: normal;
+        font-size: 14px;
+        width: 140px;        
+    }
+
     .box {
         float: left;
         width: 100px;
@@ -48,6 +66,7 @@
         margin-top: 130px;	
         position: absolute;
         text-align: center;
+        
     }
     .boxHorarioDeFuncionamento {			
         width: 450px;
@@ -64,19 +83,37 @@
     }   
     p.fonte1 {
         padding: 0px;
-        font-size: 10px;
+        margin: 0px;
+        margin-left: 5px;
+        font-size: 14px;
+        text-align: left;
     }
     p.fonte2 {
+        padding: 5px;
+        margin: 0px;
+        margin-right: 5px;
+        font-size: 14px;
+        text-align: right;
+    }
+    p.fonte3 {
         padding: 0px;
-        font-size: 10px;
+        margin: 5px;
+        margin-right: 5px;
+        font-size: 14px;
+        text-align: left;
+    }
+    p.fonte4 {
+        padding: 0px;
+        margin: 0px;
+        
     }
 </style>
 
 <div class="row">
     <div id="contracapa" class="contracapa">
         <!-- <span class="text-right" style="width:30%">Observações</span>  -->
-        <p>Empréstimo em <strong>{{object.qtd_parcelas}} parcelas</strong> no dia {{object.dt_emprestimo}}</p>
-        <p><strong>Fique de olho na data de vencimento da sua parcela</strong></p> 
+        <p>&nbsp&nbsp&nbsp Empréstimo em <strong>{{object.qtd_parcelas}} parcelas</strong> no dia {{object.dt_emprestimo}}</p>
+        <p><strong>&nbsp&nbsp&nbsp Fique de olho na data de vencimento da sua parcela</strong></p> 
     </div>
 </div>
 
@@ -183,7 +220,6 @@
                 <br>
                 <br>
                 <br>
-                
                     
                 `
             }
@@ -191,25 +227,120 @@
             `          
             <table>
                 <tr>
-                    <th>
-                        CREDCOOP</br>
+                    <th class="canhoto">
+                        <b>CREDCOOP</b></br>
                         (84) 4141-3210
                     </th>
-                    <th>
-                        CREDCOOP</br>
+                    <th class="meio" style="border-right: none;">
+                        <b>CREDCOOP</b></br>
                         (84) 4141-3210
                     </th>
-                    <th>
-                        (84) 4141-3210
+                    <th class="canhotoDaEmpresa" style="border-left: none;">
+                        
                     </th>
                 </tr>
                 <tr>
-                    <td>1</td>
-                    <td>2</td>
+                    <th class="canhoto" >
+                        <p class="fonte1"><b>Vencimento</b></p>
+                        <p class="fonte2">${dia}/${meses[mes-1]}/${ano}</p>
+                    </th>
+                    <th class="meio" style="text-align: left;">
+                        <p class="fonte1"><b>Local de Pagamento: ESCRITÓRIO</b></p>
+                    </th>
+                    <th class="canhotoDaEmpresa">
+                        <p class="fonte1"><b>Vencimento</b></p>
+                        <p class="fonte2">${dia}/${meses[mes-1]}/${ano}</p> 
+                    </th>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td>4</td>
+                    <th class="canhoto" >
+                        <p class="fonte1"><b>Valor do Documento</b></p>
+                        <p class="fonte2">R$ {{object.valor_prestacao}}</p>
+                    </th>
+                    <th class="canhotoDaEmpresa">
+                        <p class="fonte1"><b>Nome do Cedente</b></p>
+                        <p class="fonte1">CREDCOOP</p> 
+                    </th>
+                    <th class="canhotoDaEmpresa">
+                        <p class="fonte1"><b>Valor do Documento</b></p>
+                        <p class="fonte2">R$ {{object.valor_prestacao}}</p> 
+                    </th>
+                </tr>
+                <tr>
+                    <th class="canhoto">
+                        <p class="fonte3"><b>Parcela: ${i}/{{object.qtd_parcelas}}</b></p>
+                    </th>
+                    <th class="meio">
+                        <p class="fonte3"><b>Data de Emissão: {{object.dt_emprestimo}} </b></p>                    
+                    </th>
+                    <th class="canhotoDaEmpresa">
+                        <p class="fonte3"><b>Parcela: ${i}/{{object.qtd_parcelas}}</b></p>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="canhoto">
+                        <p class="fonte3">Descontos</p>
+                        <p class="fonte4">&nbsp</p>
+                    </th>
+                    <th class="meio" style="border-bottom: none;">
+                        <p class="fonte3" ><b>INSTRUÇÕES:</b></p>                    
+                    </th>
+                    <th class="canhoto">
+                        <p class="fonte3">Descontos</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="canhoto">
+                        <p class="fonte3">Acrécimos</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                    <th class="meio" style="border-bottom: none; border-top: none;">
+                        <p class="fonte3" ><b>MULTA DE R$: {{object.valor_multa}} APÓS: ${dia}/${meses[mes-1]}/${ano}</b></p>                    
+                    </th>
+                    <th class="canhoto">
+                        <p class="fonte3">Acrécimos</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="canhoto">
+                        <p class="fonte3">Mora/Multa</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                    <th class="meio" style="border-bottom: none; border-top: none;">
+                        <p class="fonte3" ><b>JUROS DE R$: {{object.juros_ao_dia}}</b></p>                    
+                    </th>
+                    <th class="canhoto">
+                        <p class="fonte3">Mora/Multa</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="canhoto">
+                        <p class="fonte3">Valor Cobrado</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                    <th class="meio" style="border-top: none;">
+                        <p class="fonte3"><b></b></p>                    
+                    </th>
+                    <th class="canhoto">
+                        <p class="fonte3">Valor Cobrado</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="canhoto">
+                        <p class="fonte3"><b>Visto do Operador</b></p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
+                    <th class="meio" style="border-top: none;">
+                        <p class="fonte3"><b></b></p>                    
+                    </th>
+                    <th class="canhoto">
+                        <p class="fonte3">Valor Cobrado</p>
+                         <p class="fonte4">&nbsp</p>
+                    </th>
                 </tr>
             </table>
             
