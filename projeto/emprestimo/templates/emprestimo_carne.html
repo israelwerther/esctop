@@ -240,108 +240,112 @@
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto" >
+                    <th>
                         <p class="fonte1"><b>Vencimento</b></p>
                         <p class="fonte2">${dia}/${meses[mes-1]}/${ano}</p>
                     </th>
-                    <th class="meio" style="text-align: left;">
+                    <th style="text-align: left;">
                         <p class="fonte1"><b>Local de Pagamento: ESCRITÓRIO</b></p>
                     </th>
-                    <th class="canhotoDaEmpresa">
+                    <th>
                         <p class="fonte1"><b>Vencimento</b></p>
                         <p class="fonte2">${dia}/${meses[mes-1]}/${ano}</p> 
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto" >
+                    <th>
                         <p class="fonte1"><b>Valor do Documento</b></p>
                         <p class="fonte2">R$ {{object.valor_prestacao}}</p>
                     </th>
-                    <th class="canhotoDaEmpresa">
+                    <th>
                         <p class="fonte1"><b>Nome do Cedente</b></p>
                         <p class="fonte1">CREDCOOP</p> 
                     </th>
-                    <th class="canhotoDaEmpresa">
+                    <th>
                         <p class="fonte1"><b>Valor do Documento</b></p>
                         <p class="fonte2">R$ {{object.valor_prestacao}}</p> 
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3"><b>Parcela: ${i}/{{object.qtd_parcelas}}</b></p>
                     </th>
-                    <th class="meio">
+                    <th>
                         <p class="fonte3"><b>Data de Emissão: {{object.dt_emprestimo}} </b></p>                    
                     </th>
-                    <th class="canhotoDaEmpresa">
+                    <th>
                         <p class="fonte3"><b>Parcela: ${i}/{{object.qtd_parcelas}}</b></p>
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Descontos</p>
                         <p class="fonte4">&nbsp</p>
                     </th>
-                    <th class="meio" style="border-bottom: none;">
+                    <th style="border-bottom: none;">
                         <p class="fonte3" ><b>INSTRUÇÕES:</b></p>                    
                     </th>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Descontos</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Acrécimos</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
-                    <th class="meio" style="border-bottom: none; border-top: none;">
+                    <th style="border-bottom: none; border-top: none;">
                         <p class="fonte3" ><b>MULTA DE R$: {{object.valor_multa}} APÓS: ${dia}/${meses[mes-1]}/${ano}</b></p>                    
                     </th>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Acrécimos</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Mora/Multa</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
-                    <th class="meio" style="border-bottom: none; border-top: none;">
+                    <th style="border-bottom: none; border-top: none;">
                         <p class="fonte3" ><b>JUROS DE R$: {{object.juros_ao_dia}}</b></p>                    
                     </th>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Mora/Multa</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Valor Cobrado</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
-                    <th class="meio" style="border-top: none;">
+                    <th style="border-top: none;">
                         <p class="fonte3"><b></b></p>                    
                     </th>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte3">Valor Cobrado</p>
                          <p class="fonte4">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
-                    <th class="canhoto">
+                    <th>
                         <p class="fonte1" style="text-align:center;"><b>&nbspVisto do Operador</b></p>							
 						<p class="fonte1" style="text-align:center;">Pago em:</p>						
 						<p class="fonte1" style="text-align:center;">____/____/____ </p>
                     </th>
-                    <th class="meio" style="border-top: none;">
-                        <p class="fonte3"><b></b></p>                    
-                    </th>
-                    <th class="canhoto">
+                    <th>
+                        <p class="fonte1">&nbspSacado: {{object.cliente}} - CPF: {{object.cliente.cpf}} </p>						
+                        <p class="fonte1">&nbspEndereço: {{object.cliente.rua}} - {{object.cliente.numero_casa}} - 
+                            {{object.cliente.bairro}} - {{object.cliente.uf}} - {{object.cliente.cep}}
+                        </p>
+                        <p class="fonte1">&nbspFiador: {{object.cliente.fiador.nome}} - &nbspCPF: {{object.cliente.fiador.cpf}}</p>
+                    </th>                   
+                    <th>
                         <p class="fonte1" style="text-align:center;"><b>&nbspVisto do Operador</b></p>							
-						<p class="fonte1" style="text-align:center;">Pago em:</p>						
-						<p class="fonte1" style="text-align:center;">____/____/____ </p>
+                        <p class="fonte1" style="text-align:center;">Pago em:</p>						
+                        <p class="fonte1" style="text-align:center;">____/____/____ </p>
                     </th>
                 </tr>
             </table>
