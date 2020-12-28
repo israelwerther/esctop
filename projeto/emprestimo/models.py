@@ -6,11 +6,6 @@ from django.utils.translation import gettext_lazy as _
 from projeto.cliente.models import Cliente
 from projeto.cliente_cnpj.models import Cliente_cnpj
 
-# VERIFICAR AS FUNÇÕES DESSA BIBLIOTECA
-# from decimal import Decimal
-
-import math
-
 class Emprestimo(models.Model):
     funcionario          = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     cliente              = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
