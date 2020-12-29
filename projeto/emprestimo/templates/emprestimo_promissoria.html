@@ -363,9 +363,9 @@ window.onload = function imprimir_promissoria(){
                 <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
                 <a class="ait"> 
                     <b class = "fontmaior" >&nbspNº</b>                 
-                    <b class="bordinha fontmaior">&nbsp&nbsp${contador_parcela}/${aux_qtd_parccela}&nbsp&nbsp</b>  
+                    <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
 
-                    <b class="fontmenor"> Vencimento: ${dia} de ${mes} de ${ano} </b> 
+                    <b class="fontmenor"> Vencimento: ${dia} de ${meses[mes-1]} de ${ano} </b> 
 
                     <b>
                         <b class="bordinha fontmaior1">R$&nbsp&nbsp${"{{object.valor_prestacao}}"}&nbsp</b> 
@@ -417,9 +417,9 @@ window.onload = function imprimir_promissoria(){
                     <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
                     <a class="ait"> 
                         <b class = "fontmaior" >&nbspNº</b>                 
-                        <b class="bordinha fontmaior">&nbsp&nbsp${contador_parcela}/${aux_qtd_parccela}&nbsp&nbsp</b>  
+                        <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
         
-                        <b class="fontmenor"> Vencimento: ${dia} de ${mes} de ${ano} </b> 
+                        <b class="fontmenor"> Vencimento: ${dia} de ${meses[mes-1]} de ${ano} </b> 
         
                         <b>
                             <b class="bordinha fontmaior1">R$&nbsp&nbsp${"{{object.valor_prestacao}}"}&nbsp</b> 
