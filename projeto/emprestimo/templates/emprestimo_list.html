@@ -34,7 +34,11 @@
                     <td style="text-align:center">{{ object.n_contrato }}</td>
                     <td style="text-align:center">{{ object.valor_emprestado }}</td>
                     <td style="text-align:center">{{ object.qtd_parcelas }}x</td>  
-                    <td style="text-align:center">{{ object.valor_prestacao }}</td>  
+                    <td style="text-align:left"> R$ 
+                        <b style="text-align:right">
+                            {{ object.valor_prestacao }}
+                        </b>
+                    </td>  
                     <td style="text-align:center"> 
                         <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a>
                     </td>                     

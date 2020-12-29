@@ -94,6 +94,7 @@
         margin-right: 5px;
         font-size: 12px;
         text-align: right;
+        font-weight: normal;
     }
     p.fonte3 {
         padding: 0px;
@@ -106,6 +107,15 @@
         padding: 0px;
         margin: 0px;
         font-size: 10px;   
+    }
+    p.fonte5 {
+        padding: 2px;
+        margin: 0px;
+        margin-right: 5px;       
+        font-size: 12px;
+        text-align: right;
+        font-weight: normal;
+        text-align: left;
     }
 </style>
 
@@ -279,73 +289,73 @@
                 </tr>
                 <tr>
                     <th>
-                        <p class="fonte3">Descontos</p>
-                        <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Descontos</p>
+                        <p class="fonte5">&nbsp</p>
                     </th>
                     <th style="border-bottom: none;">
                         <p class="fonte3" ><b>INSTRUÇÕES:</b></p>                    
                     </th>
                     <th>
-                        <p class="fonte3">Descontos</p>
-                        <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Descontos</p>
+                        <p class="fonte5">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        <p class="fonte3">Acrécimos</p>
-                        <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Acrécimos</p>
+                        <p class="fonte5">&nbsp</p>
                     </th>
                     <th style="border-bottom: none; border-top: none;">
                         <p class="fonte3" ><b>MULTA DE R$: {{object.valor_multa}} APÓS: ${dia}/${meses[mes-1]}/${ano}</b></p>                    
                     </th>
                     <th>
-                        <p class="fonte3">Acrécimos</p>
-                        <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Acrécimos</p>
+                        <p class="fonte5">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        <p class="fonte3">Mora/Multa</p>
-                         <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Mora/Multa</p>
+                         <p class="fonte5">&nbsp</p>
                     </th>
                     <th style="border-bottom: none; border-top: none;">
                         <p class="fonte3" ><b>JUROS DE R$: {{object.juros_ao_dia}} AO DIA</b></p>                    
                     </th>
                     <th>
-                        <p class="fonte3">Mora/Multa</p>
-                         <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Mora/Multa</p>
+                         <p class="fonte5">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
                     <th>
-                        <p class="fonte3">Valor Cobrado</p>
-                         <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Valor Cobrado</p>
+                         <p class="fonte5">&nbsp</p>
                     </th>
                     <th style="border-top: none;">
                         <p class="fonte3"><b></b></p>                    
                     </th>
                     <th>
-                        <p class="fonte3">Valor Cobrado</p>
-                         <p class="fonte4">&nbsp</p>
+                        <p class="fonte5">Valor Cobrado</p>
+                         <p class="fonte5">&nbsp</p>
                     </th>
                 </tr>
                 <tr>
                     <th>
                         <p class="fonte1" style="text-align:center;"><b>&nbspVisto do Operador</b></p>							
-						<p class="fonte1" style="text-align:center;">Pago em:</p></br>						
-						<p class="fonte1" style="text-align:center;">____/____/____ </p>
+						<p class="fonte5" style="text-align:center;">Pago em:</p></br>						
+						<p class="fonte5" style="text-align:center;">____/____/____ </p>
                     </th>
                     <th>
-                        <p class="fonte1">&nbspSacado: {{object.cliente}} - CPF: {{object.cliente.cpf}} </p>						
-                        <p class="fonte1">&nbspEndereço: {{object.cliente.rua}} - {{object.cliente.numero_casa}} - 
+                        <p class="fonte5">&nbspSacado: {{object.cliente}} - CPF: {{object.cliente.cpf}} </p>						
+                        <p class="fonte5">&nbspEndereço: {{object.cliente.rua}} - {{object.cliente.numero_casa}} - 
                             {{object.cliente.bairro}} - {{object.cliente.uf}} - {{object.cliente.cep}}
                         </p>
-                        <p class="fonte1">&nbspFiador: {{object.cliente.fiador.nome}} - &nbspCPF: {{object.cliente.fiador.cpf}}</p>
+                        <p class="fonte5">&nbspFiador: {{object.cliente.fiador.nome}} - &nbspCPF: {{object.cliente.fiador.cpf}}</p>
                     </th>                   
                     <th>
                         <p class="fonte1" style="text-align:center;"><b>&nbspVisto do Operador</b></p>							
-                        <p class="fonte1" style="text-align:center;">Pago em:</p></br>					
-                        <p class="fonte1" style="text-align:center;">____/____/____ </p>
+                        <p class="fonte5" style="text-align:center;">Pago em:</p></br>					
+                        <p class="fonte5" style="text-align:center;">____/____/____ </p>
                     </th>
                 </tr>
             </table>
