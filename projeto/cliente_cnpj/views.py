@@ -23,6 +23,13 @@ def cliente_cnpj_cadastra(request):
     data = {'cnpjs': cnpjs,'form': form} 
     return render(request, 'cliente_cnpj_form.html', data)
 
+@login_required
+def cliente_cep(request):
+    cnpjs = Cliente_cnpj.objects.all()    
+    form = Cliente_cnpjForm()    
+    data = {'cnpjs': cnpjs,'form': form} 
+    return render(request, 'testecep.html', data)
+
 
 @login_required
 def cliente_cnpj_add(request): 
