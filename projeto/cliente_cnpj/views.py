@@ -12,8 +12,7 @@ def cliente_cnpj_list(request):
     template_name='cliente_cnpj_list.html'
     objects=Cliente_cnpj.objects.all()
     context={'object_list': objects}
-    return render(request, template_name, context)
-    
+    return render(request, template_name, context)    
 
 
 @login_required
@@ -22,13 +21,7 @@ def cliente_cnpj_cadastra(request):
     form = Cliente_cnpjForm()    
     data = {'cnpjs': cnpjs,'form': form} 
     return render(request, 'cliente_cnpj_form.html', data)
-
-@login_required
-def cliente_cep(request):
-    cnpjs = Cliente_cnpj.objects.all()    
-    form = Cliente_cnpjForm()    
-    data = {'cnpjs': cnpjs,'form': form} 
-    return render(request, 'testecep.html', data)
+    
 
 
 @login_required

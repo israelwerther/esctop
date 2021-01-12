@@ -6,8 +6,6 @@
 
 <!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
 <div class="row" > 
     <div class="col-sm-12">
         <div class="tab">
@@ -33,7 +31,7 @@
     <div class="row" > 
         <div class="col-sm-6">                    
             <div class="form-group" >                
-                <label class="required" >{{form.razao_social.label}} </label>        
+                <label for="" class="required" >{{form.razao_social.label}} </label>        
                 {% render_field form.razao_social class="form-control" %}
             </div>
         </div>    
@@ -91,68 +89,38 @@
     <div class="row">
         <div class="col-sm-2">                    
             <div class="form-group" >                
-                <label for="cep" class="required">{{form.cep.label}} </label>        
-                {% render_field form.cep class="form-control" id="cep" type="text"%}                            
+                <label for="" class="required">{{form.cep.label}} </label>        
+                {% render_field form.cep class="form-control" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}                            
             </div>
         </div>
-
         <div class="col-sm-4">                    
             <div class="form-group" >                
-                <label for="logradouro" class="required">{{form.rua.label}} </label>        
-                {% render_field form.rua class="form-control" id="logradouro" type="text"%}
+                <label for="" class="required">{{form.rua.label}} </label>        
+                {% render_field form.rua class="form-control" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
-
         <div class="col-sm-1">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.numero_casa.label}} </label>        
-                {% render_field form.numero_casa class="form-control"%}
+                {% render_field form.numero_casa class="form-control" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
         <div class="col-sm-5">                    
             <div class="form-group" >                
-                <label for="bairro" class="required">{{form.bairro.label}} </label>        
-                {% render_field form.bairro class="form-control" id="bairro" type="text"%}
+                <label for="" class="required">{{form.bairro.label}} </label>        
+                {% render_field form.bairro class="form-control" name="bairro" type="text" id="bairro" size="40" %}
             </div>
         </div>
         <div class="col-sm-3">                    
             <div class="form-group" >                
-                <label for="cidade" class="required">{{form.cidade.label}} </label>        
-                {% render_field form.cidade class="form-control" id="cidade"%}
+                <label for="" class="required">{{form.cidade.label}} </label>        
+                {% render_field form.cidade class="form-control" name="cidade" type="text" id="cidade" size="40"%}
             </div>
         </div>
-        <div class="col-sm-3">                    
+        <div class="col-sm-1">                    
             <div class="form-group" >                
-                <label for="uf" class="required">{{form.uf.label}} </label> 
-                <select id="uf" class="form-control" style="text-transform: uppercase;">
-                    <option value="AC">Acre</option>
-                    <option value="AL">Alagoas</option>
-                    <option value="AP">Amapá</option>
-                    <option value="AM">Amazonas</option>
-                    <option value="BA">Bahia</option>
-                    <option value="CE">Ceará</option>
-                    <option value="DF">Distrito Federal</option>
-                    <option value="ES">Espírito Santo</option>
-                    <option value="GO">Goiás</option>
-                    <option value="MA">Maranhão</option>
-                    <option value="MT">Mato Grosso</option>
-                    <option value="MS">Mato Grosso do Sul</option>
-                    <option value="MG">Minas Gerais</option>
-                    <option value="PA">Pará</option>
-                    <option value="PB">Paraíba</option>
-                    <option value="PR">Paraná</option>
-                    <option value="PE">Pernambuco</option>
-                    <option value="PI">Piauí</option>
-                    <option value="RJ">Rio de Janeiro</option>
-                    <option value="RN">Rio Grande do Norte</option>
-                    <option value="RS">Rio Grande do Sul</option>
-                    <option value="RO">Rondônia</option>
-                    <option value="RR">Roraima</option>
-                    <option value="SC">Santa Catarina</option>
-                    <option value="SP">São Paulo</option>
-                    <option value="SE">Sergipe</option>
-                    <option value="TO">Tocantins</option>
-                </select>
+                <label for="" class="required">{{form.uf.label}} </label>        
+                {% render_field form.uf class="form-control" name="uf" type="text" id="uf" size="2"%}
             </div>
         </div>            
         <div class="col-sm-4">                    
@@ -368,75 +336,56 @@
 <hr>
     <h3>ENDEREÇO</h3>               
 <hr/>
-<div class="row">     
+<div class="row">            
     <div class="col-sm-2">                    
+        {% comment %} <div class="form-group" >                
+            <label for="" > {{form.rep_cep.label}} </label>        
+            {% render_field form.rep_cep class="form-control" %}
+        </div> {% endcomment %}
         <div class="form-group" >                
             <label for="cep2" class="required">{{form.rep_cep.label}} </label>        
             {% render_field form.rep_cep class="form-control" id="cep2" type="text"%}                            
         </div>
     </div>
-
-    <div class="col-sm-4">                    
+    <div class="col-sm-5">                    
         <div class="form-group" >                
-            <label for="logradouro2" class="required">{{form.rep_rua.label}} </label>        
-            {% render_field form.rep_rua class="form-control" id="logradouro2" type="text"%}
+            {% comment %} <label for="" > {{form.rep_rua.label}} </label>        
+            {% render_field form.rep_rua class="form-control" %} {% endcomment %}
+            <label for="logradouro" class="required">{{form.rep_rua.label}} </label>        
+            {% render_field form.rep_rua class="form-control" id="logradouro" type="text"%}
         </div>
-    </div>       
-    
+    </div>
+
     <div class="col-sm-1">                    
         <div class="form-group" >                
-            <label for="" >{{form.rep_numero_casa.label}} </label>        
+            <label for="" > {{form.rep_numero_casa.label}} </label>        
             {% render_field form.rep_numero_casa class="form-control" %}
         </div>
     </div>
-
-    <div class="col-sm-5">                    
+    <div class="col-sm-4">                    
         <div class="form-group" >                
-            <label for="bairro2" class="required">{{form.bairro.label}} </label>        
-            {% render_field form.bairro class="form-control" id="bairro2" type="text"%}
+            {% comment %} <label for="" >{{form.rep_bairro.label}} </label>        
+            {% render_field form.rep_bairro class="form-control" %} {% endcomment %}
+            <label for="bairro2" class="required">{{form.rep_bairro.label}} </label>        
+            {% render_field form.rep_bairro class="form-control" id="bairro2" type="text"%}
         </div>
     </div>
     <div class="col-sm-3">                    
         <div class="form-group" >                
-            <label for="cidade2" class="required">{{form.cidade.label}} </label>        
-            {% render_field form.cidade class="form-control" id="cidade2"%}
+            {% comment %} <label for="" >{{form.rep_cidade.label}} </label>        
+            {% render_field form.rep_cidade class="form-control" %} {% endcomment %}
+            <label for="cidade2" class="required">{{form.rep_cidade.label}} </label>        
+            {% render_field form.rep_cidade class="form-control" id="cidade2" type="text"%}
         </div>
     </div>
-    <div class="col-sm-3">                    
+    <div class="col-sm-1">                    
         <div class="form-group" >                
-            <label for="uf2" class="required">{{form.uf.label}} </label> 
-            <select id="uf2" class="form-control" style="text-transform: uppercase;">
-                <option value="AC">Acre</option>
-                <option value="AL">Alagoas</option>
-                <option value="AP">Amapá</option>
-                <option value="AM">Amazonas</option>
-                <option value="BA">Bahia</option>
-                <option value="CE">Ceará</option>
-                <option value="DF">Distrito Federal</option>
-                <option value="ES">Espírito Santo</option>
-                <option value="GO">Goiás</option>
-                <option value="MA">Maranhão</option>
-                <option value="MT">Mato Grosso</option>
-                <option value="MS">Mato Grosso do Sul</option>
-                <option value="MG">Minas Gerais</option>
-                <option value="PA">Pará</option>
-                <option value="PB">Paraíba</option>
-                <option value="PR">Paraná</option>
-                <option value="PE">Pernambuco</option>
-                <option value="PI">Piauí</option>
-                <option value="RJ">Rio de Janeiro</option>
-                <option value="RN">Rio Grande do Norte</option>
-                <option value="RS">Rio Grande do Sul</option>
-                <option value="RO">Rondônia</option>
-                <option value="RR">Roraima</option>
-                <option value="SC">Santa Catarina</option>
-                <option value="SP">São Paulo</option>
-                <option value="SE">Sergipe</option>
-                <option value="TO">Tocantins</option>
-            </select>
+            {% comment %} <label for="" >{{form.rep_uf.label}} </label>        
+            {% render_field form.rep_uf class="form-control" %} {% endcomment %}
+            <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
+            {% render_field form.rep_uf class="form-control" id="uf2" type="text"%}
         </div>
-    </div>    
-   
+    </div>
     <div class="col-sm-5">                    
         <div class="form-group" >                
             <label for="" >{{form.rep_ponto_referencia.label}} </label>        
@@ -482,12 +431,12 @@
     </div>    
 </div> 
 {% comment %}
-    <div id="Page3" class="tabcontent">  
-{% endcomment %}
+<div id="Page3" class="tabcontent">  
+        {% endcomment %}
 </div>
 
 <script type="text/javascript">
-		$("#cep").focusout(function(){
+		$("#cep2").focusout(function(){
 			//Início do Comando AJAX
 			$.ajax({
 				//O campo URL diz o caminho de onde virá os dados
@@ -505,41 +454,12 @@
 					//automaticamente nos campos acima.
 					$("#logradouro").val(resposta.logradouro);
 					$("#complemento").val(resposta.complemento);
-					$("#bairro").val(resposta.bairro);
-					$("#cidade").val(resposta.localidade);
-					$("#uf").val(resposta.uf);
-					//Vamos incluir para que o Número seja focado automaticamente
-					//melhorando a experiência do usuário
-					$("#numero").focus();
-				}
-			});
-		});
-	</script>
-    <script type="text/javascript">
-		$("#cep2").focusout(function(){
-			//Início do Comando AJAX
-			$.ajax({
-				//O campo URL diz o caminho de onde virá os dados
-				//É importante concatenar o valor digitado no CEP
-				url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
-				//Aqui você deve preencher o tipo de dados que será lido,
-				//no caso, estamos lendo JSON.
-				dataType: 'json',
-				//SUCESS é referente a função que será executada caso
-				//ele consiga ler a fonte de dados com sucesso.
-				//O parâmetro dentro da função se refere ao nome da variável
-				//que você vai dar para ler esse objeto.
-				success: function(resposta){
-					//Agora basta definir os valores que você deseja preencher
-					//automaticamente nos campos acima.
-					$("#logradouro2").val(resposta.logradouro);
-					$("#complemento2").val(resposta.complemento);
 					$("#bairro2").val(resposta.bairro);
 					$("#cidade2").val(resposta.localidade);
 					$("#uf2").val(resposta.uf);
 					//Vamos incluir para que o Número seja focado automaticamente
 					//melhorando a experiência do usuário
-					$("#numero2").focus();
+					$("#numero").focus();
 				}
 			});
 		});

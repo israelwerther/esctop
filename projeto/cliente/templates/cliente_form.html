@@ -22,12 +22,11 @@
     <form method="POST">
     {% csrf_token %}    
     <h3>CADASTRO PESSOAL</h3>
-    <hr/> 
-    
+    <hr/>    
     <div class="row" >
-        <div class="col-sm-6">                    
+        <div class="col-sm-6">
             <div class="form-group" >                
-                <label for="" class="required" >{{form.nome.label}} </label>        
+                <label class="required" >{{form.nome.label}} </label>                
                 {% render_field form.nome class="form-control" %}
             </div>
         </div>
