@@ -88,8 +88,8 @@
     <div class="row">
         <div class="col-sm-2">                    
             <div class="form-group" >                
-                <label for="" class="required">{{form.cep.label}} </label>        
-                {% render_field form.cep class="form-control" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}                            
+                <label for="cep" class="required">{{form.cep.label}} </label>        
+                {% render_field form.cep class="form-control cep-mask" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}                            
             </div>
         </div>
         <div class="col-sm-4">                    
@@ -100,8 +100,8 @@
         </div>
         <div class="col-sm-1">                    
             <div class="form-group" >                
-                <label for="" class="required">{{form.numero_casa.label}} </label>        
-                {% render_field form.numero_casa class="form-control" name="rua" type="text" id="rua" size="60" %}
+                <label for="numero_casa" >{{form.numero_casa.label}} </label>        
+                {% render_field form.numero_casa class="form-control" name="numero_casa" type="text"%}
             </div>
         </div>
         <div class="col-sm-5">                    
@@ -339,7 +339,7 @@
     <div class="col-sm-2">
         <div class="form-group" >                
             <label for="cep2" class="required">{{form.rep_cep.label}} </label>        
-            {% render_field form.rep_cep class="form-control" id="cep2" type="text"%}                            
+            {% render_field form.rep_cep class="form-control cep-mask" id="cep2" type="text"%}                            
         </div>
     </div>
     <div class="col-sm-5">                    
@@ -348,11 +348,10 @@
             {% render_field form.rep_rua class="form-control" id="logradouro" type="text"%}
         </div>
     </div>
-
     <div class="col-sm-1">                    
         <div class="form-group" >                
             <label for="" > {{form.rep_numero_casa.label}} </label>        
-            {% render_field form.rep_numero_casa class="form-control" %}
+            {% render_field form.rep_numero_casa class="form-control"%}
         </div>
     </div>
     <div class="col-sm-4">                    

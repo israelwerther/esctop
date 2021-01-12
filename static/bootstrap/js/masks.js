@@ -10,7 +10,9 @@ $(document).ready(function() {
     $('.insc-est-mask').mask('000.000.000.000');    
     $('.datepicker').datepicker({
         dateFormat: "dd/mm/yy",
-    });    
+    });
+    //CEP
+    $('.cep-mask').mask("99999-999");
 });
 
 // EMPEDE A TECLA ENTER DE FUNCIONAR NOS FORMULARIOS
