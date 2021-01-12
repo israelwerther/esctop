@@ -3,7 +3,6 @@
 {% block js %}{% endblock js %}
 {% block content %}
 
-
 <!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
 
 <div class="row" > 
@@ -337,20 +336,14 @@
     <h3>ENDEREÇO</h3>               
 <hr/>
 <div class="row">            
-    <div class="col-sm-2">                    
-        {% comment %} <div class="form-group" >                
-            <label for="" > {{form.rep_cep.label}} </label>        
-            {% render_field form.rep_cep class="form-control" %}
-        </div> {% endcomment %}
+    <div class="col-sm-2">
         <div class="form-group" >                
             <label for="cep2" class="required">{{form.rep_cep.label}} </label>        
             {% render_field form.rep_cep class="form-control" id="cep2" type="text"%}                            
         </div>
     </div>
     <div class="col-sm-5">                    
-        <div class="form-group" >                
-            {% comment %} <label for="" > {{form.rep_rua.label}} </label>        
-            {% render_field form.rep_rua class="form-control" %} {% endcomment %}
+        <div class="form-group" > 
             <label for="logradouro" class="required">{{form.rep_rua.label}} </label>        
             {% render_field form.rep_rua class="form-control" id="logradouro" type="text"%}
         </div>
@@ -363,25 +356,19 @@
         </div>
     </div>
     <div class="col-sm-4">                    
-        <div class="form-group" >                
-            {% comment %} <label for="" >{{form.rep_bairro.label}} </label>        
-            {% render_field form.rep_bairro class="form-control" %} {% endcomment %}
+        <div class="form-group" >
             <label for="bairro2" class="required">{{form.rep_bairro.label}} </label>        
             {% render_field form.rep_bairro class="form-control" id="bairro2" type="text"%}
         </div>
     </div>
     <div class="col-sm-3">                    
-        <div class="form-group" >                
-            {% comment %} <label for="" >{{form.rep_cidade.label}} </label>        
-            {% render_field form.rep_cidade class="form-control" %} {% endcomment %}
+        <div class="form-group" >
             <label for="cidade2" class="required">{{form.rep_cidade.label}} </label>        
             {% render_field form.rep_cidade class="form-control" id="cidade2" type="text"%}
         </div>
     </div>
     <div class="col-sm-1">                    
-        <div class="form-group" >                
-            {% comment %} <label for="" >{{form.rep_uf.label}} </label>        
-            {% render_field form.rep_uf class="form-control" %} {% endcomment %}
+        <div class="form-group" >
             <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
             {% render_field form.rep_uf class="form-control" id="uf2" type="text"%}
         </div>
@@ -430,39 +417,39 @@
     </form>        
     </div>    
 </div> 
-{% comment %}
-<div id="Page3" class="tabcontent">  
-        {% endcomment %}
+
 </div>
 
+<!-- MODIFIQUEI ESSE SCRIPT PARA PODER PREENCHER OS DADOS DE ENDEREÇO DO REPRESENTANTE SEM 
+DEPENDER DA FUNÇÃO QUE JÁ FAZ ISSO NOS DADOS DA RAZÃO SOCIAL(CLEIENTE)  -->
 <script type="text/javascript">
-		$("#cep2").focusout(function(){
-			//Início do Comando AJAX
-			$.ajax({
-				//O campo URL diz o caminho de onde virá os dados
-				//É importante concatenar o valor digitado no CEP
-				url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
-				//Aqui você deve preencher o tipo de dados que será lido,
-				//no caso, estamos lendo JSON.
-				dataType: 'json',
-				//SUCESS é referente a função que será executada caso
-				//ele consiga ler a fonte de dados com sucesso.
-				//O parâmetro dentro da função se refere ao nome da variável
-				//que você vai dar para ler esse objeto.
-				success: function(resposta){
-					//Agora basta definir os valores que você deseja preencher
-					//automaticamente nos campos acima.
-					$("#logradouro").val(resposta.logradouro);
-					$("#complemento").val(resposta.complemento);
-					$("#bairro2").val(resposta.bairro);
-					$("#cidade2").val(resposta.localidade);
-					$("#uf2").val(resposta.uf);
-					//Vamos incluir para que o Número seja focado automaticamente
-					//melhorando a experiência do usuário
-					$("#numero").focus();
-				}
-			});
-		});
-	</script>
+    $("#cep2").focusout(function(){
+        //Início do Comando AJAX
+        $.ajax({
+            //O campo URL diz o caminho de onde virá os dados
+            //É importante concatenar o valor digitado no CEP
+            url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+            //Aqui você deve preencher o tipo de dados que será lido,
+            //no caso, estamos lendo JSON.
+            dataType: 'json',
+            //SUCESS é referente a função que será executada caso
+            //ele consiga ler a fonte de dados com sucesso.
+            //O parâmetro dentro da função se refere ao nome da variável
+            //que você vai dar para ler esse objeto.
+            success: function(resposta){
+                //Agora basta definir os valores que você deseja preencher
+                //automaticamente nos campos acima.
+                $("#logradouro").val(resposta.logradouro);
+                $("#complemento").val(resposta.complemento);
+                $("#bairro2").val(resposta.bairro);
+                $("#cidade2").val(resposta.localidade);
+                $("#uf2").val(resposta.uf);
+                //Vamos incluir para que o Número seja focado automaticamente
+                //melhorando a experiência do usuário
+                $("#numero").focus();
+            }
+        });
+    });
+</script>
 
 {% endblock content %}
