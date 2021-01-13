@@ -152,7 +152,6 @@ function myFunction() {
 	.navbar-light .navbar-nav .nav-link {
 		color: rgb(255, 255, 255);
 		z-index: 2;
-
 	}
 
 </style>
@@ -161,7 +160,7 @@ function myFunction() {
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="#">CREDCOOP</a>
+		<a class="navbar-brand" href="{% url 'core:index' %}">CREDCOOP</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
 			aria-controls="navbarNav" aria-expanded="false" aria-label="Alterna navegação">
 			<span class="navbar-toggler-icon"></span>
@@ -174,9 +173,9 @@ function myFunction() {
 						Cadastro
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" routerLink="/cadastro/credcoop" routerLinkActive="active">CREDCOOP</a>
-						<a class="dropdown-item" routerLink="/cadastro/esctop" routerLinkActive="active">ESCTOP</a>
-						<a class="dropdown-item" routerLink="/cadastro/esctop-fiador" routerLinkActive="active">FIADOR
+						<a class="dropdown-item" href="{% url 'cliente:cliente_list' %}">CREDCOOP</a>
+						<a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">ESCTOP</a>
+						<a class="dropdown-item" routerLink="/cadastro/esctop-fiador">FIADOR
 							ESCTOP</a>
 					</div>
 				</li>
@@ -186,21 +185,21 @@ function myFunction() {
 						Consultar
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" routerLink="/lista/credcoop" routerLinkActive="active">CREDCOOP</a>
-						<a class="dropdown-item" routerLink="/lista/esctop" routerLinkActive="active">ESCTOP</a>
-						<a class="dropdown-item" routerLink="/lista/esctop-fiador" routerLinkActive="active">ESCTOP
+						<a class="dropdown-item" href="{% url 'cliente:cliente_list' %}">CREDCOOP</a>
+						<a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">ESCTOP</a>
+						<a class="dropdown-item" routerLink="/lista/esctop-fiador">ESCTOP
 							FIADOR</a>
 						<!-- <div class="dropdown-divider"></div> -->
 					</div>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" routerLink="/painel" routerLinkActive="active">Painel</a>
+					<a class="nav-link" href="#" routerLink="/painel">Painel</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" routerLink="/cadastro" routerLinkActive="active">Cadastrar</a>
+					<a class="nav-link" href="#" routerLink="/cadastro">Cadastrar</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" routerLink="/login" routerLinkActive="active">Logar</a>
+					<a class="nav-link" href="#" routerLink="/login">Logar</a>
 				</li>
 			</ul>
 		</div>
