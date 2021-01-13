@@ -5,321 +5,370 @@
 {% load widget_tweaks %}
 
 <head>
-<!-- Required meta tags -->
+  <!-- Required meta tags -->
 
-<!-- Exibe data e hora -->
-<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-<script type="text/javascript">
-  jQuery(window).load(function($){
-    atualizaRelogio();
-  });
-</script>
-<!-- Exibe data e hora -->
+  <!-- Exibe data e hora -->
+  <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+  <script type="text/javascript">
+    jQuery(window).load(function ($) {
+      atualizaRelogio();
+    });
+  </script>
+  <!-- Exibe data e hora -->
 
 
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=0.8, shrink-to-fit=no">
-<link rel="shortcut icon" href="https://www.djangoproject.com/favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=0.8, shrink-to-fit=no">
+  <link rel="shortcut icon" href="https://www.djangoproject.com/favicon.ico">
 
-<title>ESCTOP - SISTEMA</title>    
+  <title>ESCTOP - SISTEMA</title>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
 
-<!-- Font-awesome -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<!-- MEUS CSS -->
-{% block css %}{% endblock css %}
-<style>
-.ok{
-  color: green;
-}
-.no{
-  color: red;
-}   
-label.required:after{
-  content: "*";
-  color: red;
-}
-label {
-  font-weight: bold;
-  margin-bottom: 0px;
-}   
-input {
-  text-transform: uppercase;
-}
-/* apenas primeira letra maiuscula */
-.maiusculo {
-  text-transform: capitalize;
-}
-/* todas as letras maiusculas */
-.upper_all {
-  text-transform: uppercase;
-}
-.lower_all {
-  text-transform: lowercase;
-}
+  <!-- Font-awesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-/* STYLE DE CONTENT E TABS DOS TEMPLATES DE CADASTRO */
-body {font-family: Arial;}
-    
-h3{
-  background-color: #4CAF50;
-  color: rgb(255, 255, 255);
-  padding: 5px;
-  border-radius: 5px;
-}   
+  <!-- MEUS CSS -->
+  {% block css %}{% endblock css %}
+  <style>
+    .ok {
+      color: green;
+    }
 
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #f1f1f1;
-  border-top: 0px;
-  position:fixed;
-  z-index: 1;        
-  top: 53px;
-  width: 1109px;
-}
+    .no {
+      color: red;
+    }
 
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
+    label.required:after {
+      content: "*";
+      color: red;
+    }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
+    label {
+      font-weight: bold;
+      margin-bottom: 0px;
+    }
 
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
-}
+    input {
+      text-transform: uppercase;
+    }
 
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;    
-  margin-top: 105px;  
-  -webkit-animation: fadeEffect 1s;
-  z-index: -1;
-}
-/* Fade in tabs */
-@-webkit-keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
+    /* apenas primeira letra maiuscula */
+    .maiusculo {
+      text-transform: capitalize;
+    }
 
-@keyframes fadeEffect {
-    from {opacity: 0;}
-    to {opacity: 1;}
-} 
-/* STYLE DE CONTENT E TABS DOS TEMPLATES DE CADASTRO */
+    /* todas as letras maiusculas */
+    .upper_all {
+      text-transform: uppercase;
+    }
 
-/*ESTILO DAS LISTAS*/
-.maiusculo{
-  text-transform: uppercase; 
-}
-/*ESTILO DAS LISTAS*/
+    .lower_all {
+      text-transform: lowercase;
+    }
 
-/* ESTILOS DAS TELAS DE IMPRESSÃO DE DETALHES DE CLIENTE */
-.color{
-  background-color: rgb(156, 156, 156);
-  }  
-  h5{
-  padding: 5px;        
-  background-color: #ccc;
-  text-transform: uppercase;
-}
+    /* STYLE DE CONTENT E TABS DOS TEMPLATES DE CADASTRO */
+    body {
+      font-family: Arial;
+    }
 
-@media print{    
-  .no-print, .no-print *
-  {
-    display: none !important;
-  }    
-  @page {
-    margin: 0.5cm;
-  }    
-  label {
-    font-size: 9pt; 
-    padding: 0px;
-  }
-  h2{
-    font-weight: bold;
-    padding: 0px;
-    font-size: 13pt; 
-  }    
-  div{
-    columns:90px 1; 
-    margin: 0px,0px,0px,0px;        
-  }
-  input.form-control{
-    font-size: 9pt;  
-    border: none;
-    /* left: -10px; */
-    padding: 0px;
-  }    
-  @media all {
-    .page-break { display: none; }
-  }
-  @media print {
-    .page-break { display: block; page-break-before: always; }
-  }
-}  
+    h3 {
+      background-color: #4CAF50;
+      color: rgb(255, 255, 255);
+      padding: 5px;
+      border-radius: 5px;
+    }
 
-div.a {
-  text-transform: uppercase;
-}
-/* ESTILOS DAS TELAS DE IMPRESSÃO DE DETALHES DE CLIENTE */
-  
-</style>
-<!-- MEUS CSS -->  
+    /* Style the tab */
+    .tab {
+      overflow: hidden;
+      border: 1px solid #ccc;
+      background-color: #f1f1f1;
+      border-top: 0px;
+      position: fixed;
+      z-index: 1;
+      top: 53px;
+      width: 1109px;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+      background-color: inherit;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      transition: 0.3s;
+      font-size: 17px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+      background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+      background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+      display: none;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      border-top: none;
+      margin-top: 45px;
+      -webkit-animation: fadeEffect 1s;
+      z-index: -1;
+    }
+
+    /* Fade in tabs */
+    @-webkit-keyframes fadeEffect {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeEffect {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* STYLE DE CONTENT E TABS DOS TEMPLATES DE CADASTRO */
+
+    /*ESTILO DAS LISTAS*/
+    .maiusculo {
+      text-transform: uppercase;
+    }
+
+    /*ESTILO DAS LISTAS*/
+
+    /* ESTILOS DAS TELAS DE IMPRESSÃO DE DETALHES DE CLIENTE */
+    .color {
+      background-color: rgb(156, 156, 156);
+    }
+
+    h5 {
+      padding: 5px;
+      background-color: #ccc;
+      text-transform: uppercase;
+    }
+
+    @media print {
+
+      .no-print,
+      .no-print * {
+        display: none !important;
+      }
+
+      @page {
+        margin: 0.5cm;
+      }
+
+      label {
+        font-size: 9pt;
+        padding: 0px;
+      }
+
+      h2 {
+        font-weight: bold;
+        padding: 0px;
+        font-size: 13pt;
+      }
+
+      div {
+        columns: 90px 1;
+        margin: 0px, 0px, 0px, 0px;
+      }
+
+      input.form-control {
+        font-size: 9pt;
+        border: none;
+        /* left: -10px; */
+        padding: 0px;
+      }
+
+      @media all {
+        .page-break {
+          display: none;
+        }
+      }
+
+      @media print {
+        .page-break {
+          display: block;
+          page-break-before: always;
+        }
+      }
+    }
+
+    div.a {
+      text-transform: uppercase;
+    }
+
+    /* ESTILOS DAS TELAS DE IMPRESSÃO DE DETALHES DE CLIENTE */
+  </style>
+  <!-- MEUS CSS -->
 
 </head>
+
 <body>
 
-{% include "includes/nav.html" %}
+  {% include "includes/nav.html" %}
 
-<div class="container">
-  {% block content %}{% endblock content %}
-</div>
-  
-<!-- Bootstrap 4 -->
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  
+  <div class="container">
+    {% block content %}{% endblock content %}
+  </div>
 
-<script type="text/javascript" src="{% static 'bootstrap/js/masks.js' %}"></script>
-<script type="text/javascript" src="{% static 'bootstrap/js/jquery.mask.min.js' %}"></script>
-{% comment %} <script src="{% static 'bootstrap/js/jquery.bootstrap.modal.forms.js' %}"></script> {% endcomment %}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> 
-<script src="https://raw.githubusercontent.com/igorescobar/jQuery-Mask-Plugin/master/src/jquery.mask.js"></script>
+  <!-- Bootstrap 4 -->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
 
-{% block js %}{% endblock js %}
 
-<script type="text/javascript" >
-  /*AUTOMATIZA A PESQUISA DE CEP*/
-  function limpa_formulário_cep() {
-    //Limpa valores do formulário de cep.
-    document.getElementById('rua').value=("");
-    document.getElementById('bairro').value=("");
-    document.getElementById('cidade').value=("");
-    document.getElementById('uf').value=("");
-    
-  }
+  <script type="text/javascript" src="{% static 'bootstrap/js/masks.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap/js/jquery.mask.min.js' %}"></script>
+  {% comment %}
+  <script src="{% static 'bootstrap/js/jquery.bootstrap.modal.forms.js' %}"></script> {% endcomment %}
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://raw.githubusercontent.com/igorescobar/jQuery-Mask-Plugin/master/src/jquery.mask.js"></script>
 
-  function meu_callback(conteudo) {
-    if (!("erro" in conteudo)) {
-      //Atualiza os campos com os valores.
-      document.getElementById('rua').value=(conteudo.logradouro);
-      document.getElementById('bairro').value=(conteudo.bairro);
-      document.getElementById('cidade').value=(conteudo.localidade);
-      document.getElementById('uf').value=(conteudo.uf);
-     
-    } //end if.
-    else {
-      //CEP não Encontrado.
-      limpa_formulário_cep();
-      alert("CEP não encontrado.");
+  {% block js %}{% endblock js %}
+
+  <script type="text/javascript">
+    /*AUTOMATIZA A PESQUISA DE CEP*/
+    function limpa_formulário_cep() {
+      //Limpa valores do formulário de cep.
+      document.getElementById('rua').value = ("");
+      document.getElementById('bairro').value = ("");
+      document.getElementById('cidade').value = ("");
+      document.getElementById('uf').value = ("");
+
     }
-  }
-  function pesquisacep(valor) {
-    //Nova variável "cep" somente com dígitos.
-    var cep = valor.replace(/\D/g, '');
 
-    //Verifica se campo cep possui valor informado.
-    if (cep != "") {
-
-      //Expressão regular para validar o CEP.
-      var validacep = /^[0-9]{8}$/;
-
-      //Valida o formato do CEP.
-      if(validacep.test(cep)) {
-        
-        //Preenche os campos com "..." enquanto consulta webservice.
-        document.getElementById('rua').value="...";
-        document.getElementById('bairro').value="...";
-        document.getElementById('cidade').value="...";
-        document.getElementById('uf').value="...";
-        
-
-        //Cria um elemento javascript.
-        var script = document.createElement('script');
-
-        //Sincroniza com o callback.
-        script.src = 'https://viacep.com.br/ws/'+ cep + '/json/?callback=meu_callback';
-
-        //Insere script no documento e carrega o conteúdo.
-        document.body.appendChild(script);
+    function meu_callback(conteudo) {
+      if (!("erro" in conteudo)) {
+        //Atualiza os campos com os valores.
+        document.getElementById('rua').value = (conteudo.logradouro);
+        document.getElementById('bairro').value = (conteudo.bairro);
+        document.getElementById('cidade').value = (conteudo.localidade);
+        document.getElementById('uf').value = (conteudo.uf);
 
       } //end if.
       else {
-        //cep é inválido.
+        //CEP não Encontrado.
         limpa_formulário_cep();
-        alert("Formato de CEP inválido.");
+        alert("CEP não encontrado.");
       }
-    } //end if.
-    else {
-      //cep sem valor, limpa formulário.
-      limpa_formulário_cep();
     }
-  };
-  /*AUTOMATIZA A PESQUISA DE CEP*/
+    function pesquisacep(valor) {
+      //Nova variável "cep" somente com dígitos.
+      var cep = valor.replace(/\D/g, '');
 
-  
+      //Verifica se campo cep possui valor informado.
+      if (cep != "") {
+
+        //Expressão regular para validar o CEP.
+        var validacep = /^[0-9]{8}$/;
+
+        //Valida o formato do CEP.
+        if (validacep.test(cep)) {
+
+          //Preenche os campos com "..." enquanto consulta webservice.
+          document.getElementById('rua').value = "...";
+          document.getElementById('bairro').value = "...";
+          document.getElementById('cidade').value = "...";
+          document.getElementById('uf').value = "...";
+
+
+          //Cria um elemento javascript.
+          var script = document.createElement('script');
+
+          //Sincroniza com o callback.
+          script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+          //Insere script no documento e carrega o conteúdo.
+          document.body.appendChild(script);
+
+        } //end if.
+        else {
+          //cep é inválido.
+          limpa_formulário_cep();
+          alert("Formato de CEP inválido.");
+        }
+      } //end if.
+      else {
+        //cep sem valor, limpa formulário.
+        limpa_formulário_cep();
+      }
+    };
+    /*AUTOMATIZA A PESQUISA DE CEP*/
+
+
+    /*OCULTA FORMULÁRIOS NA TELA DE CADASTRO DE CLIENTES - TABCONTENTS*/
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
   /*OCULTA FORMULÁRIOS NA TELA DE CADASTRO DE CLIENTES - TABCONTENTS*/
-  function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-  }
-  /*OCULTA FORMULÁRIOS NA TELA DE CADASTRO DE CLIENTES - TABCONTENTS*/ 
 
-</script>
+  </script>
 
-<!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
-<script>
-  function atualizaRelogio(){ 
+  <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
+  <script>
+    function atualizaRelogio() {
       var momentoAtual = new Date();
-      
+
       var vhora = momentoAtual.getHours();
       var vminuto = momentoAtual.getMinutes();
       var vsegundo = momentoAtual.getSeconds();
-      
+
       var vdia = momentoAtual.getDate();
       var vmes = momentoAtual.getMonth() + 1;
       var vano = momentoAtual.getFullYear();
-      
-      if (vdia < 10){ vdia = "0" + vdia;}
-      if (vmes < 10){ vmes = "0" + vmes;}
-      if (vhora < 10){ vhora = "0" + vhora;}
-      if (vminuto < 10){ vminuto = "0" + vminuto;}
-      if (vsegundo < 10){ vsegundo = "0" + vsegundo;}
+
+      if (vdia < 10) { vdia = "0" + vdia; }
+      if (vmes < 10) { vmes = "0" + vmes; }
+      if (vhora < 10) { vhora = "0" + vhora; }
+      if (vminuto < 10) { vminuto = "0" + vminuto; }
+      if (vsegundo < 10) { vsegundo = "0" + vsegundo; }
 
       dataFormat = vdia + " / " + vmes + " / " + vano;
       horaFormat = vhora + " : " + vminuto + " : " + vsegundo;
@@ -327,11 +376,11 @@ div.a {
       document.getElementById("data").innerHTML = dataFormat;
       document.getElementById("hora").innerHTML = horaFormat;
 
-      setTimeout("atualizaRelogio()",1000);
-  }
-</script>
-<!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
-  
+      setTimeout("atualizaRelogio()", 1000);
+    }
+  </script>
+  <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
+
 </body>
-  
+
 </html>
