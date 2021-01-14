@@ -139,22 +139,10 @@
                 {% render_field form.rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.numero_casa.label}} </label>        
-                {% render_field form.numero_casa class="form-control form-control-sm" type="text" size="60" %}
-            </div>
-        </div>
         <div class="col-sm-5">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.bairro.label}} </label>        
                 {% render_field form.bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
-            </div>
-        </div>
-        <div class="col-sm-3">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.cidade.label}} </label>        
-                {% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
             </div>
         </div>
         <div class="col-sm-1">                    
@@ -163,6 +151,18 @@
                 {% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
             </div>
         </div>            
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" class="required">{{form.cidade.label}} </label>        
+                {% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
+            </div>
+        </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="" class="required">{{form.numero_casa.label}} </label>        
+                {% render_field form.numero_casa class="form-control form-control-sm" type="text" size="60" %}
+            </div>
+        </div>
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.complemento.label}} </label>        

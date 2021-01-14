@@ -4,9 +4,7 @@
 {% block content %}
 
 <style>
-    input {       
-        z-index: -1;
-    }
+    
 </style>
 
 <!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
@@ -31,8 +29,7 @@
     {% endif %}
     {% csrf_token %}         
 
-    <h3>DADOS DA EMPRESA</h3>
-    <hr/>
+    <h3>DADOS DA EMPRESA</h3>    
     <div class="row" > 
         <div class="col-sm-6">                    
             <div class="form-group" >                
@@ -88,9 +85,8 @@
         </div> 
 
     </div>  
-    <hr>
-        <h3>ENDEREÇO</h3>  
-    <hr/>
+    
+    <h3>ENDEREÇO</h3>
     <div class="row">
         <div class="col-sm-2">                    
             <div class="form-group" >                
@@ -106,7 +102,7 @@
         </div>
         <div class="col-sm-1">                    
             <div class="form-group" >                
-                <label for="numero_casa" >{{form.numero_casa.label}} </label>        
+                <label for="numero_casa" class="required">{{form.numero_casa.label}} </label>        
                 {% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text"%}
             </div>
         </div>
@@ -141,9 +137,8 @@
             </div>
         </div>   
     </div>  
-    <hr>
-    <h3>CONTATO</h3>  
-    <hr/>
+    
+    <h3>CONTATO</h3>
     <div class="row"> 
         <div class="col-sm-2">                    
             <div class="form-group" >                
@@ -174,13 +169,12 @@
         <div class="col-sm-6">                    
             <div class="form-group" >                
                 <label for=""  >{{form.email.label}} </label>        
-                {% render_field form.email class="form-control lower_all" %}
+                {% render_field form.email class="form-control form-control-sm lower_all" %}
             </div>
         </div>          
     </div> 
-    <hr>
-        <h3>DADOS BANCÁRIOS</h3>  
-    <hr/>
+    
+    <h3>DADOS BANCÁRIOS</h3>
     <div class="row">
         <div class="col-sm-4">                    
             <div class="form-group" >                
@@ -213,9 +207,8 @@
             </div>    
         </div>   
     </div> 
-    <hr>
-        <h3>REFERÊNCIAS</h3>  
-    <hr/>
+    
+    <h3>REFERÊNCIAS</h3>
     <div class="row">            
         <div class="col-sm-4">                    
             <div class="form-group" >                
@@ -259,67 +252,66 @@
 {% comment %} REPRESENTANTE {% endcomment %}
 <div id="Page2" class="tabcontent">   
 
-<h3>DADOS DO REPRESENTANTE</h3>               
-<hr/>     
-<div class="row">
-    <div class="col-sm-6">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_nome.label}} </label>        
-            {% render_field form.rep_nome class="form-control form-control-sm" %}
-        </div>                    
-    </div>
-    <div class="col-sm-3">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_cpf.label}} </label>        
-            {% render_field form.rep_cpf class="form-control form-control-sm cpf-mask" type="text" %}
+    <h3>DADOS DO REPRESENTANTE</h3>
+    <div class="row">
+        <div class="col-sm-6">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_nome.label}} </label>        
+                {% render_field form.rep_nome class="form-control form-control-sm" %}
+            </div>                    
         </div>
-    </div>
-    <div class="col-sm-3">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_rg.label}} </label>        
-            {% render_field form.rep_rg class="form-control form-control-sm" %}
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_cpf.label}} </label>        
+                {% render_field form.rep_cpf class="form-control form-control-sm cpf-mask" type="text" %}
+            </div>
         </div>
-    </div>
-    <div class="col-sm-2">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_orgao_emissor.label}} </label>        
-            {% render_field form.rep_orgao_emissor  class="form-control form-control-sm upper_all" %}
-        </div>    
-    </div>  
-    {% if cliente_cnpj %}
-    <div class="col-sm-3">                    
-        <div class="form-group" >                
-            <label for="" class="required" >{{form.rep_data_nasc.label}} </label>        
-            {% render_field form.rep_data_nasc class="form-control form-control-sm" %}
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_rg.label}} </label>        
+                {% render_field form.rep_rg class="form-control form-control-sm" %}
+            </div>
         </div>
-    </div>  
-    {% else %}
-    <div class="col-sm-3">                    
-        <div class="form-group" >                
-            <label for="" class="required" >{{form.rep_data_nasc.label}} </label>        
-            {% render_field form.rep_data_nasc class="form-control form-control-sm" type="date"%}
-        </div>
-    </div>  
-    {% endif %}
-    <div class="col-sm-2">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_naturalidade.label}} </label>        
-            {% render_field form.rep_naturalidade  class="form-control form-control-sm" %}
-        </div>    
-    </div>  
-    <div class="col-sm-2">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_nacionalidade.label}} </label>        
-            {% render_field form.rep_nacionalidade  class="form-control form-control-sm" value="BRASILEIRA" %}
-        </div>    
-    </div>  
-    <div class="col-sm-2">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_estado_civil.label}} </label>        
-            {% render_field form.rep_estado_civil  class="form-control form-control-sm" %}
-        </div>    
-    </div> 
-    <div class="col-sm-3">
+        <div class="col-sm-2">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_orgao_emissor.label}} </label>        
+                {% render_field form.rep_orgao_emissor  class="form-control form-control-sm upper_all" %}
+            </div>    
+        </div>  
+        {% if cliente_cnpj %}
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" class="required" >{{form.rep_data_nasc.label}} </label>        
+                {% render_field form.rep_data_nasc class="form-control form-control-sm" %}
+            </div>
+        </div>  
+        {% else %}
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" class="required" >{{form.rep_data_nasc.label}} </label>        
+                {% render_field form.rep_data_nasc class="form-control form-control-sm" type="date"%}
+            </div>
+        </div>  
+        {% endif %}
+        <div class="col-sm-2">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_naturalidade.label}} </label>        
+                {% render_field form.rep_naturalidade  class="form-control form-control-sm" %}
+            </div>    
+        </div>  
+        <div class="col-sm-2">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_nacionalidade.label}} </label>        
+                {% render_field form.rep_nacionalidade  class="form-control form-control-sm" value="BRASILEIRA" %}
+            </div>    
+        </div>  
+        <div class="col-sm-2">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_estado_civil.label}} </label>        
+                {% render_field form.rep_estado_civil  class="form-control form-control-sm" %}
+            </div>    
+        </div> 
+        <div class="col-sm-3">
             <div class="form-group">            
                 <label for="">{{form.rep_conjuge_nome.label}}</label>
                 {% render_field form.rep_conjuge_nome class="form-control form-control-sm" %}                    
@@ -337,57 +329,56 @@
                 {% render_field form.rep_conjuge_telefone class="form-control form-control-sm cel-phone-mask" %}                    
             </div>
         </div>        
-</div> 
-<hr>
+    </div> 
+
     <h3>ENDEREÇO</h3>               
-<hr/>
-<div class="row">            
-    <div class="col-sm-2">
-        <div class="form-group" >                
-            <label for="cep2" class="required">{{form.rep_cep.label}} </label>        
-            {% render_field form.rep_cep class="form-control form-control-sm cep-mask" id="cep2" type="text"%}                            
+
+    <div class="row">            
+        <div class="col-sm-2">
+            <div class="form-group" >                
+                <label for="cep2" class="required">{{form.rep_cep.label}} </label>        
+                {% render_field form.rep_cep class="form-control form-control-sm cep-mask" id="cep2" type="text"%}                            
+            </div>
         </div>
-    </div>
-    <div class="col-sm-5">                    
-        <div class="form-group" > 
-            <label for="logradouro" class="required">{{form.rep_rua.label}} </label>        
-            {% render_field form.rep_rua class="form-control form-control-sm" id="logradouro" type="text"%}
+        <div class="col-sm-5">                    
+            <div class="form-group" > 
+                <label for="logradouro" class="required">{{form.rep_rua.label}} </label>        
+                {% render_field form.rep_rua class="form-control form-control-sm" id="logradouro" type="text"%}
+            </div>
         </div>
-    </div>
-    <div class="col-sm-1">                    
-        <div class="form-group" >                
-            <label for="" > {{form.rep_numero_casa.label}} </label>        
-            {% render_field form.rep_numero_casa class="form-control form-control-sm"%}
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="" > {{form.rep_numero_casa.label}} </label>        
+                {% render_field form.rep_numero_casa class="form-control form-control-sm"%}
+            </div>
         </div>
-    </div>
-    <div class="col-sm-4">                    
-        <div class="form-group" >
-            <label for="bairro2" class="required">{{form.rep_bairro.label}} </label>        
-            {% render_field form.rep_bairro class="form-control form-control-sm" id="bairro2" type="text"%}
+        <div class="col-sm-4">                    
+            <div class="form-group" >
+                <label for="bairro2" class="required">{{form.rep_bairro.label}} </label>        
+                {% render_field form.rep_bairro class="form-control form-control-sm" id="bairro2" type="text"%}
+            </div>
         </div>
-    </div>
-    <div class="col-sm-3">                    
-        <div class="form-group" >
-            <label for="cidade2" class="required">{{form.rep_cidade.label}} </label>        
-            {% render_field form.rep_cidade class="form-control form-control-sm" id="cidade2" type="text"%}
+        <div class="col-sm-3">                    
+            <div class="form-group" >
+                <label for="cidade2" class="required">{{form.rep_cidade.label}} </label>        
+                {% render_field form.rep_cidade class="form-control form-control-sm" id="cidade2" type="text"%}
+            </div>
         </div>
-    </div>
-    <div class="col-sm-1">                    
-        <div class="form-group" >
-            <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
-            {% render_field form.rep_uf class="form-control form-control-sm" id="uf2" type="text"%}
+        <div class="col-sm-1">                    
+            <div class="form-group" >
+                <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
+                {% render_field form.rep_uf class="form-control form-control-sm" id="uf2" type="text"%}
+            </div>
         </div>
-    </div>
-    <div class="col-sm-5">                    
-        <div class="form-group" >                
-            <label for="" >{{form.rep_ponto_referencia.label}} </label>        
-            {% render_field form.rep_ponto_referencia class="form-control form-control-sm" %}
-        </div>
-    </div>            
-</div>  
-    <hr> 
-        <h3>CONTATO</h3>               
-    <hr/>
+        <div class="col-sm-5">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_ponto_referencia.label}} </label>        
+                {% render_field form.rep_ponto_referencia class="form-control form-control-sm" %}
+            </div>
+        </div>            
+    </div> 
+
+    <h3>CONTATO</h3>
     <div class="row">
         <div class="col-sm-2">                    
             <div class="form-group" >                

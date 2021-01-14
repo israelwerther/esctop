@@ -55,7 +55,7 @@ class Cliente(models.Model):
     uf_trabalho           = models.CharField("Estado", max_length=2, blank=True, null=True)
     numero_casa_trabalho  = models.CharField("Nº ", max_length=5, blank=True, null=True)
     referencia_trabalho   = models.CharField("Ponto de Referencia",max_length=50, blank=True, null=True)  
-    obs_trabalho          = models.TextField("Observações",max_length=200, blank=True, null=True)    
+    obs_trabalho          = models.TextField("Observações",max_length=200, blank=True, null=True)
     # DADOS BANCÁRIOS
     banco                 = models.ForeignKey(Banco, on_delete=models.PROTECT,max_length=25, blank=True, null=True)  
     n_operacao            = models.CharField("Nº operação",max_length=15, blank=True, null=True)
