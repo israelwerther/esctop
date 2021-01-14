@@ -135,6 +135,7 @@ function myFunction() {
 		color: rgb(255, 255, 255);
 		z-index: 2;
 	}
+	
 </style>
 
 <html>
@@ -152,7 +153,7 @@ function myFunction() {
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
-						CADASTRO
+						Cadastro
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'core:fiador_decision_1' %}">CLIENTE CREDCOOP</a>
@@ -165,7 +166,7 @@ function myFunction() {
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
-						CONSULTA
+						Consulta
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'cliente:cliente_list' %}">CLIENTE CREDCOOP</a>
@@ -179,20 +180,20 @@ function myFunction() {
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
-						EMPRÉSTIMOS
+						Empréstimo
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'emprestimo:emprestimo_add' %}">REALIZAR EMPRÉSTIMO</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">CLIENTE ESCTOP</a>
-						<a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">FIADOR ESCTOP</a>
+						<!-- <a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">CLIENTE ESCTOP</a>
+						<a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">FIADOR ESCTOP</a> -->
 					</div>
 				</li>
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 						aria-haspopup="true" aria-expanded="false">
-						USUÁRIO
+						Usuário
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'logout' %}" style="float:right">ENCERRAR SESSÃO</a>
@@ -200,9 +201,8 @@ function myFunction() {
 				</li>
 
 				{% if user.is_authenticated %}			
-				<a href="" style='float:right' class="nav-link">Olá, {{user.first_name}}</a>
-				</span>
-				{% endif %}
+				<a href="" class="nav-link" >Olá, {{user.first_name}}</a>				
+				{% endif %}				
 
 			</ul>
 		</div>
