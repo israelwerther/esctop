@@ -4,12 +4,6 @@
 {% block js %}{% endblock js %}
 {% block content %}
 
-<style>
-    
-
-
-</style>
-
 <!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
 
 <div class="row" >
@@ -211,7 +205,7 @@
 </div>
 <div id="Page2" class="tabcontent">        
     <div class="row">
-        <div class="col-sm-6">                    
+        <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.nome_fantasia.label}} </label>        
                 {% render_field form.nome_fantasia class="form-control form-control-sm" %}
@@ -245,52 +239,51 @@
         </div>
         </div>
         <div class="col-sm-2">                    
-            <div class="form-group" >                
-                <label for="" >{{form.cep_trabalho.label}} </label>        
-                {% render_field form.cep_trabalho class="form-control form-control-sm" %}
-                        
+            <div class="form-group">                
+                <label for="cep2" >{{form.cep_trabalho.label}} </label>        
+                {% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep2" type="text"%}                        
             </div>
         </div>
         <div class="col-sm-4">                    
+            <div class="form-group">                
+                <label for="logradouro" >{{form.rua_trabalho.label}} </label>        
+                {% render_field form.rua_trabalho class="form-control form-control-sm" id="logradouro" type="text"%}
+            </div>
+        </div>
+        <div class="col-sm-5">                    
+            <div class="form-group">                
+                <label for="bairro2">{{form.bairro_trabalho.label}} </label>        
+                {% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro2" type="text"%}
+            </div>
+        </div>
+        <div class="col-sm-1">                    
             <div class="form-group" >                
-                <label for="" >{{form.rua_trabalho.label}} </label>        
-                {% render_field form.rua_trabalho class="form-control form-control-sm"  %}
+                <label for="uf2" >{{form.uf_trabalho.label}} </label>        
+                {% render_field form.uf_trabalho class="form-control form-control-sm" id="uf2" type="text"%}
+            </div>
+        </div>
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="cidade2" >{{form.cidade_trabalho.label}} </label>        
+                {% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade2" type="text"%}
             </div>
         </div>
         <div class="col-sm-1">                    
             <div class="form-group" >                
                 <label for="" >{{form.numero_casa_trabalho.label}} </label>        
-                {% render_field form.numero_casa_trabalho class="form-control form-control-sm"  %}
+                {% render_field form.numero_casa_trabalho class="form-control form-control-sm"%}
             </div>
         </div>               
-        <div class="col-sm-4">                    
-            <div class="form-group" >                
-                <label for="" >{{form.bairro_trabalho.label}} </label>        
-                {% render_field form.bairro_trabalho class="form-control form-control-sm"  %}
-            </div>
-        </div>
-        <div class="col-sm-4">                    
-            <div class="form-group" >                
-                <label for="" >{{form.cidade_trabalho.label}} </label>        
-                {% render_field form.cidade_trabalho class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" >{{form.uf_trabalho.label}} </label>        
-                {% render_field form.uf_trabalho class="form-control form-control-sm" %}
-            </div>
-        </div>
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.referencia_trabalho.label}} </label>        
                 {% render_field form.referencia_trabalho class="form-control form-control-sm" %}
             </div>
-        </div>
+        </div>        
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.obs_trabalho.label}} </label>        
-                {% render_field form.obs_trabalho class="form-control form-control-sm" %}
+                {% render_field form.obs_trabalho class="form-control form-control-sm" style="height: 100px;"%}
             </div>
         </div>
     </div>   

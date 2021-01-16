@@ -1,13 +1,9 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
+{% load  static %}
 {% block js %}{% endblock js %}
 {% block content %}
 
-<style>
-    
-</style>
-
-<!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
 
 <div class="row" > 
     <div class="col-sm-12">
@@ -100,22 +96,10 @@
                 {% render_field form.rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="numero_casa" class="required">{{form.numero_casa.label}} </label>        
-                {% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text"%}
-            </div>
-        </div>
         <div class="col-sm-5">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.bairro.label}} </label>        
                 {% render_field form.bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
-            </div>
-        </div>
-        <div class="col-sm-3">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.cidade.label}} </label>        
-                {% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
             </div>
         </div>
         <div class="col-sm-1">                    
@@ -124,16 +108,28 @@
                 {% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
             </div>
         </div>            
-        <div class="col-sm-4">                    
+        <div class="col-sm-3">                    
             <div class="form-group" >                
-                <label for="" >{{form.ponto_referencia.label}} </label>        
-                {% render_field form.ponto_referencia class="form-control form-control-sm" %}
+                <label for="" class="required">{{form.cidade.label}} </label>        
+                {% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
             </div>
-        </div>   
+        </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="numero_casa" class="required">{{form.numero_casa.label}} </label>        
+                {% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text"%}
+            </div>
+        </div>
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.complemento.label}} </label>        
                 {% render_field form.complemento class="form-control form-control-sm" %}
+            </div>
+        </div>   
+        <div class="col-sm-4">                    
+            <div class="form-group" >                
+                <label for="" >{{form.ponto_referencia.label}} </label>        
+                {% render_field form.ponto_referencia class="form-control form-control-sm" %}
             </div>
         </div>   
     </div>  
@@ -166,7 +162,7 @@
                 <label class="checkbox-inline"> {{form.whatsapp2.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
             </div>
         </div>   
-        <div class="col-sm-6">                    
+        <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for=""  >{{form.email.label}} </label>        
                 {% render_field form.email class="form-control form-control-sm lower_all" %}
@@ -340,22 +336,22 @@
                 {% render_field form.rep_cep class="form-control form-control-sm cep-mask" id="cep2" type="text"%}                            
             </div>
         </div>
-        <div class="col-sm-5">                    
+        <div class="col-sm-4">                    
             <div class="form-group" > 
                 <label for="logradouro" class="required">{{form.rep_rua.label}} </label>        
                 {% render_field form.rep_rua class="form-control form-control-sm" id="logradouro" type="text"%}
             </div>
         </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" > {{form.rep_numero_casa.label}} </label>        
-                {% render_field form.rep_numero_casa class="form-control form-control-sm"%}
-            </div>
-        </div>
-        <div class="col-sm-4">                    
+        <div class="col-sm-5">                    
             <div class="form-group" >
                 <label for="bairro2" class="required">{{form.rep_bairro.label}} </label>        
                 {% render_field form.rep_bairro class="form-control form-control-sm" id="bairro2" type="text"%}
+            </div>
+        </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >
+                <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
+                {% render_field form.rep_uf class="form-control form-control-sm" id="uf2" type="text"%}
             </div>
         </div>
         <div class="col-sm-3">                    
@@ -365,12 +361,12 @@
             </div>
         </div>
         <div class="col-sm-1">                    
-            <div class="form-group" >
-                <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
-                {% render_field form.rep_uf class="form-control form-control-sm" id="uf2" type="text"%}
+            <div class="form-group" >                
+                <label for="" > {{form.rep_numero_casa.label}} </label>        
+                {% render_field form.rep_numero_casa class="form-control form-control-sm"%}
             </div>
         </div>
-        <div class="col-sm-5">                    
+        <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.rep_ponto_referencia.label}} </label>        
                 {% render_field form.rep_ponto_referencia class="form-control form-control-sm" %}
@@ -415,37 +411,5 @@
 </div> 
 
 </div>
-
-<!-- MODIFIQUEI ESSE SCRIPT PARA PODER PREENCHER OS DADOS DE ENDEREÇO DO REPRESENTANTE SEM 
-DEPENDER DA FUNÇÃO QUE JÁ FAZ ISSO NOS DADOS DA RAZÃO SOCIAL(CLEIENTE)  -->
-<script type="text/javascript">
-    $("#cep2").focusout(function(){
-        //Início do Comando AJAX
-        $.ajax({
-            //O campo URL diz o caminho de onde virá os dados
-            //É importante concatenar o valor digitado no CEP
-            url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
-            //Aqui você deve preencher o tipo de dados que será lido,
-            //no caso, estamos lendo JSON.
-            dataType: 'json',
-            //SUCESS é referente a função que será executada caso
-            //ele consiga ler a fonte de dados com sucesso.
-            //O parâmetro dentro da função se refere ao nome da variável
-            //que você vai dar para ler esse objeto.
-            success: function(resposta){
-                //Agora basta definir os valores que você deseja preencher
-                //automaticamente nos campos acima.
-                $("#logradouro").val(resposta.logradouro);
-                $("#complemento").val(resposta.complemento);
-                $("#bairro2").val(resposta.bairro);
-                $("#cidade2").val(resposta.localidade);
-                $("#uf2").val(resposta.uf);
-                //Vamos incluir para que o Número seja focado automaticamente
-                //melhorando a experiência do usuário
-                $("#numero").focus();
-            }
-        });
-    });
-</script>
 
 {% endblock content %}

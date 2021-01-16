@@ -360,6 +360,38 @@
     }
   </script>
   <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
+
+  <!-- MODIFIQUEI ESSE SCRIPT PARA PODER PREENCHER OS DADOS DE ENDEREÇO DO REPRESENTANTE SEM 
+  DEPENDER DA FUNÇÃO QUE JÁ FAZ ISSO NOS DADOS DA RAZÃO SOCIAL(CLEIENTE)  -->
+  <script type="text/javascript">
+    $("#cep2").focusout(function(){
+        //Início do Comando AJAX
+        $.ajax({
+            //O campo URL diz o caminho de onde virá os dados
+            //É importante concatenar o valor digitado no CEP
+            url: 'https://viacep.com.br/ws/'+$(this).val()+'/json/unicode/',
+            //Aqui você deve preencher o tipo de dados que será lido,
+            //no caso, estamos lendo JSON.
+            dataType: 'json',
+            //SUCESS é referente a função que será executada caso
+            //ele consiga ler a fonte de dados com sucesso.
+            //O parâmetro dentro da função se refere ao nome da variável
+            //que você vai dar para ler esse objeto.
+            success: function(resposta){
+                //Agora basta definir os valores que você deseja preencher
+                //automaticamente nos campos acima.
+                $("#logradouro").val(resposta.logradouro);
+                $("#complemento").val(resposta.complemento);
+                $("#bairro2").val(resposta.bairro);
+                $("#cidade2").val(resposta.localidade);
+                $("#uf2").val(resposta.uf);
+                //Vamos incluir para que o Número seja focado automaticamente
+                //melhorando a experiência do usuário
+                $("#numero").focus();
+            }
+        });
+    });
+  </script>
   
   <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -369,10 +401,8 @@
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
   
-
-
-  <!-- <script src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script> -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+  <script src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script type="text/javascript" src="{% static 'bootstrap/js/masks.js' %}"></script>
   <script type="text/javascript" src="{% static 'bootstrap/js/jquery.mask.min.js' %}"></script>  
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
