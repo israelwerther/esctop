@@ -29,11 +29,11 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = [
     'localhost', 
-    '127.0.0.1', 
-    'israeltestes2.herokuapp.com', 
+    '127.0.0.1',
     'esctop.herokuapp.com', 
     'escback1.herokuapp.com', 
-    'escback2.herokuapp.com'
+    'escback2.herokuapp.com',
+    'escback3.herokuapp.com',
 ]
 
 # Application definition
