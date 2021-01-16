@@ -35,16 +35,13 @@ def cliente_detail(request, pk):
 #     return render(request, template_name, context)
 
 class ClienteCreate(CreateView):
-    model=Cliente    
-    # success_url = reverse_lazy('list_exemplo')
-    # success_message = "Exemplo deletado com sucesso!!"       
+    model=Cliente
     template_name='cliente_form.html'
     form_class=ClienteForm
 
 
 class FiadorCreate(CreateView):
-    model=Cliente    
-    # success_message = "Exemplo deletado com sucesso!!"       
+    model=Cliente       
     template_name='fiador_form.html'
     form_class=ClienteForm
     success_url = reverse_lazy('cliente:cliente_add')

@@ -23,19 +23,12 @@
 
   <title>ESCTOP - SISTEMA</title>
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
-    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-    crossorigin="anonymous"></script>
-
-
+  <!-- Bootstrap CSS -->  
+  <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
+  
+  
   <!-- Font-awesome -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -61,19 +54,15 @@
     }
 
     .form-control:focus {
-        border-color: #01ff1f;
-        box-shadow: inset 0 0px 0px rgb(0, 0, 0), 0 0 0px rgba(72, 255, 0, 0.6);
-        border-radius: 0px;
+      border-color: #01ff1f;
+      box-shadow: inset 0 0px 0px rgb(0, 0, 0), 0 0 0px rgba(72, 255, 0, 0.6);
+      border-radius: 0px;
     }
+
     .form-control {
-        border-color: #444444;
-        border-radius: 0px;
-        text-transform: uppercase;
-    }
-    
-    /* apenas primeira letra maiuscula */
-    .maiusculo {
-      text-transform: capitalize;
+      border-color: #444444;
+      border-radius: 0px;
+      text-transform: uppercase;
     }
 
     /* todas as letras maiusculas */
@@ -249,25 +238,9 @@
     {% block content %}{% endblock content %}
   </div>
 
-  <!-- Bootstrap 4 -->
-  <!-- Optional JavaScript -->
+ 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-
-
-  <script type="text/javascript" src="{% static 'bootstrap/js/masks.js' %}"></script>
-  <script type="text/javascript" src="{% static 'bootstrap/js/jquery.mask.min.js' %}"></script>
-  {% comment %}
-  <script src="{% static 'bootstrap/js/jquery.bootstrap.modal.forms.js' %}"></script> {% endcomment %}
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script src="https://raw.githubusercontent.com/igorescobar/jQuery-Mask-Plugin/master/src/jquery.mask.js"></script>
-
+  
   {% block js %}{% endblock js %}
 
   <script type="text/javascript">
@@ -278,9 +251,9 @@
       document.getElementById('bairro').value = ("");
       document.getElementById('cidade').value = ("");
       document.getElementById('uf').value = ("");
-
+      
     }
-
+    
     function meu_callback(conteudo) {
       if (!("erro" in conteudo)) {
         //Atualiza os campos com os valores.
@@ -288,7 +261,7 @@
         document.getElementById('bairro').value = (conteudo.bairro);
         document.getElementById('cidade').value = (conteudo.localidade);
         document.getElementById('uf').value = (conteudo.uf);
-
+        
       } //end if.
       else {
         //CEP não Encontrado.
@@ -299,32 +272,32 @@
     function pesquisacep(valor) {
       //Nova variável "cep" somente com dígitos.
       var cep = valor.replace(/\D/g, '');
-
+      
       //Verifica se campo cep possui valor informado.
       if (cep != "") {
-
+        
         //Expressão regular para validar o CEP.
         var validacep = /^[0-9]{8}$/;
-
+        
         //Valida o formato do CEP.
         if (validacep.test(cep)) {
-
+          
           //Preenche os campos com "..." enquanto consulta webservice.
           document.getElementById('rua').value = "...";
           document.getElementById('bairro').value = "...";
           document.getElementById('cidade').value = "...";
           document.getElementById('uf').value = "...";
-
-
+          
+          
           //Cria um elemento javascript.
           var script = document.createElement('script');
-
+          
           //Sincroniza com o callback.
           script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
-
+          
           //Insere script no documento e carrega o conteúdo.
           document.body.appendChild(script);
-
+          
         } //end if.
         else {
           //cep é inválido.
@@ -339,7 +312,7 @@
     };
     /*AUTOMATIZA A PESQUISA DE CEP*/
 
-
+    
     /*OCULTA FORMULÁRIOS NA TELA DE CADASTRO DE CLIENTES - TABCONTENTS*/
     function openCity(evt, cityName) {
       var i, tabcontent, tablinks;
@@ -354,40 +327,57 @@
       document.getElementById(cityName).style.display = "block";
       evt.currentTarget.className += " active";
     }
-  /*OCULTA FORMULÁRIOS NA TELA DE CADASTRO DE CLIENTES - TABCONTENTS*/
-
+    /*OCULTA FORMULÁRIOS NA TELA DE CADASTRO DE CLIENTES - TABCONTENTS*/
+    
   </script>
 
-  <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
+<!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
   <script>
     function atualizaRelogio() {
       var momentoAtual = new Date();
-
+      
       var vhora = momentoAtual.getHours();
       var vminuto = momentoAtual.getMinutes();
       var vsegundo = momentoAtual.getSeconds();
-
+      
       var vdia = momentoAtual.getDate();
       var vmes = momentoAtual.getMonth() + 1;
       var vano = momentoAtual.getFullYear();
-
+      
       if (vdia < 10) { vdia = "0" + vdia; }
       if (vmes < 10) { vmes = "0" + vmes; }
       if (vhora < 10) { vhora = "0" + vhora; }
       if (vminuto < 10) { vminuto = "0" + vminuto; }
       if (vsegundo < 10) { vsegundo = "0" + vsegundo; }
-
+      
       dataFormat = vdia + " / " + vmes + " / " + vano;
       horaFormat = vhora + " : " + vminuto + " : " + vsegundo;
-
+      
       document.getElementById("data").innerHTML = dataFormat;
       document.getElementById("hora").innerHTML = horaFormat;
-
+      
       setTimeout("atualizaRelogio()", 1000);
     }
   </script>
   <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
+  
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
+ 
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+  
 
+
+  <!-- <script src="{% static 'bootstrap/js/jquery-3.3.1.min.js' %}"></script> -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> -->
+  <script type="text/javascript" src="{% static 'bootstrap/js/masks.js' %}"></script>
+  <script type="text/javascript" src="{% static 'bootstrap/js/jquery.mask.min.js' %}"></script>  
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://raw.githubusercontent.com/igorescobar/jQuery-Mask-Plugin/master/src/jquery.mask.js"></script> 
+  
 </body>
 
 </html>
