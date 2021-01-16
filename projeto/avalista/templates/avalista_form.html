@@ -17,25 +17,25 @@
         <div class="col-sm-6">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_nome.label}} </label>        
-                {% render_field form.fiador_nome class="form-control" %}
+                {% render_field form.fiador_nome class="form-control form-control-sm" %}
             </div>    
         </div>  
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_cpf.label}} </label>        
-                {% render_field form.fiador_cpf class="form-control cpf-mask"%}
+                {% render_field form.fiador_cpf class="form-control form-control-sm cpf-mask"%}
             </div>    
         </div>  
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_rg.label}} </label>        
-                {% render_field form.fiador_rg class="form-control" %}
+                {% render_field form.fiador_rg class="form-control form-control-sm" %}
             </div>    
         </div>  
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_orgao_emissor.label}} </label>        
-                {% render_field form.fiador_orgao_emissor  class="form-control upper_all" %}
+                {% render_field form.fiador_orgao_emissor  class="form-control form-control-sm" %}
             </div>    
         </div>  
               
@@ -43,35 +43,35 @@
             <div class="col-sm-3">                    
                 <div class="form-group" >                
                     <label for="" >{{form.fiador_data_nasc.label}} </label>        
-                    {% render_field form.fiador_data_nasc  class="form-control" type="text" %}
+                    {% render_field form.fiador_data_nasc  class="form-control form-control-sm" type="text" %}
                 </div>    
             </div>     
         {% else %}
             <div class="col-sm-3">                    
                 <div class="form-group" >                
                     <label for="" >{{form.fiador_data_nasc.label}} </label>        
-                    {% render_field form.fiador_data_nasc  class="form-control" type="date" %}
+                    {% render_field form.fiador_data_nasc  class="form-control form-control-sm" type="date" %}
                 </div>    
             </div>             
         {% endif %}
         <div class="col-sm-3">                    
             <div class="form-group" >                
-                <label for="" >{{form.fiador_estado_civil.label}} </label>        
-                {% render_field form.fiador_estado_civil  class="form-control" %}
-            </div>    
-        </div>  
-        <div class="col-sm-3">                    
-            <div class="form-group" >                
                 <label for="" >{{form.fiador_naturalidade.label}} </label>        
-                {% render_field form.fiador_naturalidade  class="form-control" %}
+                {% render_field form.fiador_naturalidade  class="form-control form-control-sm" %}
             </div>    
         </div> 
         <div class="col-sm-3">    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_nacionalidade.label}} </label>        
-                {% render_field form.fiador_nacionalidade  class="form-control" value="BRASILEIRA"%}
+                {% render_field form.fiador_nacionalidade  class="form-control form-control-sm" value="BRASILEIRA"%}
             </div>    
         </div>
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" >{{form.fiador_estado_civil.label}} </label>        
+                {% render_field form.fiador_estado_civil  class="form-control form-control-sm" %}
+            </div>    
+        </div>  
 
     </div>     
     <hr>
@@ -82,49 +82,49 @@
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.fiador_cep.label}} </label>        
-                {% render_field form.fiador_cep class="form-control" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}                            
-            </div>
-        </div>
-        <div class="col-sm-5">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.fiador_rua.label}} </label>        
-                {% render_field form.fiador_rua class="form-control" name="rua" type="text" id="rua" size="60" %}
-            </div>
-        </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.fiador_numero_casa.label}} </label>        
-                {% render_field form.fiador_numero_casa class="form-control" name="rua" type="text" id="rua" size="60" %}
+                {% render_field form.fiador_cep class="form-control form-control-sm" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}                            
             </div>
         </div>
         <div class="col-sm-4">                    
             <div class="form-group" >                
-                <label for="" class="required">{{form.fiador_bairro.label}} </label>        
-                {% render_field form.fiador_bairro class="form-control" name="bairro" type="text" id="bairro" size="40" %}
+                <label for="" class="required">{{form.fiador_rua.label}} </label>        
+                {% render_field form.fiador_rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
-        <div class="col-sm-3">                    
+        <div class="col-sm-5">                    
             <div class="form-group" >                
-                <label for="" class="required">{{form.fiador_cidade.label}} </label>        
-                {% render_field form.fiador_cidade class="form-control" name="cidade" type="text" id="cidade" size="40"%}
+                <label for="" class="required">{{form.fiador_bairro.label}} </label>        
+                {% render_field form.fiador_bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
             </div>
         </div>
         <div class="col-sm-1">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.fiador_uf.label}} </label>        
-                {% render_field form.fiador_uf class="form-control" name="uf" type="text" id="uf" size="2"%}
+                {% render_field form.fiador_uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
             </div>
         </div>            
+        <div class="col-sm-3">                    
+            <div class="form-group" >                
+                <label for="" class="required">{{form.fiador_cidade.label}} </label>        
+                {% render_field form.fiador_cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
+            </div>
+        </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="" class="required">{{form.fiador_numero_casa.label}} </label>        
+                {% render_field form.fiador_numero_casa class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
+            </div>
+        </div>
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_complemento.label}} </label>        
-                {% render_field form.fiador_complemento class="form-control" %}
+                {% render_field form.fiador_complemento class="form-control form-control-sm" %}
             </div>
         </div>               
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_ponto_referencia.label}} </label>        
-                {% render_field form.fiador_ponto_referencia class="form-control" %}
+                {% render_field form.fiador_ponto_referencia class="form-control form-control-sm" %}
             </div>
         </div>
         {% comment %} ENDEREÇO FIM {% endcomment %}
@@ -136,27 +136,27 @@
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_contato1.label}} </label>        
-                {% render_field form.fiador_contato1 class="form-control phone-mask" %}
+                {% render_field form.fiador_contato1 class="form-control form-control-sm phone-mask" %}
             </div>    
         </div>  
         <div class="col-sm-2"> 
             <div class="form-group" > 
                 <label for="" >{{form.fiador_celular1.label}} </label>
-                {% render_field form.fiador_celular1 class="form-control cel-phone-mask" %}
+                {% render_field form.fiador_celular1 class="form-control form-control-sm cel-phone-mask" %}
                 <label class="checkbox-inline"> {{form.whatsapp1.label}} <input type="checkbox" value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>                    
             </div>    
         </div>  
         <div class="col-sm-2">
             <div class="form-group" > 
                 <label for="" > {{form.fiador_celular2.label}} </label>   
-                {% render_field form.fiador_celular2 class="form-control cel-phone-mask" %}
+                {% render_field form.fiador_celular2 class="form-control form-control-sm cel-phone-mask" %}
                 <label class="checkbox-inline"> {{form.whatsapp2.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>                      
             </div>     
         </div>             
-        <div class="col-sm-3">                    
+        <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_email.label}} </label>        
-                {% render_field form.fiador_email class="form-control lower_all" %}
+                {% render_field form.fiador_email class="form-control form-control-sm lower_all" %}
             </div>    
         </div>  
     </div>
@@ -169,37 +169,37 @@
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.banco.label}} </label>        
-                {% render_field form.banco class="form-control" %}
+                {% render_field form.banco class="form-control form-control-sm" %}
             </div>    
         </div> 
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_n_operacao.label}} </label>        
-                {% render_field form.fiador_n_operacao class="form-control" %}
+                {% render_field form.fiador_n_operacao class="form-control form-control-sm" %}
             </div>    
         </div>
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.tipo_de_conta.label}} </label>        
-                {% render_field form.tipo_de_conta class="form-control" %}
+                {% render_field form.tipo_de_conta class="form-control form-control-sm" %}
             </div>    
         </div>             
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_agencia.label}} </label>        
-                {% render_field form.fiador_agencia class="form-control" %}
+                {% render_field form.fiador_agencia class="form-control form-control-sm" %}
             </div>    
         </div>  
         <div class="col-sm-2">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_conta.label}} </label>        
-                {% render_field form.fiador_conta class="form-control" %}
+                {% render_field form.fiador_conta class="form-control form-control-sm" %}
             </div>    
         </div>            
         <div class="col-sm-6">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_copia.label}} </label>        
-                {% render_field form.fiador_copia class="form-control" %}
+                {% render_field form.fiador_copia class="form-control form-control-sm" %}
             </div>    
         </div>  
     </div>
