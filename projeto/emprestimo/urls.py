@@ -9,6 +9,7 @@ urlpatterns = [
     path('', v.emprestimo_list, name='emprestimo_list'),
     path('add/', login_required(v.EmprestimoCreate.as_view()), name='emprestimo_add'),
     path('cnpj_add/', login_required(v.EmprestimoCNPJCreate.as_view()), name='emprestimo_cnpj_add'),
+    path('cnpj_list', v.emprestimo_cnpj_list, name='emprestimo_cnpj_list'),
     path('<int:pk>/delete/', login_required(v.EmprestimoDelete.as_view()), name='emprestimo_delete'),
     path('<int:pk>/impress/', login_required(v.EmprestimoImpress.as_view()), name='emprestimo_impress'),
     path('<int:pk>/carne/', login_required(v.EmprestimoCarne.as_view()), name='emprestimo_carne'),

@@ -15,6 +15,15 @@ def emprestimo_list(request):
     context={'object_list': objects}
     return render(request, template_name, context)
 
+
+@login_required
+def emprestimo_cnpj_list(request):    
+    template_name='emprestimo_cnpj_list.html'
+    objects=Emprestimo.objects.all()
+    context={'object_list': objects}
+    return render(request, template_name, context)
+
+
 # (LoginRequiredMixin, CreateView):
 class EmprestimoCreate(CreateView):
     model=Emprestimo
