@@ -25,6 +25,17 @@ class EmprestimoCreate(CreateView):
         obj = form_class.save(commit=False)
         obj.funcionario = self.request.user
         return super(EmprestimoCreate, self).form_valid(form_class)
+
+
+class EmprestimoCNPJCreate(CreateView):
+    model=Emprestimo
+    template_name='emprestimo_cnpj_form.html'
+    form_class=EmprestimoForm
+    
+    def form_valid(self, form_class):
+        obj = form_class.save(commit=False)
+        obj.funcionario = self.request.user
+        return super(EmprestimoCNPJCreate, self).form_valid(form_class)
     
     
 class EmprestimoUpdate(UpdateView):

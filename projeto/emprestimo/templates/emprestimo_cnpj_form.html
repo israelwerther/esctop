@@ -24,16 +24,16 @@
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
     {% else %}  
         <h3>CADASTRAR UM EMPRÉSTIMO</h3>
-        <form action="{% url 'emprestimo:emprestimo_add' %}" method="POST" novalidate>
+        <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
     {% endif %}
 
     {% csrf_token %}
     
-    <div class="row">        
+    <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="">Cliente Credcoop</label>
-                {% render_field form.cliente type="text" class="form-control" %}
+                <label for="">Cliente Esctop</label>
+                {% render_field form.cliente_cnpj type="text" class="form-control" %}
             </div>
         </div>
         <div class="col-sm-6"> 
@@ -137,6 +137,7 @@
         {% else %}
         <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger">Cancelar</a>        
         <button type="submit" class="btn btn-success">Cadastrar</button>
+
     </form>    
     {% endif %}
     <br>  
