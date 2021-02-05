@@ -4,116 +4,159 @@
 {% block js %}{% endblock js %}
 {% block content %}
 
-<!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
+<script src="https://kit.fontawesome.com/yourcode.js"></script>
 
-<div class="row" >
-    <div class="col-sm-12">
-        <div class="tab">
-            <button class="tablinks active" onclick="openCity(event, 'Page1')">Dados Pessoais</button>
-            <button class="tablinks" onclick="openCity(event, 'Page2')">Dados do Local de Trabalho</button>
-            <button class="tablinks" onclick="openCity(event, 'Page3')">Dados Bancários</button>
-            <button class="tablinks" onclick="openCity(event, 'Page4')">Referências e Observações</button>
-        </div>
+<style>
+.row{
+    z-index: 1;
+}
+</style>
+
+<!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->    
+<form method="POST">    
+    {% csrf_token %} 
+
+<div class="row fixed-top my-5">
+    <div class="col ">
+        <ul class="nav nav-tabs bg-white px-5 py-2" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">
+                    Dados Pessoais
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-toggle="tab" href="#tab2" role="tab" aria-selected="true">
+                    Dados do Local de Trabalho
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-toggle="tab" href="#tab3" role="tab" aria-selected="true">
+                    Dados Bancários
+                </a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" data-toggle="tab" href="#tab4" role="tab" aria-selected="true">
+                    Referências e Observações
+                </a>
+            </li>
+            {% if object.pk %}
+            <li class="nav-item ml-auto" role="presentation">
+                <label for="salvarCliente">
+                    <a class="nav-link btn btn-primary" role="tab" aria-selected="true">
+                        Salvar
+                    </a>
+                </label>
+            </li>
+            {% else %}
+            <li class="nav-item ml-auto" role="presentation">
+                <label for="cadastrarCliente">
+                    <a class="nav-link btn btn-primary" role="tab" aria-selected="true">
+                        Cadastrar
+                    </a>
+                </label>
+            </li>
+
+            {% endif %}
+        </ul>
     </div>
 </div>
 
-<div id="Page1" class="tabcontent" style="display:block">
-    <form method="POST">
-    {% csrf_token %}    
-    <h3>DADOS DO CLIENTE (CREDCOOP)</h3>
-    <div class="row" >
-        <div class="col-sm-6">
-            <div class="form-group" >                
-                <label class="required" >{{form.nome.label}} </label>                
-                {% render_field form.nome class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">                    
-            <div class="form-group" >                
-                <label for="" class="required" >{{form.cpf.label}} </label>        
-                {% render_field form.cpf class="form-control form-control-sm cpf-mask" type="text"%}
-                {% if form.errors %}
-                    <li style="color:red;">CPF inválido ou já existe.</li>
-                {% endif %}
-            </div>
-        </div>
-        <div class="col-sm-2">                    
-            <div class="form-group" >                
-                <label for="" class="required" >{{form.rg.label}} </label>        
-                {% render_field form.rg class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group" >                
-                <label for="" class="required">{{form.orgao_emissor.label}} </label>        
-                {% render_field form.orgao_emissor class="form-control form-control-sm" %}
-            </div>
-        </div>
+    <div class="tab-content  pt-5" id="myTabContent">
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
 
-        {% if object.pk %}
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="" class="required">{{form.data_nasc.label}}</label>
-                {% render_field form.data_nasc class="form-control date-mask-placeholder" %}                        
+        <h3>DADOS DO CLIENTE (CREDCOOP)</h3>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" >                
+                        <label class="required" >{{form.nome.label}} </label>                
+                        {% render_field form.nome class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">                    
+                    <div class="form-group" >                
+                        <label for="" class="required" >{{form.cpf.label}} </label>        
+                        {% render_field form.cpf class="form-control form-control-sm cpf-mask" type="text"%}
+                        {% if form.errors %}
+                            <li style="color:red;">CPF inválido ou já existe.</li>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-sm-2">                    
+                    <div class="form-group" >                
+                        <label for="" class="required" >{{form.rg.label}} </label>        
+                        {% render_field form.rg class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group" >                
+                        <label for="" class="required">{{form.orgao_emissor.label}} </label>        
+                        {% render_field form.orgao_emissor class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                {% if object.pk %}
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="" class="required">{{form.data_nasc.label}}</label>
+                        {% render_field form.data_nasc class="form-control date-mask-placeholder" %}                        
+                    </div>  
+                </div>
+                {% else %}
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="" class="required">{{form.data_nasc.label}}</label>
+                            {% render_field form.data_nasc class="form-control form-control-sm" type="date" %}
+                        </div>  
+                    </div>
+                {% endif %}
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="" class="required">{{form.naturalidade.label}}</label>
+                        {% render_field form.naturalidade class="form-control form-control-sm"  %}
+                    </div>  
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="" class="required">{{form.nacionalidade.label}}</label>
+                        {% render_field form.nacionalidade class="form-control form-control-sm" value="BRASILEIRA" %}
+                    </div>  
+                </div>    
+                <div class="col-sm-3" > 
+                    <div class="form-group">            
+                        <label for="" class="required">{{form.estado_civil.label}}</label>
+                        {% render_field form.estado_civil class="form-control form-control-sm" %}                    
+                    </div>
+                </div>
+                <div class="col-sm-6">                    
+                    <div class="form-group" >                
+                        <label for="" class="required">{{form.nome_da_mae.label}}</label>        
+                        {% render_field form.nome_da_mae class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-6">                    
+                    <div class="form-group" >                
+                        <label for="" >{{form.nome_do_pai.label}}</label>        
+                        {% render_field form.nome_do_pai class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">            
+                        <label for="">{{form.conjuge_nome.label}}</label>
+                        {% render_field form.conjuge_nome class="form-control form-control-sm" %}                    
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">            
+                        <label for="">{{form.conjuge_cpf.label}}</label>
+                        {% render_field form.conjuge_cpf class="form-control form-control-sm cpf-mask"%}                    
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">            
+                        <label for="">{{form.conjuge_telefone.label}}</label>
+                        {% render_field form.conjuge_telefone class="form-control form-control-sm cel-phone-mask" %}                    
+                    </div>
+                </div>         
             </div>  
-        </div>
-        {% else %}
-            <div class="col-sm-3">
-                <div class="form-group">
-                    <label for="" class="required">{{form.data_nasc.label}}</label>
-                    {% render_field form.data_nasc class="form-control form-control-sm" type="date" %}
-                </div>  
-            </div>
-        {% endif %}
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="" class="required">{{form.naturalidade.label}}</label>
-                {% render_field form.naturalidade class="form-control form-control-sm"  %}
-            </div>  
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="" class="required">{{form.nacionalidade.label}}</label>
-                {% render_field form.nacionalidade class="form-control form-control-sm" value="BRASILEIRA" %}
-            </div>  
-        </div>    
-        <div class="col-sm-3" > 
-            <div class="form-group">            
-                <label for="" class="required">{{form.estado_civil.label}}</label>
-                {% render_field form.estado_civil class="form-control form-control-sm" %}                    
-            </div>
-        </div>
-        <div class="col-sm-6">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.nome_da_mae.label}}</label>        
-                {% render_field form.nome_da_mae class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-6">                    
-            <div class="form-group" >                
-                <label for="" >{{form.nome_do_pai.label}}</label>        
-                {% render_field form.nome_do_pai class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="form-group">            
-                <label for="">{{form.conjuge_nome.label}}</label>
-                {% render_field form.conjuge_nome class="form-control form-control-sm" %}                    
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">            
-                <label for="">{{form.conjuge_cpf.label}}</label>
-                {% render_field form.conjuge_cpf class="form-control form-control-sm cpf-mask"%}                    
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">            
-                <label for="">{{form.conjuge_telefone.label}}</label>
-                {% render_field form.conjuge_telefone class="form-control form-control-sm cel-phone-mask" %}                    
-            </div>
-        </div>         
-    </div>  
     
     <h3>ENDEREÇO</h3>
     <div class="row">
@@ -202,8 +245,13 @@
             </div>
         </div>
     </div>  
-</div>
-<div id="Page2" class="tabcontent">        
+        </div>
+        <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">
+             <div class="saveFixadoDiv">
+        <button class="btn btn-success saveFixado" float="right">
+            Cadastrar
+        </button>
+    </div>
     <div class="row">
         <div class="col-sm-4">                    
             <div class="form-group" >                
@@ -287,10 +335,9 @@
             </div>
         </div>
     </div>   
-</div>    
-
-<div id="Page3" class="tabcontent">       
-    <div class="row">
+        </div>
+        <div class="tab-pane fade show" id="tab3" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.banco.label}} </label>        
@@ -322,10 +369,9 @@
             </div>    
         </div>     
     </div> 
-</div>
-
-<div id="Page4" class="tabcontent">         
-    <div class="row">
+        </div>
+        <div class="tab-pane fade show" id="tab4" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
         
         <div class="col-sm-4">                    
             <div class="form-group" >                
@@ -387,10 +433,28 @@
                 {% render_field form.fiador class="form-control form-control-sm"  %}
             </div>
         </div> 
+    </div>  
+        </div>        
     </div>
-    <div style='float: right;'>
-        <button class="btn btn-success" float="right">Cadastrar</button>
-    </div>
+
+    <div id="Page1" class="tabcontent" style="display:block">       
+    {% if object.pk %}
+        <div class="saveFixadoDiv">
+            <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
+                <span class="fa fa-save"></span> 
+                Salvar Alterações
+            </button>
+        </div>     
+    </span>
+    {% else %}
+        <div class="saveFixadoDiv">
+            <button class="btn btn-dark saveFixado" float="right" id="cadastrarCliente">
+                <span class="fa fa-save"></span>
+                Cadastrar
+            </button>
+        </div>
+    {% endif %}   
+</div>
     </form> 
 </div>
 
