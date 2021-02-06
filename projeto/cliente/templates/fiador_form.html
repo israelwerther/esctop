@@ -4,22 +4,105 @@
 {% block js %}{% endblock js %}
 {% block content %}
 
+<style>
+    .nav-tabs{
+        border: 1px solid #c1c5c1;   
+    }
+    .row {
+        z-index: 1;
+    }
+    .tab-pane{
+        border: 1px solid #c1c5c1;
+        padding: 15px;
+        text-shadow: 1px 1px 1px #a79f9f;
+    }
+    a:link {  /* links não visitados */
+        color: black;
+    }     
+    a:hover{
+        color: #1c910c;
+    }  
+    a:active { /* links ativos */
+        color: #98e998;        
+    } 
+    .aTab {     
+        background-color: rgba(255, 255, 255, 0.809);
+        color: black; 
+    }
+    .nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+        /* background-image: linear-gradient(15deg, #67dc6f 0%, #1c910c 100%); */
+        background-color: #b9edb5;
+    }
+    .liTab{
+        /* margin-left: 25px; */
+    }   
+    .pl-5, .px-5 {
+        padding: 10px!important;
+    }
+    .ml-auto{
+        margin-left: 185px !important;        
+        padding: none!important;
+        padding-right: none!important;       
+    }  
+    div.ex1 {
+        background-color: lightblue;
+        width: 110px;
+        height: 110px;
+        overflow: scroll;
+    }
+    
+</style>
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="tab">
-            <button class="tablinks active" onclick="openCity(event, 'Page1')">Dados Pessoais</button>
-            <button class="tablinks" onclick="openCity(event, 'Page2')">Dados do Local de Trabalho</button>
-            <button class="tablinks" onclick="openCity(event, 'Page3')">Dados Bancários</button>
+<form method="POST">
+    {% csrf_token %}    
+    <div class="row fixed-top my-5" style="padding: 5px;border: none;">
+        <div class="col">
+            <div class="container " style="margin-top: 3px;">
+                <ul class="nav nav-tabs bg-white px-5 py-2" id="myTab" role="tablist">
+                    <li class="nav-item liTab" role="presentation">
+                        <a class="nav-link aTab active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">
+                            Dados Pessoais
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link aTab" data-toggle="tab" href="#tab2" role="tab" aria-selected="true">
+                            Dados do Local de Trabalho
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link aTab" data-toggle="tab" href="#tab3" role="tab" aria-selected="true">
+                            Dados Bancários
+                        </a>
+                    </li>                    
+    
+                    {% if object.pk %}
+                        <li class="nav-item ml-auto" role="presentation">
+                            <label for="salvarCliente">
+                                <a class="nav-link btn btn-success" role="tab" aria-selected="true" style="margin:0;">
+                                    <span class="fa fa-save"></span>
+                                    Salvar
+                                </a>
+                            </label>
+                        </li>
+                    {% else %}
+                        <li class="nav-item ml-auto" role="presentation">
+                            <label for="cadastrarCliente">
+                                <a class="nav-link btn btn-success"  role="tab" aria-selected="true">
+                                    <span class="fa fa-save"></span>
+                                    Cadastrar
+                                </a>
+                            </label>
+                        </li>
+                    {% endif %}                        
+                </ul>
+
+            </div>
         </div>
     </div>
-</div>
 
-<div id="Page1" class="tabcontent" style="display:block">
-    <form method="POST">
-    {% csrf_token %}
-
-    <h3>DADOS DO FIADOR (CREDCOOP)</h3>
+    <div class="tab-content  pt-5" id="myTabContent">
+        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
+            <h3>DADOS DO FIADOR (CREDCOOP)</h3>
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
@@ -182,126 +265,159 @@
             </div>
         </div>
     </div>
+           
+        </div>
+        <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">           
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">{{form.nome_fantasia.label}} </label>
+                        {% render_field form.nome_fantasia class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.contato1_trabalho.label}} </label>
+                        {% render_field form.contato1_trabalho class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.contato2_trabalho.label}} </label>
+                        {% render_field form.contato2_trabalho class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.celular1_trabalho.label}} </label>
+                        {% render_field form.celular1_trabalho class="form-control form-control-sm" %}
+                        <label class="checkbox-inline"> {{form.whatsapp1_trabalho.label}} <input type="checkbox" value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.celular2_trabalho.label}} </label>
+                        {% render_field form.celular2_trabalho class="form-control form-control-sm" %}
+                        <label class="checkbox-inline"> {{form.whatsapp2_trabalho.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="cep2">{{form.cep_trabalho.label}} </label>
+                        {% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep2" type="text"%}
+        
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="logradouro">{{form.rua_trabalho.label}} </label>
+                        {% render_field form.rua_trabalho class="form-control form-control-sm" id="logradouro" type="text"%}
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="form-group">
+                        <label for="bairro2">{{form.bairro_trabalho.label}} </label>
+                        {% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro2" type="text"%}
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-group">
+                        <label for="uf2">{{form.uf_trabalho.label}} </label>
+                        {% render_field form.uf_trabalho class="form-control form-control-sm" id="uf2" type="text"%}
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label for="cidade2">{{form.cidade_trabalho.label}} </label>
+                        {% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade2" type="text"%}
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="form-group">
+                        <label for="">{{form.numero_casa_trabalho.label}} </label>
+                        {% render_field form.numero_casa_trabalho class="form-control form-control-sm" type="text" size="60" %}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">{{form.referencia_trabalho.label}} </label>
+                        {% render_field form.referencia_trabalho class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">{{form.obs_trabalho.label}} </label>
+                        {% render_field form.obs_trabalho class="form-control form-control-sm" style="height: 100px;"%}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade show" id="tab3" role="tabpanel" aria-labelledby="home-tab">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">{{form.banco.label}} </label>
+                        {% render_field form.banco class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">{{form.n_operacao.label}} </label>
+                        {% render_field form.n_operacao class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="">{{form.tipo_de_conta.label}} </label>
+                        {% render_field form.tipo_de_conta class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.agencia.label}} </label>
+                        {% render_field form.agencia class="form-control form-control-sm" %}
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.conta.label}} </label>
+                        {% render_field form.conta class="form-control form-control-sm" %}
+                    </div>
+                </div>
+        </div>       
+    </div>
+
+    {% if object.pk %}
+    <div class="saveFixadoDiv invisible">
+        <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
+            <span class="fa fa-save"></span>            
+        </button>
+    </div>
+    
+    {% else %}
+    <div class="saveFixadoDiv invisible">
+        <button class="btn btn-dark saveFixado" float="right" id="cadastrarCliente">
+            <span class="fa fa-save"></span>           
+        </button>
+    </div>
+    {% endif %}
+
+</form>
+
+
+<div id="Page1" class="tabcontent" style="display:block">
+    <form method="POST">
+    {% csrf_token %}
+
+    
 </div>
 
 <div id="Page2" class="tabcontent">    
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="">{{form.nome_fantasia.label}} </label>
-                {% render_field form.nome_fantasia class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="">{{form.contato1_trabalho.label}} </label>
-                {% render_field form.contato1_trabalho class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="">{{form.contato2_trabalho.label}} </label>
-                {% render_field form.contato2_trabalho class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="">{{form.celular1_trabalho.label}} </label>
-                {% render_field form.celular1_trabalho class="form-control form-control-sm" %}
-                <label class="checkbox-inline"> {{form.whatsapp1_trabalho.label}} <input type="checkbox" value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="">{{form.celular2_trabalho.label}} </label>
-                {% render_field form.celular2_trabalho class="form-control form-control-sm" %}
-                <label class="checkbox-inline"> {{form.whatsapp2_trabalho.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="cep2">{{form.cep_trabalho.label}} </label>
-                {% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep2" type="text"%}
-
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="logradouro">{{form.rua_trabalho.label}} </label>
-                {% render_field form.rua_trabalho class="form-control form-control-sm" id="logradouro" type="text"%}
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <div class="form-group">
-                <label for="bairro2">{{form.bairro_trabalho.label}} </label>
-                {% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro2" type="text"%}
-            </div>
-        </div>
-        <div class="col-sm-1">
-            <div class="form-group">
-                <label for="uf2">{{form.uf_trabalho.label}} </label>
-                {% render_field form.uf_trabalho class="form-control form-control-sm" id="uf2" type="text"%}
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="cidade2">{{form.cidade_trabalho.label}} </label>
-                {% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade2" type="text"%}
-            </div>
-        </div>
-        <div class="col-sm-1">
-            <div class="form-group">
-                <label for="">{{form.numero_casa_trabalho.label}} </label>
-                {% render_field form.numero_casa_trabalho class="form-control form-control-sm" type="text" size="60" %}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="">{{form.referencia_trabalho.label}} </label>
-                {% render_field form.referencia_trabalho class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="">{{form.obs_trabalho.label}} </label>
-                {% render_field form.obs_trabalho class="form-control form-control-sm" style="height: 100px;"%}
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <div id="Page3" class="tabcontent">
-    <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="">{{form.banco.label}} </label>
-                {% render_field form.banco class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="">{{form.n_operacao.label}} </label>
-                {% render_field form.n_operacao class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="">{{form.tipo_de_conta.label}} </label>
-                {% render_field form.tipo_de_conta class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="">{{form.agencia.label}} </label>
-                {% render_field form.agencia class="form-control form-control-sm" %}
-            </div>
-        </div>
-        <div class="col-sm-2">
-            <div class="form-group">
-                <label for="">{{form.conta.label}} </label>
-                {% render_field form.conta class="form-control form-control-sm" %}
-            </div>
-        </div>
+    
     </div>
 
     <div style='float: right;'>
