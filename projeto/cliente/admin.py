@@ -13,16 +13,4 @@ class ClienteAdmin(admin.ModelAdmin):
     )
     search_fields=('nome',)
     list_filter=('rg',)
-
-
-
-    
-    
-    
-
-
-    
-    
-    
-
     
