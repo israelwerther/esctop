@@ -38,14 +38,3 @@ class AvalistaDelete(DeleteView):
     model=Avalista
     template_name ='avalista_delete.html'    
     success_url = reverse_lazy('avalista:avalista_list')
-
-
-# def avalista_add(request):
-#     form_avalista = AvalistaForm()
-#     form_teste = TesteForm()
-#     if request.method == 'POST':
-#         if form_avalista.is_valid():
-#             form_avalista.save()
-#         if form_teste.is_valid():
-#             form_teste.save()
-#     return render(request, 'avalista_form.html', {'form1': form_avalista, 'form2': form_teste})
