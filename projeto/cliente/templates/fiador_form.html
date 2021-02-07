@@ -38,18 +38,7 @@
     }   
     .pl-5, .px-5 {
         padding: 10px!important;
-    }
-    .ml-auto{
-        margin-left: 185px !important;        
-        padding: none!important;
-        padding-right: none!important;       
-    }  
-    div.ex1 {
-        background-color: lightblue;
-        width: 110px;
-        height: 110px;
-        overflow: scroll;
-    }
+    }   
     
 </style>
 
@@ -389,14 +378,14 @@
 
     {% if object.pk %}
     <div class="saveFixadoDiv invisible">
-        <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
+        <button class="btn btn-dark saveFixado"id="salvarCliente">
             <span class="fa fa-save"></span>            
         </button>
     </div>
     
     {% else %}
     <div class="saveFixadoDiv invisible">
-        <button class="btn btn-dark saveFixado" float="right" id="cadastrarCliente">
+        <button class="btn btn-dark saveFixado"id="cadastrarCliente">
             <span class="fa fa-save"></span>           
         </button>
     </div>
