@@ -26,6 +26,14 @@ class ClienteCreate(CreateView):
     template_name='cliente_form.html'
     form_class=ClienteForm
 
+
+class FiadorCreate(CreateView):
+    model=Cliente       
+    template_name='fiador_form.html'
+    form_class=ClienteForm
+    success_url = reverse_lazy('cliente:cliente_add')
+
+    
 # def ClienteCreate(request):
 #     template_name='cliente_form.html'    
 #     if request.method == 'POST':
@@ -38,14 +46,6 @@ class ClienteCreate(CreateView):
 #         'form': form
 #     }    
 #     return render(request, template_name, context)
-
-
-
-class FiadorCreate(CreateView):
-    model=Cliente       
-    template_name='fiador_form.html'
-    form_class=ClienteForm
-    success_url = reverse_lazy('cliente:cliente_add')
     
     
 class ClienteUpdate(UpdateView):

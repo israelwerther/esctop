@@ -16,32 +16,17 @@ def cliente_cnpj_list(request):
 
 
 @login_required
-def cliente_cnpj_cadastra(request):
-    cnpjs = Cliente_cnpj.objects.all()    
-    form = Cliente_cnpjForm()    
-    data = {'cnpjs': cnpjs,'form': form} 
-    return render(request, 'cliente_cnpj_form.html', data)
-    
-
-
-@login_required
-def cliente_cnpj_add(request): 
-    form=Cliente_cnpjForm(request.POST or None)    
-    if form.is_valid():
-        form.save()       
-    return redirect('cliente_cnpj:cliente_cnpj_list')
-
-
-@login_required
 def cliente_cnpj_detail(request, pk):
     template_name='cliente_cnpj_detail.html'
     obj=Cliente_cnpj.objects.get(pk=pk)
     context={'object': obj}
     return render(request, template_name, context)
-    # template_name='cliente_cnpj_form.html'
-    # form_class=Cliente_cnpjForm
-    # form1 = AvalistaForm(request.POST or None)
-    # form2 = TesteForm(request.POST or None)
+
+
+class ClienteCnpjCreate(CreateView):
+    model=Cliente_cnpj
+    template_name='cliente_cnpj_form.html'
+    form_class=Cliente_cnpjForm
 
 
 @login_required

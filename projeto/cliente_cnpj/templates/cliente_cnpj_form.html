@@ -94,42 +94,7 @@
 
     <div class="tab-content  pt-5" id="myTabContent">
         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
-           
-        </div>
-        <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">           
-            
-        </div>        
-    </div>
-
-    {% if object.pk %}
-    <div class="saveFixadoDiv invisible">
-        <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
-            <span class="fa fa-save"></span>            
-        </button>
-    </div>
-    
-    {% else %}
-    <div class="saveFixadoDiv invisible">
-        <button class="btn btn-dark saveFixado" float="right" id="cadastrarCliente">
-            <span class="fa fa-save"></span>           
-        </button>
-    </div>
-    {% endif %}
-
-</form>
-
-
-<div id="Page1" class="tabcontent" style="display:block">
-
-    {% if cliente_cnpj %}
-        <h1>Editar {{cliente_cnpj.razao_social}}</h1>
-        <form action="{% url 'cliente_cnpj:cliente_cnpjupdate' cliente_cnpj.pk %}" method="POST" novalidate>
-    {% else %}
-        <form action="{% url 'cliente_cnpj:cliente_cnpj_add' %}" method="POST">
-    {% endif %}
-    {% csrf_token %}
-
-    <h3>DADOS DA EMPRESA (ESCTOP)</h3>
+           <h3>DADOS DA EMPRESA (ESCTOP)</h3>
     <div class="row" > 
         <div class="col-sm-6">                    
             <div class="form-group" >                
@@ -348,11 +313,9 @@
         </div>
 
     </div>
-</div> 
-{% comment %} REPRESENTANTE {% endcomment %}
-<div id="Page2" class="tabcontent">   
-
-    <h3>DADOS DO REPRESENTANTE</h3>
+        </div>
+        <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">           
+            <h3>DADOS DO REPRESENTANTE</h3>
     <div class="row">
         <div class="col-sm-6">                    
             <div class="form-group" >                
@@ -507,13 +470,25 @@
             </div>
         </div>
     </div>
-    <div style='float: right;'>
-        <button class="btn btn-success" float="right" style="margin: 20px;">Cadastrar</button>
+        </div>        
     </div>
-    </form>        
-    </div>    
-</div> 
 
-</div>
+    {% if object.pk %}
+    <div class="saveFixadoDiv invisible">
+        <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
+            <span class="fa fa-save"></span>            
+        </button>
+    </div>
+    
+    {% else %}
+    <div class="saveFixadoDiv invisible">
+        <button class="btn btn-dark saveFixado" float="right" id="cadastrarCliente">
+            <span class="fa fa-save"></span>           
+        </button>
+    </div>
+    {% endif %}
+
+</form>
+
 
 {% endblock content %}
