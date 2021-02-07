@@ -21,6 +21,11 @@ def cliente_detail(request, pk):
     return render(request, template_name, context)
 
 
+class ClienteCreate(CreateView):
+    model=Cliente
+    template_name='cliente_form.html'
+    form_class=ClienteForm
+
 # def ClienteCreate(request):
 #     template_name='cliente_form.html'    
 #     if request.method == 'POST':
@@ -34,10 +39,6 @@ def cliente_detail(request, pk):
 #     }    
 #     return render(request, template_name, context)
 
-class ClienteCreate(CreateView):
-    model=Cliente
-    template_name='cliente_form.html'
-    form_class=ClienteForm
 
 
 class FiadorCreate(CreateView):

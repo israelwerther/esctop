@@ -21,20 +21,10 @@ def avalista_detail(request, pk):
     return render(request, template_name, context)
 
 
-@login_required
-def avalista_cadastra(request):
-    form = AvalistaForm()    
-    avalistas = Avalista.objects.all()    
-    data = {'avalistas': avalistas,'form': form} 
-    return render(request, 'avalista_form.html', data)
-
-
-@login_required
-def avalista_add(request):
-    form = AvalistaForm(request.POST or None)   
-    if form.is_valid():
-        form.save()        
-    return redirect('cliente_cnpj:cliente_cnpj_cadastra')
+class AvalistaCreate(CreateView):
+    model=Avalista
+    template_name='avalista_form.html'
+    form_class=AvalistaForm
 
 
 class AvalistaUpdate(UpdateView):

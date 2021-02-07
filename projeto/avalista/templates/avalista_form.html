@@ -4,13 +4,9 @@
 {% block content %}
 
 
-{% if avalista %}
-    <h1>Editar {{cliente_cnpj.razao_social}}</h1>
-    <form action="{% url 'avalista:avalista_edit' avalista.pk %}" method="POST" novalidate>
-{% else %}
-    <form action="{% url 'avalista:avalista_add' %}" method="POST">
-{% endif %}
-{% csrf_token %}    
+<form method="POST">
+    {% csrf_token %}
+    
     <h3>DADOS DO FIADOR (ESCTOP)</h3>     
     <hr/>
     <div class="row" > 
@@ -24,6 +20,9 @@
             <div class="form-group" >                
                 <label for="" >{{form.fiador_cpf.label}} </label>        
                 {% render_field form.fiador_cpf class="form-control form-control-sm cpf-mask"%}
+                {% if form.errors %}
+                    <li style="color:red;">CPF inválido ou já existe.</li>
+                {% endif %}
             </div>    
         </div>  
         <div class="col-sm-2">                    
