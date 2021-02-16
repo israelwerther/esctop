@@ -7,7 +7,7 @@ from projeto.core.models import Banco, Tipo_de_conta
 
 class Cliente(models.Model):   
     #dados pessoais 
-    nome                  = models.CharField("Nome", max_length=50)
+    nome                  = models.CharField("Nome", max_length=50, blank=False, null=True)
     cpf                   = models.CharField("CPF", max_length=20, unique=True)
     rg                    = models.CharField("RG",max_length=20, blank=False, null=True)
     orgao_emissor         = models.CharField("Orgão Emissor", max_length=15, blank=False, null=True)
