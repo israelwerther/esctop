@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from projeto.core.models import Banco, Tipo_de_conta
 
 class Avalista(models.Model): 
-    fiador_nome                = models.CharField("Nome", max_length=50, blank=True, null=True)
+    fiador_nome                = models.CharField("Nome", max_length=50, blank=False, null=True)
     fiador_cpf                 = models.CharField("CPF", max_length=20, unique=True, blank=True, null=True) 
     fiador_rg                  = models.CharField("RG",max_length=20, blank=True, null=True)
     fiador_orgao_emissor       = models.CharField("Orgão Emissor",max_length=20, blank=True, null=True)
@@ -42,9 +42,9 @@ class Avalista(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('avalista:avalista_detail', kwargs={'pk': self.pk})
 
-    def save(self, force_insert=False, force_update=False):
-        self.fiador_nome = self.fiador_nome.upper()
-        super(Avalista, self).save(force_insert, force_update)       
+    # def save(self, force_insert=False, force_update=False):
+    #     self.fiador_nome = self.fiador_nome.upper()
+    #     super(Avalista, self).save(force_insert, force_update)       
     
     # def save(self, force_insert=False, force_update=False):
     #     self.fiador_nome = self.fiador_nome.upper()
