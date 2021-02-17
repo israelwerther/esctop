@@ -12,7 +12,7 @@
     <div class="btn-group" role="group" >        
     {% if object.cliente %}    
         <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
-        <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê Novo</a>    
+        <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>    
     {% endif %}
         <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-warning">Promissória</a>
         {% if object.cliente_cnpj %}  
