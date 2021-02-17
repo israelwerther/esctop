@@ -120,6 +120,7 @@
 </style>
 
 <div class="row">
+    <!-- AQUI ESTÁ O CARNÊ VIGENTE DO SISTEMA. CARNÊ IMPRESSA ESTÁ EM DESUSO -->
     <div id="contracapa" class="contracapa">
         <!-- <span class="text-right" style="width:30%">Observações</span>  -->
         <p>&nbsp&nbsp&nbsp Empréstimo em <strong>{{object.qtd_parcelas}} parcelas</strong> no dia {{object.dt_emprestimo}}</p>
@@ -156,7 +157,8 @@
 
         for(var i = 1 ; i <= {{object.qtd_parcelas}}; i++){
             mes++
-            if(dia == 1 && mes == 2){
+
+            if(dia == 1 && mes == 2 || dia == 1){
                 primeiro = true
             }
             if(dia == 31){
@@ -206,7 +208,15 @@
                 if(mes == 10 && trinta_e_um == 31){
                     dia++
                 }
-            }            
+            }      
+            
+            if(primeiro == true){
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 01 FEVEREIRO
+                if(dia == 1 && mes == 3){
+                    dia = 1 
+                    mes = 3                
+                }
+            }   
             
             //AJUSTA MESES E ANOS 
             if(mes == 13){
