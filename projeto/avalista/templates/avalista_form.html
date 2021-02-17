@@ -49,7 +49,6 @@
     }
 </style>
 
-
 <form method="POST">
     {% csrf_token %}    
     <div class="row fixed-top my-5" style="padding: 5px;border: none;">
@@ -84,7 +83,8 @@
                                     Cadastrar
                                 </a>
                             </label>
-                        </li>
+                        </li>                       
+                        {% comment %} <button type="button" onclick="mudar()">Executar</button> {% endcomment %}
                     {% endif %}                        
                 </ul>
             </div>
@@ -294,7 +294,15 @@
     </div>
     {% endif %}
 
+    
+    
 </form>
+<script>
+    function mudar() {
+        alert("mudou");
+    }
+
+</script>
 {% endblock content %}
 
 {% comment %} <form action="" method="post">
@@ -308,3 +316,33 @@
     <input type="submit" class="btn btn-info" value="Salvar Lingua">
     
 </form> {% endcomment %}
+
+{% comment %} Modal {% endcomment %}
+{% comment %} <button type="button" class="btn btn-success m-4" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+    <span class="fa fa-plus"></span> 
+    Cadastrar
+</button>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">O CLIENTE JÁ POSSUI FIADOR CADASTRADO?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <span class="pull-center">
+                    <a href="{% url 'cliente:cliente_add' %}" type="button" class="btn btn-success">SIM</a>
+                    <a href="{% url 'cliente:fiador_add' %}" type="button" class="btn btn-danger">NÃO</a>
+                </span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>                   
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+{% comment %} Modal {% endcomment %}

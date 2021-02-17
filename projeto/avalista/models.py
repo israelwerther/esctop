@@ -44,7 +44,7 @@ class Avalista(models.Model):
 
     # def save(self, force_insert=False, force_update=False):
     #     self.fiador_nome = self.fiador_nome.upper()
-    #     super(Avalista, self).save(force_insert, force_update)       
+    #     super(Avalista, self).save(force_insert, force_update)
     
     # def save(self, force_insert=False, force_update=False):
     #     self.fiador_nome = self.fiador_nome.upper()

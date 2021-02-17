@@ -21,6 +21,11 @@ def avalista_detail(request, pk):
     return render(request, template_name, context)
 
 
+# @login_required
+# def avalista_decision(request):
+#     return render(request, 'avalista_decision.html')
+
+
 class AvalistaCreate(CreateView):
     model=Avalista
     template_name='avalista_form.html'
