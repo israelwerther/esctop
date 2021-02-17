@@ -130,7 +130,7 @@
                     <b>PARCELAS</b>
                 </td>
                 <td width="33%">
-                    <b>VENCIMENTO</b>
+                    <b>VENCIMENTO teste</b>
                 </td>
                 <td width="39%">
                     <b>VALOR</b>
@@ -143,7 +143,7 @@
         for(var i=0; i<{{object.qtd_parcelas}}; i++){ 
             mes++      
             
-            if(dia == 1 && mes == 2){
+            if(dia == 1 && mes == 2 || dia == 1){
                 primeiro = true
             }
 
@@ -195,7 +195,16 @@
                 if(mes == 10 && trinta_e_um == 31){
                     dia++
                 }
-            }            
+
+            }  
+            
+            if(primeiro == true){
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 01 FEVEREIRO
+                if(dia == 1 && mes == 3){
+                    dia = 1 
+                    mes = 3                
+                }
+            }          
             
             //AJUSTA MESES E ANOS 
             if(mes == 13){
