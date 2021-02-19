@@ -29,23 +29,12 @@ class ClienteCnpjCreate(CreateView):
     form_class=Cliente_cnpjForm
 
 
-@login_required
-def cliente_cnpjupdate(request, pk):
-    data = {}
-    cliente_cnpj = Cliente_cnpj.objects.get(pk=pk)
-    form = Cliente_cnpjForm(request.POST or None, instance=cliente_cnpj)
-    data['cliente_cnpj'] = cliente_cnpj
-    data['form'] = form
+class Cliente_cnpjUpdate(UpdateView):
+    model=Cliente_cnpj   
+    model1=Avalista   
+    template_name='cliente_cnpj_form.html'
+    form_class = Cliente_cnpjForm
 
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            return redirect('cliente_cnpj:cliente_cnpj_list')
-        else:
-            # messages.error(request, 'Dados inválidos')
-            return render(request, 'cliente_cnpj_form.html', data)  
-    else:
-        return render(request, 'cliente_cnpj_form.html', data) 
 
 
 class Cliente_cnpjDelete(DeleteView):
@@ -55,9 +44,22 @@ class Cliente_cnpjDelete(DeleteView):
 
     
 
-# class Cliente_cnpjUpdate(UpdateView):
-#     model=Cliente_cnpj   
-#     model1=Avalista   
-#     template_name='cliente_cnpj_form.html'
-#     form_class = Cliente_cnpjForm
 
+# ***********************NÃO APAGAR ESTA VIEW COMENTADA ABAIXO************************
+# @login_required
+# def cliente_cnpjupdate(request, pk):
+#     data = {}
+#     cliente_cnpj = Cliente_cnpj.objects.get(pk=pk)
+#     form = Cliente_cnpjForm(request.POST or None, instance=cliente_cnpj)
+#     data['cliente_cnpj'] = cliente_cnpj
+#     data['form'] = form
+
+#     if request.method == 'POST':
+#         if form.is_valid():
+#             form.save()
+#             return redirect('cliente_cnpj:cliente_cnpj_list')
+#         else:
+#             # messages.error(request, 'Dados inválidos')
+#             return render(request, 'cliente_cnpj_form.html', data)  
+#     else:
+#         return render(request, 'cliente_cnpj_form.html', data) 
