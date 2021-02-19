@@ -82,10 +82,10 @@ class EmprestimoPromissoria(UpdateView):
     form_class=EmprestimoForm
 
     
-class EmprestimoContrato(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_contrato.html'
-    form_class=EmprestimoForm
+# class EmprestimoContrato(UpdateView):
+#     model=Emprestimo
+#     template_name='emprestimo_contrato.html'
+#     form_class=EmprestimoForm
 
 
 class EmprestimoContratoCNPJ(UpdateView):
