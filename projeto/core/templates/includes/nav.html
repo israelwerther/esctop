@@ -6,20 +6,33 @@
 		/* text-transform: uppercase; */
 	}
 	.navBarVerde {
-	/* background-color:#4CAF50!important; */
+		font-family: Noto Sans, sans-serif;
 		background-image: linear-gradient(15deg, #67dc6f 0%, #1c910c 100%);
+		font-weight: bold;
+		/* background-color:#4CAF50!important; */
 		/* position: fixed; */
 		/* top: 0;
-		width: 100%;		 */
+		width: 100%;*/
 	}
 	.navbar-light .navbar-brand {
 		color: rgb(255, 255, 255);		
+		opacity: 1.0;
+  		transition: 0.3s;
 	}
 	.navbar-light .navbar-nav .nav-link {
 		color: rgb(255, 255, 255);		
+		opacity: 1.0;
+  		transition: 0.3s;
 	}
 	.dropdown-menu a{		
 		-webkit-animation: fadeEffect 1s;
+	}
+	.dropdown-item{
+		opacity: 1.0;
+  		transition: 0.8s;		
+	}
+	.dropdown-item:hover {
+		background-color: #67dc6f;
 	}
 	
 </style>
@@ -87,7 +100,7 @@
 
 				{% if user.is_authenticated %}		
 					<!--afastei para a direita aqui de um jeito provisório  -->
-					<a href="" class="nav-link disabled" style="margin-left: 465px; color: aliceblue;">Olá, {{user.first_name}}!</a>				
+					<a class="nav-link disabled" style="margin-left: 465px; color: aliceblue;">Olá, {{user.first_name}}!</a>				
 				{% endif %}						
 
 			</ul>
