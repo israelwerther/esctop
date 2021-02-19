@@ -23,7 +23,8 @@ class EmprestimoForm(forms.ModelForm):
             'juros_moratorio',
             'multa_por_atraso',
             'iof_real',
-            'valor_devido'
+            'valor_devido',
+            'postergar'
         ]
         
 
