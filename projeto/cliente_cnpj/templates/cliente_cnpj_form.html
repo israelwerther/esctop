@@ -112,6 +112,9 @@
             <div class="form-group" >                
                 <label for="" class="required" >{{form.cnpj.label}} </label>        
                 {% render_field form.cnpj class="form-control form-control-sm cnpj-mask" %}
+                {% if form.cnpj.errors %}
+                    <li style="color:red;">CNPJ inválido ou já existe.</li>
+                {% endif %}
             </div>
         </div>  
         {% if cliente_cnpj %}
@@ -327,6 +330,9 @@
             <div class="form-group" >                
                 <label for="" >{{form.rep_cpf.label}} </label>        
                 {% render_field form.rep_cpf class="form-control form-control-sm cpf-mask" type="text" %}
+                {% if form.rep_cpf.errors %}
+                    <li style="color:red;">CPF inválido ou já existe.</li>
+                {% endif %}
             </div>
         </div>
         <div class="col-sm-3">                    

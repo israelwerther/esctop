@@ -15,6 +15,7 @@ class EmprestimoForm(forms.ModelForm):
             'qtd_parcelas',
             'valor_prestacao',            
             'dt_emprestimo',            
+            'dt_vencimento',            
             'n_contrato',
             'valor_multa',
             'juros_ao_dia',
