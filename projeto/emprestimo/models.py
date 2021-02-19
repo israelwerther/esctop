@@ -24,6 +24,9 @@ class Emprestimo(models.Model):
     iof_real             = models.DecimalField("IOF real", max_digits=10, decimal_places=2, null=True, blank=True)
     valor_devido         = models.DecimalField("Valor devido", max_digits=10, decimal_places=2, null=True, blank=True)    
     postergar            = models.PositiveIntegerField('Postergar', null=True, blank=True)
+    
+
+
     class Meta:
         ordering = ('-dt_emprestimo',)        
     # def __str__(self):
@@ -33,7 +36,7 @@ class Emprestimo(models.Model):
     
     def get_absolute_url(self):
         return reverse_lazy('emprestimo:emprestimo_detail', kwargs={'pk': self.pk})
-    
+
 
 # class EmprestimoParcelas(models.Model):
 #     valor_parcela = models.DecimalField("Valor da Parcela", max_digits=10, decimal_places=2, null=True, blank=True)

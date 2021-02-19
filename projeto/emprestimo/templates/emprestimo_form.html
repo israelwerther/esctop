@@ -57,7 +57,7 @@
                         <label for="">{{form.dt_emprestimo.label}}</label>   
                         {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
                     </div>                  
-                </div> 
+                </div>
             {% else %}    
                 <div class="col-sm-4">
                     <div class="form-group">
@@ -136,25 +136,21 @@
                     {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}                       
                 </div>
             </div>
+            <!-- ELEMENTOS OCULTOS -->
         </div>           
         
         {% if emprestimo %}   
-        <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
-        <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a> 
-        
+            <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
+            <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>        
         {% else %}
-        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
-        <button type="submit" onclick="somar(), sequencial()" class="btn btn-success pull-right m-1">Cadastrar</button>
-        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
-        <button type="button" class="btn btn btn-primary m-1" onclick="Mudarestado('minhaDiv')">Postergar Vencimento</button>
-
-        
-
-
-
+            <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
+            <button type="submit" onclick="somar(), sequencial()" class="btn btn-success pull-right m-1">Cadastrar</button>
+            <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
+            <!-- <button type="button" class="btn btn btn-primary m-1" onclick="mudarEstado('minhaDiv')">Postergar Vencimento</button> -->
+        {% endif %}
     </form>    
-    {% endif %}
     <br>  
+
     <div class="row">
         <div class="col-sm-12">
             <h3>INFORMAÇÕES DO EMPRÉSTIMO</h3>
@@ -216,7 +212,7 @@
     </div>
 
     
-    <script>   
+<script>   
      
     function numberToReal(numero) {
         var numero = numero.toFixed(2).split('.');
@@ -378,14 +374,24 @@
        
     }
 
-    function Mudarestado(el) {
-    var display = document.getElementById(el).style.display;
-    if (display == "none")
-        document.getElementById(el).style.display = 'block';
-    else
-        document.getElementById(el).style.display = 'none';
+
+    // OCULTA OU EXIBE POSTERGAÇÃO DE VENCIMENTO
+    function mudarEstado(el) {
+        var display = document.getElementById(el).style.display;
+        if (display == "none")
+            document.getElementById(el).style.display = 'block';
+        else
+            document.getElementById(el).style.display = 'none';
     }
-       
+
+
+    // ACRESCENTA DIAS A DATA POSTERGADA
+    // function acrescentaDias(){
+    //     // CALCULA DATA POSTERGADA
+        
+    //     document.getElementById('dataselecionada').value = data
+    //     console.log(data)
+    // }
 </script>
   
     
