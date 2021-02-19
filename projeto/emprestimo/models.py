@@ -5,6 +5,8 @@ from projeto.core.models import TimeStampedModel
 from django.utils.translation import gettext_lazy as _ 
 from projeto.cliente.models import Cliente
 from projeto.cliente_cnpj.models import Cliente_cnpj
+# testando o timedelta
+from datetime import timedelta
 
 class Emprestimo(models.Model):
     funcionario          = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -24,7 +26,6 @@ class Emprestimo(models.Model):
     iof_real             = models.DecimalField("IOF real", max_digits=10, decimal_places=2, null=True, blank=True)
     valor_devido         = models.DecimalField("Valor devido", max_digits=10, decimal_places=2, null=True, blank=True)    
     postergar            = models.PositiveIntegerField('Postergar', null=True, blank=True)
-    
 
 
     class Meta:

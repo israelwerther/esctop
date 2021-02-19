@@ -135,9 +135,9 @@
         <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a> 
         
         {% else %}
-        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger">Cancelar</a>        
-        <button type="submit" onclick="somar(), sequencial()" class="btn btn-success">Cadastrar</button>
-        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-info">Calcular Parcela</button>
+        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
+        <button type="submit" onclick="somar(), sequencial()" class="btn btn-success pull-right m-1">Cadastrar</button>
+        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
     </form>    
     {% endif %}
     <br>  

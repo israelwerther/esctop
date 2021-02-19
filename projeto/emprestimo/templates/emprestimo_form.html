@@ -146,7 +146,7 @@
             <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
             <button type="submit" onclick="somar(), sequencial()" class="btn btn-success pull-right m-1">Cadastrar</button>
             <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
-            <!-- <button type="button" class="btn btn btn-primary m-1" onclick="mudarEstado('minhaDiv')">Postergar Vencimento</button> -->
+            {% comment %} <button type="button" class="btn btn btn-primary m-1" onclick="mudarEstado('minhaDiv')">Postergar Vencimento</button> {% endcomment %}
         {% endif %}
     </form>    
     <br>  
@@ -388,9 +388,14 @@
     // ACRESCENTA DIAS A DATA POSTERGADA
     // function acrescentaDias(){
     //     // CALCULA DATA POSTERGADA
-        
-    //     document.getElementById('dataselecionada').value = data
-    //     console.log(data)
+    //     var dt = new Date()
+    //     var ano       = document.getElementById("dataselecionada").value.split("-")[0];
+    //     ano = String(ano)       
+    //     ano = (ano.substr(2, 3))
+    //     var mes       = document.getElementById("dataselecionada").value.split("-")[1];
+    //     var dia       = document.getElementById("dataselecionada").value.split("-")[2];       
+    //     document.getElementById('dataselecionada').value = dataEmprestimo
+    //     console.log("dia")
     // }
 </script>
   
