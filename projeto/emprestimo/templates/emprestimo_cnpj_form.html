@@ -62,7 +62,7 @@
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="">{{form.dt_emprestimo.label}}</label>   
-                        {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" onchange="somar(), sequencial()" %}                    
+                        {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
                     </div>                  
                 </div> 
             {% endif %}  
@@ -136,8 +136,8 @@
         
         {% else %}
         <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger">Cancelar</a>        
-        <button type="submit" class="btn btn-success">Cadastrar</button>
-
+        <button type="submit" onclick="somar(), sequencial()" class="btn btn-success">Cadastrar</button>
+        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-info">Calcular Parcela</button>
     </form>    
     {% endif %}
     <br>  

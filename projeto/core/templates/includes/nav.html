@@ -34,9 +34,11 @@
 	.dropdown-item:hover {
 		background-color: #67dc6f;
 	}
-	.dropdown-item:visited {
-		color:rgb(0, 19, 128)n;
-	}	
+
+	a .nav-link{
+		left: auto !important;
+      	right: 0px;
+	}
 	
 </style>
 <html>
@@ -100,12 +102,12 @@
 						<a class="dropdown-item" href="{% url 'logout' %}">ENCERRAR SESSÃO</a>
 					</div>
 				</li>
-
-				{% if user.is_authenticated %}		
-					<!--afastei para a direita aqui de um jeito provisório  -->
-					<a class="nav-link disabled" style="margin-left: 465px; color: aliceblue;">Olá, {{user.first_name}}!</a>				
-				{% endif %}						
-
+				
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				{% if user.is_authenticated %}
+					<a class="nav-link disabled" style=" color: rgb(240, 246, 255);">Olá, {{user.first_name}}!</a>
+				{% endif %}
 			</ul>
 		</div>
 	</nav>
