@@ -49,7 +49,7 @@
     }
 </style>
 
-<form method="POST">
+<form method="POST" novalidate>
     {% csrf_token %}    
     <div class="row fixed-top my-5" style="padding: 5px;border: none;">
         <div class="col">
@@ -59,13 +59,7 @@
                         <a class="nav-link aTab active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">
                             Dados Pessoais
                         </a>
-                    </li>
-                    {% comment %} <li class="nav-item" role="presentation">
-                        <a class="nav-link aTab" data-toggle="tab" href="#tab2" role="tab" aria-selected="true">
-                            exemplo
-                        </a>
-                    </li> {% endcomment %}
-    
+                    </li>  
                     {% if object.pk %}
                         <li class="nav-item ml-auto" role="presentation">
                             <label for="salvarCliente">
@@ -78,14 +72,13 @@
                     {% else %}
                         <li class="nav-item ml-auto" role="presentation">
                             <label for="cadastrarCliente">
-                                <a class="nav-link btn btn-success"  role="tab" aria-selected="true">
+                                <a class="nav-link btn btn-success" role="tab" aria-selected="true">
                                     <span class="fa fa-save"></span>
                                     Cadastrar
                                 </a>
                             </label>
-                        </li>                       
-                        {% comment %} <button type="button" onclick="mudar()">Executar</button> {% endcomment %}
-                    {% endif %}                        
+                        </li>                        
+                    {% endif %}
                 </ul>
             </div>
         </div>
@@ -97,24 +90,30 @@
     <hr/>
     <div class="row" > 
         <div class="col-sm-6">                    
-            <div class="form-group" >                
-                <label for="" >{{form.fiador_nome.label}} </label>        
-                {% render_field form.fiador_nome class="form-control form-control-sm" %}
+            <div class="form-group">                
+                <label for="" class="required">{{form.fiador_nome.label}} </label>
+                {% render_field form.fiador_nome class="form-control form-control-sm"%}     
+                {% if form.fiador_nome.errors %}
+                    <li style="color:red;">Este campo é obrigatório</li>
+                {% endif %}
             </div>    
-        </div>  
+        </div>
         <div class="col-sm-2">                    
             <div class="form-group" >                
-                <label for="" >{{form.fiador_cpf.label}} </label>        
+                <label for="" class="required">{{form.fiador_cpf.label}} </label>        
                 {% render_field form.fiador_cpf class="form-control form-control-sm cpf-mask"%}
-                {% if form.errors %}
+                {% if form.fiador_cpf.errors %}
                     <li style="color:red;">CPF inválido ou já existe.</li>
                 {% endif %}
             </div>    
         </div>  
         <div class="col-sm-2">                    
-            <div class="form-group" >                
-                <label for="" >{{form.fiador_rg.label}} </label>        
+            <div class="form-group">                
+                <label for="" class="required">{{form.fiador_rg.label}} </label>        
                 {% render_field form.fiador_rg class="form-control form-control-sm" %}
+                {% if form.fiador_rg.errors %}
+                    <li style="color:red;">Este campo é obrigatório</li>
+                {% endif %}
             </div>    
         </div>  
         <div class="col-sm-2">                    
@@ -135,6 +134,9 @@
                 <div class="form-group" >                
                     <label for="" >{{form.fiador_data_nasc.label}} </label>        
                     {% render_field form.fiador_data_nasc  class="form-control form-control-sm" type="date" %}
+                    {% if form.fiador_data_nasc.errors %}
+                        <li style="color:red;">Este campo é obrigatório</li>
+                    {% endif %}
                 </div>    
             </div>             
         {% endif %}
@@ -145,7 +147,7 @@
             </div>    
         </div> 
         <div class="col-sm-3">    
-            <div class="form-group" >                
+            <div class="form-group">                
                 <label for="" >{{form.fiador_nacionalidade.label}} </label>        
                 {% render_field form.fiador_nacionalidade  class="form-control form-control-sm" value="BRASILEIRA"%}
             </div>    
@@ -166,6 +168,9 @@
             <div class="form-group" >                
                 <label for="" class="required">{{form.fiador_cep.label}} </label>        
                 {% render_field form.fiador_cep class="form-control form-control-sm" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}                            
+                {% if form.fiador_cep.errors %}
+                    <li style="color:red;">Este campo é obrigatório</li>
+                {% endif %}
             </div>
         </div>
         <div class="col-sm-4">                    
@@ -293,56 +298,7 @@
         </button>
     </div>
     {% endif %}
-
-    
     
 </form>
-<script>
-    function mudar() {
-        alert("mudou");
-    }
 
-</script>
 {% endblock content %}
-
-{% comment %} <form action="" method="post">
-    {% csrf_token %}
-    {{ form1 }}
-<input type="submit" class="btn btn-info" value="Salvar Idioma">
-</form>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form2 }}
-    <input type="submit" class="btn btn-info" value="Salvar Lingua">
-    
-</form> {% endcomment %}
-
-{% comment %} Modal {% endcomment %}
-{% comment %} <button type="button" class="btn btn-success m-4" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
-    <span class="fa fa-plus"></span> 
-    Cadastrar
-</button>
-
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">O CLIENTE JÁ POSSUI FIADOR CADASTRADO?</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <span class="pull-center">
-                    <a href="{% url 'cliente:cliente_add' %}" type="button" class="btn btn-success">SIM</a>
-                    <a href="{% url 'cliente:fiador_add' %}" type="button" class="btn btn-danger">NÃO</a>
-                </span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>                   
-            </div>
-        </div>
-    </div>
-</div> {% endcomment %}
-{% comment %} Modal {% endcomment %}
