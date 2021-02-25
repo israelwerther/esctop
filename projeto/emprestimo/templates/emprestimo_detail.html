@@ -69,12 +69,12 @@
             {% if object.cliente %}
             <tr>
                 <th class="text-right">E-mail</th>
-                <td type="form-control">{{ object.cliente.email }}</td>
+                <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
             </tr>   
             {% else %}
             <tr>
                 <th class="text-right">E-mail</th>
-                <td>{{ object.cliente_cnpj.email }}</td>
+                <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
             </tr>
             {% endif %}         
         </tbody>
