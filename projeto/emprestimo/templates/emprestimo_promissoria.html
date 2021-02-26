@@ -363,12 +363,12 @@ window.onload = function imprimir_promissoria(){
         else if(fundacao){
             promissoria.innerHTML +=
             `
-            <div class="body">
+            <div class="body">                
                 <a class="test1">&nbsp</a>
-                <a class="test1">&nbsp</a>
-                <a class="test1"> &nbsp
-                <br>&nbsp </a>
+                <a class="test1 maiusculo"><b>Fiador: ${"{{object.cliente_cnpj.fiador}}"}</b> &nbsp&nbsp&nbsp</a>
                 <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
+                <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
+                <a class="test1">&nbsp</a>
                 <a class="ait"> 
                     <b class = "fontmaior" >&nbspNº</b>                 
                     <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
