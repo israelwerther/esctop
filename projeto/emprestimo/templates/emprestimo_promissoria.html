@@ -30,6 +30,13 @@
         /*transform: scaleY(-1);*/
         /*float: top;*/
     }
+    a.testo2 {
+        writing-mode: vertical-lr; 
+        transform: rotate(180deg);
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+    }
     p {
         width: 720px; 
         border:none;
@@ -102,9 +109,9 @@
         font-family: "Arial";
         border-radius: 25px;
     }
-    .ait{               
-        margin-top: 10px;
-        margin-left: 10px;
+    .textoHorizontal{               
+        margin-top: 20px;
+        margin-left: -5px;
         position: absolute;
     }
     .bordinha{
@@ -309,17 +316,18 @@ window.onload = function imprimir_promissoria(){
             meses[mes-1] = 'Dezembro'
         }
             
-        //PARA CLIENTE COM AVALISTA 
+        //PARA CLIENTE CREDCOOP COM AVALISTA 
         if(fiador){
         promissoria.innerHTML +=
             `
             <div class="body">
                 <a class="test1">&nbsp</a>
-                <a class="test1">Fiador:</a>
-                <a class="test1"> CPF:${cpf_fiador}
-                <br> ${fiador} </a>
-                <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
-                <a class="ait"> 
+                <a class="testo2"> Fiador:</a> 
+                <a class="testo2">${fiador}</a> 
+                <a class="testo2"> CPF:${cpf_fiador}</a>
+                <a class="test1">________________________________ &nbsp&nbsp&nbsp</a>
+                <a class="test1">________________________________ &nbsp&nbsp&nbsp</a>
+                <a class="textoHorizontal"> 
                     <b class = "fontmaior" >&nbspNº</b>                 
                     <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
 
@@ -359,17 +367,18 @@ window.onload = function imprimir_promissoria(){
             </div>    
             `
         }
-        //PARA CLIENTE CNPJ
-        else if(fundacao){
+        //PARA CLIENTE CNPJ COM AVALISTA
+        else if("{{object.cliente_cnpj.fiador.fiador_nome}}"){
             promissoria.innerHTML +=
             `
             <div class="body">                
                 <a class="test1">&nbsp</a>
-                <a class="test1 maiusculo"><b>Fiador: ${"{{object.cliente_cnpj.fiador}}"}</b> &nbsp&nbsp&nbsp</a>
-                <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
-                <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
+                <a class="testo2">Fiador:</a>
+                <a class="testo2">${"{{object.cliente_cnpj.fiador}}"}&nbsp&nbsp&nbsp</a>
+                <a class="test1">________________________________ &nbsp&nbsp&nbsp</a>
+                <a class="test1">________________________________ &nbsp&nbsp&nbsp</a>
                 <a class="test1">&nbsp</a>
-                <a class="ait"> 
+                <a class="textoHorizontal"> 
                     <b class = "fontmaior" >&nbspNº</b>                 
                     <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
 
@@ -380,8 +389,65 @@ window.onload = function imprimir_promissoria(){
                     </b>           
                     <br><br> 
                     <p class="fontmenor a" align="Justify">                     
-                        &nbsp&nbsp&nbsp&nbsp Ao(s) <u>  ${dia} de ${mes} de ${ano} </u>&nbsp&nbsp pagarei por esta única via de NOTA PROMISSÓRIA
-                        a ESCTOP - EMPRESA SIMPLES DE CRÉDITO LTDA, CNPJ 35.297.061/0001-47 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
+                        &nbsp&nbsp&nbsp&nbsp Ao(s) <u>${dia} de ${mes} de ${ano} </u>&nbsp&nbsp pagarei 
+                        por esta única via de NOTA PROMISSÓRIA a ESCTOP - EMPRESA SIMPLES DE CRÉDITO LTDA, 
+                        CNPJ 35.297.061/0001-47 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
+                        em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.    
+                    </p>   
+
+                    <div class="fontmenor emitente" style="text-align:center">                     
+                        <u> <strong> ${razao_social} </strong> </u> <br>
+                    </div>
+                    <div class="fontmenor emitente" style="text-align:center">                     
+                        <u> <strong> ${razao_social} </strong> </u> <br>
+                    </div>
+                    
+                    <div class="fontmenor emitente1" style="text-align:center"> 
+                        EMITENTE 
+                    </div>   
+                    <div class="fontmenor emitente2" style="text-align:center">
+                        <strong>CNPJ:</strong> ${cnpj} 
+                    </div> 
+
+                    <div class="fontmenor emissao" style="text-align:center">      
+                        <u> <strong> &nbsp&nbsp${"{{object.dt_emprestimo}}"}&nbsp&nbsp </strong> </u>
+                    </div>               
+                    <div class="fontmenor emissao1" style="text-align:center">
+                        DATA DE EMISSÃO <br>
+                    </div> 
+
+                    <div class="fontmenor emissao2" style="text-align:center"> 
+                        ___________________________<br>
+                        ASSINATURA DO EMITENTE
+                    </div>   
+                </a> 
+            </div>    
+            `
+        }
+        else if("{{object.cliente_cnpj.fiador}}"){
+            promissoria.innerHTML +=
+            `
+            <div class="body">                
+                <a class="test1">&nbsp</a>
+                <a class="test1">&nbsp</a>                
+                <a class="test1">&nbsp</a>                
+                <a class="test1">________________________________ &nbsp&nbsp&nbsp</a>
+                <a class="test1">________________________________ &nbsp&nbsp&nbsp</a>
+                <a class="test1">&nbsp</a>
+                <a class="textoHorizontal"> 
+                    <b class = "fontmaior" >&nbspNº</b>                 
+                    <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
+
+                    <b class="fontmenor"> Vencimento: ${dia} de ${meses[mes-1]} de ${ano} </b> 
+
+                    <b>
+                        <b class="bordinha fontmaior1">R$&nbsp&nbsp${"{{object.valor_prestacao}}"}&nbsp</b> 
+                    </b>           
+                    <br><br> 
+                    <p class="fontmenor a" align="Justify">                     
+                        &nbsp&nbsp&nbsp&nbsp Ao(s) <u>${dia} de ${mes} de ${ano} </u>&nbsp&nbsp pagarei 
+                        por esta única via de NOTA PROMISSÓRIA a ESCTOP - EMPRESA SIMPLES DE CRÉDITO LTDA, 
+                        CNPJ 35.297.061/0001-47 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
                         em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.    
                     </p>   
 
@@ -419,11 +485,11 @@ window.onload = function imprimir_promissoria(){
             promissoria.innerHTML +=
                 `
                 <div class="body">
-                    <a class="test1">&nbsp</a>
-                    <a class="test1">&nbsp</a>
+                    <a class="test1">&nbsp</a>                    
                     <a class="test1"> &nbsp<br>&nbsp</a>
                     <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
-                    <a class="ait"> 
+                    <a class="test1">_____________________________ &nbsp&nbsp&nbsp</a>
+                    <a class="textoHorizontal"> 
                         <b class = "fontmaior" >&nbspNº</b>                 
                         <b class="bordinha fontmaior">&nbsp&nbsp${i+1}/${aux_qtd_parccela}&nbsp&nbsp</b>  
         
