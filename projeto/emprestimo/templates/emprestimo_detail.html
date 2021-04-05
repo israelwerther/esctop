@@ -44,10 +44,18 @@
                 <th class="text-right">Cliente</th>
                 <td>{{ object.cliente }}</td>
             </tr>
+            <tr>
+                <th class="text-right">CPF</th>
+                <td>{{ object.cliente.cpf }}</td>
+            </tr>
             {% else %}
             <tr>
                 <th class="text-right">Cliente</th>
                 <td>{{ object.cliente_cnpj }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">CNPJ</th>
+                <td>{{ object.cliente_cnpj.cnpj }}</td>
             </tr>
             {% endif %}
             <tr>
