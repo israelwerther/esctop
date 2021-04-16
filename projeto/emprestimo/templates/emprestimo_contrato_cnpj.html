@@ -539,8 +539,8 @@ window.onload = function imprimir(){
             <strong> CLÁUSULA 1ª. </strong> A integralidade do crédito é composta da seguinte forma: Valor mutuado R$ 
             ${"{{ object.valor_mutuado }}".replace(',', '.')}, Taxa de Juros a.m 
             ${"{{ object.juros_ao_mes }}".replace(',', '.')}%, taxa de juros moratório 
-            ${"{{ object.juros_moratorio }}".replace(',', '.')} ao dia, multa por atraso: 
-            ${"{{ object.multa_por_atraso }}".replace(',', '.')}, valor do IOF total: R$ 
+            0.66% ao dia, multa por atraso: 
+            2%, valor do IOF total: R$ 
             ${"{{ object.iof_real }}".replace(',', '.')}, Valor total devido: R$ 
             ${"{{ object.valor_devido }}".replace(',', '.')}.
         </div>
@@ -610,8 +610,8 @@ window.onload = function imprimir(){
             diariamente e devidos cumulativamente, os encargos financeiros a seguir: 
             I- atualização monetária pelo INPC-IBGE;
             II-  juros remuneratórios, à taxa contratada no período de normalidade contratual;
-            III- juros de mora de ${"{{ object.juros_moratorio }}".replace(',', '.')}  dia;
-            IV- multa de ${"{{ object.multa_por_atraso }}".replace(',', '.')} (dois por cento) sobre o valor da parcela não paga. 
+            III- juros de mora de 0.66% dia;
+            IV- multa de 2% (dois por cento) sobre o valor da parcela não paga. 
         </div>
         <div class="paragrafo" >
             <strong> Parágrafo único. </strong> Em caso de cobrança judicial e/ou extrajudicial serão devidas custas, emolumentos e 
