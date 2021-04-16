@@ -237,8 +237,9 @@
         `
         <p class="fontmenor" >
             <b>CLÁUSULA 3ª</b> - Na falta do pagamento do empréstimo na data aprazada, o <b>DEVEDOR</b> pagará uma multa no percentual de 
-            2% mais juros moratório sobre o débito no percentual de 0.66%, por dia, acrescido de correção monetária sobre o montante 
-            apurado, ficando o <b>CREDOR</b> com direito de tomar as medidas judiciais cabíveis, inclusive a penhora judicial e conseguinte 
+            ${"{{ object.multa_por_atraso }}".replace(',', '.')} mais juros moratório sobre o débito no percentual de 
+            ${"{{ object.juros_moratorio }}".replace(',', '.')} por dia, acrescido de correção monetária sobre o montante apurado, 
+            ficando o <b>CREDOR</b> com direito de tomar as medidas judiciais cabíveis, inclusive a penhora judicial e conseguinte 
             notificação e negativação nos órgãos de proteção creditícios SPC, SERASA, SCPC e afins, conforme art. 43 do estatuto 
             consumerista.
         </p>  
