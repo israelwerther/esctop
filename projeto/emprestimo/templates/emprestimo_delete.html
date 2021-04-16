@@ -9,7 +9,11 @@
         <form method="POST">
             {% csrf_token %}
             <input type="submit" class="btn btn-danger" value="Sim">
-            <a href="{% url 'emprestimo:emprestimo_list' %}" class="btn btn-primary">Não</a>
+            {% if object.cliente_cnpj %}
+                <a href="{% url 'emprestimo:emprestimo_cnpj_list' %}" class="btn btn-primary">Não</a>
+            {% else %} 
+                <a href="{% url 'emprestimo:emprestimo_list' %}" class="btn btn-primary">Não</a>
+            {% endif %}
         </form>
     </div>
 </div>

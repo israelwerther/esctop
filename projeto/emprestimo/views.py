@@ -61,7 +61,7 @@ class EmprestimoUpdate(UpdateView):
 class EmprestimoDelete(DeleteView):
     model=Emprestimo
     template_name ='emprestimo_delete.html'    
-    success_url = reverse_lazy('emprestimo:emprestimo_list')
+    success_url = reverse_lazy('emprestimo:emprestimo_list')  
 
 
 class EmprestimoImpress(UpdateView):

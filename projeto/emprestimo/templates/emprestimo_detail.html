@@ -7,7 +7,6 @@
 <span class="pull-right">
     <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-secondary">Voltar</a>
     {% comment %} <a href="{% url 'emprestimo:emprestimo_edit' object.pk %}" type="button" class="btn btn-info">Editar</a> {% endcomment %}
-    <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
    
     <div class="btn-group" role="group" >        
     {% if object.cliente %}    
@@ -86,7 +85,9 @@
             </tr>
             {% endif %}         
         </tbody>
-    </table>
+    </table>    
 </div>
-
+<span class="pull-left">
+    <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>    
+</span>
 {% endblock content %}
