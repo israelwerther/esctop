@@ -38,6 +38,7 @@
                 <th class="text-right">Nº Contrato</th>
                 <td>{{ object.n_contrato }}</td>
             </tr>
+
             {% if object.cliente %}
             <tr>
                 <th class="text-right">Cliente</th>
@@ -57,6 +58,7 @@
                 <td>{{ object.cliente_cnpj.cnpj }}</td>
             </tr>
             {% endif %}
+
             <tr>
                 <th class="text-right">Valor</th>
                 <td>{{ object.valor_emprestado }}</td>
@@ -77,13 +79,25 @@
             <tr>
                 <th class="text-right">E-mail</th>
                 <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
-            </tr>   
+            </tr>               
             {% else %}
             <tr>
                 <th class="text-right">E-mail</th>
                 <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
             </tr>
-            {% endif %}         
+            <tr>
+                <th class="text-right">Fiador</th>
+                <td class="text-left lower_all">{{ object.cliente_cnpj.fiador }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">CPF do Fiador</th>
+                <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">E-Mail do Fiador</th>
+                <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
+            </tr>
+            {% endif %}
         </tbody>
     </table>    
 </div>
