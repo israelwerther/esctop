@@ -9,7 +9,7 @@ class Avalista(models.Model):
     fiador_orgao_emissor       = models.CharField("Orgão Emissor",max_length=20, blank=True, null=True)
     fiador_data_nasc           = models.DateField("Data de Nascimento",max_length=8, blank=False, null=True) 
     fiador_estado_civil        = models.CharField("Estado Civil",max_length=20, blank=True, null=True)
-    fiador_naturalidade        = models.CharField("Naturalidade", max_length=20, blank=False, null=True) 
+    fiador_naturalidade        = models.CharField("Naturalidade", max_length=20, blank=True, null=True) 
     fiador_nacionalidade       = models.CharField("Nacionalidade",max_length=20, blank=True, null=True)
     fiador_email               = models.EmailField("Email", max_length=50, blank=True, null=True)
     fiador_contato1            = models.CharField("Contato 1",max_length=15, blank=True, null=True)
