@@ -22,7 +22,6 @@
         <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-warning"> Contrato </a>
     {% endif %}        
     </div>
-
 </span>
 
 <h1>Emprestimo Nº {{ object.n_contrato }}</h1>
@@ -80,6 +79,18 @@
                 <th class="text-right">E-mail</th>
                 <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
             </tr>               
+            <tr>
+                <th class="text-right">Fiador</th>
+                <td class="text-left" type="form-control">{{ object.cliente.fiador }}</td>
+            </tr>                
+            <tr>
+                <th class="text-right">CPF do Fiador</th>
+                <td class="text-left" type="form-control">{{ object.cliente.fiador.cpf }}</td>
+            </tr>                 
+            <tr>
+                <th class="text-right">E-Mail do Fiador</th>
+                <td class="text-left lower_all" type="form-control">{{ object.cliente.fiador.email }}</td>
+            </tr>               
             {% else %}
             <tr>
                 <th class="text-right">E-mail</th>
@@ -87,11 +98,11 @@
             </tr>
             <tr>
                 <th class="text-right">Fiador</th>
-                <td class="text-left lower_all">{{ object.cliente_cnpj.fiador }}</td>
+                <td class="text-left">{{ object.cliente_cnpj.fiador }}</td>
             </tr>
             <tr>
                 <th class="text-right">CPF do Fiador</th>
-                <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
+                <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
             </tr>
             <tr>
                 <th class="text-right">E-Mail do Fiador</th>
