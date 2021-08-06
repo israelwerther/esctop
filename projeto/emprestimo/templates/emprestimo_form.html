@@ -409,7 +409,7 @@
         valor_parcela = (valor_mutuado*(1+(qtd_parcelas*taxa_juros_a_m)/100))/qtd_parcelas
         valor_parcela = valor_parcela.toFixedDown(2)
         valor_parcela = valor_parcela.toFixed(2)
-        document.getElementById('prestacao').value = valor_parcela
+        document.getElementById('prestacao').value = parseFloat(valor_parcela)+parseFloat(10)
 
         // CALCULA MULTA POR ATRASO 
         var valor_multa = parseFloat((valor_parcela*multa_por_atraso)).toFixedDown(2).toFixed(2)
@@ -483,6 +483,30 @@
         document.getElementById('n_contrato').value = sequencia
        
     }
+
+    
+    // OCULTA OU EXIBE POSTERGAÇÃO DE VENCIMENTO
+    // function mudarEstado(el) {
+    //     var display = document.getElementById(el).style.display;
+    //     if (display == "none")
+    //         document.getElementById(el).style.display = 'block';
+    //     else
+    //         document.getElementById(el).style.display = 'none';
+    // }
+
+
+    // ACRESCENTA DIAS A DATA POSTERGADA
+    // function acrescentaDias(){
+    //     // CALCULA DATA POSTERGADA
+    //     var dt = new Date()
+    //     var ano       = document.getElementById("dataselecionada").value.split("-")[0];
+    //     ano = String(ano)       
+    //     ano = (ano.substr(2, 3))
+    //     var mes       = document.getElementById("dataselecionada").value.split("-")[1];
+    //     var dia       = document.getElementById("dataselecionada").value.split("-")[2];       
+    //     document.getElementById('dataselecionada').value = dataEmprestimo
+    //     console.log("dia")
+    // }
 </script>
   
     
