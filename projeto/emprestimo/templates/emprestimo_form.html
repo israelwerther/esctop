@@ -17,20 +17,26 @@
             border-left: 1px solid #000000;            
             border-right: 1px solid #000000;            
         }  
+        .sombra {
+            border: 1px solid;
+            padding: 1px;
+            box-shadow: 5px 10px #888888;
+            margin-bottom: 20px;
+        }
     </style>
-
-    {% if emprestimo %}
+    <div class="sombra p-4">
+        {% if emprestimo %}
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
-    {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP</h3>
-        <form action="{% url 'emprestimo:emprestimo_add' %}" method="POST" novalidate>
-    {% endif %}
-
-    {% csrf_token %}
-    
-        <div class="row">        
-            <div class="col-sm-6">
+            {% else %}  
+            <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP</h3>
+            <form action="{% url 'emprestimo:emprestimo_add' %}" method="POST" novalidate>
+                {% endif %}
+                
+                {% csrf_token %}
+                
+                <div class="row">        
+                    <div class="col-sm-6">
                 <div class="form-group">
                     <label for="">Cliente Credcoop</label>
                     {% render_field form.cliente type="text" class="form-control" %}
@@ -50,34 +56,34 @@
                     {% render_field form.qtd_parcelas class="form-control" id="qtd_parcelas" %}
                 </div>
             </div>
-
+            
             {% if object.pk %} 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">{{form.dt_emprestimo.label}}</label>   
-                        {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
-                    </div>                  
-                </div>
-            {% else %}    
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">{{form.dt_emprestimo.label}}</label>                          
-                        {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
-                    </div>                  
-                </div> 
-            {% endif %}  
-
-            <div class="col-sm-4" > 
-                <div class="form-group" id="res">
-                    <label for="">{{form.valor_prestacao.label}}</label>
-                    {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
-                </div>  
-            </div> 
-            <!-- INPUTS OCULTAS  -->
-            <div class="col-sm-3" style="display: none;"> 
+            <div class="col-sm-4">
                 <div class="form-group">
-                    <label for="">{{form.valor_multa.label}}</label>
-                    {% render_field form.valor_multa class="form-control" id="multa" %}
+                    <label for="">{{form.dt_emprestimo.label}}</label>   
+                    {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
+                </div>                  
+            </div>
+            {% else %}    
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="">{{form.dt_emprestimo.label}}</label>                          
+                    {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
+                </div>                  
+                </div> 
+                {% endif %}  
+                
+                <div class="col-sm-4" > 
+                    <div class="form-group" id="res">
+                        <label for="">{{form.valor_prestacao.label}}</label>
+                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
+                    </div>  
+                </div> 
+                <!-- INPUTS OCULTAS  -->
+                <div class="col-sm-3" style="display: none;"> 
+                    <div class="form-group">
+                        <label for="">{{form.valor_multa.label}}</label>
+                        {% render_field form.valor_multa class="form-control" id="multa" %}
                 </div>  
             </div> 
             <div class="col-sm-3" style="display: none;"> 
@@ -131,7 +137,7 @@
             </div>
             <!-- ELEMENTOS OCULTOS -->
         </div>  
-                 
+        
         <!-- <div id="minhaDiv" style="display:none;">
             <div class="form-row">
                 <div class="form-group col-sm-6">
@@ -146,24 +152,27 @@
         </div>  -->
         
         {% if emprestimo %}   
-            <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
-            <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>        
+        <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
+        <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>        
         {% else %}
-            <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
-            <button type="submit" class="btn btn-success pull-right m-1">Cadastrar</button>
-            <button type="button" onclick="somar(), sequencial()" class="btn btn btn-dark m-1">Calcular Parcela</button>
+        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
+        <button type="submit" class="btn btn-success pull-right m-1">Cadastrar</button>
+        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-dark m-1">Calcular Parcela</button>
             <button type="button" onclick="somar2(), sequencial()" class="btn btn btn-dark m-1">Calcular Parcela(com boleto)</button>
             <!-- <button type="button" class="btn btn btn-primary m-1" onclick="mudarEstado('minhaDiv')">Postergar Vencimento</button> -->
-        {% endif %}
-    </form>    
-    <br>  
+            {% endif %}
+        </form>    
+        <br>  
+        
+    </div>
 
     <div class="row">
         <div class="col-sm-12">
-            <h3>INFORMAÇÕES DO EMPRÉSTIMO</h3>
-        </div>
+        <h3>INFORMAÇÕES DO EMPRÉSTIMO</h3>
     </div>
-    <div class="row">
+
+    </div>
+    <div class="row" >
         <div class="col-sm-6">
             <table class="table table-striped">                
                 <tbody>
@@ -447,7 +456,7 @@
         document.getElementById('iof_real_info').innerHTML = numberToReal(iof_real)
 
         // LANÇA VALOR DEVIDO 
-        valor_devido = (valor_parcela*qtd_parcelas)
+        valor_devido = (valor_parcela*qtd_parcelas)+(10)
         valor_devido = valor_devido.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2) 
         document.getElementById('valor_devido').value = valor_devido
         document.getElementById('valor_devido_info').innerHTML = numberToReal(valor_devido)
