@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'datetimepicker',
     'bootstrap_modal_forms',
     'rest_framework',
+    'corsheaders',
     
     #Minhas apps
     'projeto.core',
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'projeto.cliente',
     'projeto.cliente_cnpj',
     'projeto.avalista',
+    'projeto.credcoop'
 ]
 
 MIDDLEWARE = [
@@ -70,14 +72,24 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:4200',
+)
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
 }
 
 ROOT_URLCONF = 'projeto.urls'

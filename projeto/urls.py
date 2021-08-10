@@ -26,4 +26,6 @@ urlpatterns = [
     path('avalista/', include('projeto.avalista.urls')),
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('credcoop/', include('projeto.credcoop.urls')),
+
 ]
