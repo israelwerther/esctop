@@ -34,8 +34,7 @@ class Cliente_cnpj(models.Model):
     n_operacao            = models.CharField("Nº operação",max_length=15, blank=True, null=True)
     tipo_de_conta         = models.ForeignKey(Tipo_de_conta, on_delete=models.PROTECT,max_length=25, blank=True, null=True)  
     agencia               = models.CharField("Nº agência",max_length=15, blank=True, null=True)
-    conta                 = models.CharField("Nº conta",max_length=15, blank=True, null=True)
-    
+    conta                 = models.CharField("Nº conta",max_length=15, blank=True, null=True)    
     # REFERÊNCIAS
     ref1_nome             = models.CharField("Nome", max_length=50, blank=True, null=True)
     ref1_contato          = models.CharField("Contato",max_length=17, blank=True, null=True)
@@ -43,7 +42,6 @@ class Cliente_cnpj(models.Model):
     ref2_nome             = models.CharField("Nome", max_length=50, blank=True, null=True)
     ref2_contato          = models.CharField("Contato",max_length=17, blank=True, null=True)
     ref2_parentesco       = models.CharField("Parentesco", max_length=50, blank=True, null=True)
-
     #REPRESENTANTE
     rep_nome              = models.CharField("Nome", max_length=50, blank=True, null=True)
     rep_cpf               = models.CharField("CPF", max_length=20, unique=True, blank=True, null=True) 
