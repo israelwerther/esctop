@@ -131,15 +131,15 @@
         </div>           
         
         {% if emprestimo %}   
-        <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
-        <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a> 
-        
+            <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
+            <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>
         {% else %}
-        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
-        <button type="submit" onclick="somar(), sequencial()" class="btn btn-success pull-right m-1">Cadastrar</button>
-        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
-    </form>    
-    {% endif %}
+            <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
+            <button type="submit" class="btn btn-success pull-right m-1">Cadastrar</button>
+            <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
+            <button type="button" onclick="somar2(), sequencial()" class="btn btn btn-dark m-1">Calcular Parcela(com boleto)</button>
+        </form>    
+        {% endif %}
     <br>  
     <div class="row">
         <div class="col-sm-12">
@@ -327,7 +327,109 @@
         document.getElementById('iof_real_info').innerHTML = numberToReal(iof_real)
 
         // LANÇA VALOR DEVIDO 
-        valor_devido = (valor_parcela*qtd_parcelas)
+        valor_devido = (valor_parcela*qtd_parcelas)+(10*qtd_parcelas)
+        valor_devido = valor_devido.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2) 
+        document.getElementById('valor_devido').value = valor_devido
+        document.getElementById('valor_devido_info').innerHTML = numberToReal(valor_devido)
+        
+    }
+
+    //A FUNÇÃO ABAIXO CALCULA AS PARCELAS E TAXAS DO EMPRÉSTIMO
+    function somar2(){
+        var tvalor_emprestado  = document.getElementById('valor_emprestado')
+        var tqtd_parcelas      = document.getElementById('qtd_parcelas')
+        var tprestacao         = document.getElementById('prestacao')
+        var mes                = document.getElementById("dataselecionada").value.split("-")[1];  
+        var valor_emprestado   = Number(tvalor_emprestado.value)
+        var qtd_parcelas       = Number(tqtd_parcelas.value)
+        var prestacao          = Number(tprestacao.value)
+        var mes_num            = Number(mes)        
+        var principal          = valor_emprestado/qtd_parcelas  
+        var iof_inicial        = 0
+        var iof_diario         = 0.0041        
+        var qtd_dias           = 0
+        var iof_adicional      = 0.0038   
+        var multa_por_atraso   = parseFloat(0.020)
+        var valor_devido       = parseFloat(0)
+
+        var primeiro           = document.getElementById('dataselecionada')
+        
+        if(primeiro == 1){
+            primeiro = true
+        }        
+
+        //CALCULA O IOF_INICIAL (1º PASSO)
+        for (var i = 0 ; i < qtd_parcelas; i++){
+            if(mes_num == 1 || mes_num == 3 || mes_num == 5 || mes_num == 7 || mes_num == 8 || mes_num == 10 || mes_num == 12){
+                qtd_dias += 31
+            }else{
+                qtd_dias +=30
+            }
+            mes_num+=1
+            if(mes_num == 13){
+                mes_num = 1
+            }        
+            iof_inicial += ((principal*(qtd_dias*0.0041))/100)         
+            iof_inicial += principal*iof_adicional
+            iof_inicial = Number(toFixed(iof_inicial, 2))        
+        }    
+
+        //CALCULA O IOF_REAL (2º PASSO)   
+        var iof_real = 0
+        iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
+
+        //CALCULA O VALOR DA PARCELA(3º PASSO)
+        var valor_emprestado      = Number(tvalor_emprestado.value)                
+        var qtd_parcelas          = Number(tqtd_parcelas.value)
+        var prestacao             = Number(tprestacao.value)    
+        var valor_mutuado         = iof_real+valor_emprestado   
+        var valor_parcela         = 0
+        var taxa_juros_a_m        = 9.5
+        var juros_moratorio       = parseFloat(0.0066)
+        
+
+        valor_parcela = (valor_mutuado*(1+(qtd_parcelas*taxa_juros_a_m)/100))/qtd_parcelas
+        valor_parcela = valor_parcela.toFixedDown(2)
+        valor_parcela = valor_parcela.toFixed(2)
+        document.getElementById('prestacao').value = parseFloat(valor_parcela)+parseFloat(10)
+
+        // CALCULA MULTA POR ATRASO 
+        var valor_multa = parseFloat((valor_parcela*multa_por_atraso)).toFixedDown(2).toFixed(2)
+        document.getElementById('multa').value = valor_multa       
+        document.getElementById('multa_info').innerHTML = valor_multa.toString().replace(".", ",")
+        
+
+        // CALCULA JUROS AO DIA
+        var juros_ao_dia = (valor_parcela*juros_moratorio).toFixedDown(2).toFixed(2)       	
+        document.getElementById('juros_ao_dia').value = juros_ao_dia
+        document.getElementById('juros_ao_dia_info').innerHTML = juros_ao_dia.toString().replace(".", ",")
+
+        // LANÇA O VALOR MUTUADO
+        valor_mutuado = valor_mutuado.toFixedDown(2)
+        document.getElementById('valor_mutuado').value = valor_mutuado
+        document.getElementById('valor_mutuado_info').innerHTML = numberToReal(valor_mutuado)
+
+        // ******LEMBRAR DE OBSERVAR SE AS TAXAS SE ALTERAM AO INCLUIR .toFixedDown(2) OU RETIRAR*****
+
+        // LANÇA TAXA DE JUROS AO MÊS                
+        document.getElementById('juros_ao_mes').value = taxa_juros_a_m
+        document.getElementById('juros_ao_mes_info').innerHTML = numberToReal(taxa_juros_a_m)
+
+        // LANÇA TAXA DE JUROS MORATÓRIO          
+        document.getElementById('juros_moratorio').value = juros_moratorio
+        document.getElementById('juros_moratorio_info').innerHTML = numberToReal_4(juros_moratorio)
+
+        // LANÇA TAXA DE JUROS POR ATRASO        
+        document.getElementById('multa_por_atraso').value = multa_por_atraso
+        document.getElementById('multa_por_atraso_info').innerHTML = numberToReal_3(multa_por_atraso)
+
+        // LANÇA TAXA DE IOF TOTAL 
+        iof_real = iof_real.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2)        
+        document.getElementById('iof_real').value = iof_real
+        document.getElementById('iof_real_info').innerHTML = numberToReal(iof_real)
+
+        // LANÇA VALOR DEVIDO 
+        valor_devido = (valor_parcela*qtd_parcelas)+(10*qtd_parcelas)
         valor_devido = valor_devido.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2) 
         document.getElementById('valor_devido').value = valor_devido
         document.getElementById('valor_devido_info').innerHTML = numberToReal(valor_devido)
