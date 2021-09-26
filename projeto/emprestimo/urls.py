@@ -7,12 +7,13 @@ app_name='emprestimo'
 
 urlpatterns = [
     path('', v.emprestimo_list, name='emprestimo_list'),
+    
     path('add/', login_required(v.EmprestimoCreate.as_view()), name='emprestimo_add'),
-    # path('credcoop_teste_add/', login_required(v.EmprestimoCredcoopCreateTeste.as_view()), name='emprestimo_credcoop_teste_add'),
+    path('create_credcoop/', login_required(v.EmprestimoCreateCredcoop.as_view()), name='create_credcoop'),
 
     path('cnpj_add/', login_required(v.EmprestimoCNPJCreate.as_view()), name='emprestimo_cnpj_add'),
-    path('esctop_create/', login_required(v.EmprestimoEsctopCreate.as_view()), name='esctop_create'),
-    
+    path('create_esctop/', login_required(v.EmprestimoCreateEsctop.as_view()), name='create_esctop'),
+
     path('cnpj_list', v.emprestimo_cnpj_list, name='emprestimo_cnpj_list'),
     path('<int:pk>/delete/', login_required(v.EmprestimoDelete.as_view()), name='emprestimo_delete'),
     path('<int:pk>/impress/', login_required(v.EmprestimoImpress.as_view()), name='emprestimo_impress'),

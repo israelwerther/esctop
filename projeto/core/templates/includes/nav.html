@@ -88,11 +88,12 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="{% url 'emprestimo:emprestimo_add'%}">CREDCOOP</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop'%}">CREDCOOP (Nova Alíquota)</a>
 						
 						<div class="dropdown-divider"></div>
 						
 						<a class="dropdown-item" href="{% url 'emprestimo:emprestimo_cnpj_add' %}">ESCTOP</a>
-						<a class="dropdown-item" href="{% url 'emprestimo:esctop_create'%}">ESCTOP (Nova Alíquota)</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop'%}">ESCTOP (Nova Alíquota)</a>
 						{% comment %} <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_credcoop_teste_add'%}">ESCTOP (Nova Alíquota Teste)</a> {% endcomment %}
 					</div>
 				</li>

@@ -36,15 +36,15 @@ class EmprestimoCreate(CreateView):
         return super(EmprestimoCreate, self).form_valid(form_class)
 
 
-class EmprestimoCredcoopCreate(CreateView):
+class EmprestimoCreateCredcoop(CreateView):
     model=Emprestimo
-    template_name='emprestimo_credcoop_form.html'
+    template_name='emprestimo_form_credcoop.html'
     form_class=EmprestimoForm
     
     def form_valid(self, form_class):
         obj = form_class.save(commit=False)
         obj.funcionario = self.request.user
-        return super(EmprestimoCredcoopCreate, self).form_valid(form_class)      
+        return super(EmprestimoCreateCredcoop, self).form_valid(form_class)
 
 
 class EmprestimoCNPJCreate(CreateView):
@@ -58,9 +58,9 @@ class EmprestimoCNPJCreate(CreateView):
         return super(EmprestimoCNPJCreate, self).form_valid(form_class)        
     
 
-class EmprestimoEsctopCreate(CreateView):
+class EmprestimoCreateEsctop(CreateView):
     model=Emprestimo
-    template_name='emprestimo_esctop_form.html'
+    template_name='emprestimo_form_esctop.html'
     form_class=EmprestimoForm
     
     def form_valid(self, form_class):
