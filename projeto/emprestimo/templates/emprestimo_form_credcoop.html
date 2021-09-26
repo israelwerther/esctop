@@ -23,7 +23,7 @@
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
     {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(NOVA ALÍQUOTA)</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP(NOVA ALÍQUOTA)</h3>
         <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
     {% endif %}
 
@@ -32,7 +32,7 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="">Cliente Esctop</label>
+                <label for="">Cliente Credcoop</label>
                 {% render_field form.cliente type="text" class="form-control" %}
             </div>
         </div>
