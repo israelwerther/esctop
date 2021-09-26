@@ -23,7 +23,7 @@
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
     {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(NOVA ALÍQUOTA)</h3>
         <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
     {% endif %}
 
@@ -244,7 +244,7 @@
         var mes_num            = Number(mes)
         var principal          = valor_emprestado/qtd_parcelas
         var iof_inicial        = 0
-        var iof_diario         = 0.0041
+        var iof_diario         = 0.00137
         var qtd_dias           = 0
         var iof_adicional      = 0.0038
         var multa_por_atraso   = parseFloat(0.020)
@@ -267,7 +267,7 @@
             if(mes_num == 13){
                 mes_num = 1
             }        
-            iof_inicial += ((principal*(qtd_dias*0.0041))/100)         
+            iof_inicial += ((principal*(qtd_dias*0.00137))/100)
             iof_inicial += principal*iof_adicional
             iof_inicial = Number(toFixed(iof_inicial, 2))
         }
@@ -289,7 +289,7 @@
         valor_parcela = (valor_mutuado*(1+(qtd_parcelas*taxa_juros_a_m)/100))/qtd_parcelas
         valor_parcela = valor_parcela.toFixedDown(2)
         valor_parcela = valor_parcela.toFixed(2)
-        document.getElementById('prestacao').value = valor_parcela
+        document.getElementById('prestacao').value = Math.round(valor_parcela,5)
 
         // CALCULA MULTA POR ATRASO 
         var valor_multa = parseFloat((valor_parcela*multa_por_atraso)).toFixedDown(2).toFixed(2)
@@ -346,7 +346,7 @@
         var mes_num            = Number(mes)        
         var principal          = valor_emprestado/qtd_parcelas
         var iof_inicial        = 0
-        var iof_diario         = 0.0041        
+        var iof_diario         = 0.00137       
         var qtd_dias           = 0
         var iof_adicional      = 0.0038   
         var multa_por_atraso   = parseFloat(0.020)
@@ -369,7 +369,7 @@
             if(mes_num == 13){
                 mes_num = 1
             }        
-            iof_inicial += ((principal*(qtd_dias*0.0041))/100)
+            iof_inicial += ((principal*(qtd_dias*0.00137))/100)
             iof_inicial += principal*iof_adicional
             iof_inicial = Number(toFixed(iof_inicial, 2))
         }    
