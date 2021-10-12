@@ -66,7 +66,7 @@ class EmprestimoCreateEsctop(CreateView):
     def form_valid(self, form_class):
         obj = form_class.save(commit=False)
         obj.funcionario = self.request.user
-        return super(EmprestimoEsctopCreate, self).form_valid(form_class)
+        return super(EmprestimoCreateEsctop, self).form_valid(form_class)
 
     
 class EmprestimoUpdate(UpdateView):
