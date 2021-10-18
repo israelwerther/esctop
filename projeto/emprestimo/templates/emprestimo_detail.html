@@ -9,7 +9,7 @@
     {% comment %} <a href="{% url 'emprestimo:emprestimo_edit' object.pk %}" type="button" class="btn btn-info">Editar</a> {% endcomment %}
    
     <div class="btn-group" role="group" >        
-    {% if object.cliente %}    
+    {% if object.cliente %}
         <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
         <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>    
     {% endif %}
@@ -90,7 +90,27 @@
             <tr>
                 <th class="text-right">E-Mail do Fiador</th>
                 <td class="text-left lower_all" type="form-control">{{ object.cliente.fiador.email }}</td>
-            </tr>               
+            </tr>      
+            <tr>
+                <th class="text-right">Banco</th>
+                <td class="text-left">{{ object.cliente.banco }}</td>
+            </tr>
+            <tr>            
+                <th class="text-right">Nº DA OPERAÇÃO</th>
+                <td class="text-left">{{ object.cliente.n_operacao }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Tipo de Conta</th>
+                <td class="text-left">{{ object.cliente.tipo_de_conta }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Agência</th>
+                <td class="text-left">{{ object.cliente.agencia }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Conta</th>
+                <td class="text-left">{{ object.cliente.conta }}</td>
+            </tr>         
             {% else %}
             <tr>
                 <th class="text-right">E-mail</th>
@@ -108,7 +128,27 @@
                 <th class="text-right">E-Mail do Fiador</th>
                 <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
             </tr>
-            {% endif %}
+            <tr>
+                <th class="text-right">Banco</th>
+                <td class="text-left">{{ object.cliente_cnpj.banco }}</td>
+            </tr>
+            <tr>            
+                <th class="text-right">Nº DA OPERAÇÃO</th>
+                <td class="text-left">{{ object.cliente_cnpj.n_operacao }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Tipo de Conta</th>
+                <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Agência</th>
+                <td class="text-left">{{ object.cliente_cnpj.agencia }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">Conta</th>
+                <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
+            </tr>
+            {% endif %}            
         </tbody>
     </table>    
 </div>
