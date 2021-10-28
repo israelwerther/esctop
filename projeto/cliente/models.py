@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from projeto.core.models import Banco, Tipo_de_conta
 
 
-class Cliente(models.Model):   
+class Cliente(models.Model):
     #dados pessoais 
     nome                  = models.CharField("Nome", max_length=50, blank=False, null=True)
     cpf                   = models.CharField("CPF", max_length=20, unique=True)
