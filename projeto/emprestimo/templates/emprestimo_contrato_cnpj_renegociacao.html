@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html charset="UTF-8">
-<head>    
+<head>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="robots" content="noindex">
@@ -146,7 +146,7 @@ function toFixed(num, fixed) {
     return num.toString().match(re)[0];
 }
 
-window.onload = function imprimir(){     
+window.onload = function imprimir(){
         var valor_emprestado   = Number({{object.valor_emprestado}})
         var qtd_parcelas       = Number({{object.qtd_parcelas}})
         var prestacao          = Number({{object.valor_prestacao}})
@@ -227,7 +227,7 @@ window.onload = function imprimir(){
     var trinta_e_um = 0
     
     dia  = aux_dia
-    mes  = aux_mes+contador_meses
+    mes  = aux_mes+contador_meses-1
     ano  = aux_ano
 
     //VARIÁVEIS DO EMPRESTIMO
@@ -758,55 +758,3 @@ function toFixed(num, fixed) {
 </script>
 </body>
 </html>
-
-{% comment %} function somar(){
-    var tvalor_emprestado = document.getElementById('valor_emprestado')
-    var tqtd_parcelas     = document.getElementById('qtd_parcelas')
-    var tprestacao        = document.getElementById('prestacao')     
-
-    var valor_emprestado   = Number(tvalor_emprestado.value)                
-    var qtd_parcelas       = Number(tqtd_parcelas.value)
-    var prestacao          = Number(tprestacao.value)
-    
-    var principal          = valor_emprestado/qtd_parcelas         
-
-    var mes_do_emprestimo  = Number({{object.dt_emprestimo.month}})
-
-    var iof_inicial       = 0
-    var iof_diario        = 0.0041        
-    var qtd_dias          = 0
-    var iof_adicional     = 0.0038   
-
-//CALCULA O IOF_INICIAL (1º PASSO)
-for (var i = 0 ; i < qtd_parcelas; i++){
-    if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
-        qtd_dias += 31
-    }else{
-        qtd_dias +=30
-    }
-    var aux = 0 
-    iof_inicial += ((principal*(qtd_dias*0.0041))/100)        
-    iof_inicial = Number(toFixed(iof_inicial, 4)) 
-    iof_inicial += principal*iof_adicional    
-    iof_inicial = Number(toFixed(iof_inicial, 2))
-    mes_do_emprestimo++
-}    
-
-//CALCULA O IOF_REAL (2º PASSO)   
-    var iof_real = 0
-
-    iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
-    iof_real = Number(toFixed(iof_real, 3))    
-
-//CALCULA O VALOR DA PARCELA(3º PASSO)
-    var valor_emprestado   = Number(tvalor_emprestado.value)                
-    var qtd_parcelas       = Number(tqtd_parcelas.value)
-    var prestacao          = Number(tprestacao.value)
-    var cap_iof = iof_real+valor_emprestado
-    var valor_parcela = 0
-    valor_parcela = (cap_iof*(1+(qtd_parcelas*9.5)/100))/qtd_parcelas
-    valor_parcela = String(toFixed(valor_parcela, 2))  
-
-document.getElementById('prestacao').value = valor_parcela
-
-}  {% endcomment %}

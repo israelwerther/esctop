@@ -115,6 +115,11 @@ class EmprestimoContratoCNPJ(UpdateView):
     template_name='emprestimo_contrato_cnpj.html'
     form_class=EmprestimoForm
 
+class EmprestimoContratoCNPJRenegociacao(UpdateView):
+    model=Emprestimo
+    template_name='emprestimo_contrato_cnpj_renegociacao.html'
+    form_class=EmprestimoForm
+
 class EmprestimoContratoCPF(UpdateView):
     model=Emprestimo
     template_name='emprestimo_contrato_cpf.html'
