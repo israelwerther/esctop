@@ -14,7 +14,8 @@
         <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>    
     {% endif %}
         <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-warning">Promissória</a>
-        {% if object.cliente_cnpj %}  
+        <a href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-success">Promissória Renegociação</a>
+    {% if object.cliente_cnpj %}  
         <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-warning"> Contrato </a>
         <a href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-success"> Contrato Renegociação </a>
     {% endif %}
