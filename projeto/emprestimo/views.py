@@ -129,6 +129,11 @@ class EmprestimoContratoCPF(UpdateView):
     model=Emprestimo
     template_name='emprestimo_contrato_cpf.html'
     form_class=EmprestimoForm
+    
+class EmprestimoContratoCPFRenegociacao(UpdateView):
+    model=Emprestimo
+    template_name='emprestimo_contrato_cpf_renegociacao.html'
+    form_class=EmprestimoForm
 
 
 @login_required

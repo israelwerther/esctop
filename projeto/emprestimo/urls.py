@@ -24,6 +24,7 @@ urlpatterns = [
     path('<int:pk>/contrato_cnpj/', login_required(v.EmprestimoContratoCNPJ.as_view()), name='emprestimo_contrato_cnpj'),
     path('<int:pk>/contrato_cnpj_renegociacao/', login_required(v.EmprestimoContratoCNPJRenegociacao.as_view()), name='emprestimo_contrato_cnpj_renegociacao'),
     path('<int:pk>/contrato_cpf/', login_required(v.EmprestimoContratoCPF.as_view()), name='emprestimo_contrato_cpf'),
+    path('<int:pk>/contrato_cpf_renegociacao/', login_required(v.EmprestimoContratoCPFRenegociacao.as_view()), name='emprestimo_contrato_cpf_renegociacao'),
     path('<int:pk>/', v.emprestimo_detail, name='emprestimo_detail'),
     path('<int:pk>/edit/', login_required(v.EmprestimoUpdate.as_view()), name='emprestimo_edit'),  
     path('<int:pk>/pagamento_add/', v.emprestimo_pagamento_add, name='emprestimo_pagamento_add'),

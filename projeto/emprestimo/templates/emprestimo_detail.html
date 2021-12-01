@@ -22,6 +22,7 @@
 
     {% if object.cliente %}
         <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-warning"> Contrato </a>
+        <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-success"> Contrato </a>
     {% endif %}        
     </div>
 </span>
