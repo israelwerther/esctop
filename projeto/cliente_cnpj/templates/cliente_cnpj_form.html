@@ -346,6 +346,18 @@
                 <label for="" >{{form.rep_orgao_emissor.label}} </label>        
                 {% render_field form.rep_orgao_emissor  class="form-control form-control-sm upper_all" %}
             </div>    
+        </div>
+        <div class="col-sm-6">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_pai.label}} </label>        
+                {% render_field form.rep_pai class="form-control form-control-sm" %}
+            </div>                    
+        </div> 
+        <div class="col-sm-6">                    
+            <div class="form-group" >                
+                <label for="" >{{form.rep_mae.label}} </label>        
+                {% render_field form.rep_mae class="form-control form-control-sm" %}
+            </div>                    
         </div>  
         {% if cliente_cnpj %}
         <div class="col-sm-3">                    
