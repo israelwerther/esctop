@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block sidebar %}
+	{% include "includes/sidebar.html" with rota="emprestimo" menu="cadastrar-emprestimo" %}
+{% endblock sidebar %}
+
+{% block content %}
+
+<style>
+	label{
+		text-transform: uppercase;
+		font-weight: bold;
+	}
+</style>
+
+
+<div class="card mt-3">
+	<div class="card-body border m-3">
+		<div class="row">
+			<div class="col-sm-12 col-lg-6 mb-3 mt-3">
+				<div class="row">
+					<div class="col-sm-12 col-lg-6 mt-3">
+						<label class="form-label"> {{form.valor_emprestado.label}} </label>
+						<div class="form-outline">
+							<input name="{{form.valor_emprestado.name}}" type="text" id="id_valor_emprestado" value="0" @keyup="valor_emprestado = $event.target.value" class="form-control form-control-lg money" autofocus>
+						</div>
+					</div>
+					<div class="col-sm-12 col-lg-6 mt-3">
+						<label class="form-label"> {{form.qtd_de_parcelas.label}} </label>
+						<div class="form-outline">
+							<input name="{{form.qtd_de_parcelas.name}}" type="number"  id="id_qtd_de_parcelas" max="13" class="form-control form-control-lg text-right" v-model="qtd_de_parcelas">
+						</div>
+					</div>
+
+					<div class="col-sm-12 col-lg-6 mt-3">
+						<label class="form-label">{{form.data_do_emprestimo.label}}</label>
+						<div class="form-outline">
+							<input name="{{form.data_do_emprestimo.name}}" type="date" id="id_data_do_emprestimo" class="form-control form-control-lg" @change="calcula()" v-model="data_do_emprestimo">
+						</div>
+					</div>
+				</div>
+				<div class="row mt-5 mb-3">
+					<div class="col-12">
+						<button type="button" class="btn btn-dark" @click="calcula(true)">realizar</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-12 col-lg-6 mb-3 mt-3">
+				<div class="row">
+					<div class="col-sm-12 col-lg-12">
+						<div class="card text-white bg-success" style="height: 190px;">
+							<div class="card-body">
+								<div class="media d-flex">
+									<div class="media-body text-left ml-4 mt-3">
+										<h4 class="font-weight-bold text-uppercase">parcela</h4>
+										<h3 class="font-weight-bold text-uppercase">r$ ${(valor_mutuado / qtd_de_parcelas).toFixed(2)}</h3>
+									</div>
+									<div class="align-self-center mr-4 mt-4">
+										<i class="fas fa-calculator fa-5x"></i>
+									</div>
+								</div>
+
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-12 col-lg-12 mt-2">
+						<div class="card text-white bg-success" style="height: 190px;">
+							<div class="card-body">          
+								<div class="media d-flex">
+									<div class="media-body text-left ml-4 mt-3">
+										<h4 class="font-weight-bold text-uppercase">Total</h4>
+										<h3 class="font-weight-bold text-uppercase">r$ ${valor_mutuado.toFixed(2)}</h3>
+									</div>
+									<div class="align-self-center mr-4 mt-4">
+										<i class="fas fa-calculator fa-5x"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="card mt-3 mb-3">
+	<div class="card-body border m-3">
+		<div class="row">
+			<div v-for="parcela in parcelas" class="col-3 border border-primary d-flex">
+				<div class="card mt-2">              
+					<h3 class="">DATA: ${parcela.data_pagamento.format('DD/MM/YYYY')}</h3>
+					<h3 class="">VALOR: ${(valor_mutuado / qtd_de_parcelas).toFixed(2)}</h3>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% endblock content %}
+
+{% block js %}
+
+<script src="{% static 'js/vue.min.js' %}"></script>
+<script src="{% static 'js/moment.js' %}"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+
+<!-- COMENTADA PARA VER SE PODE TIRAR DO PROJETO DEPOIS -->
+<!-- <script src="{% static 'js/jquery.mask.js' %}"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.7-beta.29/jquery.inputmask.min.js" integrity="sha512-Ax4+qW2rAVWrk3SU1ef/L8O0jF6vKSfaMIR3du6efzf5v/pibzDcLFx29YCeR7WphoPO4zranQFsFUf+9Rb+dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+	var app = new Vue({
+		delimiters: ['${', '}'],
+		el: '#app',
+		data: {
+			data_do_emprestimo: moment().format("YYYY-MM-DD"),
+			valor_emprestado: '',
+			numero_do_contrato: `${Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000}`,
+			qtd_de_parcelas: 2,
+			valor_da_parcela: 0,
+
+			//Empréstimo
+			valor_mutuado: 0,
+			iof_real: 0,
+			
+			// Taxas
+			taxas: {
+				porcent_diaria_iof: 0.5,
+				porcent_adicional_iof: 0.6,
+			},
+			parcelas: [],
+			passou_por_fevereiro: false,
+		},
+		
+		mounted: function () {
+			
+			$('.money').inputmask('currency', {
+				autoUnmask: true,
+				groupSeparator: '.',
+				allowMinus: false,
+				prefix: 'R$: ',
+				digits: 2,
+				digitsOptional: true,
+				rightAlign: true,
+				unmaskAsNumber: true,
+				removeMaskOnSubmit: true
+			}),
+			$('.money2').inputmask('currency', {
+				autoUnmask: true,
+				groupSeparator: '.',
+				allowMinus: false,
+				prefix: 'R$: ',
+				digits: 2,
+				digitsOptional: false,
+				rightAlign: true,
+				unmaskAsNumber: true,
+			})
+		},
+		methods: {
+			gerarParcelas(data_parcela) {
+
+				if(this.passou_por_fevereiro) {
+					data_parcela = data_parcela.date(1).add('month', 1)
+				}
+				if(data_parcela.daysInMonth() == 28 && moment(this.data_do_emprestimo).date() > 28) {
+					data_parcela = data_parcela.date(1).add('month', 1)
+					this.passou_por_fevereiro = true
+				}
+				this.parcelas.push({						
+					data_pagamento: data_parcela,
+					valor_parcela: 0
+				})
+			},
+
+			calcula(save = false) {
+				this.reset()
+				let qnt_dias_no_mes_count = 0, iof_diario = 0
+				let valor_da_parcela_pura = this.valor_emprestado / this.qtd_de_parcelas
+
+				for(let i = 0; i < this.qtd_de_parcelas; i++) {
+					let data_parcela = moment(this.data_do_emprestimo).add('month', i+1)
+					qnt_dias_no_mes_count += data_parcela.daysInMonth()			
+
+					iof_diario += ((valor_da_parcela_pura / 100) * (qnt_dias_no_mes_count * this.taxas.porcent_diaria_iof)) + (valor_da_parcela_pura * this.taxas.porcent_adicional_iof)
+					
+					this.gerarParcelas(data_parcela)
+                    console.log("🚀  data_parcela", data_parcela)
+					
+					// 2º Passo, executa o cálculo da parcela quando for o ultimo laço
+					if(i == this.qtd_de_parcelas - 1) {
+						this.iof_real = (this.valor_emprestado * iof_diario) / (this.valor_emprestado - iof_diario)
+						this.valor_mutuado = (((this.valor_emprestado + this.iof_real) * (1 + ((this.qtd_de_parcelas * 9.5) / 100))) / this.qtd_de_parcelas) * this.qtd_de_parcelas
+						// Caso você clique no botão "Realizar" o emprestimo será salvo vai API 
+						if(save)
+							this.salvarEmprestimo()
+					}	
+							
+				}
+			},
+			reset() {
+				this.parcelas = []
+				this.iof_real = 0
+				this.valor_mutuado = 0
+				this.passou_por_fevereiro = false
+			},
+			salvarEmprestimo() {
+				// Dados do emprestimo
+				const EMPRESTIMO = {
+					valor_emprestado: this.valor_emprestado,
+					qtd_de_parcelas: this.qtd_de_parcelas,
+					data_do_emprestimo: this.data_do_emprestimo,
+					parcelas: this.parcelas,
+					iof_real: this.iof_real,
+					valor_mutuado: this.valor_mutuado,
+					numero_do_contrato: this.numero_do_contrato,
+				}               
+				
+			}
+		},
+		watch: {
+			qtd_de_parcelas: function (val) {
+				if(val > 0 && val != '') {
+					this.calcula()
+				}
+				if(val > 12){
+					this.qtd_de_parcelas = 12
+					alert("não não não")
+					return
+				}
+			},
+			valor_emprestado: function (val) {
+				if(val > 0 && val != '') {
+					this.calcula()
+				}
+			},
+		},
+	})
+</script>
+{% endblock js %}
+

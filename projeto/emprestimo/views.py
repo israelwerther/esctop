@@ -1,11 +1,12 @@
 from django.shortcuts import render, resolve_url, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Emprestimo, EmprestimoPagamento, Cliente
 from .forms import EmprestimoForm, EmprestimoPagamentoForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
 
 @login_required
@@ -171,3 +172,11 @@ def emprestimo_pagamento_list(request, pk):
     emprestimos = emprestimo.emprestimopagamento_set.all()
     context = {'emprestimo': emprestimo, 'form': form, 'emprestimos': emprestimos } 
     return render(request, 'emprestimo_pagamento_list.html', context)
+
+
+class EmprestimoCreateView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):    
+    template_name = 'form_emprestimo.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser 
+

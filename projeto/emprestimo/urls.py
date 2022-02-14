@@ -30,4 +30,5 @@ urlpatterns = [
     path('<int:pk>/pagamento_add/', v.emprestimo_pagamento_add, name='emprestimo_pagamento_add'),
     path('<int:pk>/pagamento/', v.emprestimo_pagamento, name='emprestimo_pagamento'),
     path('<int:pk>/pagamento_list/', v.emprestimo_pagamento_list, name='emprestimo_pagamento_list'),
+    path('simular/', v.EmprestimoCreateView.as_view(), name='form_emprestimo'),
 ]

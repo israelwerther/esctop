@@ -9,11 +9,11 @@
 
   <!-- Exibe data e hora -->
   <script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-  <script type="text/javascript">
+  {% comment %} <script type="text/javascript">
     jQuery(window).load(function ($) {
       atualizaRelogio();
     });
-  </script>
+  </script> {% endcomment %}
   <!-- Exibe data e hora -->
 
 
@@ -255,7 +255,7 @@
   
   {% include "includes/nav.html" %}
   
-  <div class="container">
+  <div id="app" class="container">
     {% block content %}{% endblock content %}
   </div>
   
@@ -355,7 +355,7 @@
   </script>
 
 <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
-  <script>
+  {% comment %} <script>
     function atualizaRelogio() {
       var momentoAtual = new Date();
       
@@ -381,7 +381,7 @@
       
       setTimeout("atualizaRelogio()", 1000);
     }
-  </script>
+  </script> {% endcomment %}
   <!-- EXIBE A DATA E HORA NA TELA DE IMPRESSÃO DE DETALHES DO CLIENTE -->
 
   <!-- MODIFIQUEI ESSE SCRIPT PARA PODER PREENCHER OS DADOS DE ENDEREÇO DO REPRESENTANTE SEM 
