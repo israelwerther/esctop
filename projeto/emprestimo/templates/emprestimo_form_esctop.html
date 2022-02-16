@@ -429,7 +429,7 @@
         document.getElementById('iof_real_info').innerHTML = numberToReal(iof_real)
 
         // LANÇA VALOR DEVIDO 
-        valor_devido = (valor_parcela*qtd_parcelas)+(10*qtd_parcelas)
+        valor_devido = (valor_parcela*qtd_parcelas)
         valor_devido = valor_devido.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2) 
         document.getElementById('valor_devido').value = valor_devido
         document.getElementById('valor_devido_info').innerHTML = numberToReal(valor_devido)

@@ -178,5 +178,5 @@ class EmprestimoCreateView(LoginRequiredMixin, UserPassesTestMixin, TemplateView
     template_name = 'form_emprestimo.html'
 
     def test_func(self):
-        return self.request.user.is_superuser 
+        return self.request.user.is_superuser
 
