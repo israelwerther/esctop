@@ -185,17 +185,19 @@
 
 				for(let i = 0; i < this.qtd_de_parcelas; i++) {
 					let data_parcela = moment(this.data_do_emprestimo).add('month', i+1)
-					qnt_dias_no_mes_count += data_parcela.daysInMonth()
+					let dias_no_mes = moment(this.data_do_emprestimo).add('month', i)
+					qnt_dias_no_mes_count += dias_no_mes.daysInMonth()					
 
-					iof_diario += ((valor_da_parcela_pura / 100) * (qnt_dias_no_mes_count * this.taxas.porcent_diaria_iof)) + (valor_da_parcela_pura * this.taxas.porcent_adicional_iof)                    
+					iof_diario += ((valor_da_parcela_pura) * (qnt_dias_no_mes_count * this.taxas.porcent_diaria_iof))/100 + (valor_da_parcela_pura * this.taxas.porcent_adicional_iof)
 					console.log("iof_diario", iof_diario)
 					this.gerarParcelas(data_parcela)
-                    
-					// 2º Passo, executa o cálculo da parcela quando for o ultimo laço
+					
 					if(i == this.qtd_de_parcelas - 1) {
-						this.iof_real = iof_diario                        
+						iof_diario = (1000 * iof_diario)/(1000 - iof_diario)
+						this.iof_real = iof_diario
 						
 						this.valor_mutuado = ((this.valor_emprestado + this.iof_real)*((1+0.083)**this.qtd_de_parcelas))
+						console.log("this.valor_mutuado", this.valor_mutuado/5)
 
 						if(save)
 							this.salvarEmprestimo()
