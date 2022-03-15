@@ -2,7 +2,7 @@ from django.db import models
 from django.urls import reverse_lazy
 from projeto.cliente.models import Cliente
 from projeto.avalista.models import Avalista
-from projeto.core.models import Banco, Tipo_de_conta
+from projeto.core.models import Banco, Chave_PIX, Tipo_de_conta
 
 
 class Cliente_cnpj(models.Model):
@@ -35,6 +35,10 @@ class Cliente_cnpj(models.Model):
     tipo_de_conta         = models.ForeignKey(Tipo_de_conta, on_delete=models.PROTECT,max_length=25, blank=True, null=True)  
     agencia               = models.CharField("Nº agência",max_length=15, blank=True, null=True)
     conta                 = models.CharField("Nº conta",max_length=15, blank=True, null=True)    
+    tipo_de_chave_pix     = models.ForeignKey(Chave_PIX, on_delete=models.PROTECT,max_length=50, blank=True, null=True)
+    chave_pix             = models.CharField("Chave Pix", max_length=50, blank=True, null=True)   
+    
+    
     # REFERÊNCIAS
     ref1_nome             = models.CharField("Nome", max_length=50, blank=True, null=True)
     ref1_contato          = models.CharField("Contato",max_length=17, blank=True, null=True)

@@ -274,6 +274,19 @@
                 {% render_field form.conta class="form-control form-control-sm" %}
             </div>    
         </div>   
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="">{{form.tipo_de_chave_pix.label}} </label>
+                {% render_field form.tipo_de_chave_pix class="form-control form-control-sm" %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="">{{form.chave_pix.label}} </label>
+                {% render_field form.chave_pix class="form-control form-control-sm" %}
+            </div>
+        </div>
     </div> 
     
     <h3>REFERÊNCIAS</h3>
