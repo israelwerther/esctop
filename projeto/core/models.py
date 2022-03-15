@@ -26,5 +26,14 @@ class Tipo_de_conta(models.Model):
     
     def __str__(self):
         return str(self.tipo_de_conta)
+    
+    
+class Chave_PIX(models.Model):       
+    pix_key_type = models.CharField("Tipo de Chave", max_length=30, blank=True, null=True)
+    
+    class Meta:
+        ordering = ('pix_key_type',)
 
-
+    def __str__(self):
+        return str(self.pix_key_type)
+    

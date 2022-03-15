@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Banco, Tipo_de_conta
+from .models import Banco, Tipo_de_conta, Chave_PIX
 
 @admin.register(Banco)
 class BancoAdmin(admin.ModelAdmin):
@@ -19,3 +19,11 @@ class Tipo_de_contaAdmin(admin.ModelAdmin):
     )
     search_fields=('tipo_de_conta',)
     list_filter=('tipo_de_conta',)
+    
+@admin.register(Chave_PIX)
+class Chave_PIX(admin.ModelAdmin):
+    list_display=(        
+        'pix_key_type',
+    )
+    search_fields=('pix_key_type',)
+    list_filter=('pix_key_type',)

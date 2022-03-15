@@ -2,7 +2,7 @@
 #https://stackoverflow.com/questions/1134667/django-required-field-in-model-form/1429646
 from django.db import models
 from django.urls import reverse_lazy
-from projeto.core.models import Banco, Tipo_de_conta
+from projeto.core.models import Banco, Chave_PIX, Tipo_de_conta
 
 
 class Cliente(models.Model):
@@ -59,8 +59,10 @@ class Cliente(models.Model):
     banco                 = models.ForeignKey(Banco, on_delete=models.PROTECT,max_length=25, blank=True, null=True)  
     n_operacao            = models.CharField("Nº operação",max_length=15, blank=True, null=True)
     agencia               = models.CharField("Nº agência",max_length=15, blank=True, null=True)
-    conta                 = models.CharField("Nº conta",max_length=15, blank=True, null=True)
-    tipo_de_conta         = models.ForeignKey(Tipo_de_conta, on_delete=models.PROTECT,max_length=25, blank=True, null=True)      
+    conta                 = models.CharField("Nº conta",max_length=15, blank=True, null=True)   
+    tipo_de_conta         = models.ForeignKey(Tipo_de_conta, on_delete=models.PROTECT,max_length=25, blank=True, null=True)
+    tipo_de_chave_pix     = models.ForeignKey(Chave_PIX, on_delete=models.PROTECT,max_length=50, blank=True, null=True)
+    chave_pix             = models.CharField("Chave Pix", max_length=50, blank=True, null=True)   
 
     # REFERÊNCIAS
     ref1_nome             = models.CharField("Nome", max_length=50, blank=True, null=True)
