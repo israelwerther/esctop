@@ -113,6 +113,10 @@
             <tr>
                 <th class="text-right">Conta</th>
                 <td class="text-left">{{ object.cliente.conta }}</td>
+            </tr> 
+            <tr>
+                <th class="text-right">PIX</th>
+                <td class="text-left">{{ object.cliente.tipo_de_chave_pix }} | {{ object.cliente.chave_pix }}</td>
             </tr>         
             {% else %}
             <tr>
@@ -150,6 +154,10 @@
             <tr>
                 <th class="text-right">Conta</th>
                 <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
+            </tr>
+            <tr>
+                <th class="text-right">PIX</th>
+                <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
             </tr>
             {% endif %}            
         </tbody>

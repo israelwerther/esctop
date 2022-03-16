@@ -216,10 +216,22 @@
                                 <th class="text-left" style="width:70%">{{ object.conta }}</th>
                             </tr>
                         {% endif %}
+                        {% if object.tipo_de_chave_pix %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Tipo de Chave PIX</th> 
+                                <th class="text-left" style="width:70%">{{ object.tipo_de_chave_pix }}</th>
+                            </tr>
+                        {% endif %}
+                        {% if object.chave_pix %}
+                            <tr>
+                                <th class="text-right" style="width:30%">Chave PIX</th> 
+                                <th class="text-left" style="width:70%">{{ object.chave_pix }}</th>
+                            </tr>
+                        {% endif %}
                     </tbody>
                 </table>                    
             </div>   
-            <div class="col-sm-12 a">                    
+            <div class="col-sm-12 a">
                 <table class="table table-striped">                   
                     {% if object.ref1_nome %}
                     <h5>REFERÊNCIAS PESSOAIS</h5>

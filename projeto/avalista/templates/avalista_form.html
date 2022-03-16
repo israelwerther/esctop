@@ -281,7 +281,19 @@
                 <label for="" >{{form.fiador_conta.label}} </label>        
                 {% render_field form.fiador_conta class="form-control form-control-sm" %}
             </div>    
-        </div>         
+        </div>
+        <div class="col-sm-4">                    
+            <div class="form-group" >                
+                <label for="" >{{form.tipo_de_chave_pix.label}} </label>        
+                {% render_field form.tipo_de_chave_pix class="form-control form-control-sm" %}
+            </div>    
+        </div>
+        <div class="col-sm-4">                    
+            <div class="form-group" >                
+                <label for="" >{{form.chave_pix.label}} </label>        
+                {% render_field form.chave_pix class="form-control form-control-sm" %}
+            </div>
+        </div>
     </div>  
 
     {% if object.pk %}

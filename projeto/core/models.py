@@ -29,11 +29,14 @@ class Tipo_de_conta(models.Model):
     
     
 class Chave_PIX(models.Model):       
-    pix_key_type = models.CharField("Tipo de Chave", max_length=30, blank=True, null=True)
+    pix_key_type = models.CharField("Tipo de Chave PIX", max_length=30, blank=True, null=True)
     
     class Meta:
         ordering = ('pix_key_type',)
+        verbose_name = 'Tipo de Chave PIX'
+        verbose_name_plural = 'Tipo de Chave PIX'
 
     def __str__(self):
         return str(self.pix_key_type)
-    
+
+
