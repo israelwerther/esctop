@@ -67,68 +67,91 @@
                 </div> 
             {% endif %}  
 
-            <div class="col-sm-4" > 
+            <div class="col-sm-4"> 
                 <div class="form-group" id="res">
                     <label for="">{{form.valor_prestacao.label}}</label>
                     {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
                 </div>  
-            </div> 
-            <!-- INPUTS OCULTAS  -->
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.valor_multa.label}}</label>
-                    {% render_field form.valor_multa class="form-control" id="multa" %}
-                </div>  
-            </div> 
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.juros_ao_dia.label}}</label>
-                    {% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" %}
-                </div>  
-            </div> 
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.valor_mutuado.label}}</label>
-                    {% render_field form.valor_mutuado class="form-control" id="valor_mutuado" %}
-                </div>  
-            </div>  
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.juros_ao_mes.label}}</label>
-                    {% render_field form.juros_ao_mes class="form-control" id="juros_ao_mes" %}
-                </div>  
-            </div>  
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.juros_moratorio.label}}</label>
-                    {% render_field form.juros_moratorio class="form-control" id="juros_moratorio" %}
-                </div>  
-            </div> 
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.multa_por_atraso.label}}</label>
-                    {% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" %}
-                </div>  
             </div>
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.iof_real.label}}</label>
-                    {% render_field form.iof_real class="form-control" id="iof_real" %}
-                </div>  
-            </div> 
-            <div class="col-sm-3" style="display: none;"> 
-                <div class="form-group">
-                    <label for="">{{form.valor_devido.label}}</label>
-                    {% render_field form.valor_devido class="form-control" id="valor_devido" %}
-                </div>  
-            </div> 
-            <!-- ELEMENTOS OCULTOS -->
-            <div class="col-sm-3" > 
-                <div class="form-group">            
-                    {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}                       
+        </div>
+        <br>        
+        <div class="card card-body">
+            <h4>MODALIDADE DO EMPRÉSTIMO</h4>
+            <div class="row">
+                <div class="col-sm-2"> 
+                    <div class="form-group"> 
+                        <label for="" >Presencial</label>
+                        {% render_field form.presencial class="form-control" %}
+                        <label class="checkbox-inline"> {{form.presencial.label}} <input type="checkbox" value="presencial" id="presencial" name="presencial"></label>
+                    </div>    
+                </div>
+                <div class="col-sm-2"> 
+                    <div class="form-group"> 
+                        <label for="" >Online</label>
+                        {% render_field form.online class="form-control" %}
+                        <label class="checkbox-inline"> {{form.online.label}} <input type="checkbox" value="online" id="online" name="online"></label>                    
+                    </div>    
                 </div>
             </div>
-        </div>           
+        </div>
+
+
+        <!-- INPUTS OCULTAS  -->
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.valor_multa.label}}</label>
+                {% render_field form.valor_multa class="form-control" id="multa" %}
+            </div>  
+        </div> 
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.juros_ao_dia.label}}</label>
+                {% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" %}
+            </div>  
+        </div> 
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.valor_mutuado.label}}</label>
+                {% render_field form.valor_mutuado class="form-control" id="valor_mutuado" %}
+            </div>  
+        </div>  
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.juros_ao_mes.label}}</label>
+                {% render_field form.juros_ao_mes class="form-control" id="juros_ao_mes" %}
+            </div>  
+        </div>  
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.juros_moratorio.label}}</label>
+                {% render_field form.juros_moratorio class="form-control" id="juros_moratorio" %}
+            </div>  
+        </div> 
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.multa_por_atraso.label}}</label>
+                {% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" %}
+            </div>  
+        </div>
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.iof_real.label}}</label>
+                {% render_field form.iof_real class="form-control" id="iof_real" %}
+            </div>  
+        </div> 
+        <div class="col-sm-3" style="display: none;"> 
+            <div class="form-group">
+                <label for="">{{form.valor_devido.label}}</label>
+                {% render_field form.valor_devido class="form-control" id="valor_devido" %}
+            </div>  
+        </div> 
+        <!-- ELEMENTOS OCULTOS -->
+        <div class="col-sm-3" > 
+            <div class="form-group">            
+                {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}                       
+            </div>
+        </div>
+        
         
         {% if emprestimo %}   
             <button type="submit" class="btn btn-success" >Salvar Alterações</button>     

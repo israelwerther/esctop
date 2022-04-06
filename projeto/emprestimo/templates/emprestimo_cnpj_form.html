@@ -65,14 +65,14 @@
                         {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
                     </div>                  
                 </div> 
-            {% endif %}  
+            {% endif %}
 
             <div class="col-sm-4" > 
                 <div class="form-group" id="res">
                     <label for="">{{form.valor_prestacao.label}}</label>
                     {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
                 </div>  
-            </div> 
+            </div>
             <!-- INPUTS OCULTAS  -->
             <div class="col-sm-3" style="display: none;"> 
                 <div class="form-group">

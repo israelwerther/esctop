@@ -27,6 +27,10 @@ class Emprestimo(models.Model):
     iof_real             = models.DecimalField("IOF real", max_digits=10, decimal_places=2, null=True, blank=True)
     valor_devido         = models.DecimalField("Valor devido", max_digits=10, decimal_places=2, null=True, blank=True)    
     postergar            = models.PositiveIntegerField('Postergar', null=True, blank=True)
+    
+    # Modalidade do emprestimo é presencial ou online
+    presencial           = models.BooleanField("Presencial", default=False)
+    onlene               = models.BooleanField("Online", default=False)
 
 
     class Meta:
