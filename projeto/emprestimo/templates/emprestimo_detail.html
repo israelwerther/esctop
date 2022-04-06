@@ -159,7 +159,17 @@
                 <th class="text-right">PIX</th>
                 <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
             </tr>
-            {% endif %}            
+            {% endif %}
+            <tr>
+                {% if object.presencial %}
+                    <th class="text-right">Modalidade</th>
+                    <td class="text-left">Presencial</td>
+                {% endif %}  
+                {% if object.online %}
+                    <th class="text-right">Modalidade</th>
+                    <td class="text-left">online</td>
+                {% endif %}
+            </tr>
         </tbody>
     </table>    
 </div>

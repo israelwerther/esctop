@@ -30,7 +30,7 @@ class Emprestimo(models.Model):
     
     # Modalidade do emprestimo é presencial ou online
     presencial           = models.BooleanField("Presencial", default=False)
-    onlene               = models.BooleanField("Online", default=False)
+    online               = models.BooleanField("Online", default=False)
 
 
     class Meta:
