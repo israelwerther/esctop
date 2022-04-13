@@ -395,30 +395,34 @@
             mes_num+=1
             if(mes_num == 13){
                 mes_num = 1
-            }            
-            iof_inicial += ((principal*(qtd_dias*(1+0.083)))/100)
-            iof_inicial += principal*iof_adicional
-            iof_inicial = Number(toFixed(iof_inicial, 2))
+            }
+            iof_inicial += (((principal) * (qtd_dias * 0.00137))/100 + (principal * 0.0038))
             console.log("primeiro passo", iof_inicial)
-        }    
-        //CALCULA O IOF_REAL (2º PASSO)   
+        }
+
+        //CALCULA O IOF_REAL (2º PASSO)
         var iof_real = 0
-        iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)        
-        
+        iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
+        console.log("segundo passo", iof_real)
+        var valor_mutuado = 0
+        valor_mutuado = ((valor_emprestado + iof_real)*((1+0.083)**qtd_parcelas))
+        console.log("terceiro passo", valor_mutuado/qtd_parcelas)
+
         //CALCULA O VALOR DA PARCELA(3º PASSO)
         var valor_emprestado      = Number(tvalor_emprestado.value)                
         var qtd_parcelas          = Number(tqtd_parcelas.value)
         var prestacao             = Number(tprestacao.value)    
-        var valor_mutuado         = iof_real+valor_emprestado   
+        
         var valor_parcela         = 0
         var taxa_juros_a_m        = 9.5
         var juros_moratorio       = parseFloat(0.0066)
         
 
         valor_parcela = (valor_mutuado*(1+(qtd_parcelas*taxa_juros_a_m)/100))/qtd_parcelas
-        valor_parcela = valor_parcela.toFixedDown(2)
-        valor_parcela = valor_parcela.toFixed(2)
-        document.getElementById('prestacao').value = parseFloat(valor_parcela)+parseFloat(10)
+        //valor_parcela = valor_parcela.toFixedDown(2)
+        valor_parcela = ((valor_mutuado/qtd_parcelas)+10).toFixed(2)
+        console.log("(valor_mutuado/qtd_parcelas)",(valor_mutuado/qtd_parcelas))
+        document.getElementById('prestacao').value = valor_parcela
 
         // CALCULA MULTA POR ATRASO 
         var valor_multa = parseFloat((valor_parcela*multa_por_atraso)).toFixedDown(2).toFixed(2)
