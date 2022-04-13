@@ -10,6 +10,7 @@ urlpatterns = [
     
     path('add/', login_required(v.EmprestimoCreate.as_view()), name='emprestimo_add'),
     path('create_credcoop/', login_required(v.EmprestimoCreateCredcoop.as_view()), name='create_credcoop'),
+    path('create_credcoop_composto/', login_required(v.EmprestimoCompostoCreateCredcoop.as_view()), name='create_credcoop_composto'),
 
     path('cnpj_add/', login_required(v.EmprestimoCNPJCreate.as_view()), name='emprestimo_cnpj_add'),
     path('create_esctop/', login_required(v.EmprestimoCreateEsctop.as_view()), name='create_esctop'),

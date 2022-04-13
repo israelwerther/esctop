@@ -87,7 +87,10 @@
 						Empréstimo
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">						
-						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop'%}">CREDCOOP</a>						
+						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop'%}">CREDCOOP(Antigo)</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop_composto'%}">CREDCOOP
+							<span class="badge badge-success">Novo</span>
+						</a>
 						<div class="dropdown-divider"></div>						
 						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop'%}">ESCTOP</a>		
 						<div class="dropdown-divider"></div>		
