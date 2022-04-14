@@ -23,7 +23,7 @@
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
     {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(NOVA ALÍQUOTA)</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(JUROS COMPOSTO)</h3>
         <form action="{% url 'emprestimo:create_esctop' %}" method="POST" novalidate>
     {% endif %}
 
