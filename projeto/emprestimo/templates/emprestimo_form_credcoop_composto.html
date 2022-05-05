@@ -295,17 +295,20 @@
                 mes_num = 1
             }
             iof_inicial += (((principal) * (qtd_dias * 0.00137))/100 + (principal * 0.0038))
-            console.log("primeiro passo", iof_inicial)
-            console.log("qtd dias", qtd_dias)
+            console.log("IOF INICIAL", iof_inicial)
         }
+        
 
         //CALCULA O IOF_REAL (2º PASSO)
-        var iof_real = 0
-        iof_real = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
-        console.log("segundo passo", iof_real)
+        var iof_final = 0
+        iof_final = (valor_emprestado*iof_inicial)/(valor_emprestado-iof_inicial)
+        console.log("IOF FINAL 1", iof_final)
+
+
+
         var valor_mutuado = 0
-        valor_mutuado = ((valor_emprestado + iof_real)*((1+0.083)**qtd_parcelas))
-        console.log("terceiro passo", valor_mutuado/qtd_parcelas)
+        valor_mutuado = ((valor_emprestado + iof_inicial)*((1+0.083)**qtd_parcelas))
+        console.log("IOF FINAL", valor_mutuado)
 
         //CALCULA O VALOR DA PARCELA(3º PASSO)
         var valor_emprestado      = Number(tvalor_emprestado.value)                
@@ -313,13 +316,13 @@
         var prestacao             = Number(tprestacao.value)    
         
         var valor_parcela         = 0
-        var taxa_juros_a_m        = 9.5
+        //var taxa_juros_a_m        = 8.3
         var juros_moratorio       = parseFloat(0.0066)
         
 
-        valor_parcela = (valor_mutuado*(1+(qtd_parcelas*taxa_juros_a_m)/100))/qtd_parcelas
+        //valor_parcela = (valor_mutuado*(1+(qtd_parcelas*taxa_juros_a_m)/100))/qtd_parcelas
         //valor_parcela = valor_parcela.toFixedDown(2)
-        valor_parcela = (valor_mutuado/qtd_parcelas).toFixed(2)
+        valor_parcela = (valor_mutuado/qtd_parcelas).toFixed(3)
         console.log("(valor_mutuado/qtd_parcelas)",(valor_mutuado/qtd_parcelas))
         document.getElementById('prestacao').value = valor_parcela 
 
@@ -354,9 +357,9 @@
         document.getElementById('multa_por_atraso_info').innerHTML = numberToReal_3(multa_por_atraso)
 
         // LANÇA TAXA DE IOF TOTAL 
-        iof_real = iof_real.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2)        
-        document.getElementById('iof_real').value = iof_real
-        document.getElementById('iof_real_info').innerHTML = numberToReal(iof_real)
+        iof_final = iof_final.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2)        
+        document.getElementById('iof_final').value = iof_final
+        document.getElementById('iof_final_info').innerHTML = numberToReal(iof_final)
 
         // LANÇA VALOR DEVIDO 
         valor_devido = (valor_parcela*qtd_parcelas)
