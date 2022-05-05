@@ -283,7 +283,11 @@
         for (var i = 0 ; i < qtd_parcelas; i++){
             if(mes_num == 1 || mes_num == 3 || mes_num == 5 || mes_num == 7 || mes_num == 8 || mes_num == 10 || mes_num == 12){
                 qtd_dias += 31
-            }else{
+            }
+            else if(mes_num == 2){
+                qtd_dias += 28
+            }
+            else{
                 qtd_dias +=30
             }
             mes_num+=1
@@ -292,6 +296,7 @@
             }
             iof_inicial += (((principal) * (qtd_dias * 0.00137))/100 + (principal * 0.0038))
             console.log("primeiro passo", iof_inicial)
+            console.log("qtd dias", qtd_dias)
         }
 
         //CALCULA O IOF_REAL (2º PASSO)
@@ -485,7 +490,8 @@
 
         let teste = "{{sequencial}}"
         teste = Number(teste)+1
-        teste = String(teste)        
+        teste = String(teste)    
+        console.log("Teste", teste)    
 
         if (presencial == true) {
             var modalidade = 0

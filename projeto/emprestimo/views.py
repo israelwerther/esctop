@@ -56,10 +56,9 @@ class EmprestimoCompostoCreateCredcoop(CreateView):
     def get_context_data(self, **kwargs):
         context = super(EmprestimoCompostoCreateCredcoop, self).get_context_data(**kwargs)
 
-        sequencial = Emprestimo.objects.all(
-            
-        ).order_by('sequencia').last()
+        sequencial = Emprestimo.objects.all().order_by('sequencia').last()
         context['sequencial'] = sequencial.sequencia
+        print("Sequencial@@@@@@@@@@@@@@@",context['sequencial'])
         context['ultimo_contrato'] = sequencial.n_contrato
 
         return context
