@@ -52,6 +52,15 @@ class EmprestimoCompostoCreateCredcoop(CreateView):
     model=Emprestimo
     template_name='emprestimo_form_credcoop_composto.html'
     form_class=EmprestimoForm
+
+    def get_context_data(self, **kwargs):
+        context = super(EmprestimoCompostoCreateCredcoop, self).get_context_data(**kwargs)
+
+        sequencial = Emprestimo.objects.all().order_by('sequencia').last()
+        context['sequencial'] = sequencial.sequencia
+        context['ultimo_contrato'] = sequencial.n_contrato
+
+        return context
     
     def form_valid(self, form_class):
         obj = form_class.save(commit=False)

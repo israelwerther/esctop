@@ -32,6 +32,8 @@ class Emprestimo(models.Model):
     presencial           = models.BooleanField("Presencial", default=False)
     online               = models.BooleanField("Online", default=False)
 
+    sequencia = models.CharField("Sequencia", max_length=255, unique=True, blank=True, null=True)
+
 
     class Meta:
         ordering = ('-dt_emprestimo',)        

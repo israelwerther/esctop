@@ -25,7 +25,8 @@ class EmprestimoForm(forms.ModelForm):
             'multa_por_atraso',
             'iof_real',
             'valor_devido',
-            'postergar'
+            'postergar',
+            'sequencia',
         ]
         
 

@@ -147,10 +147,9 @@
             </div>  
         </div> 
         <!-- ELEMENTOS OCULTOS -->
-        <div class="col-sm-3" > 
-            <div class="form-group">            
-                {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}                       
-            </div>
+        <div class="col-sm-3" >                        
+            {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}
+            {% render_field form.sequencia class="form-control" id="sequencia" type="hidden" %}
         </div>
         
         
@@ -478,36 +477,44 @@
         ano = (ano.substr(2, 3))
         var mes       = document.getElementById("dataselecionada").value.split("-")[1];
         var dia       = document.getElementById("dataselecionada").value.split("-")[2];   
-        var hora      = String(dt.getHours())
-        var minutos   = String(dt.getMinutes())        
+
+        
+        var presencial = document.getElementById("presencial").checked
+        var online = document.getElementById("online").checked
+
+
+        //var hora      = String(dt.getHours())
+        //var minutos   = String(dt.getMinutes())
         var sequencia = ano
         var sequencia = sequencia+mes       
-        var sequencia = sequencia+dia    
+        var sequencia = sequencia+dia
 
-        if(hora<10){
-            sequencia += '0'
-        } 
-        var sequencia = sequencia+hora  
+        let teste = "{{sequencial}}"
+        teste = Number(teste)+1
+        teste = String(teste)
+        console.log("sequencia inicial",teste)
 
-        if(minutos<10 && minutos>0){
-            sequencia += '0'
+        //if(hora<10){
+        //    sequencia += '0'
+        //}
+        //var sequencia = sequencia+hora
+
+        //if(minutos<10 && minutos>0){
+        //    sequencia += '0'
+        //}
+
+        if (presencial == true) {
+            var modalidade = 0
         }
-        var sequencia = sequencia+minutos  
-
+        if (online == true) {
+            var modalidade = 1
+        }
+        var sequencia = modalidade+sequencia+teste
+        console.log("sequencia",sequencia)
         document.getElementById('n_contrato').value = sequencia
-       
+        document.getElementById('sequencia').value = teste
     }
-       
+    
 </script>
 
-<!-- <script>
-    function tableshowhide(love, amor)
-
-    len = menu.childElementCount
-</script> -->
-  
-    
 {% endblock content %}
-
-
-    
