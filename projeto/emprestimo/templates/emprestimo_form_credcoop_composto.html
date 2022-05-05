@@ -469,39 +469,23 @@
 
     //GERA UM NUMERO SEQUENCIAL BASEADO NA DATA E HORA ATUAL
     function sequencial(){
-        var dt = new Date()      
-        // var ano = String(dt.getYear())
+        var dt = new Date()        
         var ano       = document.getElementById("dataselecionada").value.split("-")[0];
         ano = String(ano)
         // RETORNA APENAS OS DOIS ULTIMOS DIGITOS DO ANO
         ano = (ano.substr(2, 3))
         var mes       = document.getElementById("dataselecionada").value.split("-")[1];
-        var dia       = document.getElementById("dataselecionada").value.split("-")[2];   
-
-        
+        var dia       = document.getElementById("dataselecionada").value.split("-")[2];
         var presencial = document.getElementById("presencial").checked
         var online = document.getElementById("online").checked
-
-
-        //var hora      = String(dt.getHours())
-        //var minutos   = String(dt.getMinutes())
+        
         var sequencia = ano
         var sequencia = sequencia+mes       
         var sequencia = sequencia+dia
 
         let teste = "{{sequencial}}"
         teste = Number(teste)+1
-        teste = String(teste)
-        console.log("sequencia inicial",teste)
-
-        //if(hora<10){
-        //    sequencia += '0'
-        //}
-        //var sequencia = sequencia+hora
-
-        //if(minutos<10 && minutos>0){
-        //    sequencia += '0'
-        //}
+        teste = String(teste)        
 
         if (presencial == true) {
             var modalidade = 0
@@ -510,7 +494,6 @@
             var modalidade = 1
         }
         var sequencia = modalidade+sequencia+teste
-        console.log("sequencia",sequencia)
         document.getElementById('n_contrato').value = sequencia
         document.getElementById('sequencia').value = teste
     }

@@ -33,12 +33,13 @@ class Emprestimo(models.Model):
     online               = models.BooleanField("Online", default=False)
 
     sequencia = models.CharField("Sequencia", max_length=255, unique=True, blank=True, null=True)
+    created_at  = models.DateTimeField(verbose_name='Registrado em', auto_now_add=True, blank=True, null=True)
 
 
     class Meta:
-        ordering = ('-dt_emprestimo',)        
+        ordering = ('-dt_emprestimo',)
     # def __str__(self):
-    #     return '{} - {} - {}'.format(self.pk, self.num_doc, self.created.strftime('%d-%m-%Y'))        
+    #     return '{} - {} - {}'.format(self.pk, self.num_doc, self.created.strftime('%d-%m-%Y'))
     def __str__(self):
         return str(self.n_contrato)
     
