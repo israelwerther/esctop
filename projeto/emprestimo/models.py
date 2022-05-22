@@ -17,7 +17,7 @@ class Emprestimo(models.Model):
     valor_prestacao      = models.DecimalField("Valor da parcela", max_digits=10, decimal_places=2, null=True, blank=True)    
     dt_emprestimo        = models.DateField("Data do Empréstimo", auto_now_add=False, auto_now=False, null=True,blank=True)
     dt_vencimento        = models.DateField("Data do Vencimento", auto_now_add=False, auto_now=False, null=True,blank=True)
-    n_contrato           = models.CharField("Nº Contrato", max_length=13, unique=True, blank=True, null=True)
+    n_contrato           = models.CharField("Nº Contrato", max_length=255, unique=True, blank=True, null=True)
     valor_multa          = models.DecimalField("Multa por atraso", max_digits=10, decimal_places=2, null=True, blank=True)
     juros_ao_dia         = models.DecimalField("Juros ao dia", max_digits=10, decimal_places=2, null=True, blank=True)
     valor_mutuado        = models.DecimalField("Valor mutuado", max_digits=10, decimal_places=2, null=True, blank=True)
@@ -32,7 +32,7 @@ class Emprestimo(models.Model):
     presencial           = models.BooleanField("Presencial", default=False)
     online               = models.BooleanField("Online", default=False)
 
-    sequencia = models.CharField("Sequencia", max_length=255, unique=True, blank=True, null=True)
+    sequencia = models.PositiveIntegerField("Sequencia", null=True, blank=True)
     created_at  = models.DateTimeField(verbose_name='Registrado em', auto_now_add=True, blank=True, null=True)
 
 

@@ -26,6 +26,8 @@ class EmprestimoForm(forms.ModelForm):
             'iof_real',
             'valor_devido',
             'postergar',
+            'online',
+            'presencial',
             'sequencia',
         ]
         
