@@ -2,10 +2,7 @@
 {% load static %}
 {% load widget_tweaks %}
 {% block js %}{% endblock js %}
-<!--  -->
-<!-- ESTUDO COMPLETO DE FORMSET -->
-<!-- https://docs.djangoproject.com/en/3.0/topics/forms/formsets/ -->
-<!--  -->
+
 {% block content %}
     <style> 
         .table td, .table th {             
@@ -19,65 +16,62 @@
         }
     </style>
     <div class="card card-body">
-
-    {% if emprestimo %}
+        <div class="card card-body">
+        {% if emprestimo %}
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
-    {% else %}  
+        {% else %}  
         <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP(JUROS COMPOSTO)</h3>
         <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
-    {% endif %}
+        {% endif %}
+        {% csrf_token %}        
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="">Cliente Credcoop</label>
+                        {% render_field form.cliente type="text" class="form-control" %}
+                    </div>
+                </div>
+                <div class="col-sm-6"> 
+                    <div class="form-group">
+                        <label for="">{{form.valor_emprestado.label}}</label>
+                        {% render_field form.valor_emprestado class="form-control" id="valor_emprestado" value="1000"%}
+                    </div>
+                </div>        
+                <div class="col-sm-4">                    
+                    <div class="form-group" >                
+                        <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
+                        {% render_field form.qtd_parcelas class="form-control" id="qtd_parcelas" value="3"%}
+                    </div>
+                </div>
 
-    {% csrf_token %}
-    
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="form-group">
-                <label for="">Cliente Credcoop</label>
-                {% render_field form.cliente type="text" class="form-control" %}
-            </div>
-        </div>
-        <div class="col-sm-6"> 
-                <div class="form-group">
-                    <label for="">{{form.valor_emprestado.label}}</label>
-                    {% render_field form.valor_emprestado class="form-control" id="valor_emprestado" value="1000"%}                       
+                {% if object.pk %} 
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="">{{form.dt_emprestimo.label}}</label>   
+                            {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
+                        </div>                  
+                    </div> 
+                {% else %}    
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="">{{form.dt_emprestimo.label}}</label>   
+                            {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
+                        </div>                  
+                    </div> 
+                {% endif %}  
+
+                <div class="col-sm-4"> 
+                    <div class="form-group" id="res">
+                        <label for="">{{form.valor_prestacao.label}}</label>
+                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
+                    </div>  
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-4">                    
-                <div class="form-group" >                
-                    <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
-                    {% render_field form.qtd_parcelas class="form-control" id="qtd_parcelas" value="3"%}
-                </div>
-            </div>
-
-            {% if object.pk %} 
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">{{form.dt_emprestimo.label}}</label>   
-                        {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
-                    </div>                  
-                </div> 
-            {% else %}    
-                <div class="col-sm-4">
-                    <div class="form-group">
-                        <label for="">{{form.dt_emprestimo.label}}</label>   
-                        {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
-                    </div>                  
-                </div> 
-            {% endif %}  
-
-            <div class="col-sm-4"> 
-                <div class="form-group" id="res">
-                    <label for="">{{form.valor_prestacao.label}}</label>
-                    {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
-                </div>  
-            </div>
-        </div>
-        <br>        
-        <div class="card card-body">
-            <h4>MODALIDADE DO EMPRÉSTIMO</h4>
+            
+        <div class="card card-body mt-2">
+            <h4>OPÇÕES DO EMPRÉSTIMO</h4>
             <div class="row">                
                 <div class="col-sm-2"> 
                     <div class="form-group">
@@ -85,14 +79,7 @@
                             <input type="checkbox" value="online" id="online" name="online" onclick="checkUncheck()">
                         </label>
                     </div>    
-                </div>              
-                <div class="col-sm-2"> 
-                    <div class="form-group">
-                        <label class="checkbox-inline"> {{form.presencial.label}} 
-                            <input type="checkbox" value="presencial" id="presencial" name="presencial" checked>
-                        </label>
-                    </div>
-                </div>
+                </div>    
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label for="" >Boleto</label>
@@ -100,167 +87,47 @@
                         <label class="checkbox-inline"> {{form.boleto.label}} <input type="checkbox" value="boleto" id="boleto" name="boleto" onclick="somar()"></label>
                     </div>
                 </div>
+                <div class="col-sm-2 d-none">
+                    <div class="form-group">
+                        <label class="checkbox-inline"> {{form.presencial.label}} 
+                            <input type="checkbox" value="presencial" id="presencial" name="presencial" checked>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
-        
-    
-
-        <!-- INPUTS OCULTAS  -->
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.valor_multa.label}}</label>
-                {% render_field form.valor_multa class="form-control" id="multa" %}
-            </div>  
-        </div> 
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.juros_ao_dia.label}}</label>
-                {% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" %}
-            </div>  
-        </div> 
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.valor_mutuado.label}}</label>
-                {% render_field form.valor_mutuado class="form-control" id="valor_mutuado" %}
-            </div>  
-        </div>  
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.juros_ao_mes.label}}</label>
-                {% render_field form.juros_ao_mes class="form-control" id="juros_ao_mes" %}
-            </div>  
-        </div>  
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.juros_moratorio.label}}</label>
-                {% render_field form.juros_moratorio class="form-control" id="juros_moratorio" %}
-            </div>  
-        </div> 
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.multa_por_atraso.label}}</label>
-                {% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" %}
-            </div>  
+        <div class="card card-body mt-2 mb-5">
+            <div class="row">
+                <div class="col">
+                    {% if emprestimo %}   
+                        <button type="submit" class="btn btn-success" >Salvar Alterações</button>
+                        <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>
+                    {% else %}
+                        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
+                        <button type="submit" class="btn btn-success pull-right m-1" onclick="somar(), sequencial()">Cadastrar</button>
+                        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
+                        {% endif %}
+                    </div>
+                </div>
         </div>
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.iof_real.label}}</label>
-                {% render_field form.iof_real class="form-control" id="iof_real" %}
-            </div>  
-        </div> 
-        <div class="col-sm-3" style="display: none;"> 
-            <div class="form-group">
-                <label for="">{{form.valor_devido.label}}</label>
-                {% render_field form.valor_devido class="form-control" id="valor_devido" %}
-            </div>  
-        </div> 
+
         <!-- ELEMENTOS OCULTOS -->
-        <div class="col-sm-3" >                        
-            {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}
-            {% render_field form.sequencia class="form-control" id="sequencia" type="hidden" %}
-        </div>
-        
-        
-        {% if emprestimo %}   
-            <button type="submit" class="btn btn-success" >Salvar Alterações</button>     
-            <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>
-        {% else %}
-            <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
-            <button type="submit" class="btn btn-success pull-right m-1" onclick="somar(), sequencial()">Cadastrar</button>
-            <button type="button" onclick="somar()" class="btn btn btn-primary m-1">Calcular Parcela</button>
-        </form>    
-        {% endif %}
-    <br>  
-    <div class="row">
-        <div class="col-sm-12">
-            <h3>INFORMAÇÕES DO EMPRÉSTIMO</h3>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6">
-            <table class="table table-striped">                
-                <tbody>
-                    <tr >
-                        <th class="text-left color" style="width:60%">{{form.valor_multa.label}}</th>                        
-                        <th class="text-center color" style="width:10%">R$</th>
-                        <th class="text-right color" id="multa_info" style="width:30%"></th>
-                    </tr>
-                    <tr>
-                        <th class="text-left" style="width:60%">{{form.juros_ao_dia.label}}</th>  
-                        <th class="text-center" style="width:10%">R$</th>
-                        <th class="text-right" id="juros_ao_dia_info" style="width:30%"></th>
-                    </tr>
-                    <tr>
-                        <th class="text-left color" style="width:60%">{{form.valor_mutuado.label}}</th> 
-                        <th class="text-center color" style="width:10%">R$</th>
-                        <th class="text-right color" id="valor_mutuado_info" style="width:30%"></th>
-                    </tr>  
-                    <tr>
-                        <th class="text-left " style="width:60%">{{form.valor_devido.label}}</th> 
-                        <th class="text-center " style="width:10%">R$</th>
-                        <th class="text-right " id="valor_devido_info" style="width:30%"></th>
-                    </tr>                    
-                </tbody>
-            </table>
-        </div>
-        <div class="col-sm-6">
-            <table class="table table-striped">
-                <tbody>
-                    <tr>
-                        <th class="text-left color" style="width:60%">Taxa de Juros a.m</th>
-                        <th class="text-center color" style="width:10%" style="width:30%">%</th>
-                        <th class="text-right color" id="juros_ao_mes_info"></th>
-                    </tr>   
-                    <tr>
-                        <th class="text-left" style="width:60%">IOF real</th>
-                        <th class="text-center" style="width:10%" style="width:30%">%</th>
-                        <th class="text-right" id="iof_real_info"></th>
-                    </tr>  
-                    <tr>
-                        <th class="text-left" style="width:60%">Juros Moratório</th>
-                        <th class="text-center" style="width:10%" style="width:30%"></th>
-                        <th class="text-right" id="juros_moratorio_info"></th>
-                    </tr>  
-                    <tr>
-                        <th class="text-left color" style="width:60%">Multa por atraso</th>
-                        <th class="text-center color" style="width:10%" style="width:30%"></th>
-                        <th class="text-right color" id="multa_por_atraso_info"></th>
-                    </tr>   
-                </tbody>
-            </table>
-        </div>
-    </div>
+        {% render_field form.valor_multa class="form-control" id="multa" type="hidden" %}
+        {% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" type="hidden" %}
+        {% render_field form.valor_mutuado class="form-control" id="valor_mutuado" type="hidden" %}
+        {% render_field form.juros_ao_mes class="form-control" id="juros_ao_mes" type="hidden" %}
+        {% render_field form.juros_moratorio class="form-control" id="juros_moratorio" type="hidden" %}
+        {% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" type="hidden" %}
+        {% render_field form.iof_real class="form-control" id="iof_real" type="hidden" %}
+        {% render_field form.valor_devido class="form-control" id="valor_devido" type="hidden" %}    
+        {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}
+        {% render_field form.sequencia class="form-control" id="sequencia" type="hidden" %}
+        <!-- ELEMENTOS OCULTOS -->
+        </form>
     </div>
     
-    <script>   
+    <script>
     
-    function numberToReal(numero) {
-        var numero = numero.toFixed(2).split('.');
-        numero[0] = " " + numero[0].split(/(?=(?:...)*$)/).join('.');
-        return numero.join(',');
-    }
-    function numberToReal_2(numero) {
-        var numero = numero.toFixed(2).split('.');
-        numero[0] = " " + numero[0].split(/(?=(?:...)*$)/).join('.');
-        return numero.join(',');
-    }
-    function numberToReal_3(numero) {
-        var numero = numero.toFixed(3).split('.');
-        numero[0] = " " + numero[0].split(/(?=(?:...)*$)/).join('.');
-        return numero.join(',');
-    }
-    function numberToReal_4(numero) {
-        var numero = numero.toFixed(4).split('.');
-        numero[0] = " " + numero[0].split(/(?=(?:...)*$)/).join('.');
-        return numero.join(',');
-    }    
-
-
-    Number.prototype.toFixedDown = function(digits){
-		var re = new RegExp("(\\d+\\.\\d{" + digits + "})(\\d)"),
-		m = this.toString().match(re);
-		return m ? parseFloat(m[1]) : this.valueOf();
-	};
     //VERIFICAR A FUNCIONALIDADE DESSE SCRIPT!!!!!!!!!!!!!!
     function toFixed(num, fixed) {
         var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
@@ -276,7 +143,7 @@
         var tvalor_emprestado  = document.getElementById('valor_emprestado')
         var tqtd_parcelas      = document.getElementById('qtd_parcelas')
         var tprestacao         = document.getElementById('prestacao')
-        var mes                = document.getElementById("dataselecionada").value.split("-")[1];  
+        var mes                = document.getElementById("dataselecionada").value.split("-")[1];
         var valor_emprestado   = Number(tvalor_emprestado.value)
         var qtd_parcelas       = Number(tqtd_parcelas.value)
         var prestacao          = Number(tprestacao.value)
@@ -301,7 +168,7 @@
 
         //if(primeiro == 1){
         //    primeiro = true
-        //}        
+        //}
 
         //-------------------CALCULA O IOF FORA DO CONTRATO--------------------- 
 
@@ -373,50 +240,39 @@
         }else {
             var parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas)*100)/100            
         }
-        console.log("parcela_final", parcela_final)
-        document.getElementById('prestacao').value = parcela_final
-        
-        
+        //console.log("parcela_final", parcela_final)
+        document.getElementById('prestacao').value = parcela_final        
         
         // CALCULA MULTA POR ATRASO 
         var valor_multa = parseFloat((parcela_final*multa_por_atraso)).toFixed(2)
-        document.getElementById('multa').value = valor_multa       
-        document.getElementById('multa_info').innerHTML = valor_multa.toString().replace(".", ",")
+        document.getElementById('multa').value = valor_multa        
 
         // CALCULA JUROS AO DIA
         var juros_ao_dia = (parcela_final*juros_moratorio).toFixed(2)       	
         document.getElementById('juros_ao_dia').value = juros_ao_dia
-        document.getElementById('juros_ao_dia_info').innerHTML = juros_ao_dia.toString().replace(".", ",")
-
+        
         // LANÇA O VALOR MUTUADO
         var valor_mutuado = valor_total_a_Prazo
         document.getElementById('valor_mutuado').value = valor_mutuado
-        document.getElementById('valor_mutuado_info').innerHTML = numberToReal(valor_mutuado)
 
         // LANÇA VALOR DEVIDO 
         valor_devido = valor_total_a_Prazo
-        document.getElementById('valor_devido').value = valor_devido
-        document.getElementById('valor_devido_info').innerHTML = numberToReal(valor_devido)
+        document.getElementById('valor_devido').value = valor_devido        
 
         // LANÇA TAXA DE JUROS AO MÊS
         var taxa_juros_a_m = juros*100 .toFixed(2)
         document.getElementById('juros_ao_mes').value = taxa_juros_a_m        
-        document.getElementById('juros_ao_mes_info').innerHTML = numberToReal(taxa_juros_a_m)
         
         // LANÇA TAXA DE JUROS MORATÓRIO 
         var juros_moratorio2 = juros_moratorio*100
         document.getElementById('juros_moratorio').value = juros_moratorio2
-        document.getElementById('juros_moratorio_info').innerHTML = numberToReal_2(juros_moratorio2)
 
         // LANÇA TAXA DE JUROS POR ATRASO
         var multa_por_atraso2 = multa_por_atraso*100
         document.getElementById('multa_por_atraso').value = multa_por_atraso2
-        document.getElementById('multa_por_atraso_info').innerHTML = numberToReal_2(multa_por_atraso2)
 
         // LANÇA TAXA DE IOF TOTAL 
         document.getElementById('iof_real').value = iof_final
-        document.getElementById('iof_real_info').innerHTML = numberToReal(iof_final)        
-        
     }
 
     //GERA UM NUMERO SEQUENCIAL BASEADO NA DATA E HORA ATUAL
@@ -437,7 +293,7 @@
         var teste = "{{sequencial}}"
         teste = Number(teste)+1
         teste = String(teste)    
-        console.log("Teste", teste)
+        //console.log("Teste", teste)
 
         if (online == true) {
             var modalidade = 1
@@ -449,6 +305,7 @@
         document.getElementById('n_contrato').value = sequencia
         document.getElementById('sequencia').value = teste
         console.log("modalidade", modalidade)
+        console.log("sequencia", sequencia)
     }
 
     // função para marcar online quando presencial não está marcado
