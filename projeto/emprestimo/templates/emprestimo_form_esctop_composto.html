@@ -4,17 +4,7 @@
 {% block js %}{% endblock js %}
 
 {% block css %}
-<style> 
-    .table td, .table th {             
-        padding-left: 10px;
-        padding-top: 0px;  
-        padding-bottom: 0px;  
-        border-top: 1px solid #000000;            
-        border-bottom: 1px solid #000000;            
-        border-left: 1px solid #000000;            
-        border-right: 1px solid #000000;
-    }
-</style>
+
 {% endblock css %}
 
 {% block content %}
@@ -27,48 +17,53 @@
         <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(JUROS COMPOSTO)</h3>
         <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
         {% endif %}
-        {% csrf_token %}        
+        {% csrf_token %}
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="">Cliente Esctop</label>
-                        {% render_field form.cliente_cnpj type="text" class="form-control" %}
-                    </div>
+                    <label for="">Cliente Esctop</label>
+                    <select id="cliente" class="form-control" name="cliente">
+                        <option id="foo">----------------</option>
+                        {% for cliente in clientes %}
+                            <option value="{{cliente.pk}}" {% if cliente.pk|stringformat:'s' in clientes %} selected="selected" {% endif %}>
+                                {{ cliente.razao_social }}
+                            </option>
+                        {% endfor %}
+                    </select>
                 </div>
-                <div class="col-sm-6"> 
+                <div class="col-sm-6">
+                    <label for="">{{form.valor_emprestado.label}}</label>
                     <div class="form-group">
-                        <label for="">{{form.valor_emprestado.label}}</label>
-                        {% render_field form.valor_emprestado class="form-control" id="valor_emprestado" value="0"%}
+                        {% render_field form.valor_emprestado class="form-control form-control-sm" id="valor_emprestado" onchange="somar()"%}
                     </div>
                 </div>        
-                <div class="col-sm-4">                    
+                <div class="col-sm-4">
+                    <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
                     <div class="form-group" >                
-                        <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
-                        {% render_field form.qtd_parcelas class="form-control" id="qtd_parcelas"%}
+                        {% render_field form.qtd_parcelas value="1" class="form-control form-control-sm" id="qtd_parcelas" onchange="somar()"%}
                     </div>
                 </div>
 
                 {% if object.pk %} 
                     <div class="col-sm-4">
+                        <label for="">{{form.dt_emprestimo.label}}</label>   
                         <div class="form-group">
-                            <label for="">{{form.dt_emprestimo.label}}</label>   
-                            {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
+                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" onblur="somar()"%}                    
                         </div>                  
                     </div> 
-                {% else %}    
+                {% else %}
                     <div class="col-sm-4">
+                        <label for="">{{form.dt_emprestimo.label}}</label>   
                         <div class="form-group">
-                            <label for="">{{form.dt_emprestimo.label}}</label>   
-                            {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
+                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" type="date" onchange="somar()"%}                    
                         </div>                  
                     </div> 
                 {% endif %}
 
                 <div class="col-sm-4"> 
+                    <label for="">{{form.valor_prestacao.label}}</label>
                     <div class="form-group" id="res">
-                        <label for="">{{form.valor_prestacao.label}}</label>
-                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
-                    </div>  
+                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control form-control-sm" id="prestacao" %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,9 +122,12 @@
         {% render_field form.sequencia class="form-control" id="sequencia" type="hidden" %}
         <!-- ELEMENTOS OCULTOS -->
         </form>
-    </div>
+    </div>    
     
     <script>
+    $(document).ready(function () {
+        $('#cliente').select2();
+    });
     
     //VERIFICAR A FUNCIONALIDADE DESSE SCRIPT!!!!!!!!!!!!!!
     function toFixed(num, fixed) {
@@ -141,6 +139,7 @@
         return Math[number < 0 ? 'ceil' : 'floor'](number);
     };
     
+    //A FUNÇÃO ABAIXO CALCULA AS PARCELAS E TAXAS DO EMPRÉSTIMO
     //A FUNÇÃO ABAIXO CALCULA AS PARCELAS E TAXAS DO EMPRÉSTIMO
     function somar(){
         var tvalor_emprestado  = document.getElementById('valor_emprestado')
@@ -167,7 +166,10 @@
         var somatorio_encargos_anteriores = 0.0
         var qtd_dias           = 0
         //var primeiro = document.getElementById('dataselecionada')
-        var boleto    = document.getElementById("boleto").checked        
+        var boleto    = document.getElementById("boleto").checked   
+        
+        console.log("iof_fora_contrato", iof_fora_contrato)
+        console.log("qtd_parcelas", qtd_parcelas)
 
         //if(primeiro == 1){
         //    primeiro = true
@@ -176,27 +178,40 @@
         //-------------------CALCULA O IOF FORA DO CONTRATO--------------------- 
 
         //> parcela
-        parcela = Math.round((valor_emprestado*(1+juros)**(qtd_parcelas)/qtd_parcelas)*100)/100
-            console.log("parcela", parcela)
+        parcela = ((valor_emprestado*(1+juros)**(qtd_parcelas)).toFixed(2)/qtd_parcelas) .toFixed(2)
+        console.log("parcela", parcela)
 
         //> encargos[i]
         encargos[0] = Math.round((valor_emprestado*juros)*100)/100
-        
-        for(let i=1; i<qtd_parcelas; i++){
-            somatorio_encargos_anteriores += encargos[i-1]
-            encargos[i] = Math.round(((valor_emprestado + somatorio_encargos_anteriores) * juros)*100)/100
-
-            console.log("somatorio_encargos_anteriores", somatorio_encargos_anteriores) 
-            console.log("encargos[i]", encargos[i], i)
+        console.log("valor_emprestado", valor_emprestado)
+        if (qtd_parcelas > 1) {
+            for(let i=1; i<qtd_parcelas; i++){
+                somatorio_encargos_anteriores += encargos[i-1]
+                encargos[i] = Math.round(((valor_emprestado + somatorio_encargos_anteriores) * juros)*100)/100
+    
+                console.log("somatorio_encargos_anteriores", somatorio_encargos_anteriores) 
+                console.log("encargos[i]", encargos[i], i)
+            }    
+        }else {
+            encargos[0]
+            console.log("encargos[0]", encargos[0])
         }
 
         //> principal[i]
+        if (qtd_parcelas > 1) {
         for(let i=0; i<qtd_parcelas; i++){
             principal[i] = Math.floor((parcela - encargos[i])*100)/100
             console.log("principal[i]", principal[i], i)
+        }
+        }else {
+            for(let i=0; i<qtd_parcelas; i++){
+                principal[i] = Math.floor((parcela - encargos[0])*100)/100
+                console.log("principal[i]", principal[i], i)
+            }
         }       
 
-        //> iof_fora_contrato
+        //> qtd_dias
+        iof_fora_contrato_total = 0
         for (let i = 0 ; i < qtd_parcelas; i++){
             if(mes_num == 1 || mes_num == 3 || mes_num == 5 || mes_num == 7 || mes_num == 8 || mes_num == 10 || mes_num == 12){
                 qtd_dias += 31
@@ -211,13 +226,17 @@
             if(mes_num == 13){
                 mes_num = 1
             }
-            
+
+        //> iof_fora_contrato
             iof_fora_contrato[i] = Math.floor(((principal[i]*qtd_dias*iof_diario)/100)*100)/100 + Math.floor((principal[i]*iof_adicional)*100)/100
             console.log("iof_fora_contrato", iof_fora_contrato[i], i)
+            
+            iof_fora_contrato_total += iof_fora_contrato[i]
+            console.log("iof_fora_contrato_total", iof_fora_contrato_total)
         }
 
         //> IOF_INICIAL
-        var iof_inicial = iof_fora_contrato[0]+iof_fora_contrato[1]+iof_fora_contrato[2]
+        var iof_inicial = Math.round(iof_fora_contrato_total*100)/100
         console.log("iof_inicial", iof_inicial)
 
         //----------------CALCULA O IOF DENTRO DO VALOR DO CONTRATO ---------------->

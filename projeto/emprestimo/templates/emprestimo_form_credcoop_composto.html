@@ -4,17 +4,7 @@
 {% block js %}{% endblock js %}
 
 {% block css %}
-<style> 
-    .table td, .table th {             
-        padding-left: 10px;
-        padding-top: 0px;  
-        padding-bottom: 0px;  
-        border-top: 1px solid #000000;            
-        border-bottom: 1px solid #000000;            
-        border-left: 1px solid #000000;            
-        border-right: 1px solid #000000;
-    }
-</style>
+
 {% endblock css %}
 
 {% block content %}
@@ -30,45 +20,50 @@
         {% csrf_token %}
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="">Cliente Credcoop</label>
-                        {% render_field form.cliente type="text" class="form-control" %}
-                    </div>
+                    <label for="">Cliente Credcoop</label>
+                    <select id="cliente" class="form-control" name="cliente">
+                        <option id="foo">----------------</option>
+                        {% for cliente in clientes %}
+                            <option value="{{cliente.pk}}" {% if cliente.pk|stringformat:'s' in clientes %} selected="selected" {% endif %}>
+                                {{ cliente.nome }}
+                            </option>
+                        {% endfor %}
+                    </select>
                 </div>
                 <div class="col-sm-6"> 
+                    <label for="">{{form.valor_emprestado.label}}</label>
                     <div class="form-group">
-                        <label for="">{{form.valor_emprestado.label}}</label>
-                        {% render_field form.valor_emprestado class="form-control" id="valor_emprestado"%}
+                        {% render_field form.valor_emprestado class="form-control form-control-sm" id="valor_emprestado" onchange="somar()"%}
                     </div>
                 </div>        
                 <div class="col-sm-4">                    
+                    <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
                     <div class="form-group" >                
-                        <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
-                        {% render_field form.qtd_parcelas class="form-control" id="qtd_parcelas"%}
+                        {% render_field form.qtd_parcelas value="1" class="form-control form-control-sm" id="qtd_parcelas" onchange="somar()"%}
                     </div>
                 </div>
 
                 {% if object.pk %} 
                     <div class="col-sm-4">
+                        <label for="">{{form.dt_emprestimo.label}}</label>   
                         <div class="form-group">
-                            <label for="">{{form.dt_emprestimo.label}}</label>   
-                            {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" onblur="somar()"%}                    
+                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" onblur="somar()"%}                    
                         </div>                  
                     </div> 
-                {% else %}    
+                {% else %}
                     <div class="col-sm-4">
+                        <label for="">{{form.dt_emprestimo.label}}</label>   
                         <div class="form-group">
-                            <label for="">{{form.dt_emprestimo.label}}</label>   
-                            {% render_field form.dt_emprestimo class="form-control" id="dataselecionada" type="date" %}                    
+                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" type="date" onchange="somar()"%}                    
                         </div>                  
                     </div> 
                 {% endif %}
 
                 <div class="col-sm-4"> 
+                    <label for="">{{form.valor_prestacao.label}}</label>
                     <div class="form-group" id="res">
-                        <label for="">{{form.valor_prestacao.label}}</label>
-                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control" id="prestacao" %}
-                    </div>  
+                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control form-control-sm" id="prestacao" %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,9 +122,12 @@
         {% render_field form.sequencia class="form-control" id="sequencia" type="hidden" %}
         <!-- ELEMENTOS OCULTOS -->
         </form>
-    </div>
+    </div>    
     
     <script>
+    $(document).ready(function () {
+        $('#cliente').select2();
+    });
     
     //VERIFICAR A FUNCIONALIDADE DESSE SCRIPT!!!!!!!!!!!!!!
     function toFixed(num, fixed) {
@@ -213,7 +211,6 @@
         }       
 
         //> qtd_dias
-
         iof_fora_contrato_total = 0
         for (let i = 0 ; i < qtd_parcelas; i++){
             if(mes_num == 1 || mes_num == 3 || mes_num == 5 || mes_num == 7 || mes_num == 8 || mes_num == 10 || mes_num == 12){
@@ -228,7 +225,8 @@
             mes_num+=1
             if(mes_num == 13){
                 mes_num = 1
-            } 
+            }
+
         //> iof_fora_contrato
             iof_fora_contrato[i] = Math.floor(((principal[i]*qtd_dias*iof_diario)/100)*100)/100 + Math.floor((principal[i]*iof_adicional)*100)/100
             console.log("iof_fora_contrato", iof_fora_contrato[i], i)
