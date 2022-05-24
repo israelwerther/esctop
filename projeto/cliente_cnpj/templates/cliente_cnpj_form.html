@@ -168,18 +168,18 @@
                 {% render_field form.rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="numero_casa" class="required">{{form.numero_casa.label}} </label>        
+                {% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text"%}
+            </div>
+        </div>
         <div class="col-sm-5">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.bairro.label}} </label>        
                 {% render_field form.bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
             </div>
         </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.uf.label}} </label>        
-                {% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
-            </div>
-        </div>            
         <div class="col-sm-3">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.cidade.label}} </label>        
@@ -188,10 +188,10 @@
         </div>
         <div class="col-sm-1">                    
             <div class="form-group" >                
-                <label for="numero_casa" class="required">{{form.numero_casa.label}} </label>        
-                {% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text"%}
+                <label for="" class="required">{{form.uf.label}} </label>        
+                {% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
             </div>
-        </div>
+        </div>            
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.complemento.label}} </label>        
@@ -440,16 +440,16 @@
                 {% render_field form.rep_rua class="form-control form-control-sm" id="logradouro" type="text"%}
             </div>
         </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="" > {{form.rep_numero_casa.label}} </label>        
+                {% render_field form.rep_numero_casa class="form-control form-control-sm"%}
+            </div>
+        </div>
         <div class="col-sm-5">                    
             <div class="form-group" >
                 <label for="bairro2" class="required">{{form.rep_bairro.label}} </label>        
                 {% render_field form.rep_bairro class="form-control form-control-sm" id="bairro2" type="text"%}
-            </div>
-        </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >
-                <label for="uf2" class="required">{{form.rep_uf.label}} </label>        
-                {% render_field form.rep_uf class="form-control form-control-sm" id="uf2" type="text"%}
             </div>
         </div>
         <div class="col-sm-3">                    
@@ -459,14 +459,14 @@
             </div>
         </div>
         <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" > {{form.rep_numero_casa.label}} </label>        
-                {% render_field form.rep_numero_casa class="form-control form-control-sm"%}
+            <div class="form-group" >
+                <label for="uf2" class="required">{{form.rep_uf.label}} </label>
+                {% render_field form.rep_uf class="form-control form-control-sm" id="uf2" type="text"%}
             </div>
         </div>
-        <div class="col-sm-4">                    
-            <div class="form-group" >                
-                <label for="" >{{form.rep_ponto_referencia.label}} </label>        
+        <div class="col-sm-4">
+            <div class="form-group" >
+                <label for="" >{{form.rep_ponto_referencia.label}} </label>
                 {% render_field form.rep_ponto_referencia class="form-control form-control-sm" %}
             </div>
         </div>            

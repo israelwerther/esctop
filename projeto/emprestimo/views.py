@@ -104,7 +104,7 @@ class EmprestimoCompostoCreateEsctop(CreateView):
         sequencial = Emprestimo.objects.all().order_by('sequencia').last()
         context['sequencial'] = sequencial.sequencia
         context['ultimo_contrato'] = sequencial.n_contrato
-        context['clientes'] = Cliente_cnpj.objects.all()
+        context['clientes_cnpj'] = Cliente_cnpj.objects.all()
         
         return context
     

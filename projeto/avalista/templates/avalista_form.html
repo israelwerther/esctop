@@ -160,7 +160,7 @@
         </div>
     </div>     
     <hr>
-        <h3>ENDEREÇO</h3>               
+        <h3>ENDEREÇO</h3>
     <hr/>
     <div class="row">
         {% comment %} ENDEREÇO INICIO {% endcomment %}
@@ -179,18 +179,18 @@
                 {% render_field form.fiador_rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
             </div>
         </div>
+        <div class="col-sm-1">                    
+            <div class="form-group" >                
+                <label for="" class="required">{{form.fiador_numero_casa.label}} </label>        
+                {% render_field form.fiador_numero_casa class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
+            </div>
+        </div>
         <div class="col-sm-5">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.fiador_bairro.label}} </label>        
                 {% render_field form.fiador_bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
             </div>
         </div>
-        <div class="col-sm-1">                    
-            <div class="form-group" >                
-                <label for="" class="required">{{form.fiador_uf.label}} </label>        
-                {% render_field form.fiador_uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
-            </div>
-        </div>            
         <div class="col-sm-3">                    
             <div class="form-group" >                
                 <label for="" class="required">{{form.fiador_cidade.label}} </label>        
@@ -199,10 +199,10 @@
         </div>
         <div class="col-sm-1">                    
             <div class="form-group" >                
-                <label for="" class="required">{{form.fiador_numero_casa.label}} </label>        
-                {% render_field form.fiador_numero_casa class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
+                <label for="" class="required">{{form.fiador_uf.label}} </label>        
+                {% render_field form.fiador_uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
             </div>
-        </div>
+        </div>            
         <div class="col-sm-4">                    
             <div class="form-group" >                
                 <label for="" >{{form.fiador_complemento.label}} </label>        
