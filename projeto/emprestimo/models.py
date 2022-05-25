@@ -65,7 +65,6 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         
         self.sequencia = sequencia
         self.n_contrato = f'{modalidade}{tipo_cliente}{data}{sequencia}'
-        print("self.n_contrato", self.n_contrato)
 
 # class EmprestimoParcelas(models.Model):
 #     valor_parcela = models.DecimalField("Valor da Parcela", max_digits=10, decimal_places=2, null=True, blank=True)
