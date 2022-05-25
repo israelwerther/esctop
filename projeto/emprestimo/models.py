@@ -1,3 +1,4 @@
+from email.policy import default
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse_lazy
@@ -32,7 +33,7 @@ class Emprestimo(models.Model):
     presencial           = models.BooleanField("Presencial", default=False)
     online               = models.BooleanField("Online", default=False)
 
-    sequencia = models.PositiveIntegerField("Sequencia", null=True, blank=True)
+    sequencia = models.PositiveIntegerField("Sequencia", null=True, blank=True, default=1)
     created_at  = models.DateTimeField(verbose_name='Registrado em', auto_now_add=True, blank=True, null=True)
 
 
