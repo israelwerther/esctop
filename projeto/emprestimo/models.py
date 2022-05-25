@@ -33,7 +33,7 @@ class Emprestimo(models.Model):
     presencial           = models.BooleanField("Presencial", default=False)
     online               = models.BooleanField("Online", default=False)
 
-    # sequencia = models.PositiveIntegerField("Sequencia", null=True, blank=True)
+    sequencia = models.PositiveIntegerField("Sequencia", null=True, blank=True)
     created_at  = models.DateTimeField(verbose_name='Registrado em', auto_now_add=True, blank=True, null=True)
 
 

@@ -101,9 +101,9 @@ class EmprestimoCompostoCreateEsctop(CreateView):
     def get_context_data(self, **kwargs):
         context = super(EmprestimoCompostoCreateEsctop, self).get_context_data(**kwargs)
 
-        # sequencial = Emprestimo.objects.all().order_by('sequencia').last()
-        # context['sequencial'] = sequencial.sequencia
-        # context['ultimo_contrato'] = sequencial.n_contrato
+        sequencial = Emprestimo.objects.all().order_by('sequencia').last()
+        context['sequencial'] = sequencial.sequencia
+        context['ultimo_contrato'] = sequencial.n_contrato
         context['clientes_cnpj'] = Cliente_cnpj.objects.all()
         
         return context
