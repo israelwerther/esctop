@@ -15,7 +15,7 @@
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
         {% else %}
         <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP(JUROS COMPOSTO)</h3>
-        <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
+        <form method="POST" novalidate>
         {% endif %}
         {% csrf_token %}
             <div class="row">
@@ -30,6 +30,7 @@
                         {% endfor %}
                     </select>
                 </div>
+                {{form.errors}}
                 <div class="col-sm-6"> 
                     <label for="">{{form.valor_emprestado.label}}</label>
                     <div class="form-group">
@@ -102,8 +103,8 @@
                         <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>
                     {% else %}
                         <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
-                        <button type="submit" class="btn btn-success pull-right m-1" onclick="somar(), sequencial()">Cadastrar</button>
-                        <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
+                        <button type="submit" class="btn btn-success pull-right m-1" onclick="somar()">Cadastrar</button>
+                        <button type="button" onclick="somar()" class="btn btn btn-primary m-1">Calcular Parcela</button>
                         {% endif %}
                     </div>
                 </div>
@@ -117,9 +118,8 @@
         {% render_field form.juros_moratorio class="form-control" id="juros_moratorio" type="hidden" %}
         {% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" type="hidden" %}
         {% render_field form.iof_real class="form-control" id="iof_real" type="hidden" %}
-        {% render_field form.valor_devido class="form-control" id="valor_devido" type="hidden" %}    
+        {% render_field form.valor_devido class="form-control" id="valor_devido" type="hidden" %}
         {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}
-        {% render_field form.sequencia class="form-control" id="sequencia" type="hidden" %}
         <!-- ELEMENTOS OCULTOS -->
         </form>
     </div>    
@@ -295,39 +295,6 @@
 
         // LANÇA TAXA DE IOF TOTAL 
         document.getElementById('iof_real').value = iof_final
-    }
-
-    //GERA UM NUMERO SEQUENCIAL BASEADO NA DATA E HORA ATUAL
-    function sequencial(){
-        var dt   = new Date()        
-        var ano  = document.getElementById("dataselecionada").value.split("-")[0];
-        ano      = String(ano)
-        // RETORNA APENAS OS DOIS ULTIMOS DIGITOS DO ANO
-        ano           = (ano.substr(2, 3))
-        var mes       = document.getElementById("dataselecionada").value.split("-")[1];
-        var dia       = document.getElementById("dataselecionada").value.split("-")[2];
-        var online    = document.getElementById("online").checked
-        
-        var sequencia = ano
-        var sequencia = sequencia+mes       
-        var sequencia = sequencia+dia
-
-        var teste = "{{sequencial}}"
-        teste = Number(teste)+1
-        teste = String(teste)    
-        //console.log("Teste", teste)
-
-        if (online == true) {
-            var modalidade = 1
-        }else {
-            var modalidade = 0
-        }
-        
-        var sequencia = modalidade+sequencia+teste
-        document.getElementById('n_contrato').value = sequencia
-        document.getElementById('sequencia').value = teste
-        console.log("modalidade", modalidade)
-        console.log("sequencia", sequencia)
     }
 
     // função para marcar online quando presencial não está marcado

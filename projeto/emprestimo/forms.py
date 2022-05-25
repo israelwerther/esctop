@@ -28,7 +28,6 @@ class EmprestimoForm(forms.ModelForm):
             'postergar',
             'online',
             'presencial',
-            'sequencia',
         ]
         
 

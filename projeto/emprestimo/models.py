@@ -8,8 +8,9 @@ from projeto.cliente.models import Cliente
 from projeto.cliente_cnpj.models import Cliente_cnpj
 # testando o timedelta
 from datetime import timedelta
+from django_lifecycle import LifecycleModelMixin, hook
 
-class Emprestimo(models.Model):
+class Emprestimo( LifecycleModelMixin, models.Model):
     funcionario          = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     cliente              = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
     cliente_cnpj         = models.ForeignKey(Cliente_cnpj, on_delete=models.CASCADE, null=True, blank=True)    
@@ -47,6 +48,24 @@ class Emprestimo(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('emprestimo:emprestimo_detail', kwargs={'pk': self.pk})
 
+    @hook('before_create')
+    def gera_num_contrato(self):
+        modalidade = 1 if self.online else 0
+        tipo_cliente = 1 if self.cliente else 0
+        data = self.dt_emprestimo.strftime('%m%Y')
+        ultimo_emprestimo = Emprestimo.objects.all().order_by('created_at').last()
+
+        if ultimo_emprestimo.sequencia is None:
+            sequencia = 1
+        else:
+            if not Emprestimo.objects.filter(dt_emprestimo__year = self.dt_emprestimo.strftime('%Y')).exists():
+                sequencia = 1
+            else:
+                sequencia = ultimo_emprestimo.sequencia + 1
+        
+        self.sequencia = sequencia
+        self.n_contrato = f'{modalidade}{tipo_cliente}{data}{sequencia}'
+        print("self.n_contrato", self.n_contrato)
 
 # class EmprestimoParcelas(models.Model):
 #     valor_parcela = models.DecimalField("Valor da Parcela", max_digits=10, decimal_places=2, null=True, blank=True)
@@ -57,5 +76,5 @@ class EmprestimoPagamento(models.Model):
     valor_pago           = models.DecimalField("Valor Pago", max_digits=10, decimal_places=2, null=True, blank=True)
     data_pagamento       = models.DateField("Data do Pagamento", auto_now_add=False, auto_now=False, null=True,blank=True,)
 
-   
+
 

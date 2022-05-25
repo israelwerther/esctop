@@ -101,17 +101,22 @@ class EmprestimoCompostoCreateEsctop(CreateView):
     def get_context_data(self, **kwargs):
         context = super(EmprestimoCompostoCreateEsctop, self).get_context_data(**kwargs)
 
-        sequencial = Emprestimo.objects.all().order_by('sequencia').last()
+        sequencial = Emprestimo.objects.all().order_by('created_at').last()
         context['sequencial'] = sequencial.sequencia
         context['ultimo_contrato'] = sequencial.n_contrato
         context['clientes_cnpj'] = Cliente_cnpj.objects.all()
         
         return context
     
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
+    def form_invalid(self, form):
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@", form.errors)
+        return super(EmprestimoCompostoCreateEsctop, self).form_invalid(form)
+    
+    def form_valid(self, form):
+        obj = form.save(commit=False)
         obj.funcionario = self.request.user
-        return super(EmprestimoCompostoCreateEsctop, self).form_valid(form_class)
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        return super(EmprestimoCompostoCreateEsctop, self).form_valid(form)
 
     
 class EmprestimoUpdate(UpdateView):
