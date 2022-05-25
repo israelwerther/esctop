@@ -56,7 +56,7 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         data = self.dt_emprestimo.strftime('%m%Y')
         ultimo_emprestimo = Emprestimo.objects.filter(
             dt_emprestimo__year = timezone.now().year,
-        ).order_by('-sequencia').first()
+        ).order_by('sequencia').first()
         
         if ultimo_emprestimo.sequencia is None:
             sequencia = 1
