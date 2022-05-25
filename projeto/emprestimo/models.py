@@ -9,6 +9,7 @@ from projeto.cliente_cnpj.models import Cliente_cnpj
 # testando o timedelta
 from datetime import timedelta
 from django_lifecycle import LifecycleModelMixin, hook
+from django.utils import timezone
 
 class Emprestimo( LifecycleModelMixin, models.Model):
     funcionario          = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -53,12 +54,14 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         modalidade = 1 if self.online else 0
         tipo_cliente = 1 if self.cliente else 0
         data = self.dt_emprestimo.strftime('%m%Y')
-        ultimo_emprestimo = Emprestimo.objects.all().order_by('created_at').last()
-
+        ultimo_emprestimo = Emprestimo.objects.filter(
+            dt_emprestimo__year = timezone.now().year,
+        ).order_by('-sequencia').first()
+        
         if ultimo_emprestimo.sequencia is None:
             sequencia = 1
         else:
-            if not Emprestimo.objects.filter(dt_emprestimo__year = self.dt_emprestimo.strftime('%Y')).exists():
+            if not Emprestimo.objects.filter(dt_emprestimo__year = timezone.now().year).exists():
                 sequencia = 1
             else:
                 sequencia = ultimo_emprestimo.sequencia + 1
