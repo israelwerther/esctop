@@ -1,4 +1,5 @@
 from email.policy import default
+from queue import Empty
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse_lazy
@@ -56,17 +57,18 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         data = self.dt_emprestimo.strftime('%m%Y')
         ultimo_emprestimo = Emprestimo.objects.filter(
             dt_emprestimo__year = timezone.now().year,
-        ).order_by('sequencia').first()
-        
-        if ultimo_emprestimo.sequencia is None:
+        ).order_by('-sequencia').first()        
+        print("!!!!!!!!!!!!!!!!!!!!!!!!", ultimo_emprestimo.sequencia)
+        # if not ultimo_emprestimo.sequencia:
+        #     sequencia = 1
+        # else:
+        if not Emprestimo.objects.filter(dt_emprestimo__year = timezone.now().year).exists():
             sequencia = 1
         else:
-            if not Emprestimo.objects.filter(dt_emprestimo__year = timezone.now().year).exists():
-                sequencia = 1
-            else:
-                sequencia = ultimo_emprestimo.sequencia + 1
+            sequencia = ultimo_emprestimo.sequencia + 1
         
         self.sequencia = sequencia
+        print("!!!!!!!!!!!!!!!!!!!!!!!!", f'{modalidade}{tipo_cliente}{data}{sequencia}')
         self.n_contrato = f'{modalidade}{tipo_cliente}{data}{sequencia}'
 
 # class EmprestimoParcelas(models.Model):
