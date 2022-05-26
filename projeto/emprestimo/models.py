@@ -62,8 +62,7 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         if Emprestimo.objects.exists():
             ultimo_emprestimo = Emprestimo.objects.filter(
                 dt_emprestimo__year = timezone.now().year,
-                dt_emprestimo = timezone.now().date(),
-            ).order_by('-sequencia').first()
+            ).order_by('pk').last()
         
         if not Emprestimo.objects.filter(dt_emprestimo__year = timezone.now().year).exists():
             sequencia = 1
