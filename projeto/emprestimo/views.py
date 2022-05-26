@@ -8,6 +8,7 @@ from .forms import EmprestimoForm, EmprestimoPagamentoForm
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
+from django.utils import timezone
 
 
 @login_required
@@ -60,6 +61,8 @@ class EmprestimoCompostoCreateCredcoop(CreateView):
         # context['sequencial'] = sequencial.sequencia
         # context['ultimo_contrato'] = sequencial.n_contrato
         context['clientes'] = Cliente.objects.all()
+        print("timezone.now().year", timezone.now().year)
+        print("timezone.now().year", timezone.now().day)
         return context
     
     def form_valid(self, form_class):

@@ -56,20 +56,21 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         tipo_cliente = 1 if self.cliente else 0
         data = self.dt_emprestimo.strftime('%m%Y')
         sequencia = 0
-        ultimo_emprestimo = Emprestimo.objects.filter(
-            dt_emprestimo__year = timezone.now().year,
-        ).order_by('sequencia').first()        
-        print("!!!!!!!!!!!!!!!!!!!!!!!!", ultimo_emprestimo.sequencia)
-        # if not ultimo_emprestimo.sequencia:
-        #     sequencia = 1
-        # else:
+
+        print("timezone.now().year", timezone.now().year)
+
+        if Emprestimo.objects.exists():
+            ultimo_emprestimo = Emprestimo.objects.filter(
+                dt_emprestimo__year = timezone.now().year,
+                dt_emprestimo__day = timezone.now().day,
+            ).order_by('-sequencia').first()
+        
         if not Emprestimo.objects.filter(dt_emprestimo__year = timezone.now().year).exists():
             sequencia = 1
         else:
             sequencia = ultimo_emprestimo.sequencia + 1
         
         self.sequencia = sequencia
-        print("!!!!!!!!!!!!!!!!!!!!!!!!", f'{modalidade}{tipo_cliente}{data}{sequencia}')
         self.n_contrato = f'{modalidade}{tipo_cliente}{data}{sequencia}'
 
 # class EmprestimoParcelas(models.Model):
