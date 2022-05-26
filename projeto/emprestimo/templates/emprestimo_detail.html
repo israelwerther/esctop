@@ -154,9 +154,14 @@
         <span>
             <h4 class="mt-2">Imprimir</h4>
             <div class="btn-group pb-1" role="group">
+                <i class="bi bi-printer-fill"></i>
             {% if object.cliente %}
                 <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
-                <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning">Carnê</a>    
+                <a type="button" class="btn btn-outline-warning active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                    <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                    <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                </svg></a>
+                <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning">Carnê</a>
             {% endif %}
                 <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning">Promissória</a>                
             {% if object.cliente_cnpj %}  
@@ -171,7 +176,11 @@
 
         <span>
             <h4 class="mt-4">Renegociação</h4>
-            <div class="btn-group" role="group" >
+            <div class="btn-group" role="group">
+                <a type="button" class="btn btn-outline-success active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                    <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                    <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
+                </svg></a>
                 <a href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success">Promissória Renegociação</a>
             {% if object.cliente_cnpj %}
                 <a href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato Renegociação </a>
