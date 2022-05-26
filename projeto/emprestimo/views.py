@@ -62,7 +62,7 @@ class EmprestimoCompostoCreateCredcoop(CreateView):
         # context['ultimo_contrato'] = sequencial.n_contrato
         context['clientes'] = Cliente.objects.all()
         print("timezone.now().year", timezone.now().year)
-        print("timezone.now().year", timezone.now().day)
+        print("timezone.now().year", timezone.now())
         return context
     
     def form_valid(self, form_class):
