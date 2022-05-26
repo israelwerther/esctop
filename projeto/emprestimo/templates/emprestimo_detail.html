@@ -4,168 +4,186 @@
 
 {% block content %}
 
-<span class="pull-right">
-    <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-secondary">Voltar</a>
-    {% comment %} <a href="{% url 'emprestimo:emprestimo_edit' object.pk %}" type="button" class="btn btn-info">Editar</a> {% endcomment %}
-   
-    <div class="btn-group" role="group" >        
-    {% if object.cliente %}
-        <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
-        <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>    
-    {% endif %}
-        <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-warning">Promissória</a>
-        <a href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-success">Promissória Renegociação</a>
-    {% if object.cliente_cnpj %}  
-        <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-warning"> Contrato </a>
-        <a href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-success"> Contrato Renegociação </a>
-    {% endif %}
-
-    {% if object.cliente %}
-        <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-warning"> Contrato </a>
-        <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-success"> Contrato </a>
-    {% endif %}        
-    </div>
-</span>
-
-<h1>Emprestimo Nº {{ object.n_contrato }}</h1>
-
-<div class="col-sm-6">
-    <table class="table table-user-information" style="text-transform: uppercase;">
-        <tbody>
-            <tr>
-                <th class="text-right">Funcionario</th>
-                <td>{{ object.funcionario }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Nº Contrato</th>
-                <td>{{ object.n_contrato }}</td>
-            </tr>
-
-            {% if object.cliente %}
-            <tr>
-                <th class="text-right">Cliente</th>
-                <td>{{ object.cliente }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">CPF</th>
-                <td>{{ object.cliente.cpf }}</td>
-            </tr>
-            {% else %}
-            <tr>
-                <th class="text-right">Cliente</th>
-                <td>{{ object.cliente_cnpj }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">CNPJ</th>
-                <td>{{ object.cliente_cnpj.cnpj }}</td>
-            </tr>
-            {% endif %}
-
-            <tr>
-                <th class="text-right">Valor</th>
-                <td>{{ object.valor_emprestado }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Parcelas</th>
-                <td>{{ object.qtd_parcelas }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Prestacao</th>
-                <td>{{ object.valor_prestacao }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Data do Empréstimo</th>
-                <td type="form-control">{{ object.dt_emprestimo }}</td>                               
-            </tr>  
-            {% if object.cliente %}
-            <tr>
-                <th class="text-right">E-mail</th>
-                <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Fiador</th>
-                <td class="text-left" type="form-control">{{ object.cliente.fiador }}</td>
-            </tr>                
-            <tr>
-                <th class="text-right">CPF do Fiador</th>
-                <td class="text-left" type="form-control">{{ object.cliente.fiador.cpf }}</td>
-            </tr>                 
-            <tr>
-                <th class="text-right">E-Mail do Fiador</th>
-                <td class="text-left lower_all" type="form-control">{{ object.cliente.fiador.email }}</td>
-            </tr>      
-            <tr>
-                <th class="text-right">Banco</th>
-                <td class="text-left">{{ object.cliente.banco }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Tipo de Conta</th>
-                <td class="text-left">{{ object.cliente.tipo_de_conta }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Agência</th>
-                <td class="text-left">{{ object.cliente.agencia }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Conta</th>
-                <td class="text-left">{{ object.cliente.conta }}</td>
-            </tr> 
-            <tr>
-                <th class="text-right">PIX</th>
-                <td class="text-left">{{ object.cliente.tipo_de_chave_pix }} | {{ object.cliente.chave_pix }}</td>
-            </tr>         
-            {% else %}
-            <tr>
-                <th class="text-right">E-mail</th>
-                <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
-            </tr>
-            <tr>            
-                <th class="text-right">Fiador</th>
-                <td class="text-left">{{ object.cliente_cnpj.fiador }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">CPF do Fiador</th>
-                <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">E-Mail do Fiador</th>
-                <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Banco</th>
-                <td class="text-left">{{ object.cliente_cnpj.banco }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Tipo de Conta</th>
-                <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Agência</th>
-                <td class="text-left">{{ object.cliente_cnpj.agencia }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">Conta</th>
-                <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
-            </tr>
-            <tr>
-                <th class="text-right">PIX</th>
-                <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
-            </tr>
-            {% endif %}
-            <tr>
-                {% if object.presencial %}
-                    <th class="text-right">Modalidade</th>
-                    <td class="text-left">Presencial</td>
-                {% endif %}  
-                {% if object.online %}
-                    <th class="text-right">Modalidade</th>
-                    <td class="text-left">online</td>
-                {% endif %}
-            </tr>
-        </tbody>
-    </table>    
+<div class="row card card-body">
+    <h1>Emprestimo Nº {{ object.n_contrato }}</h1>
 </div>
-<span class="pull-left">
-    <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>    
-</span>
+<div class="row mt-1">
+    <div class="col-7 card card-body">        
+            <table class="table table-user-information" style="text-transform: uppercase;">
+                <tbody>
+                    <tr>
+                        <th class="text-right">Funcionario</th>
+                        <td>{{ object.funcionario }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Nº Contrato</th>
+                        <td>{{ object.n_contrato }}</td>
+                    </tr>
+        
+                    {% if object.cliente %}
+                    <tr>
+                        <th class="text-right">Cliente</th>
+                        <td>{{ object.cliente }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">CPF</th>
+                        <td>{{ object.cliente.cpf }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <th class="text-right">Cliente</th>
+                        <td>{{ object.cliente_cnpj }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">CNPJ</th>
+                        <td>{{ object.cliente_cnpj.cnpj }}</td>
+                    </tr>
+                    {% endif %}
+        
+                    <tr>
+                        <th class="text-right">Valor</th>
+                        <td>{{ object.valor_emprestado }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Parcelas</th>
+                        <td>{{ object.qtd_parcelas }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Prestacao</th>
+                        <td>{{ object.valor_prestacao }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Data do Empréstimo</th>
+                        <td type="form-control">{{ object.dt_emprestimo }}</td>                               
+                    </tr>  
+                    {% if object.cliente %}
+                    <tr>
+                        <th class="text-right">E-mail</th>
+                        <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Fiador</th>
+                        <td class="text-left" type="form-control">{{ object.cliente.fiador }}</td>
+                    </tr>                
+                    <tr>
+                        <th class="text-right">CPF do Fiador</th>
+                        <td class="text-left" type="form-control">{{ object.cliente.fiador.cpf }}</td>
+                    </tr>                 
+                    <tr>
+                        <th class="text-right">E-Mail do Fiador</th>
+                        <td class="text-left lower_all" type="form-control">{{ object.cliente.fiador.email }}</td>
+                    </tr>      
+                    <tr>
+                        <th class="text-right">Banco</th>
+                        <td class="text-left">{{ object.cliente.banco }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Tipo de Conta</th>
+                        <td class="text-left">{{ object.cliente.tipo_de_conta }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Agência</th>
+                        <td class="text-left">{{ object.cliente.agencia }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Conta</th>
+                        <td class="text-left">{{ object.cliente.conta }}</td>
+                    </tr> 
+                    <tr>
+                        <th class="text-right">PIX</th>
+                        <td class="text-left">{{ object.cliente.tipo_de_chave_pix }} | {{ object.cliente.chave_pix }}</td>
+                    </tr>         
+                    {% else %}
+                    <tr>
+                        <th class="text-right">E-mail</th>
+                        <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
+                    </tr>
+                    <tr>            
+                        <th class="text-right">Fiador</th>
+                        <td class="text-left">{{ object.cliente_cnpj.fiador }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">CPF do Fiador</th>
+                        <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">E-Mail do Fiador</th>
+                        <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Banco</th>
+                        <td class="text-left">{{ object.cliente_cnpj.banco }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Tipo de Conta</th>
+                        <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Agência</th>
+                        <td class="text-left">{{ object.cliente_cnpj.agencia }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">Conta</th>
+                        <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">PIX</th>
+                        <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
+                    </tr>
+                    {% endif %}
+                    <tr>
+                        {% if object.presencial %}
+                            <th class="text-right">Modalidade</th>
+                            <td class="text-left">Presencial</td>
+                        {% endif %}  
+                        {% if object.online %}
+                            <th class="text-right">Modalidade</th>
+                            <td class="text-left">online</td>
+                        {% endif %}
+                    </tr>
+                </tbody>
+            </table>
+        <span class="pull-left">
+            <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>    
+        </span>
+    </div>
+    <div class="col-5 card card-body">
+        <div  style="position: -webkit-sticky; position: sticky; top: 60px;">
+        <span>
+            <div class="btn-group pb-1" role="group" >
+            {% if object.cliente %}
+                <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
+                <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning">Carnê</a>    
+            {% endif %}
+                <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning">Promissória</a>                
+            {% if object.cliente_cnpj %}  
+                <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning"> Contrato </a>
+            {% endif %}
+        
+            {% if object.cliente %}
+                <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning"> Contrato </a>
+            {% endif %}        
+            </div>
+        </span>
+
+        <span>
+            <h4 class="mt-4">Renegociação</h4>
+            <div class="btn-group" role="group" >
+                <a href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success">Promissória Renegociação</a>
+            {% if object.cliente_cnpj %}
+                <a href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato Renegociação </a>
+            {% endif %}
+        
+            {% if object.cliente %}
+                <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato </a>
+            {% endif %}        
+            </div>
+        </span>        
+    </div>
+    </div>
+</div>
+
+
+
+
 {% endblock content %}

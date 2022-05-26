@@ -57,8 +57,6 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         data = self.dt_emprestimo.strftime('%m%Y')
         sequencia = 0
 
-        print("timezone.now().year", timezone.now().year)
-
         if Emprestimo.objects.exists():
             ultimo_emprestimo = Emprestimo.objects.filter(
                 dt_emprestimo__year = timezone.now().year,
