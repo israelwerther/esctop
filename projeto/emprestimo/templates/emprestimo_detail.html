@@ -4,8 +4,10 @@
 
 {% block content %}
 
-<div class="row card card-body">
-    <h1>Emprestimo Nº {{ object.n_contrato }}</h1>
+<div class="row" style="position: -webkit-sticky; position: sticky; top: 50px; z-index:5">
+    <div class="col-7 card card-body">
+        <h1>Emprestimo Nº {{ object.n_contrato }}</h1>
+    </div>
 </div>
 <div class="row mt-1">
     <div class="col-7 card card-body">        
@@ -148,9 +150,10 @@
         </span>
     </div>
     <div class="col-5 card card-body">
-        <div  style="position: -webkit-sticky; position: sticky; top: 60px;">
+        <div style="position: -webkit-sticky; position: sticky; top: 60px;">
         <span>
-            <div class="btn-group pb-1" role="group" >
+            <h4 class="mt-2">Imprimir</h4>
+            <div class="btn-group pb-1" role="group">
             {% if object.cliente %}
                 <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
                 <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-outline-warning">Carnê</a>    
