@@ -23,7 +23,7 @@
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
     {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(NOVA ALÍQUOTA)</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP</h3>
         <form action="{% url 'emprestimo:create_esctop' %}" method="POST" novalidate>
     {% endif %}
 
@@ -79,16 +79,12 @@
             <h4>MODALIDADE DO EMPRÉSTIMO</h4>
             <div class="row">
                 <div class="col-sm-2"> 
-                    <div class="form-group"> 
-                        <label for="" >Presencial</label>
-                        {% render_field form.presencial class="form-control" %}
+                    <div class="form-group">
                         <label class="checkbox-inline"> {{form.presencial.label}} <input type="checkbox" value="presencial" id="presencial" name="presencial"></label>
                     </div>    
                 </div>
                 <div class="col-sm-2"> 
-                    <div class="form-group"> 
-                        <label for="" >Online</label>
-                        {% render_field form.online class="form-control" %}
+                    <div class="form-group">
                         <label class="checkbox-inline"> {{form.online.label}} <input type="checkbox" value="online" id="online" name="online"></label>                    
                     </div>    
                 </div>
@@ -158,8 +154,8 @@
         {% else %}
             <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>        
             <button type="submit" class="btn btn-success pull-right m-1">Cadastrar</button>
-            <button type="button" onclick="somar(), sequencial()" class="btn btn btn-primary m-1">Calcular Parcela</button>
-            <button type="button" onclick="somar2(), sequencial()" class="btn btn btn-dark m-1">Calcular Parcela(com boleto)</button>
+            <button type="button" onclick="somar()" class="btn btn btn-primary m-1">Calcular Parcela</button>
+            <button type="button" onclick="somar2()" class="btn btn btn-dark m-1">Calcular Parcela(com boleto)</button>
         </form>    
         {% endif %}
     <br>  
@@ -455,39 +451,8 @@
         valor_devido = valor_devido.toFixedDown(2) //verificar pq não salva sem .toFixedDown(2) 
         document.getElementById('valor_devido').value = valor_devido
         document.getElementById('valor_devido_info').innerHTML = numberToReal(valor_devido)
-        
     }
-
-    //GERA UM NUMERO SEQUENCIAL BASEADO NA DATA E HORA ATUAL
-    function sequencial(){
-        var dt = new Date()      
-        // var ano = String(dt.getYear())
-        var ano       = document.getElementById("dataselecionada").value.split("-")[0];
-        ano = String(ano)
-        // RETORNA APENAS OS DOIS ULTIMOS DIGITOS DO ANO
-        ano = (ano.substr(2, 3))
-        var mes       = document.getElementById("dataselecionada").value.split("-")[1];
-        var dia       = document.getElementById("dataselecionada").value.split("-")[2];   
-        var hora      = String(dt.getHours())
-        var minutos   = String(dt.getMinutes())        
-        var sequencia = ano
-        var sequencia = sequencia+mes       
-        var sequencia = sequencia+dia    
-
-        if(hora<10){
-            sequencia += '0'
-        } 
-        var sequencia = sequencia+hora  
-
-        if(minutos<10 && minutos>0){
-            sequencia += '0'
-        }
-        var sequencia = sequencia+minutos  
-
-        document.getElementById('n_contrato').value = sequencia
-       
-    }
-       
+    
 </script>
 
 

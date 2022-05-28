@@ -39,6 +39,7 @@ class Emprestimo( LifecycleModelMixin, models.Model):
     sequencia = models.PositiveIntegerField("Sequencia", null=True, blank=True)
     created_at  = models.DateTimeField(verbose_name='Registrado em', auto_now_add=True, blank=True, null=True)
 
+    renegociar = models.BooleanField("Renegociação", default=False)
 
     class Meta:
         ordering = ('-dt_emprestimo',)
@@ -53,8 +54,8 @@ class Emprestimo( LifecycleModelMixin, models.Model):
     @hook('before_create')
     def gera_num_contrato(self):
         modalidade = 1 if self.online else 0
-        tipo_cliente = 1 if self.cliente else 0
-        data = self.dt_emprestimo.strftime('%m%Y')
+        tipo_cliente = 0 if self.cliente else 1
+        data = self.dt_emprestimo.strftime('%d%m%Y')
         sequencia = 0
 
         if Emprestimo.objects.exists():
