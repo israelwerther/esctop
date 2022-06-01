@@ -14,7 +14,7 @@
         <h3>Editar {{emprestimo.cliente_cnpj}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
         {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP(JUROS COMPOSTO)</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP</h3>
         <form method="POST" novalidate>
         {% endif %}
         {% csrf_token %}
@@ -78,7 +78,7 @@
                         </label>
                     </div>    
                 </div>
-                <div class="col-sm-2 d-none">
+                <div class="col-sm-2">
                     <div class="form-group">
                         <label for="" >Boleto</label>
                         {% render_field form.boleto class="form-control" %}

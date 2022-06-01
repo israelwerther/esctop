@@ -14,7 +14,7 @@
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
         {% else %}
-        <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP(JUROS COMPOSTO)</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP</h3>
         <form method="POST" novalidate>
         {% endif %}
         {% csrf_token %}
