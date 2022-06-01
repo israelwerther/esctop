@@ -167,14 +167,14 @@ function somar(){
         var parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas)*100)/100            
     }
     //console.log("parcela_final", parcela_final)
-    document.getElementById('prestacao').value = parcela_final        
+    document.getElementById('prestacao').value = parcela_final
     
     // CALCULA MULTA POR ATRASO 
     var valor_multa = parseFloat((parcela_final*multa_por_atraso)).toFixed(2)
-    document.getElementById('multa').value = valor_multa        
+    document.getElementById('multa').value = valor_multa
 
     // CALCULA JUROS AO DIA
-    var juros_ao_dia = (parcela_final*juros_moratorio).toFixed(2)       	
+    var juros_ao_dia = (parcela_final*juros_moratorio).toFixed(2)
     document.getElementById('juros_ao_dia').value = juros_ao_dia
     
     // LANÇA O VALOR MUTUADO

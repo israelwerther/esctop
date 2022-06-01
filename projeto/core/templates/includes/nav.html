@@ -87,19 +87,19 @@
 						Empréstimo
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">						
-						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop'%}">CREDCOOP(Antigo)</a>
+						{% comment %} <a class="dropdown-item" href="{% url 'emprestimo:create_credcoop'%}">CREDCOOP(Antigo)</a> {% endcomment %}
 						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop_composto'%}">CREDCOOP
-							<span class="badge badge-success">Novo</span>
+							{% comment %} <span class="badge badge-success">Novo</span> {% endcomment %}
 						</a>
 						<div class="dropdown-divider"></div>						
-						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop'%}">ESCTOP(Antigo)</a>
+						{% comment %} <a class="dropdown-item" href="{% url 'emprestimo:create_esctop'%}">ESCTOP(Antigo)</a> {% endcomment %}
 						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop_composto'%}">ESCTOP
-							<span class="badge badge-success">Novo</span>
+							{% comment %} <span class="badge badge-success">Novo</span> {% endcomment %}
 						</a>
-						<div class="dropdown-divider"></div>		
+						{% comment %} <div class="dropdown-divider"></div>		
 						<a class="dropdown-item" href="{% url 'emprestimo:form_emprestimo'%}">SIMULAR
 							<span class="badge badge-success">Novo</span>
-						</a>
+						</a> {% endcomment %}
 					</div>
 				</li>
 
