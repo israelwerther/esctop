@@ -150,7 +150,7 @@ window.onload = function imprimir(){
         var valor_emprestado   = Number({{object.valor_emprestado}})
         var qtd_parcelas       = Number({{object.qtd_parcelas}})
         var prestacao          = Number({{object.valor_prestacao}})
-        var n_contrato         = Number({{object.n_contrato}})        
+        //var n_contrato         = Number({{object.n_contrato}})        
         var principal          = valor_emprestado/qtd_parcelas  
         var mes_do_emprestimo  = Number({{object.dt_emprestimo.month}})
     
@@ -333,7 +333,7 @@ window.onload = function imprimir(){
         `
         <div class="num_contrato" > 
             <strong> Nº DO CONTRATO </strong> <br>
-            ${n_contrato}
+            ${"{{object.n_contrato}}"}
         </div>
         <br>
         `
