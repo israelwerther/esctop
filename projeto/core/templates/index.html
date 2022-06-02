@@ -1,9 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="jumbotron jumbotron-fluid shadow rounded" >
-        <div class="container" >
-            <h1>Bem Vindo</h1>
+<div class="jumbotron jumbotron-fluid shadow rounded">
+    <div class="container">
+        <h1>Bem Vindo</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 col-sm-6 col-12">
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+            <div class="card-header"><h5>Aniversariantes de hoje</h5></div>
+            <div class="card-body">
+                {% if total_aniversariantes > 0 %}
+                    <p class="card-title">{{total_aniversariantes}} Aniversariante(s)</p>
+                    <a href="{% url 'core:aniversariantes'%}" class="btn btn-primary">Ver lista</a>
+                {% else %}
+                    <p class="card-text">Nenhum aniversariante hoje</p>
+                {% endif %}
+            </div>
         </div>
     </div>
+</div>
+
 {% endblock content %}
