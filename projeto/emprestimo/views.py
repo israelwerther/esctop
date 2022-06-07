@@ -162,7 +162,7 @@ class EmprestimoContratoCNPJ(UpdateView):
     model=Emprestimo
     template_name='emprestimo_contrato_cnpj.html'
     form_class=EmprestimoForm
-    print("#######################################")
+    
 
 class EmprestimoContratoCNPJRenegociacao(UpdateView):
     model=Emprestimo

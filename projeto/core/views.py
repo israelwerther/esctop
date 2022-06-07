@@ -7,14 +7,11 @@ from django.views.generic import TemplateView, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from projeto.cliente.models import Cliente
+from projeto.cliente_cnpj.models import Cliente_cnpj
+from projeto.avalista.models import Avalista
+
 from itertools import chain
 
-from projeto.cliente_cnpj.models import Cliente_cnpj
-
-
-# @login_required
-# def index(request):
-#     return render(request, 'index.html')
 
 class Index(LoginRequiredMixin, TemplateView):
     template_name = 'index.html'
@@ -24,28 +21,33 @@ class Index(LoginRequiredMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
-
+        
         aniversariantes_credcoop = Cliente.objects.filter(
             data_nasc__month=date.today().month,
             data_nasc__day=date.today().day
         )
 
-        aniversariantes_esctop = Cliente_cnpj.objects.filter(
-            fiador__fiador_data_nasc__month=date.today().month,
-            fiador__fiador_data_nasc__day=date.today().day
+        aniversariantes_representante_esctop = Cliente_cnpj.objects.filter(
+            rep_data_nasc__month=date.today().month,
+            rep_data_nasc__day=date.today().day
         )
 
-        total_aniversariantes = aniversariantes_credcoop.count() + aniversariantes_esctop.count()
-        
-        
+        aniversariantes_fiador_esctop = Avalista.objects.filter(
+            fiador_data_nasc__month=date.today().month,
+            fiador_data_nasc__day=date.today().day
+        )
+
+        total_aniversariantes = aniversariantes_credcoop.count() + aniversariantes_representante_esctop.count() + aniversariantes_fiador_esctop.count()
         
         context['total_aniversariantes'] = total_aniversariantes
 
         return context
 
 
+
+
 class Aniversariantes(LoginRequiredMixin, TemplateView):
-    template_name = 'aniversariantes.html'    
+    template_name = 'aniversariantes_lista.html'
 
     def test_func(self):
         return self.request.user.is_superuser
@@ -58,16 +60,19 @@ class Aniversariantes(LoginRequiredMixin, TemplateView):
             data_nasc__day=date.today().day
         )
 
-        aniversariantes_esctop = Cliente_cnpj.objects.filter(
-            fiador__fiador_data_nasc__month=date.today().month,
-            fiador__fiador_data_nasc__day=date.today().day
+        aniversariantes_representante_esctop = Cliente_cnpj.objects.filter(
+            rep_data_nasc__month=date.today().month,
+            rep_data_nasc__day=date.today().day
         )
 
-        result_list = list(chain(aniversariantes_credcoop, aniversariantes_esctop))
+        aniversariantes_fiador_esctop = Avalista.objects.filter(
+            fiador_data_nasc__month=date.today().month,
+            fiador_data_nasc__day=date.today().day
+        )
+
+        result_list = list(chain(aniversariantes_credcoop, aniversariantes_representante_esctop, aniversariantes_fiador_esctop))
         
-        print("@@@@@@@@@@@@@@@@@@@@", result_list)
-        
-        context['aniversariantes_credcoop'] = result_list
+        context['aniversariantes'] = result_list
 
         return context
 

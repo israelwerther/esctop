@@ -6,7 +6,7 @@ from projeto.core.models import Banco, Chave_PIX, Tipo_de_conta
 
 
 class Cliente(models.Model):
-    #dados pessoais 
+    #Dados pessoais do Cliente Credcoop
     nome                  = models.CharField("Nome", max_length=50, blank=False, null=True)
     cpf                   = models.CharField("CPF", max_length=20, unique=True)
     rg                    = models.CharField("RG",max_length=20, blank=False, null=True)

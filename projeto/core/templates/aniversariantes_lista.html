@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link href="{% static 'bootstrap/css/jquery.datatables.min.css' %}" rel="stylesheet">
+<link href="{% static 'bootstrap/css/responsive.datatables.min.css' %}" rel="stylesheet">
+
+<style>    
+    .dataTables_length, .dataTables_filter{
+        display: none;
+    }
+
+</style>
+{% endblock css %}
+
+{% block content %}
+
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Início</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lista de aniversariantes</li>
+        </ol>
+    </nav>
+
+    <hr class="mg-t-50 mg-b-40">
+    <div class="card card-body">        
+        <h4 id="section2" class="mg-b-10">Aniversariantes do dia</h4>
+        <p class="mg-b-30">Lista com todos os aniversariantes do dia de hoje</p>
+        <div data-label="Example" class="df-example demo-table">
+            {% if aniversariantes %}
+            <table id="example2" class="table table-hover mg-b-0">
+                <thead>
+                    <tr>
+                        <th class="wd-10p">Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for aniversariante in aniversariantes %}
+                        <tr class="text-uppercase">                                
+                            {% if aniversariante.nome %}
+                                <td>{{aniversariante.nome}} <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#staticBackdrop{{ forloop.counter }}">Ver contatos</button></td>
+                            {% elif aniversariante.razao_social %}
+                                <td>{{aniversariante.razao_social}} <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#staticBackdrop{{ forloop.counter }}">Ver contatos</button></td>
+                            {% else %}
+                                <td >{{aniversariante.fiador_nome}} <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#staticBackdrop{{ forloop.counter }}">Ver contatos</button></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="mg-t-50 mg-b-40">
+
+    <!-- Modal -->
+    {% for aniversariante in aniversariantes %}
+        <div class="modal fade" id="staticBackdrop{{ forloop.counter }}" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdrop{{ forloop.counter }}Label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdrop{{ forloop.counter }}Label">Contatos do cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <tr class="text-uppercase">
+                            <!-- Cliente Credcoop -->
+                            {% if aniversariante.nome %}
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">{{aniversariante.nome}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if aniversariante.contato1 %}
+                                        <tr>
+                                            <td>
+                                                <label>Contato 1</label>
+                                                <h5>{{aniversariante.contato1}}</h5>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if aniversariante.contato2 %}
+                                        <tr>
+                                            <td>
+                                                <label>Contato 2</label>
+                                                <h5>{{aniversariante.contato2}}</h5>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if aniversariante.celular1 %}
+                                        <tr>
+                                            <td>
+                                                <label>Celular 1</label>
+                                                <h5>{{aniversariante.celular1}}</h5>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                    {% if aniversariante.celular2 %}
+                                        <tr>
+                                            <td>
+                                                <label>Celular 2</label>
+                                                <h5>{{aniversariante.celular2}}</h5>
+                                            </td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                            {% elif aniversariante.razao_social %}
+                                <h5>2</h5>
+                            {% else %}
+                                <h5>3</h5>
+                            {% endif %}
+                        </tr>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'bootstrap/js/jquery.datatables.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/datatables.datatables.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/datatables.responsive.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/responsive.datatables.min.js' %}"></script>
+
+<script>
+    $('#example2').DataTable({
+        responsive: true,
+        language: {
+            searchPlaceholder: 'Buscar...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page',
+            info: "Mostrando _PAGE_ de _PAGES_ paginas",
+        }
+    });    
+</script>
+{% endblock js %}
