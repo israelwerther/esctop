@@ -161,11 +161,13 @@ function somar(){
     var valor_total_a_Prazo = Math.round((valor_contrato*(1+juros)**qtd_parcelas)*100)/100
 
     //> parcela_final
-    if (boleto == true){        
-        var parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas+10)*100)/100           
+    var parcela_final = 0
+    if (boleto == true){
+        parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas+10)*100)/100           
     }else {
-        var parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas)*100)/100            
+        parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas)*100)/100
     }
+    
     //console.log("parcela_final", parcela_final)
     document.getElementById('prestacao').value = parcela_final
     
@@ -178,12 +180,12 @@ function somar(){
     document.getElementById('juros_ao_dia').value = juros_ao_dia
     
     // LANÇA O VALOR MUTUADO
-    var valor_mutuado = valor_total_a_Prazo
+    var valor_mutuado = valor_emprestado+iof_final
     document.getElementById('valor_mutuado').value = valor_mutuado
 
     // LANÇA VALOR DEVIDO 
-    valor_devido = valor_total_a_Prazo
-    document.getElementById('valor_devido').value = valor_devido        
+    valor_devido = parcela_final*qtd_parcelas
+    document.getElementById('valor_devido').value = valor_devido
 
     // LANÇA TAXA DE JUROS AO MÊS
     var taxa_juros_a_m = juros*100 .toFixed(2)

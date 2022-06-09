@@ -151,12 +151,6 @@ class EmprestimoPromissoriaRenegociacao(UpdateView):
     template_name='emprestimo_promissoria_renegociacao.html'
     form_class=EmprestimoForm
 
-    
-# class EmprestimoContrato(UpdateView):
-#     model=Emprestimo
-#     template_name='emprestimo_contrato.html'
-#     form_class=EmprestimoForm
-
 
 class EmprestimoContratoCNPJ(UpdateView):
     model=Emprestimo
