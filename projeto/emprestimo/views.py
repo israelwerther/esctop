@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils import timezone
+from django.http import JsonResponse
 
 
 @login_required
@@ -57,12 +58,7 @@ class EmprestimoCompostoCreateCredcoop(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(EmprestimoCompostoCreateCredcoop, self).get_context_data(**kwargs)
-        # sequencial = Emprestimo.objects.all().order_by('sequencia').last()
-        # context['sequencial'] = sequencial.sequencia
-        # context['ultimo_contrato'] = sequencial.n_contrato
         context['clientes'] = Cliente.objects.all()
-        print("timezone.now().year", timezone.now().year)
-        print("timezone.now().year", timezone.now())
         return context
     
     def form_valid(self, form_class):
@@ -100,17 +96,13 @@ class EmprestimoCompostoCreateEsctop(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super(EmprestimoCompostoCreateEsctop, self).get_context_data(**kwargs)
-        # sequencial = Emprestimo.objects.all().order_by('created_at').last()
-        # context['sequencial'] = sequencial.sequencia
-        # context['ultimo_contrato'] = sequencial.n_contrato
-        context['clientes_cnpj'] = Cliente_cnpj.objects.all()        
+        context['clientes_cnpj'] = Cliente_cnpj.objects.all()
         return context
     
     def form_valid(self, form):
         obj = form.save(commit=False)
         obj.funcionario = self.request.user
         return super(EmprestimoCompostoCreateEsctop, self).form_valid(form)
-
     
 class EmprestimoUpdate(UpdateView):
     model=Emprestimo

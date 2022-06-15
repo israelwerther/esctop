@@ -96,7 +96,6 @@ function somar(){
 
     //> parcela
     parcela = ((valor_emprestado*(1+juros)**(qtd_parcelas)).toFixed(2)/qtd_parcelas) .toFixed(2)
-    
 
     //> encargos[i]
     encargos[0] = Math.round((valor_emprestado*juros)*100)/100    
@@ -168,7 +167,6 @@ function somar(){
         parcela_final = Math.round((valor_total_a_Prazo/qtd_parcelas)*100)/100
     }
     
-    //console.log("parcela_final", parcela_final)
     document.getElementById('prestacao').value = parcela_final
     
     // CALCULA MULTA POR ATRASO 
@@ -185,7 +183,8 @@ function somar(){
 
     // LANÇA VALOR DEVIDO 
     valor_devido = parcela_final*qtd_parcelas
-    document.getElementById('valor_devido').value = valor_devido
+    document.getElementById('valor_devido').value = valor_devido.toFixed(2)
+    console.log("valor_devido: ", valor_devido)
 
     // LANÇA TAXA DE JUROS AO MÊS
     var taxa_juros_a_m = juros*100 .toFixed(2)
