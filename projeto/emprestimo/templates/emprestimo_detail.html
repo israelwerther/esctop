@@ -166,6 +166,9 @@
             {% if object.cliente_cnpj %}  
                 <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary"> Contrato </a>
             {% endif %}
+            {% if object.cliente_cnpj %}  
+                <a href="{% url 'emprestimo:emprestimo_contrato_cnpj+emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary"> Contrato+Prmissória </a>
+            {% endif %}
         
             {% if object.cliente %}
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary"> Contrato </a>

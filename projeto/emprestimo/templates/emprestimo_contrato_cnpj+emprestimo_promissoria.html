@@ -137,6 +137,11 @@
         <div id = "contrato" class="col-sm-6">
            
         </div>
+    </div>
+    <div class="document">
+        <div id = "promissoria" class="col-sm-6">
+           
+        </div>
     </div>  
     
 <script>
@@ -250,16 +255,16 @@ window.onload = function imprimir(){
     //VARIÁVEIS DO CLIENTE CNPJ
     var cliente_cnpj         = "{{object.cliente_cnpj.razao_social}}"
     var fundacao             = "{{object.cliente_cnpj.fundacao}}"
-    var razao_social         = "{{object.cliente_cnpj.razao_social}}"
+
     var cnpj                 = "{{object.cliente_cnpj.cnpj}}"
     var cnpj_cep             = "{{object.cliente_cnpj.cep}}"
-    var cnpj_rua             = "{{object.cliente_cnpj.rua}}"
+ 
     var cnpj_bairro          = "{{object.cliente_cnpj.bairro}}"
     var cnpj_cidade          = "{{object.cliente_cnpj.cidade}}"
     var cnpj_uf              = "{{object.cliente_cnpj.uf}}"
     var cnpj_numero_casa     = "{{object.cliente_cnpj.numero_casa}}"
-    var cnpj_celular1        = "{{object.cliente_cnpj.celular1}}"
-    var cnpj_email           = "{{object.cliente_cnpj.email}}"
+    
+    
 
     //VARIÁVEIS DO CLIENTE CNPJ(REPRESENTANTE)
     var representante               = "{{object.cliente_cnpj.rep_nome}}"
@@ -360,11 +365,11 @@ window.onload = function imprimir(){
 
         <div class="quadro" > 
             <strong> II-CONTRATANTE MUTUÁRIA </strong><br>
-            Nome/Razão Social: <a class="maiusculo">${razao_social}</a>,
+            Nome/Razão Social: <a class="maiusculo">${"{{object.cliente_cnpj.razao_social}}"}</a>,
             CNPJ: ${cnpj},
-            Endereço: ${cnpj_rua}, ${cnpj_numero_casa}, ${cnpj_bairro}, ${cnpj_cidade}-${cnpj_uf} CEP: ${cnpj_cep},
-            Telefone: ${cnpj_celular1},
-            E-mail: ${cnpj_email} 
+            Endereço: {{object.cliente_cnpj.rua}}, ${cnpj_numero_casa}, ${cnpj_bairro}, ${cnpj_cidade}-${cnpj_uf} CEP: ${cnpj_cep},
+            Telefone: {{object.cliente_cnpj.celular1}},
+            E-mail: {{object.cliente_cnpj.email}}
         </div>
 
         <div class="quadro" > 
@@ -713,7 +718,7 @@ window.onload = function imprimir(){
 
         <div class="paragrafo" style="text-align:center">
             ____________________________________________________________<br>
-            <strong> ${razao_social} </strong><br>
+            <strong> {{object.cliente_cnpj.razao_social}} </strong><br>
             CONTRATANTE MUTUÁRIA            
         </div>
         <div class="paragrafo" style="text-align:center">
@@ -730,10 +735,16 @@ window.onload = function imprimir(){
             ______________________________________________________________<br>
             <strong>${fiador}</strong><br>
             FIADOR
-        </div>  
+        </div> 
         `
     }
+        
 }
+
+
+
+
+
 
 
 String.prototype.extenso = function(c){
@@ -766,6 +777,11 @@ function toFixed(num, fixed) {
 }  
 
 </script>
+
+
+
+
+
 </body>
 </html>
 
