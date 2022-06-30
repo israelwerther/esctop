@@ -1,5 +1,5 @@
 from django.shortcuts import render, resolve_url, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView, DetailView
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 
@@ -148,7 +148,19 @@ class EmprestimoContratoCNPJ(UpdateView):
     model=Emprestimo
     template_name='emprestimo_contrato_cnpj.html'
     form_class=EmprestimoForm
+
+
+class EsctopEmprestimoContratoPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos/esctop_contrato_e_promissoria.html'
     
+    def get_context_data(self, **kwargs):
+        context = super(EsctopEmprestimoContratoPromissoria, self).get_context_data(**kwargs)
+		
+        return context
 
 class EmprestimoContratoCNPJRenegociacao(UpdateView):
     model=Emprestimo
