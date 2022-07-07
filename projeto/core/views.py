@@ -27,6 +27,8 @@ class Index(LoginRequiredMixin, TemplateView):
             data_nasc__day=date.today().day
         )
 
+        print("==============================================", aniversariantes_credcoop)
+
         aniversariantes_representante_esctop = Cliente_cnpj.objects.filter(
             rep_data_nasc__month=date.today().month,
             rep_data_nasc__day=date.today().day

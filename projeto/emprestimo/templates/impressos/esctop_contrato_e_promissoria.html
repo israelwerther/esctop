@@ -14,75 +14,107 @@
 {% block content %}
 
     <div class="document">
-        <div id="contrato">
-            <div class="container">
-
-                <div class="row justify-content-center">
-                    <h3>
-                        <p class="font-weight-bold">
-                            <u>CONTRATO DE MÚTUO FINANCEIRO</u>
-                        </p>
-                    </h3>
-                </div>
-
-                <div class="row justify-content-center text-uppercase">
-                    <div class="text-center col-4 border border-dark">
-                        <span class="font-weight-bold">
-                            Nº do contrato
-                        </span>
-                        <br>
-                        <span>{{object.n_contrato}}</span>
-                    </div>
-                    <div class="text-center col-1"></div>
-                    
-                    <div class="text-center col-4 border border-dark">
-                        <span class="font-weight-bold">
-                            Valor do crédito
-                        </span>
-                        <br>
-                        <span>R$ {{object.valor_emprestado}}</span>
-                    </div>
-                </div>
-
-                <div class="row pt-4">
-
-                    <div class="col-12 border border-dark d-flex justify-content-center text-center">
-                        <h3 class="mb-0 font-weight-bold my-2">QUADRO 01 - PARTES</h3> 
-                    </div>
-                    <div class="col-12 border border-dark">
-                        <h5 class="mb-0 font-weight-bold my-2">I-CONTRATANTE MUTUANTE</h5>
-                        <p class="text-justify">
-                            Nome/Razão Social: ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA CNPJ: 35.297.061/0001-47 Endereço: Av. das Fronteiras, 1287, Bairro: Nsa Sra da Apresentação, Cidade: Natal RN- CEP: 59114-275 Telefone: (84) 9 9461-9962 E-mail: esctoprn@gmail.com
-                        </p>
-                    </div>
-
-                    <div class="col-12 border border-dark">
-                        <h5 class="mb-0 font-weight-bold my-2"> II-CONTRATANTE MUTUÁRIA</h5>
-                        <p class="text-justify">
-                            Nome/Razão Social: {{object.cliente_cnpj.razao_social}},
-                            CNPJ: {{object.cliente_cnpj.cnpj}},
-                            Endereço: {{object.cliente_cnpj.cnpj_rua}}, {{object.cliente_cnpj.cnpj_numero_casa}}, {{object.cliente_cnpj.cnpj_bairro}}, {{object.cliente_cnpj.cnpj_cidade}}-{{object.cliente_cnpj.cnpj_uf}} CEP: {{object.cliente_cnpj.cnpj_cep}},
-                            Telefone: {{object.cliente_cnpj.cnpj_celular1}},
-                            E-mail: {{object.cliente_cnpj.cnpj_email}}
-                        </p>
-                    </div>
-
-                    <div class="col-12 border border-dark">
-                        <h5 class="mb-0 font-weight-bold my-2"> II.1-REPRESENTANTE MUTUÁRIA</h5>
-                        <p class="text-justify">
-                            Nome: {{object.cliente_cnpj.rep_nome}}, CPF: 078.013.424-96, RG/órgão Emissor: 002691927, ssp - rn, Nacionalidade: BRASILEIRA, Estado Civil: Casado Endereço: Avenida das Fronteiras, 1289, Nossa Senhora da Apresentação, Natal-RN, CEP: 59114-275
-                        </p>
-                    </div>
-                    
-                </div>
-
+        <div class="container">
+            <div class="row justify-content-center">
+                <h3>
+                    <p class="font-weight-bold">
+                        <u>CONTRATO DE MÚTUO FINANCEIRO</u>
+                    </p>
+                </h3>
             </div>
+
+            <div class="row justify-content-center text-uppercase">
+                <div class="text-center col-4 border border-dark">
+                    <span class="font-weight-bold">
+                        Nº do contrato
+                    </span>
+                    <br>
+                    <span>{{object.n_contrato}}</span>
+                </div>
+                <div class="text-center col-1"></div>
+                
+                <div class="text-center col-4 border border-dark">
+                    <span class="font-weight-bold">
+                        Valor do crédito
+                    </span>
+                    <br>
+                    <span>R$ {{object.valor_emprestado}}</span>
+                </div>
+            </div>
+
+            <div class="row pt-4">
+
+                {% comment %} QUADRO 01 - PARTES {% endcomment %}
+                <div class="col-12 border border-dark d-flex justify-content-center text-center">
+                    <h3 class="mb-0 font-weight-bold my-2">QUADRO 01 - PARTES</h3> 
+                </div>
+
+                {% comment %} I-CONTRATANTE MUTUANTE {% endcomment %}
+                <div class="col-12 border border-dark">
+                    <h5 class="mb-0 font-weight-bold my-2">I-CONTRATANTE MUTUANTE</h5>
+                    <p class="text-justify">
+                        Nome/Razão Social: ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA CNPJ: 35.297.061/0001-47 Endereço: Av. das Fronteiras, 1287, Bairro: Nsa Sra da Apresentação, Cidade: Natal RN- CEP: 59114-275 Telefone: (84) 9 9461-9962 E-mail: esctoprn@gmail.com
+                    </p>
+                </div>
+
+                {% comment %} II-CONTRATANTE MUTUÁRIA {% endcomment %}
+                <div class="col-12 border border-dark">
+                    <h5 class="mb-0 font-weight-bold my-2"> II-CONTRATANTE MUTUÁRIA</h5>
+                    <p class="text-justify">
+                        Nome/Razão Social: {{object.cliente_cnpj.razao_social}},
+                        CNPJ: {{object.cliente_cnpj.cnpj}},
+                        Endereço: {{object.cliente_cnpj.cnpj_rua}}, {{object.cliente_cnpj.cnpj_numero_casa}}, {{object.cliente_cnpj.cnpj_bairro}}, {{object.cliente_cnpj.cnpj_cidade}}-{{object.cliente_cnpj.cnpj_uf}} CEP: {{object.cliente_cnpj.cnpj_cep}},
+                        Telefone: {{object.cliente_cnpj.cnpj_celular1}},
+                        E-mail: {{object.cliente_cnpj.cnpj_email}}
+                    </p>
+                </div>
+
+                {% comment %} II.1-REPRESENTANTE MUTUÁRIA {% endcomment %}
+                <div class="col-12 border border-dark">
+                    <h5 class="mb-0 font-weight-bold my-2"> II.1-REPRESENTANTE MUTUÁRIA</h5>
+                    <p class="text-justify">
+                        Nome: {{object.cliente_cnpj.rep_nome}}, CPF: {{object.cliente_cnpj.rep_cpf}}, 
+                        RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, ssp - rn, Nacionalidade: BRASILEIRA, Estado Civil: Casado Endereço: Avenida das Fronteiras, 1289, Nossa Senhora da Apresentação, Natal-RN, CEP: 59114-275
+                    </p>
+                </div>
+
+                {% comment %} III-DO GARANTIDOR - FIADOR {% endcomment %}
+                <div class="col-12 border border-dark">
+                    <h5 class="mb-0 font-weight-bold my-2"> III-DO GARANTIDOR - FIADOR</h5>
+                    <p class="text-justify">
+                        Nome: {{object.cliente_cnpj.rep_nome}},
+                        CPF: {{object.cliente_cnpj.rep_cpf}}, 
+                        RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, {{object.cliente_cnpj.rep_orgao_emissor}}, 
+                        Nacionalidade: {{object.cliente_cnpj.rep_nacionalidade}}, 
+                        Estado Civil: {{object.cliente_cnpj.rep_estado_civil}} 
+                        Endereço: {{object.cliente_cnpj.rep_rua}}, {{object.cliente_cnpj.rep_numero_casa}}, {{object.cliente_cnpj.rep_bairro}}, {{object.cliente_cnpj.rep_cidade}}-{{object.cliente_cnpj.rep_uf}}, 
+                        CEP: {{object.cliente_cnpj.rep_cep}}
+                    </p>
+                </div>
+
+                {% comment %} QUADRO 02 - CRONOGRAMA DE REEMBOLSO {% endcomment %}
+                
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 border border-dark d-flex justify-content-center text-center">
+                    <h3 class="mb-0 font-weight-bold my-2">QUADRO 02 - CRONOGRAMA DE REEMBOLSO</h3> 
+                </div>
+            </div>
+            
+            <div class="row pt-4 px-5">
+                <div class="col-12 px-5">
+                    <div id = "tabela">
+        
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <div style="page-break-before:always"></div>
+    <!-- <div style="page-break-before:always"></div>
 
-    <!-- <div class="document">
+    <div class="document">
         <div id="contrato">
             <div style="page-break-before:after">
                 <h3>
@@ -92,7 +124,7 @@
                 </h3>
             </div>
         </div>
-    </div>   -->
+    </div> -->
 
 {% endblock content %}
 
@@ -100,6 +132,181 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-<script src="{% static 'js/contrato.js' %}" crossorigin="anonymous"></script>
+{% comment %} <script src="{% static 'js/contrato.js' %}" crossorigin="anonymous"></script> {% endcomment %}
+
+<script>
+    window.onload = function tabela_de_vencimento(){
+        var valor_emprestado   = Number({{object.valor_emprestado}})
+        var qtd_parcelas       = Number({{object.qtd_parcelas}})
+        var prestacao          = Number({{object.valor_prestacao}})
+        //var n_contrato         = Number({{object.n_contrato}})        
+        var principal          = valor_emprestado/qtd_parcelas  
+        var mes_do_emprestimo  = Number({{object.dt_emprestimo.month}})
+    
+        var qtd_dias          = 0
+        var iof_inicial       = 0
+        var iof_diario        = 0.0041        
+        var iof_adicional     = 0.0038  
+    
+    
+    for (var i = 0 ; i < qtd_parcelas; i++){
+        if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
+            qtd_dias += 31
+        }else{
+            qtd_dias +=30
+        }
+        if(mes_do_emprestimo == 13){
+            mes_do_emprestimo = 1
+        }
+        mes_do_emprestimo++
+    }
+    
+    
+        var valor_emprestado   = Number({{object.valor_emprestado}})                
+        var qtd_parcelas       = Number({{object.qtd_parcelas}})
+        var prestacao          = Number({{object.valor_prestacao}})
+        var valor_parcela = 0
+        var valor_devido = 0 
+        valor_parcela = String(toFixed(valor_parcela, 2))
+        
+        var valor_total_devido = 0
+        valor_total_devido = String(toFixed(valor_parcela*qtd_parcelas, 2))
+
+        //VARIÁVEIS DA DATA DO EMPRESTIMO
+        var contador_meses = 0
+        var contador_anos  = 0
+        var meses = new Array("01", "02", "03", "04", "05", "06" ,"07", "08", "09", "10", "11", "12")
+        var dataEmprestimo = "{{ object.dt_emprestimo}}"
+        var dt = new Date(dataEmprestimo)
+        var dia
+        var mes
+        var ano
+        var aux_dia = {{object.dt_emprestimo.day}}
+        var aux_mes = {{object.dt_emprestimo.month}}
+        var aux_ano = {{object.dt_emprestimo.year}}
+
+        var trinta_e_um = 0
+        
+        dia  = aux_dia
+        mes  = aux_mes+contador_meses
+        ano  = aux_ano
+
+        var contador_parcela = 0
+
+        //CORREÇÃO DO VALOR TOTAL
+        var valorTotal = parseFloat("{{object.valor_prestacao|floatformat:2}}".replace(',', '.'))
+        var parceTotal = parseInt("{{object.qtd_parcelas|floatformat:2}}".replace(',', '.'))
+
+        var resultado = 0 
+        resultado = parseFloat(valorTotal*parceTotal).toFixed(2)
+        resultado_ext = resultado
+        resultado_int = parseInt(resultado_ext)
+        resultado = resultado.replace('.', ',')
+
+        var real = parseInt(resultado_ext)	
+        real = String(real).extenso()
+        
+        var centavos = parseFloat((resultado_ext-resultado_int)).toFixed(2)	
+        centavos = String(centavos).extenso()
+    
+        tabela.innerHTML +=       
+        `
+            <table class="table table-bordered mb-0 text-center">
+                <thead>
+                    <tr>
+                        <th scope="col" width="33%" style="border: 2px solid black !important;">Nº PARCELAS</th>
+                        <th scope="col" width="33%" style="border: 2px solid black !important;">VENCIMENTO</th>
+                        <th scope="col" width="33%" style="border: 2px solid black !important;">VALOR</th>
+                    </tr>
+                </thead>
+        `
+        //VARIÁVEIS PARA AJUSTES DE DATA
+        var primeiro = false
+        var trinta_e_um = 0
+        for(var i=0; i<{{object.qtd_parcelas}}; i++){
+            mes++      
+            
+            if(dia == 1 && mes == 2 || dia == 1){
+                primeiro = true
+            }
+            if(dia == 31){
+                trinta_e_um = 31
+            }            
+            if(primeiro == false){
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
+                if(dia == 1 && mes == 4){
+                    dia = 30 
+                    mes = 3                
+                }
+                if(dia == 30 && mes == 2){
+                    dia = 1 
+                    mes = 3
+                }
+                if(dia == 31 && mes == 2){
+                    dia = 1 
+                    mes = 3
+                }
+                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
+                if(mes == 11 && trinta_e_um == 31){
+                    dia--
+                }
+                if(dia == 30 && mes == 12 && trinta_e_um == 31){
+                    dia++
+                }
+                if(dia == 30 && mes == 3 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 4 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 5 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 6 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 7 && trinta_e_um == 31){
+                    dia++
+                }
+                if(mes == 9 && trinta_e_um == 31){
+                    dia--
+                }
+                if(mes == 10 && trinta_e_um == 31){
+                    dia++
+                }
+            }         
+            if(primeiro == true){
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 01 FEVEREIRO
+                if(dia == 1 && mes == 3){
+                    dia = 1 
+                    mes = 3                
+                }
+            }        
+            
+            //AJUSTA MESES E ANOS 
+            if(mes == 13){
+                contador_meses = 0
+                aux_mes = 1
+                mes = 1	
+                aux_ano++
+                ano++				
+            }
+            
+        tabela.innerHTML +=
+            `
+                <table class="table table-bordered mb-0 text-center">
+                    <tbody>
+                        <tr>
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${i+1}/${"{{ object.qtd_parcelas}}"}</td>
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${dia}/${meses[mes-1]}/${ano}</td>
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${"{{ object.valor_prestacao}}"}</td>
+                        </tr>                          
+                    </tbody>
+                </table>
+                
+            `
+        }
+    }
+</script>
 
 {% endblock js %}
