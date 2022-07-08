@@ -170,6 +170,7 @@
         
             {% if object.cliente %}
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
+                <a href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato+Promissória</a>
             {% endif %}
             </div>
         </span>

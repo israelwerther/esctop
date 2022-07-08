@@ -36,5 +36,6 @@ urlpatterns = [
 
     # Novas impressões
     path('<int:pk>/contrato_e_promissoria/', login_required(v.EsctopEmprestimoContratoPromissoria.as_view()), name='contrato_e_promissoria'),
+    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopEmprestimoContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
 
 ]
