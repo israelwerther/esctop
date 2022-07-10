@@ -35,6 +35,6 @@ urlpatterns = [
     path('simular/', v.EmprestimoCreateView.as_view(), name='form_emprestimo'),
 
     # Novas impressões
-    path('<int:pk>/contrato_e_promissoria/', login_required(v.EsctopEmprestimoContratoPromissoria.as_view()), name='contrato_e_promissoria'),
+    path('<int:pk>/esctop_contrato_e_promissoria/', login_required(v.EsctopEmprestimoContratoPromissoria.as_view()), name='esctop_contrato_e_promissoria'),
 
 ]
