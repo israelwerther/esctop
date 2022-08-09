@@ -9,445 +9,436 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
 
     <title>{{object.cliente_cnpj.razao_social}}</title>
+
 </head>
 
 {% block content %}
+    
+    
+    <div class="row justify-content-center">
+        <h4>
+            <p class="font-weight-bold">
+                <u>CONTRATO DE MÚTUO FINANCEIRO</u>
+            </p>
+        </h4>
+    </div>
 
-    <div class="document">
-        <div class="container">
-            <div class="row justify-content-center">
-                <h3>
-                    <p class="font-weight-bold">
-                        <u>CONTRATO DE MÚTUO FINANCEIRO</u>
-                    </p>
-                </h3>
-            </div>
-
-            <div class="row justify-content-center text-uppercase">
-                <div class="text-center col-4 border border-dark">
-                    <span class="font-weight-bold">
-                        Nº do contrato
-                    </span>
-                    <br>
-                    <span>{{object.n_contrato}}</span>
-                </div>
-                <div class="text-center col-1"></div>
-                
-                <div class="text-center col-4 border border-dark">
-                    <span class="font-weight-bold">
-                        Valor do crédito
-                    </span>
-                    <br>
-                    <span>R$ {{object.valor_emprestado}}</span>
-                </div>
-            </div>
-
-            <div class="row pt-4">
-
-                {% comment %} QUADRO 01 - PARTES {% endcomment %}
-                <div class="col-12 border border-dark d-flex justify-content-center text-center">
-                    <h3 class="mb-0 font-weight-bold my-2">QUADRO 01 - PARTES</h3> 
-                </div>
-
-                {% comment %} I-CONTRATANTE MUTUANTE {% endcomment %}
-                <div class="col-12 border border-dark">
-                    <h5 class="mb-0 font-weight-bold my-2">I-CONTRATANTE MUTUANTE</h5>
-                    <p class="text-justify">
-                        Nome/Razão Social: ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA CNPJ: 35.297.061/0001-47 Endereço: Av. das Fronteiras, 1287, Bairro: Nsa Sra da Apresentação, Cidade: Natal RN- CEP: 59114-275 Telefone: (84) 9 9461-9962 E-mail: esctoprn@gmail.com
-                    </p>
-                </div>
-
-                {% comment %} II-CONTRATANTE MUTUÁRIA {% endcomment %}
-                <div class="col-12 border border-dark">
-                    <h5 class="mb-0 font-weight-bold my-2"> II-CONTRATANTE MUTUÁRIA</h5>
-                    <p class="text-justify">
-                        Nome/Razão Social: {{object.cliente_cnpj.razao_social}},
-                        CNPJ: {{object.cliente_cnpj.cnpj}},
-                        Endereço: {{object.cliente_cnpj.cnpj_rua}}, {{object.cliente_cnpj.cnpj_numero_casa}}, {{object.cliente_cnpj.cnpj_bairro}}, {{object.cliente_cnpj.cnpj_cidade}}-{{object.cliente_cnpj.cnpj_uf}} CEP: {{object.cliente_cnpj.cnpj_cep}},
-                        Telefone: {{object.cliente_cnpj.cnpj_celular1}},
-                        E-mail: {{object.cliente_cnpj.cnpj_email}}
-                    </p>
-                </div>
-
-                {% comment %} II.1-REPRESENTANTE MUTUÁRIA {% endcomment %}
-                <div class="col-12 border border-dark">
-                    <h5 class="mb-0 font-weight-bold my-2"> II.1-REPRESENTANTE MUTUÁRIA</h5>
-                    <p class="text-justify">
-                        Nome: {{object.cliente_cnpj.rep_nome}}, CPF: {{object.cliente_cnpj.rep_cpf}}, 
-                        RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, ssp - rn, Nacionalidade: BRASILEIRA, Estado Civil: Casado Endereço: Avenida das Fronteiras, 1289, Nossa Senhora da Apresentação, Natal-RN, CEP: 59114-275
-                    </p>
-                </div>
-
-                {% comment %} III-DO GARANTIDOR - FIADOR {% endcomment %}
-                {% if not object.cliente_cnpj.fiador %}
-                    <div class="col-12 border border-dark">
-                        <h5 class="mb-0 font-weight-bold my-2"> III-DO GARANTIDOR - FIADOR</h5>
-                        <p class="text-justify">
-                            Nome: {{object.cliente_cnpj.rep_nome}},
-                            CPF: {{object.cliente_cnpj.rep_cpf}}, 
-                            RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, {{object.cliente_cnpj.rep_orgao_emissor}}, 
-                            Nacionalidade: {{object.cliente_cnpj.rep_nacionalidade}}, 
-                            Estado Civil: {{object.cliente_cnpj.rep_estado_civil}} 
-                            Endereço: {{object.cliente_cnpj.rep_rua}}, {{object.cliente_cnpj.rep_numero_casa}}, {{object.cliente_cnpj.rep_bairro}}, {{object.cliente_cnpj.rep_cidade}}-{{object.cliente_cnpj.rep_uf}}, 
-                            CEP: {{object.cliente_cnpj.rep_cep}}
-                        </p>
-                    </div>
-                {% else %}
-                    <div class="col-12 border border-dark">
-                        <h5 class="mb-0 font-weight-bold my-2"> III-DO GARANTIDOR - FIADOR</h5>
-                        <p class="text-justify">
-                            Nome: {{object.cliente_cnpj.fiador.fiador_nome}},
-                            CPF: {{object.cliente_cnpj.fiador.fiador_cpf}}, 
-                            RG/órgão Emissor: {{object.cliente_cnpj.fiador.fiador_rg}}, {{object.cliente_cnpj.fiador.fiador_org_emissor}}, 
-                            Nacionalidade: {{object.cliente_cnpj.fiador.fiador_nacionalidade}}, 
-                            Estado Civil: {{object.cliente_cnpj.fiador.fiador_estado_civil}} 
-                            Endereço: {{object.cliente_cnpj.fiador.fiador_rua}}, {{object.cliente_cnpj.fiador.fiador_numero_casa}}, {{object.cliente_cnpj.fiador.fiador_bairro}}, {{object.cliente_cnpj.fiador.fiador_cidade}}-{{object.cliente_cnpj.fiador.fiador_uf}}, 
-                            CEP: {{object.cliente_cnpj.fiador.fiador_cep}}
-                        </p>
-                    </div>
-                {% endif %}
-                
-            </div>
-
-            {% comment %} QUADRO 02 - CRONOGRAMA DE REEMBOLSO {% endcomment %}
-            <div class="row mt-3">
-                <div class="col-12 border border-dark d-flex justify-content-center text-center">
-                    <h3 class="mb-0 font-weight-bold my-2">QUADRO 02 - CRONOGRAMA DE REEMBOLSO</h3> 
-                </div>
-            </div>
-            
-            <div class="row pt-4 px-5">
-                <div class="col-12 px-5">
-                    <div id = "tabela">
+    <div class="row justify-content-center text-uppercase">
+        <div class="text-center col-4 border border-dark">
+            <span class="font-weight-bold">
+                Nº do contrato
+            </span>
+            <br>
+            <span>{{object.n_contrato}}</span>
+        </div>
+        <div class="text-center col-1"></div>
         
-                    </div>
-                </div>
-            </div>
+        <div class="text-center col-4 border border-dark">
+            <span class="font-weight-bold">
+                Valor do crédito
+            </span>
+            <br>
+            <span>R$ {{object.valor_emprestado}}</span>
+        </div>
+    </div>
 
-            <div style="page-break-after:always"></div>
-            
-            <div class="row mt-3">
-                <div class="col-12 border border-dark d-flex justify-content-center text-center">
-                    <h3 class="mb-0 font-weight-bold my-2">QUADRO 03 - GARANTIA(S)</h3> 
-                </div>
-                <div class="col-6 border border-dark border-right-0">
-                    <p class="mt-3">
-                        (X) NOTAS PROMISSÓRIAS
-                    </p>
-                </div>
-                <div class="col-6 border border-dark border-left-0 text-right">
-                    <p class="mt-3">
-                        ( ) GARANTIA REAL
-                    </p>
-                </div>
-                <div class="col-12 border border-dark d-flex">                    
-                    <p class="mt-3">
-                        DESCRIÇÃO DA GARANTIA REAL:
-                    </p>
-                </div>
-                <div class="col-12 border border-dark d-flex justify-content-center text-center">
-                    <h3 class="mb-0 font-weight-bold my-2">
-                        <br>
-                    </h3> 
-                </div>
-            </div>
+    <div class="row pt-4">
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        Por este instrumento particular, as partes acima qualificadas, justas e acertadas, celebram o 
-                        presente <b>CONTRATO DE MÚTUO FINANCEIRO</b>, que se regerá pelo art. 586, do Código Civil Brasileiro, 
-                        pela Lei Complementar nº 167/2019 e pelas cláusulas e condições abaixo descritas:
-                    </p>
+        {% comment %} QUADRO 01 - PARTES {% endcomment %}
+        <div class="col-12 border border-dark d-flex justify-content-center text-center">
+            <h4 class="mb-0 font-weight-bold my-2">QUADRO 01 - PARTES</h4> 
+        </div>
 
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DA COMPOSIÇÃO DO CRÉDITO</h5>
-                    </p>
-                    <p class="text-justify">
-                        <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado R$ {{object.valor_mutuado}}, Taxa de Juros a.m 
-                        {{object.juros_ao_mes}}%, taxa de juros moratório {{object.juros_moratorio|floatformat:2}}% ao dia, multa por atraso: {{object.multa_por_atraso|floatformat:0}}%, 
-                        valor do IOF total: R$ {{object.iof_real}}, Valor total devido: R$ {{object.valor_devido}} <span id="h1">olá</span>  .
-                    </p>
-
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DO CRÉDITO</h5>
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 2ª. </b> A CONTRATADA MUTUANTE concedeu à CONTRATANTE MUTUÁRIA um empréstimo no valor descrito na cláusula 1ª – Composição do Crédito, que será restituído nas 
-                        épocas próprias e nas condições fixadas neste CONTRATO
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 3ª. </b> A restituição do valor mutuado, pela <b> CONTRATANTE MUTUÁRIA</b>, será feito conforme Cronograma de Reembolso acima.
-                    </p>
-
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DA FORMA E PRAZO DE PAGAMENTO</h5>
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 4ª. </b> A <b> CONTRATANTE MUTUÁRIA </b>fica obrigada a pagar à CONTRATADA MUTUANTE, nas datas especificadas no Quadro 02 – Cronograma de Reembolso, 
-                        o valor correspondente ao saldo devedor principal acrescido dos encargos financeiros pactuados e demais acessórios, quando houver.
-                    </p>
-
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DO PAGAMENTO ANTECIPADO</h5>
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 5ª. </b> A <b> CONTRATANTE MUTUÁRIA </b> poderá amortizar ou liquidar o débito antecipadamente, a qualquer tempo, com incidência de desconto, nos encargos, 
-                        em até o limite de aproximadamente, cinquenta por cento dos valores correspondentes ao que deveria pagar na normalidade do contrato sem antecipação, a depender de cada caso.  
-                    </p>
-
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DO VENCIMENTO ANTECIPADO DA DÍVIDA</h5>
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 6ª. </b>Em caso de não pagamento pontual das parcelas devidas, a <b> CONTRATADA MUTUANTE </b> poderá considerar vencidas antecipadamente, de pleno direito, 
-                        todas as demais parcelas ainda vincendas, exigindo o pagamento total da dívida independentemente de aviso extrajudicial ou interpelação judicial. Também poderá ser considerada integralmente 
-                        vencida e exigível a dívida: 
-                    </p>
-                    <p>
-                        <b> a) </b>no caso de apuração de falsidade, fraude ou inexatidão de qualquer declaração, informação ou documento que 
-                        houver sido prestador ou apresentado pela <b> CONTRATANTE MUTUÁRIA </b>, seus representantes legais e/ou garantidores;
-                    </p>
-                    <p>
-                        <b> b) </b>caso a <b> CONTRATANTE MUTUÁRIA </b>ajuizar pedido de falência ou recuperação judicial.  
-                    </p>
-
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DOS ENCARGOS FINANCEIROS</h5>
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 7ª. </b>  Sobre a valor mutuado incidirá juros conforme cláusula 1ª – Composição do Crédito, os quais serão 
-                        calculados de forma exponencial, com capitalização diária baseada em um ano de 365 (trezentos e sessenta e cinco) dias.  
-                    </p>
-                    <p>
-                        <b> CLÁUSULA 8ª. </b>  Na operação não incidirá qualquer valor relativo a tarifas ou taxas de empréstimo.
-                    </p>
-
-                    <p>
-                        <h5 class="mb-0 font-weight-bold my-2">DO INADIMPLEMENTO</h5>
-                    </p>
-                    <p>
-                        <b>CLÁUSULA 9ª. </b>Em caso de descumprimento de qualquer obrigação legal ou convencional, ou no caso de vencimento 
-                        antecipado da operação, serão exigidos, a partir do inadimplemento, calculados sobre o salvo devedor, capitalizados 
-                        diariamente e devidos cumulativamente, os encargos financeiros a seguir: I- atualização monetária pelo INPC-IBGE;
-                        II-  juros remuneratórios, à taxa contratada no período de normalidade contratual; III- juros de mora de {{object.juros_moratorio|floatformat:2}}% dia;
-                        IV- multa de {{object.multa_por_atraso|floatformat:0}}% (dois por cento) sobre o valor da parcela não paga.
-                    </p>
-
-                </div>
-            </div>
-
-            <div style="page-break-after:always"></div>
-
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <b> CLÁUSULA 10ª. </b> A constituição em mora ocorrerá independentemente de qualquer aviso ou notificação, resultando 
-                        do simples descumprimento das obrigações previstas neste <b> CONTRATO </b>.
-                    </p>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <b> CLÁUSULA 11. </b> Para garantir o cumprimento das obrigações deste CONTRATO, são constituídas em favor da 
-                        CONTRATADA MUTUANTE a(s) garantia(s) referida(s) no Quadro 03 – Garantia(s), quando houver.
-                    </p>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <b> CLÁUSULA 12ª. </b> As obrigações constituídas por este instrumento são extensivas e obrigatórias aos herdeiros, 
-                        sucessores e cessionários ou promitentes cessionários da <b> CONTRATANTE MUTUÁRIA </b> . E na impossibilidade de 
-                        adimplemento pela pessoa jurídica o débito será de responsabilidade da pessoa física titular da mesma, 
-                        <b> inclusive em caso de falecimento até o limite do patrimônio transferido </b>.
-                    </p>
-                </div>
-            </div>
-
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <b> CLÁUSULA 13ª. </b> Independentemente da modalidade de garantia ofertada – quando houver - a 
-                        <b> CONTRATANTE MUTUÁRIA </b> obriga-se a pagar o saldo remanescente, caso a importância 
-                        recebida na realização da garantia não seja suficiente para pagar o crédito da 
-                        <b> CONTRATADA MUTUANTE </b>, bem como as demais despesas previstas neste <b> CONTRATO </b>.
-                    </p>
-                </div>
-            </div>
-
-
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <b> CLÁUSULA 14ª. </b> A <b> CONTRATANTE MUTUÁRIA </b> declara que as garantias ofertadas – 
-                        quando houver - estão livres de quaisquer ônus, dividas e/ou gravames de qualquer natureza, assim devendo 
-                        permanecer até a liquidação da dívida, sob pena de caracterização de fraude, bem como vencimento antecipado da dívida.
-                    </p>
-                </div>
-            </div>
-
-            <p>
-                <h5 class="mb-0 font-weight-bold my-2">DO DEVEDOR SOLIDÁRIO E DO FIADOR – QUANDO HOUVER</h5>
+        {% comment %} I-CONTRATANTE MUTUANTE {% endcomment %}
+        <div class="col-12 border border-dark">
+            <h5 class="mb-0 font-weight-bold my-2">I-CONTRATANTE MUTUANTE</h5>
+            <p class="text-justify">
+                Nome/Razão Social: ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA CNPJ: 35.297.061/0001-47 Endereço: Av. das Fronteiras, 1287, Bairro: Nsa Sra da Apresentação, Cidade: Natal RN- CEP: 59114-275 Telefone: (84) 9 9461-9962 E-mail: esctoprn@gmail.com
             </p>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <b> CLÁUSULA 15ª </b>. Assina(m) este <b> CONTRATO </b> na qualidade fiador(es) com obrigação 
-                        sobre a totalidade da dívida principal e acessórias, se houver, na forma da legislação pertinente, a(s) pessoa(s), 
-                        todos na qualidade de garantidores, conforme descrito no Quadro 01 – Parte, Item III. Assina também o presente 
-                        contrato o Fiador qualificado no Quadro Resumo, como principal pagador, solidariamente responsável pelo fiel 
-                        cumprimento de todas as obrigações, inclusive as acessórias e encargos em geral.
-                    </p>
-                </div>
-            </div>
+        </div>
 
-            <p>
-                <h5 class="mb-0 font-weight-bold my-2">DA COBRANÇA TERCEIRIZADA</h5>
+        {% comment %} II-CONTRATANTE MUTUÁRIA {% endcomment %}
+        <div class="col-12 border border-dark">
+            <h5 class="mb-0 font-weight-bold my-2"> II-CONTRATANTE MUTUÁRIA</h5>
+            <p class="text-justify">
+                Nome/Razão Social: {{object.cliente_cnpj.razao_social}},
+                CNPJ: {{object.cliente_cnpj.cnpj}},
+                Endereço: {{object.cliente_cnpj.cnpj_rua}}, {{object.cliente_cnpj.cnpj_numero_casa}}, {{object.cliente_cnpj.cnpj_bairro}}, {{object.cliente_cnpj.cnpj_cidade}}-{{object.cliente_cnpj.cnpj_uf}} CEP: {{object.cliente_cnpj.cnpj_cep}},
+                Telefone: {{object.cliente_cnpj.cnpj_celular1}},
+                E-mail: {{object.cliente_cnpj.cnpj_email}}
             </p>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 16ª </strong>. Em caso de inadimplemento deste <strong> CONTRATO </strong>, a 
-                        <strong> CONTRATADA MUTUANTE </strong> poderá realizar, a seu critério, 
-                        cobrança por meio de empresa terceirizada, seja no âmbito de telecobrança ou cobrança especializada.
-                    </p>
-                </div>
-            </div>
+        </div>
 
-            <p>
-                <h5 class="mb-0 font-weight-bold my-2">DAS DISPOSIÇÕES GERAIS</h5>
+        {% comment %} II.1-REPRESENTANTE MUTUÁRIA {% endcomment %}
+        <div class="col-12 border border-dark">
+            <h5 class="mb-0 font-weight-bold my-2"> II.1-REPRESENTANTE MUTUÁRIA</h5>
+            <p class="text-justify">
+                Nome: {{object.cliente_cnpj.rep_nome}}, CPF: {{object.cliente_cnpj.rep_cpf}}, 
+                RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, ssp - rn, Nacionalidade: BRASILEIRA, Estado Civil: Casado Endereço: Avenida das Fronteiras, 1289, Nossa Senhora da Apresentação, Natal-RN, CEP: 59114-275
             </p>
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 17ª </strong>. A tolerância de uma das partes, quanto ao inadimplemento das obrigações assumidas pela outra, 
-                        não implica em novação ou modificação das cláusulas aqui ajustadas, constituindo-se mera liberalidade.
-                    </p>
-                </div>
+        </div>
+
+        {% comment %} III-DO GARANTIDOR - FIADOR {% endcomment %}
+        {% if not object.cliente_cnpj.fiador %}
+            <div class="col-12 border border-dark">
+                <h5 class="mb-0 font-weight-bold my-2"> III-DO GARANTIDOR - FIADOR</h5>
+                <p class="text-justify">
+                    Nome: {{object.cliente_cnpj.rep_nome}},
+                    CPF: {{object.cliente_cnpj.rep_cpf}}, 
+                    RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, {{object.cliente_cnpj.rep_orgao_emissor}}, 
+                    Nacionalidade: {{object.cliente_cnpj.rep_nacionalidade}}, 
+                    Estado Civil: {{object.cliente_cnpj.rep_estado_civil}} 
+                    Endereço: {{object.cliente_cnpj.rep_rua}}, {{object.cliente_cnpj.rep_numero_casa}}, {{object.cliente_cnpj.rep_bairro}}, {{object.cliente_cnpj.rep_cidade}}-{{object.cliente_cnpj.rep_uf}}, 
+                    CEP: {{object.cliente_cnpj.rep_cep}}
+                </p>
             </div>
-
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 18ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong>, seus representantes legais e/ou garantidores asseguram a veracidade de 
-                        todas as informações passadas à <strong> CONTRATADA MUTUANTE </strong>, especialmente acerca da licitude da origem da renda e 
-                        patrimônio, bem como declaram estar cientes das disposições previstas na Lei n° 9.613/98.
-                    </p>
-                </div>
+        {% else %}
+            <div class="col-12 border border-dark">
+                <h5 class="mb-0 font-weight-bold my-2"> III-DO GARANTIDOR - FIADOR</h5>
+                <p class="text-justify">
+                    Nome: {{object.cliente_cnpj.fiador.fiador_nome}},
+                    CPF: {{object.cliente_cnpj.fiador.fiador_cpf}}, 
+                    RG/órgão Emissor: {{object.cliente_cnpj.fiador.fiador_rg}}, {{object.cliente_cnpj.fiador.fiador_org_emissor}}, 
+                    Nacionalidade: {{object.cliente_cnpj.fiador.fiador_nacionalidade}}, 
+                    Estado Civil: {{object.cliente_cnpj.fiador.fiador_estado_civil}} 
+                    Endereço: {{object.cliente_cnpj.fiador.fiador_rua}}, {{object.cliente_cnpj.fiador.fiador_numero_casa}}, {{object.cliente_cnpj.fiador.fiador_bairro}}, {{object.cliente_cnpj.fiador.fiador_cidade}}-{{object.cliente_cnpj.fiador.fiador_uf}}, 
+                    CEP: {{object.cliente_cnpj.fiador.fiador_cep}}
+                </p>
             </div>
+        {% endif %}
+        
+    </div>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 19ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong> se compromete a informar à 
-                        <strong> CONTRATADA MUTUANTE </strong> sobre eventuais alterações 
-                        em seus dados cadastrais, sendo de sua responsabilidade todas as consequências decorrentes do descumprimento dessa 
-                        obrigação. A <strong> CONTRATADA MUTUANTE </strong>poderá, sempre que necessário, solicitar a atualização dos dados cadastrais 
-                        das partes envolvidas neste CONTRATO, inclusive do(s) garantidor(es) e fiadores quando houver.
-                    </p>
-                </div>
+    {% comment %} QUADRO 02 - CRONOGRAMA DE REEMBOLSO {% endcomment %}
+    <div class="row mt-3">
+        <div class="col-12 border border-dark d-flex justify-content-center text-center">
+            <h4 class="mb-0 font-weight-bold my-2">QUADRO 02 - CRONOGRAMA DE REEMBOLSO</h4> 
+        </div>
+    </div>
+    
+    <div class="row pt-4 px-5">
+        <div class="col-12 px-5">
+            <div id = "tabela">
+
             </div>
+        </div>
+    </div>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 20ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong>autoriza a <strong> CONTRATADA MUTUANTE </strong> a:<br>  
-                        I- transmitir e consultar informações, inclusive as relativas a esta operação de Empréstimo, à Centrais de Risco de Crédito, 
-                        podendo utilizá-las para análise de capacidade de crédito;<br> 
-                        II- fornecer tais informações a terceiros contratados para prestar serviços de controle e cobrança, por quaisquer meios, 
-                        das obrigações assumidas neste <strong> CONTRATO </strong>;<br> 
-                        III- levar a registro este <strong> CONTRATO </strong>em Entidade Registradora autorizada pelo Banco Central; e <br> 
-                        IV- em caso de inadimplência, inserir seu nome e de seus garantidores nos cadastros de proteção ao crédito.
-                    </p>
-                </div>
-            </div>
+    <div style="page-break-after:always"></div>
+    
+    <div class="row mt-3">
+        <div class="col-12 border border-dark d-flex justify-content-center text-center">
+            <h4 class="mb-0 font-weight-bold my-2">QUADRO 03 - GARANTIA(S)</h4> 
+        </div>
+        <div class="col-6 border border-dark border-right-0">
+            <p class="mt-3">
+                (X) NOTAS PROMISSÓRIAS
+            </p>
+        </div>
+        <div class="col-6 border border-dark border-left-0 text-right">
+            <p class="mt-3">
+                ( ) GARANTIA REAL
+            </p>
+        </div>
+        <div class="col-12 border border-dark d-flex">                    
+            <p class="mt-3">
+                DESCRIÇÃO DA GARANTIA REAL:
+            </p>
+        </div>
+        <div class="col-12 border border-dark d-flex justify-content-center text-center">
+            <h4 class="mb-0 font-weight-bold my-2">
+                <br>
+            </h4> 
+        </div>
+    </div>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 21 </strong>. A <strong> CONTRATADA MUTUANTE </strong> declara estar sujeita à mecanismos de controle para fins de prevenção contra 
-                        lavagem de dinheiro e ao dever de comunicação ao Conselho de Controle de Atividades Financeiras (COAF) de 
-                        operações que possam estar configuradas na Lei nº 9.613/98 (Lei de Lavagem de Dinheiro) e demais leis pertinentes.
-                    </p>
-                </div>
-            </div>
-
-            <div style="page-break-after:always"></div>
-
+    <div class="row mt-3">
+        <div class="col-12 text-justify">
             <p>
-                <h5 class="mb-0 font-weight-bold my-2">DO FORO DE ELEIÇÃO</h5>
+                Por este instrumento particular, as partes acima qualificadas, justas e acertadas, celebram o 
+                presente <b>CONTRATO DE MÚTUO FINANCEIRO</b>, que se regerá pelo art. 586, do Código Civil Brasileiro, 
+                pela Lei Complementar nº 167/2019 e pelas cláusulas e condições abaixo descritas:
             </p>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        <strong> CLÁUSULA 22 </strong>. As partes elegem o foro da sede da <strong> CONTRATADA MUTUANTE </strong> para solucionar qualquer controvérsia decorrente 
-                        deste contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.  
-                        E, por estarem assim justas e acertadas, firmam o presente instrumento em 02 (duas) vias de igual teor, para que surta 
-                        seus efeitos legais, podendo ser requeridas a presença de testemunha (s).
-                    </p>
-                </div>
-            </div>
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DA COMPOSIÇÃO DO CRÉDITO</h5>
+            </p>
+            <p>
+                <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado R$ {{object.valor_mutuado}}, Taxa de Juros a.m 
+                {{object.juros_ao_mes}}%, taxa de juros moratório {{object.juros_moratorio|floatformat:2}}% ao dia, multa por atraso: {{object.multa_por_atraso|floatformat:0}}%, 
+                valor do IOF total: R$ {{object.iof_real}}, Valor total devido: R$ {{object.valor_devido}} <span id="h1">olá</span>  .
+            </p>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-center">
-                        Natal-RN, {{object.dt_emprestimo}}
-                    </p>
-                </div>
-            </div>
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DO CRÉDITO</h5>
+            </p>
+            <p>
+                <b> CLÁUSULA 2ª. </b> A CONTRATADA MUTUANTE concedeu à CONTRATANTE MUTUÁRIA um empréstimo no valor descrito na cláusula 1ª – Composição do Crédito, que será restituído nas 
+                épocas próprias e nas condições fixadas neste CONTRATO
+            </p>
+            <p>
+                <b> CLÁUSULA 3ª. </b> A restituição do valor mutuado, pela <b> CONTRATANTE MUTUÁRIA</b>, será feito conforme Cronograma de Reembolso acima.
+            </p>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-center">
-                        ________________________________________________________________________________<br>
-                        <strong> {{object.cliente_cnpj.razao_social}} </strong><br>
-                        CONTRATANTE MUTUÁRIA
-                    </p>
-                </div>
-            </div>
-            
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-center">
-                        ________________________________________________________________________________<br>
-                        <strong>ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA 35.297.061/0001-47</strong><br>
-                        CONTRATADA MUTUANTE
-                    </p>
-                </div>
-            </div>
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DA FORMA E PRAZO DE PAGAMENTO</h5>
+            </p>
+            <p>
+                <b> CLÁUSULA 4ª. </b> A <b> CONTRATANTE MUTUÁRIA </b>fica obrigada a pagar à CONTRATADA MUTUANTE, nas datas especificadas no Quadro 02 – Cronograma de Reembolso, 
+                o valor correspondente ao saldo devedor principal acrescido dos encargos financeiros pactuados e demais acessórios, quando houver.
+            </p>
 
-            <div class="row mt-3">
-                <div class="col-12">
-                    <p class="text-justify">
-                        
-                    </p>
-                </div>
-            </div>
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DO PAGAMENTO ANTECIPADO</h5>
+            </p>
+            <p>
+                <b> CLÁUSULA 5ª. </b> A <b> CONTRATANTE MUTUÁRIA </b> poderá amortizar ou liquidar o débito antecipadamente, a qualquer tempo, com incidência de desconto, nos encargos, 
+                em até o limite de aproximadamente, cinquenta por cento dos valores correspondentes ao que deveria pagar na normalidade do contrato sem antecipação, a depender de cada caso.  
+            </p>
 
-            
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DO VENCIMENTO ANTECIPADO DA DÍVIDA</h5>
+            </p>
+            <p>
+                <b> CLÁUSULA 6ª. </b>Em caso de não pagamento pontual das parcelas devidas, a <b> CONTRATADA MUTUANTE </b> poderá considerar vencidas antecipadamente, de pleno direito, 
+                todas as demais parcelas ainda vincendas, exigindo o pagamento total da dívida independentemente de aviso extrajudicial ou interpelação judicial. Também poderá ser considerada integralmente 
+                vencida e exigível a dívida: 
+            </p>
+            <p>
+                <b> a) </b>no caso de apuração de falsidade, fraude ou inexatidão de qualquer declaração, informação ou documento que 
+                houver sido prestador ou apresentado pela <b> CONTRATANTE MUTUÁRIA </b>, seus representantes legais e/ou garantidores;
+            </p>
+            <p>
+                <b> b) </b>caso a <b> CONTRATANTE MUTUÁRIA </b>ajuizar pedido de falência ou recuperação judicial.  
+            </p>
+
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DOS ENCARGOS FINANCEIROS</h5>
+            </p>
+            <p>
+                <b> CLÁUSULA 7ª. </b>  Sobre a valor mutuado incidirá juros conforme cláusula 1ª – Composição do Crédito, os quais serão 
+                calculados de forma exponencial, com capitalização diária baseada em um ano de 365 (trezentos e sessenta e cinco) dias.  
+            </p>
+            <p>
+                <b> CLÁUSULA 8ª. </b>  Na operação não incidirá qualquer valor relativo a tarifas ou taxas de empréstimo.
+            </p>
+
+            <p>
+                <h5 class="mb-0 font-weight-bold my-2">DO INADIMPLEMENTO</h5>
+            </p>
+            <p>
+                <b>CLÁUSULA 9ª. </b>Em caso de descumprimento de qualquer obrigação legal ou convencional, ou no caso de vencimento 
+                antecipado da operação, serão exigidos, a partir do inadimplemento, calculados sobre o salvo devedor, capitalizados 
+                diariamente e devidos cumulativamente, os encargos financeiros a seguir: I- atualização monetária pelo INPC-IBGE;
+                II-  juros remuneratórios, à taxa contratada no período de normalidade contratual; III- juros de mora de {{object.juros_moratorio|floatformat:2}}% dia;
+                IV- multa de {{object.multa_por_atraso|floatformat:0}}% (dois por cento) sobre o valor da parcela não paga.
+            </p>
 
         </div>
     </div>
 
-    <!-- <div style="page-break-before:always"></div>
+    <div style="page-break-after:always"></div>
 
-    <div class="document">
-        <div id="contrato">
-            <div style="page-break-before:after">
-                <h3>
-                    <p class="text-center font-weight-bold " >
-                        <u>CONTRATO DE MÚTUO FINANCEIRO</u>
-                    </p>
-                </h3>
-            </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <b> CLÁUSULA 10ª. </b> A constituição em mora ocorrerá independentemente de qualquer aviso ou notificação, resultando 
+                do simples descumprimento das obrigações previstas neste <b> CONTRATO </b>.
+            </p>
         </div>
-    </div> -->
+    </div>
 
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <b> CLÁUSULA 11. </b> Para garantir o cumprimento das obrigações deste CONTRATO, são constituídas em favor da 
+                CONTRATADA MUTUANTE a(s) garantia(s) referida(s) no Quadro 03 – Garantia(s), quando houver.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <b> CLÁUSULA 12ª. </b> As obrigações constituídas por este instrumento são extensivas e obrigatórias aos herdeiros, 
+                sucessores e cessionários ou promitentes cessionários da <b> CONTRATANTE MUTUÁRIA </b> . E na impossibilidade de 
+                adimplemento pela pessoa jurídica o débito será de responsabilidade da pessoa física titular da mesma, 
+                <b> inclusive em caso de falecimento até o limite do patrimônio transferido </b>.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <b> CLÁUSULA 13ª. </b> Independentemente da modalidade de garantia ofertada – quando houver - a 
+                <b> CONTRATANTE MUTUÁRIA </b> obriga-se a pagar o saldo remanescente, caso a importância 
+                recebida na realização da garantia não seja suficiente para pagar o crédito da 
+                <b> CONTRATADA MUTUANTE </b>, bem como as demais despesas previstas neste <b> CONTRATO </b>.
+            </p>
+        </div>
+    </div>
+
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <b> CLÁUSULA 14ª. </b> A <b> CONTRATANTE MUTUÁRIA </b> declara que as garantias ofertadas – 
+                quando houver - estão livres de quaisquer ônus, dividas e/ou gravames de qualquer natureza, assim devendo 
+                permanecer até a liquidação da dívida, sob pena de caracterização de fraude, bem como vencimento antecipado da dívida.
+            </p>
+        </div>
+    </div>
+
+    <p>
+        <h5 class="mb-0 font-weight-bold my-2">DO DEVEDOR SOLIDÁRIO E DO FIADOR – QUANDO HOUVER</h5>
+    </p>
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <b> CLÁUSULA 15ª </b>. Assina(m) este <b> CONTRATO </b> na qualidade fiador(es) com obrigação 
+                sobre a totalidade da dívida principal e acessórias, se houver, na forma da legislação pertinente, a(s) pessoa(s), 
+                todos na qualidade de garantidores, conforme descrito no Quadro 01 – Parte, Item III. Assina também o presente 
+                contrato o Fiador qualificado no Quadro Resumo, como principal pagador, solidariamente responsável pelo fiel 
+                cumprimento de todas as obrigações, inclusive as acessórias e encargos em geral.
+            </p>
+        </div>
+    </div>
+
+    <p>
+        <h5 class="mb-0 font-weight-bold my-2">DA COBRANÇA TERCEIRIZADA</h5>
+    </p>
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 16ª </strong>. Em caso de inadimplemento deste <strong> CONTRATO </strong>, a 
+                <strong> CONTRATADA MUTUANTE </strong> poderá realizar, a seu critério, 
+                cobrança por meio de empresa terceirizada, seja no âmbito de telecobrança ou cobrança especializada.
+            </p>
+        </div>
+    </div>
+
+    <p>
+        <h5 class="mb-0 font-weight-bold my-2">DAS DISPOSIÇÕES GERAIS</h5>
+    </p>
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 17ª </strong>. A tolerância de uma das partes, quanto ao inadimplemento das obrigações assumidas pela outra, 
+                não implica em novação ou modificação das cláusulas aqui ajustadas, constituindo-se mera liberalidade.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 18ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong>, seus representantes legais e/ou garantidores asseguram a veracidade de 
+                todas as informações passadas à <strong> CONTRATADA MUTUANTE </strong>, especialmente acerca da licitude da origem da renda e 
+                patrimônio, bem como declaram estar cientes das disposições previstas na Lei n° 9.613/98.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 19ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong> se compromete a informar à 
+                <strong> CONTRATADA MUTUANTE </strong> sobre eventuais alterações 
+                em seus dados cadastrais, sendo de sua responsabilidade todas as consequências decorrentes do descumprimento dessa 
+                obrigação. A <strong> CONTRATADA MUTUANTE </strong>poderá, sempre que necessário, solicitar a atualização dos dados cadastrais 
+                das partes envolvidas neste CONTRATO, inclusive do(s) garantidor(es) e fiadores quando houver.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 20ª </strong>. A <strong> CONTRATANTE MUTUÁRIA </strong>autoriza a <strong> CONTRATADA MUTUANTE </strong> a:<br>  
+                I- transmitir e consultar informações, inclusive as relativas a esta operação de Empréstimo, à Centrais de Risco de Crédito, 
+                podendo utilizá-las para análise de capacidade de crédito;<br> 
+                II- fornecer tais informações a terceiros contratados para prestar serviços de controle e cobrança, por quaisquer meios, 
+                das obrigações assumidas neste <strong> CONTRATO </strong>;<br> 
+                III- levar a registro este <strong> CONTRATO </strong>em Entidade Registradora autorizada pelo Banco Central; e <br> 
+                IV- em caso de inadimplência, inserir seu nome e de seus garantidores nos cadastros de proteção ao crédito.
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 21 </strong>. A <strong> CONTRATADA MUTUANTE </strong> declara estar sujeita à mecanismos de controle para fins de prevenção contra 
+                lavagem de dinheiro e ao dever de comunicação ao Conselho de Controle de Atividades Financeiras (COAF) de 
+                operações que possam estar configuradas na Lei nº 9.613/98 (Lei de Lavagem de Dinheiro) e demais leis pertinentes.
+            </p>
+        </div>
+    </div>
+
+    <div style="page-break-after:always"></div>
+
+    <p>
+        <h5 class="mb-0 font-weight-bold my-2">DO FORO DE ELEIÇÃO</h5>
+    </p>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-justify">
+                <strong> CLÁUSULA 22 </strong>. As partes elegem o foro da sede da <strong> CONTRATADA MUTUANTE </strong> para solucionar qualquer controvérsia decorrente 
+                deste contrato, com renúncia expressa a qualquer outro, por mais privilegiado que seja.  
+                E, por estarem assim justas e acertadas, firmam o presente instrumento em 02 (duas) vias de igual teor, para que surta 
+                seus efeitos legais, podendo ser requeridas a presença de testemunha (s).
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-center">
+                Natal-RN, {{object.dt_emprestimo}}
+            </p>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-center text-uppercase">
+                ________________________________________________________________________________<br>
+                <b> {{object.cliente_cnpj.razao_social}} </b><br>
+                CONTRATANTE MUTUÁRIA
+            </p>
+        </div>
+    </div>
+    
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-center text-uppercase">
+                ________________________________________________________________________________<br>
+                <b>ESCTOP - EMPRESA SIMPLES DE CREDITO LTDA 35.297.061/0001-47</b><br>
+                CONTRATADA MUTUANTE
+            </p>
+        </div>
+    </div>
+
+    {% if object.cliente_cnpj.fiador %}
+    <div class="row mt-3">
+        <div class="col-12">
+            <p class="text-center text-uppercase">
+                ________________________________________________________________________________<br>
+                <b>{{object.cliente_cnpj.fiador}}</b><br>
+                FIADOR
+            </p>
+        </div>
+    </div>
+    {% endif %}
+
+    
+    
+    <div style="page-break-before:always"></div>
+
+    <div id = "promissoria" class="pt-2"></div>
+    
 {% endblock content %}
 
 {% block js %}
@@ -456,7 +447,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 {% comment %} <script src="{% static 'js/contrato.js' %}" crossorigin="anonymous"></script> {% endcomment %}
 
+
 <script>
+    
+    
     window.onload = function tabela_de_vencimento(){
         var valor_emprestado   = Number({{object.valor_emprestado}})
         var qtd_parcelas       = Number({{object.qtd_parcelas}})
@@ -471,17 +465,17 @@
         var iof_adicional     = 0.0038  
     
     
-    for (var i = 0 ; i < qtd_parcelas; i++){
-        if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
-            qtd_dias += 31
-        }else{
-            qtd_dias +=30
+        for (var i = 0 ; i < qtd_parcelas; i++){
+            if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
+                qtd_dias += 31
+            }else{
+                qtd_dias +=30
+            }
+            if(mes_do_emprestimo == 13){
+                mes_do_emprestimo = 1
+            }
+            mes_do_emprestimo++
         }
-        if(mes_do_emprestimo == 13){
-            mes_do_emprestimo = 1
-        }
-        mes_do_emprestimo++
-    }
     
     
         var valor_emprestado   = Number({{object.valor_emprestado}})                
@@ -620,21 +614,212 @@
                 ano++				
             }
             
-        tabela.innerHTML +=
+            tabela.innerHTML +=
+                `
+                    <table class="table table-bordered mb-0 text-center">
+                        <tbody>
+                            <tr>
+                                <td class="py-0" width="33%" style="border: 1px solid black !important;">${i+1}/${"{{ object.qtd_parcelas}}"}</td>
+                                <td class="py-0" width="33%" style="border: 1px solid black !important;">${dia}/${meses[mes-1]}/${ano}</td>
+                                <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${"{{ object.valor_prestacao}}"}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                `
+        }
+
+        var promissoria_dia = {{object.dt_emprestimo.day}}
+        var promissoria_mes = {{object.dt_emprestimo.month}}
+        var promissoria_ano = {{object.dt_emprestimo.year}}
+        var promissoria_aux_mes = {{object.dt_emprestimo.month}}
+        var promissoria_contador_meses = 0
+        promissoria_mes  = aux_mes+promissoria_contador_meses
+        
+
+        for (var i = 0 ; i < qtd_parcelas; i++){
+            promissoria_mes++
+            if(promissoria_dia == 1 && promissoria_mes == 2 || promissoria_dia == 1){
+                primeiro = true
+            }
+            if(promissoria_dia == 31){
+                trinta_e_um = 31
+            }            
+            if(primeiro == false){
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
+                if(promissoria_dia == 1 && promissoria_mes == 4){
+                    promissoria_dia = 30 
+                    promissoria_mes = 3                
+                }
+                if(promissoria_dia == 30 && promissoria_mes == 2){
+                    promissoria_dia = 1 
+                    promissoria_mes = 3
+                }
+                if(promissoria_dia == 31 && promissoria_mes == 2){
+                    promissoria_dia = 1 
+                    promissoria_mes = 3
+                }
+                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
+                if(promissoria_mes == 11 && trinta_e_um == 31){
+                    promissoria_dia--
+                }
+                if(promissoria_dia == 30 && promissoria_mes == 12 && trinta_e_um == 31){
+                    promissoria_dia++
+                }
+                if(promissoria_dia == 30 && promissoria_mes == 3 && trinta_e_um == 31){
+                    promissoria_dia++
+                }
+                if(promissoria_mes == 4 && trinta_e_um == 31){
+                    promissoria_dia--
+                }
+                if(promissoria_mes == 5 && trinta_e_um == 31){
+                    promissoria_dia++
+                }
+                if(promissoria_mes == 6 && trinta_e_um == 31){
+                    promissoria_dia--
+                }
+                if(promissoria_mes == 7 && trinta_e_um == 31){
+                    promissoria_dia++
+                }
+                if(promissoria_mes == 9 && trinta_e_um == 31){
+                    promissoria_dia--
+                }
+                if(promissoria_mes == 10 && trinta_e_um == 31){
+                    promissoria_dia++
+                }
+            }         
+            if(primeiro == true){
+                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 01 FEVEREIRO
+                if(promissoria_dia == 1 && promissoria_mes == 3){
+                    promissoria_dia = 1 
+                    promissoria_mes = 3                
+                }
+            }
+            
+            //AJUSTA MESES E ANOS 
+            if(promissoria_mes == 13){
+                promissoria_contador_meses = 0
+                aux_mes = 1
+                promissoria_mes = 1
+                promissoria_ano++
+            }
+
+            if(meses[promissoria_mes-1] == 1){
+                meses[promissoria_mes-1] = 'Janeiro'
+            }
+            if(meses[promissoria_mes-1] == 2){
+                meses[promissoria_mes-1] = 'Fevereiro'
+            }
+            if(meses[promissoria_mes-1] == 3){
+                meses[promissoria_mes-1] = 'Março'
+            }
+            if(meses[promissoria_mes-1] == 4){
+                meses[promissoria_mes-1] = 'Abril'
+            }
+            if(meses[promissoria_mes-1] == 5){
+                meses[promissoria_mes-1] = 'Maio'
+            }
+            if(meses[promissoria_mes-1] == 6){
+                meses[promissoria_mes-1] = 'Junho'
+            }
+            if(meses[promissoria_mes-1] == 7){
+                meses[promissoria_mes-1] = 'Julho'
+            }
+            if(meses[promissoria_mes-1] == 8){
+                meses[promissoria_mes-1] = 'Agosto'
+            }
+            if(meses[promissoria_mes-1] == 9){
+                meses[promissoria_mes-1] = 'Setembro'
+            }
+            if(meses[promissoria_mes-1] == 10){
+                meses[promissoria_mes-1] = 'Outubro'
+            }
+            if(meses[promissoria_mes-1] == 11){
+                meses[promissoria_mes-1] = 'Novembro'
+            }
+            if(meses[promissoria_mes-1] == 12){
+                meses[promissoria_mes-1] = 'Dezembro'
+            }
+
+            promissoria.innerHTML +=
             `
-                <table class="table table-bordered mb-0 text-center">
-                    <tbody>
-                        <tr>
-                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${i+1}/${"{{ object.qtd_parcelas}}"}</td>
-                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${dia}/${meses[mes-1]}/${ano}</td>
-                            <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${"{{ object.valor_prestacao}}"}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
+                <div class="container pb-4">
+                    <div class="row">
+                        <div class="col border border-dark rounded-top rounded-bottom">
+                            <div class="row">
+                                <div class="col-2" style="height:350px !important;">
+                                    {% if object.cliente_cnpj.fiador %}
+                                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbspFiador:</a>
+                                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp{{object.cliente_cnpj.fiador.fiador_nome}}</a>
+                                    {% else %}
+                                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
+                                    {% endif %}
+                                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                                    <!-- <p style=" transform: rotate(-90deg); padding-bottom:300px !important; margin-left:150px">_________________________</p> -->
+                                </div>
+                                <div class="col-10" style="height:350px !important;">
+                                    <div class="row font-weight-bold">
+                                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${i+1}/${qtd_parcelas}</div>
+                                        <div class="col-7 mt-3">Vencimento: ${promissoria_dia} de ${meses[promissoria_mes-1]} de ${promissoria_ano} </div>
+                                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">R$ {{object.valor_prestacao}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-11 mt-3 d-flex justify-content-center">
+                                            <p class="text-justify h5 pt-3">                     
+                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>  ${promissoria_dia} de ${promissoria_mes} de ${promissoria_ano} </u>&nbsp&nbsp pagarei por esta única via de NOTA PROMISSÓRIA 
+                                                a JOSIMERIO DE ABREU SILVA, CPF 029.388.274-66 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
+                                                em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <u class="h5"><b>{{object.cliente_cnpj.razao_social}}</b></u>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <u class="h5"><b>{{object.dt_emprestimo}}</b></u>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <p class="h6">EMITENTE</p>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <span class="h6">DATA DA EMISSÃO</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <p class="h6"><b>CNPJ:</b> {{object.cliente_cnpj.cnpj}}</p>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <p class="h5">____________________</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <p class="h6"></p>
+                                        </div>
+                                        <div class="col-6 d-flex justify-content-center">
+                                            <p class="h6">ASSINATURA DO EMITENTE</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             `
         }
     }
+    
 </script>
 
 {% endblock js %}
