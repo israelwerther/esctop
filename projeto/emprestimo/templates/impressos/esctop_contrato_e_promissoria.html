@@ -432,12 +432,10 @@
         </div>
     </div>
     {% endif %}
-
-    
     
     <div style="page-break-before:always"></div>
 
-    <div id = "promissoria" class="pt-2"></div>
+    <div id = "promissoria" class="pt-3"></div>
     
 {% endblock content %}
 
@@ -449,8 +447,7 @@
 
 
 <script>
-    
-    
+
     window.onload = function tabela_de_vencimento(){
         var valor_emprestado   = Number({{object.valor_emprestado}})
         var qtd_parcelas       = Number({{object.qtd_parcelas}})
@@ -743,8 +740,8 @@
 
             promissoria.innerHTML +=
             `
-                <div class="container pb-4">
-                    <div class="row">
+                <div class="row  pb-4">
+                    <p>
                         <div class="col border border-dark rounded-top rounded-bottom">
                             <div class="row">
                                 <div class="col-2" style="height:350px !important;">
@@ -814,12 +811,31 @@
 
                             </div>
                         </div>
-                    </div>
+                    </p>
                 </div>
+                
             `
         }
     }
     
+</script>
+
+<script>
+    var bottom = 0;
+    $(document).ready(function() {
+    $("p:nth-child(10n)").each(function() {
+        bottom -= 100;
+        botString = bottom.toString();
+        var $counter = $('h3.first').clone().removeClass('first');
+        $counter.css("bottom", botString + "vh");
+        ($counter).insertBefore('.insert');
+    });
+    });
+
+    $('.print').on('click', function() {
+    window.print();
+    return false;
+    });
 </script>
 
 {% endblock js %}
