@@ -119,7 +119,22 @@
     <div class="row pt-4 px-5">
         <div class="col-12 px-5">
             <div id = "tabela">
-
+                <table class="table table-bordered mb-0 text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="33%" style="border: 2px solid black !important;">Nº PARCELAS</th>
+                            <th scope="col" width="33%" style="border: 2px solid black !important;">VENCIMENTO</th>
+                            <th scope="col" width="33%" style="border: 2px solid black !important;">VALOR</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(parcela, index) in emprestimo.parcelas">
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${index+1}/${emprestimo.qtd_parcelas}</td>
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${parcela.vencimento}</td>
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${emprestimo.valor_prestacao}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -436,7 +451,80 @@
     
     <div style="page-break-before:always"></div>
 
-    <div id = "promissoria" class="pt-3"></div>
+    <div class="row pb-4 pt-3" v-for="(parcela, index) in emprestimo.parcelas">
+        <div class="col border border-dark rounded-top rounded-bottom">
+            <div class="row">
+                <div class="col-2" style="height:350px !important;">
+                    <template v-if="fiador">
+                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbspFiador:</a>
+                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp${fiador_nome}</a>
+                    </template>
+                    <template>
+                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
+                    </template>
+                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                    <!-- <p style=" transform: rotate(-90deg); padding-bottom:300px !important; margin-left:150px">_________________________</p> -->
+                </div>
+                <div class="col-10" style="height:350px !important;">
+                    <div class="row font-weight-bold">
+                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${index + 1}/${emprestimo.qtd_parcelas}</div>
+                        <div class="col-7 mt-3">Vencimento: ${parcela.vencimento} </div>
+                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">R$ {{object.valor_prestacao}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-11 mt-3 d-flex justify-content-center">
+                            <p class="text-justify h5 pt-3">                     
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>  ${moment(parcela.vencimento).format("DD")} de ${moment(parcela.vencimento).format("MM")} de ${moment(parcela.vencimento).format("YYYY")} </u>&nbsp&nbsp pagarei por esta única via de NOTA PROMISSÓRIA 
+                                a JOSIMERIO DE ABREU SILVA, CPF 029.388.274-66 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
+                                em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-6 d-flex justify-content-center">
+                            <u class="h5"><b>{{object.cliente_cnpj.razao_social}}</b></u>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <u class="h5"><b>{{object.dt_emprestimo}}</b></u>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-center">
+                            <p class="h6">EMITENTE</p>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <span class="h6">DATA DA EMISSÃO</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-center">
+                            <p class="h6"><b>CNPJ:</b> {{object.cliente_cnpj.cnpj}}</p>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <p class="h5">____________________</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-center">
+                            <p class="h6"></p>
+                        </div>
+                        <div class="col-6 d-flex justify-content-center">
+                            <p class="h6">ASSINATURA DO EMITENTE</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id = "promissoria"></div>
     
     
 {% endblock content %}
@@ -446,404 +534,118 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
 {% comment %} <script src="{% static 'js/contrato.js' %}" crossorigin="anonymous"></script> {% endcomment %}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+<script src="{% static 'js/vue.js' %}"></script>
 
 <script>
+    moment.locale('pt-br')
+    var app = new Vue({
+		delimiters: ['${', '}'],
+		el: '#app',
+		data: {
+            fiador: "{{object.cliente_cnpj.fiador|default:''}}",
+            fiador_nome: "{{object.cliente_cnpj.fiador.fiador_nome}}",
+            controls: {
+                passou_por_fevereiro: false,
+            },
+            emprestimo: {
+                dataEmprestimo: moment("{{object.dt_emprestimo|safe}}"),
+                valor_emprestado: {{object.valor_emprestado|safe}},
+                qtd_parcelas: {{object.qtd_parcelas|safe}},
+                valor_prestacao: {{object.valor_prestacao|safe}},
+                parcelas: [],
+            },
+            real: '',
+            centavos: '',
+		},
+		methods: {
+            getParcelas() {
+                let base_date = moment(this.emprestimo.dataEmprestimo)
 
-    window.onload = function tabela_de_vencimento(){
-        var valor_emprestado   = Number({{object.valor_emprestado}})
-        var qtd_parcelas       = Number({{object.qtd_parcelas}})
-        var prestacao          = Number({{object.valor_prestacao}})
-        //var n_contrato         = Number({{object.n_contrato}})        
-        var principal          = valor_emprestado/qtd_parcelas  
-        var mes_do_emprestimo  = Number({{object.dt_emprestimo.month}})
-    
-        var qtd_dias          = 0
-        var iof_inicial       = 0
-        var iof_diario        = 0.0041        
-        var iof_adicional     = 0.0038  
-    
-    
-        for (var i = 0 ; i < qtd_parcelas; i++){
-            if(mes_do_emprestimo == 1 || mes_do_emprestimo == 3 || mes_do_emprestimo == 5 || mes_do_emprestimo == 7 || mes_do_emprestimo == 8 || mes_do_emprestimo == 10 || mes_do_emprestimo == 12){
-                qtd_dias += 31
-            }else{
-                qtd_dias +=30
+                let vencimento = base_date.add(0, 'month')
+
+                for (let i = 0 ; i < this.emprestimo.qtd_parcelas; i++) {
+
+                    if(this.emprestimo.dataEmprestimo.month() == 0 && this.emprestimo.dataEmprestimo.date() >= 29) {
+                        vencimento = base_date.date(1).add(i == 0 ? 2:1, 'month')
+
+                    } else if(vencimento.daysInMonth() == 28 && moment(base_date).date() > 28){
+                        vencimento = base_date.date(1).add(1, 'month')
+                    }
+                    else {
+                        vencimento = base_date.add(1, 'month')
+                    }
+
+                    this.emprestimo.parcelas.push({						
+                        vencimento: vencimento.format("DD/MM/YYYY"),
+                        valor_parcela: this.emprestimo.valor_prestacao
+                    })
+                }
+			},
+            stringExtenso(c) {
+                var ex = [
+                    ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"],
+                    ["dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"],
+                    ["cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"],
+                    ["mil", "milhão", "bilhão", "trilhão", "quadrilhão", "quintilhão", "sextilhão", "setilhão", "octilhão", "nonilhão", "decilhão", "undecilhão", "dodecilhão", "tredecilhão", "quatrodecilhão", "quindecilhão", "sedecilhão", "septendecilhão", "octencilhão", "nonencilhão"]
+                ];
+                var a, n, v, i, n = c.replace(c ? /[^,\d]/g : /\D/g, "").split(","), e = " e ", $ = "real", d = "centavo", sl;
+                for(var f = n.length - 1, l, j = -1, r = [], s = [], t = ""; ++j <= f; s = []){
+                    j && (n[j] = (("." + n[j]) * 1).toFixed(2).slice(2));
+                    if(!(a = (v = n[j]).slice((l = v.length) % 3).match(/\d{3}/g), v = l % 3 ? [v.slice(0, l % 3)] : [], v = a ? v.concat(a) : v).length) continue;
+                    for(a = -1, l = v.length; ++a < l; t = ""){
+                        if(!(i = v[a] * 1)) continue;
+                        i % 100 < 20 && (t += ex[0][i % 100]) ||
+                        i % 100 + 1 && (t += ex[1][(i % 100 / 10 >> 0) - 1] + (i % 10 ? e + ex[0][i % 10] : ""));
+                        s.push((i < 100 ? t : !(i % 100) ? ex[2][i == 100 ? 0 : i / 100 >> 0] : (ex[2][i / 100 >> 0] + e + t)) +
+                        ((t = l - a - 2) > -1 ? " " + (i > 1 && t > 0 ? ex[3][t].replace("ão", "ões") : ex[3][t]) : ""));
+                    }
+                    a = ((sl = s.length) > 1 ? (a = s.pop(), s.join(" ") + e + a) : s.join("") || ((!j && (n[j + 1] * 1 > 0) || r.length) ? "" : ex[0][0]));
+                    a && r.push(a + (c ? (" " + (v.join("") * 1 > 1 ? j ? d + "s" : (/0{6,}$/.test(n[0]) ? "de " : "") + $.replace("l", "is") : j ? d : $)) : ""));
+                }
+                return r.join(e);
             }
-            if(mes_do_emprestimo == 13){
-                mes_do_emprestimo = 1
-            }
-            mes_do_emprestimo++
-        }
+        },
+		mounted() {
+            this.getParcelas()
+            this.real = this.stringExtenso(String(((this.emprestimo.valorTotal * this.emprestimo.qtd_parcelas).toFixed(2)).split(".")[0]))
+            this.centavos = this.stringExtenso(String(`${'0.'}${((this.emprestimo.valorTotal * this.emprestimo.qtd_parcelas).toFixed(2)).split(".")[1]}`))
     
-    
-        var valor_emprestado   = Number({{object.valor_emprestado}})                
-        var qtd_parcelas       = Number({{object.qtd_parcelas}})
-        var prestacao          = Number({{object.valor_prestacao}})
-        var valor_parcela = 0
-        var valor_devido = 0 
-        valor_parcela = String(toFixed(valor_parcela, 2))
-        
-        var valor_total_devido = 0
-        valor_total_devido = String(toFixed(valor_parcela*qtd_parcelas, 2))
-
-        //VARIÁVEIS DA DATA DO EMPRESTIMO
-        var contador_meses = 0
-        var contador_anos  = 0
-        var meses = new Array("01", "02", "03", "04", "05", "06" ,"07", "08", "09", "10", "11", "12")
-        var dataEmprestimo = "{{ object.dt_emprestimo}}"
-        var dt = new Date(dataEmprestimo)
-        var dia
-        var mes
-        var ano
-        var aux_dia = {{object.dt_emprestimo.day}}
-        var aux_mes = {{object.dt_emprestimo.month}}
-        var aux_ano = {{object.dt_emprestimo.year}}
-
-        var trinta_e_um = 0
-        
-        dia  = aux_dia
-        mes  = aux_mes+contador_meses
-        ano  = aux_ano
-
-        var contador_parcela = 0
-
-        //CORREÇÃO DO VALOR TOTAL
-        var valorTotal = parseFloat("{{object.valor_prestacao|floatformat:2}}".replace(',', '.'))
-        var parceTotal = parseInt("{{object.qtd_parcelas|floatformat:2}}".replace(',', '.'))
-
-        var resultado = 0 
-        resultado = parseFloat(valorTotal*parceTotal).toFixed(2)
-        resultado_ext = resultado
-        resultado_int = parseInt(resultado_ext)
-        resultado = resultado.replace('.', ',')
-        
-        var real = parseInt(resultado_ext)	
-        real = String(real).extenso()
-        
-        var centavos = parseFloat((resultado_ext-resultado_int)).toFixed(2)	
-        centavos = String(centavos).extenso()
-
-        if (centavos == "zero")
-            $('#h1').html(real+" reais");
-        if (centavos != "zero")
-            $('#h1').html(real+" reais e "+centavos+" centavos");
-        
-    
-        tabela.innerHTML +=       
-        `
-            <table class="table table-bordered mb-0 text-center">
-                <thead>
-                    <tr>
-                        <th scope="col" width="33%" style="border: 2px solid black !important;">Nº PARCELAS</th>
-                        <th scope="col" width="33%" style="border: 2px solid black !important;">VENCIMENTO</th>
-                        <th scope="col" width="33%" style="border: 2px solid black !important;">VALOR</th>
-                    </tr>
-                </thead>
-        `
-        //VARIÁVEIS PARA AJUSTES DE DATA
-        var primeiro = false
-        var trinta_e_um = 0
-        for(var i=0; i<{{object.qtd_parcelas}}; i++){
-            mes++      
+            if (this.centavos == "zero")
+                $('#h1').html(this.real+" reais");
+            if (this.centavos != "zero")
+                $('#h1').html(this.real+" reais e "+this.centavos+" centavos");
+            {%comment%}
+            setTimeout(()=>{
+                var totalPages = Math.ceil(document.body.scrollHeight / 842);  
+                //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi,
+                let j=0
+                for (var i = 1; i <= totalPages; i++) {
+                    var pageNumberDiv = document.createElement("div");
+                    var pageNumber = document.createTextNode("Page " + i + " of " + totalPages);
+                    pageNumberDiv.style.position = "absolute";
+                    pageNumberDiv.style.top = (i*1550)+j + "px";
+                    j+=(30 + (i+1))
+                    //297mm A4 pageheight; 0,5px unknown needed necessary correction value; 
+                    //additional wanted 40px margin from bottom(own element height included)
+                    //pageNumberDiv.style.height = "16px";
+                    pageNumberDiv.appendChild(pageNumber);
+                    document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
+                    pageNumberDiv.style.left = "calc(100% - (" + pageNumberDiv.offsetWidth + "px + 30px))";
+                }            
+            }, 1000)
+            {%endcomment%}
             
-            if(dia == 1 && mes == 2 || dia == 1){
-                primeiro = true
-            }
-            if(dia == 31){
-                trinta_e_um = 31
-            }            
-            if(primeiro == false){
-                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
-                if(dia == 1 && mes == 4){
-                    dia = 30 
-                    mes = 3                
-                }
-                if(dia == 30 && mes == 2){
-                    dia = 1 
-                    mes = 3
-                }
-                if(dia == 31 && mes == 2){
-                    dia = 1 
-                    mes = 3
-                }
-                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
-                if(mes == 11 && trinta_e_um == 31){
-                    dia--
-                }
-                if(dia == 30 && mes == 12 && trinta_e_um == 31){
-                    dia++
-                }
-                if(dia == 30 && mes == 3 && trinta_e_um == 31){
-                    dia++
-                }
-                if(mes == 4 && trinta_e_um == 31){
-                    dia--
-                }
-                if(mes == 5 && trinta_e_um == 31){
-                    dia++
-                }
-                if(mes == 6 && trinta_e_um == 31){
-                    dia--
-                }
-                if(mes == 7 && trinta_e_um == 31){
-                    dia++
-                }
-                if(mes == 9 && trinta_e_um == 31){
-                    dia--
-                }
-                if(mes == 10 && trinta_e_um == 31){
-                    dia++
-                }
-            }         
-            if(primeiro == true){
-                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 01 FEVEREIRO
-                if(dia == 1 && mes == 3){
-                    dia = 1 
-                    mes = 3                
-                }
-            }        
-            
-            //AJUSTA MESES E ANOS 
-            if(mes == 13){
-                contador_meses = 0
-                aux_mes = 1
-                mes = 1	
-                aux_ano++
-                ano++				
-            }
-            
-            tabela.innerHTML +=
-                `
-                    <table class="table table-bordered mb-0 text-center">
-                        <tbody>
-                            <tr>
-                                <td class="py-0" width="33%" style="border: 1px solid black !important;">${i+1}/${"{{ object.qtd_parcelas}}"}</td>
-                                <td class="py-0" width="33%" style="border: 1px solid black !important;">${dia}/${meses[mes-1]}/${ano}</td>
-                                <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${"{{ object.valor_prestacao}}"}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    
-                `
-        }
+        },
+		watch: {
+			
+		},
+	})
 
-        var promissoria_dia = {{object.dt_emprestimo.day}}
-        var promissoria_mes = {{object.dt_emprestimo.month}}
-        var promissoria_ano = {{object.dt_emprestimo.year}}
-        var promissoria_aux_mes = {{object.dt_emprestimo.month}}
-        var promissoria_contador_meses = 0
-        promissoria_mes  = aux_mes+promissoria_contador_meses
-        
-
-        for (var i = 0 ; i < qtd_parcelas; i++){
-            promissoria_mes++
-            if(promissoria_dia == 1 && promissoria_mes == 2 || promissoria_dia == 1){
-                primeiro = true
-            }
-            if(promissoria_dia == 31){
-                trinta_e_um = 31
-            }            
-            if(primeiro == false){
-                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 30 OU 31
-                if(promissoria_dia == 1 && promissoria_mes == 4){
-                    promissoria_dia = 30 
-                    promissoria_mes = 3                
-                }
-                if(promissoria_dia == 30 && promissoria_mes == 2){
-                    promissoria_dia = 1 
-                    promissoria_mes = 3
-                }
-                if(promissoria_dia == 31 && promissoria_mes == 2){
-                    promissoria_dia = 1 
-                    promissoria_mes = 3
-                }
-                // AJUSTE DE DIAS QUANDO A DATA INICIAL É DIA 31
-                if(promissoria_mes == 11 && trinta_e_um == 31){
-                    promissoria_dia--
-                }
-                if(promissoria_dia == 30 && promissoria_mes == 12 && trinta_e_um == 31){
-                    promissoria_dia++
-                }
-                if(promissoria_dia == 30 && promissoria_mes == 3 && trinta_e_um == 31){
-                    promissoria_dia++
-                }
-                if(promissoria_mes == 4 && trinta_e_um == 31){
-                    promissoria_dia--
-                }
-                if(promissoria_mes == 5 && trinta_e_um == 31){
-                    promissoria_dia++
-                }
-                if(promissoria_mes == 6 && trinta_e_um == 31){
-                    promissoria_dia--
-                }
-                if(promissoria_mes == 7 && trinta_e_um == 31){
-                    promissoria_dia++
-                }
-                if(promissoria_mes == 9 && trinta_e_um == 31){
-                    promissoria_dia--
-                }
-                if(promissoria_mes == 10 && trinta_e_um == 31){
-                    promissoria_dia++
-                }
-            }         
-            if(primeiro == true){
-                //AJUSTA A DATA QUANDO O MES É FEVEREIRO E O DIA DO EMPRESTIMO FOI REALIZADO EM 01 FEVEREIRO
-                if(promissoria_dia == 1 && promissoria_mes == 3){
-                    promissoria_dia = 1 
-                    promissoria_mes = 3                
-                }
-            }
-            
-            //AJUSTA MESES E ANOS 
-            if(promissoria_mes == 13){
-                promissoria_contador_meses = 0
-                aux_mes = 1
-                promissoria_mes = 1
-                promissoria_ano++
-            }
-
-            if(meses[promissoria_mes-1] == 1){
-                meses[promissoria_mes-1] = 'Janeiro'
-            }
-            if(meses[promissoria_mes-1] == 2){
-                meses[promissoria_mes-1] = 'Fevereiro'
-            }
-            if(meses[promissoria_mes-1] == 3){
-                meses[promissoria_mes-1] = 'Março'
-            }
-            if(meses[promissoria_mes-1] == 4){
-                meses[promissoria_mes-1] = 'Abril'
-            }
-            if(meses[promissoria_mes-1] == 5){
-                meses[promissoria_mes-1] = 'Maio'
-            }
-            if(meses[promissoria_mes-1] == 6){
-                meses[promissoria_mes-1] = 'Junho'
-            }
-            if(meses[promissoria_mes-1] == 7){
-                meses[promissoria_mes-1] = 'Julho'
-            }
-            if(meses[promissoria_mes-1] == 8){
-                meses[promissoria_mes-1] = 'Agosto'
-            }
-            if(meses[promissoria_mes-1] == 9){
-                meses[promissoria_mes-1] = 'Setembro'
-            }
-            if(meses[promissoria_mes-1] == 10){
-                meses[promissoria_mes-1] = 'Outubro'
-            }
-            if(meses[promissoria_mes-1] == 11){
-                meses[promissoria_mes-1] = 'Novembro'
-            }
-            if(meses[promissoria_mes-1] == 12){
-                meses[promissoria_mes-1] = 'Dezembro'
-            }
-
-            promissoria.innerHTML +=
-            `
-                <div class="row pb-4">
-                    <p>
-                        <div class="col border border-dark rounded-top rounded-bottom">
-                            <div class="row">
-                                <div class="col-2" style="height:350px !important;">
-                                    {% if object.cliente_cnpj.fiador %}
-                                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbspFiador:</a>
-                                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp{{object.cliente_cnpj.fiador.fiador_nome}}</a>
-                                    {% else %}
-                                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
-                                    {% endif %}
-                                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                                    <!-- <p style=" transform: rotate(-90deg); padding-bottom:300px !important; margin-left:150px">_________________________</p> -->
-                                </div>
-                                <div class="col-10" style="height:350px !important;">
-                                    <div class="row font-weight-bold">
-                                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${i+1}/${qtd_parcelas}</div>
-                                        <div class="col-7 mt-3">Vencimento: ${promissoria_dia} de ${meses[promissoria_mes-1]} de ${promissoria_ano} </div>
-                                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">R$ {{object.valor_prestacao}}</div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-11 mt-3 d-flex justify-content-center">
-                                            <p class="text-justify h5 pt-3">                     
-                                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>  ${promissoria_dia} de ${promissoria_mes} de ${promissoria_ano} </u>&nbsp&nbsp pagarei por esta única via de NOTA PROMISSÓRIA 
-                                                a JOSIMERIO DE ABREU SILVA, CPF 029.388.274-66 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
-                                                em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row mt-4">
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <u class="h5"><b>{{object.cliente_cnpj.razao_social}}</b></u>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <u class="h5"><b>{{object.dt_emprestimo}}</b></u>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <p class="h6">EMITENTE</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <span class="h6">DATA DA EMISSÃO</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <p class="h6"><b>CNPJ:</b> {{object.cliente_cnpj.cnpj}}</p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <p class="h5">____________________</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <p class="h6"></p>
-                                        </div>
-                                        <div class="col-6 d-flex justify-content-center">
-                                            <p class="h6">ASSINATURA DO EMITENTE</p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                            </div>
-                        </div>
-                    </p>
-                </div>
-                
-            `
-        }
-    }
+    
     
 </script>
 
-<script>
 
-    window.onload = addPageNumbers;            
-    function addPageNumbers() {
-        var totalPages = Math.ceil(document.body.scrollHeight / 842);  
-        //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi,
-        let j=0
-        for (var i = 1; i <= totalPages; i++) {
-            var pageNumberDiv = document.createElement("div");
-            var pageNumber = document.createTextNode("Page " + i + " of " + totalPages);
-            pageNumberDiv.style.position = "absolute";
-            pageNumberDiv.style.top = (i*1550)+j + "px";
-            j+=(30 + (i+1))
-            console.log("I", i)
-            //297mm A4 pageheight; 0,5px unknown needed necessary correction value; 
-            //additional wanted 40px margin from bottom(own element height included)
-            //pageNumberDiv.style.height = "16px";
-            pageNumberDiv.appendChild(pageNumber);
-            document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
-            pageNumberDiv.style.left = "calc(100% - (" + pageNumberDiv.offsetWidth + "px + 30px))";
-        }
-    }
-</script>
 
 {% endblock js %}
