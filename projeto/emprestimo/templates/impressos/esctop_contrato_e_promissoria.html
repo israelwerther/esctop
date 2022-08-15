@@ -1,18 +1,7 @@
 {% extends "base_impressoes_refatorado.html" %}
 {% load static %}
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-
-    <title>{{object.cliente_cnpj.razao_social}}</title>
-
-</head>
-
-{% block content %}    
+{% block content %}
     
     <div class="row justify-content-center">
         <h4>
@@ -130,7 +119,7 @@
                     <tbody>
                         <tr v-for="(parcela, index) in emprestimo.parcelas">
                             <td class="py-0" width="33%" style="border: 1px solid black !important;">${index+1}/${emprestimo.qtd_parcelas}</td>
-                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${parcela.vencimento}</td>
+                            <td class="py-0" width="33%" style="border: 1px solid black !important;">${moment(parcela.vencimento).format("DD/MM/YYYY")}</td>
                             <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${emprestimo.valor_prestacao}</td>
                         </tr>
                     </tbody>
@@ -181,7 +170,7 @@
             <p>
                 <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado R$ {{object.valor_mutuado}}, Taxa de Juros a.m 
                 {{object.juros_ao_mes}}%, taxa de juros moratório {{object.juros_moratorio|floatformat:2}}% ao dia, multa por atraso: {{object.multa_por_atraso|floatformat:0}}%, 
-                valor do IOF total: R$ {{object.iof_real}}, Valor total devido: R$ {{object.valor_devido}} <span id="h1">olá</span>  .
+                valor do IOF total: R$ {{object.iof_real}}, Valor total devido: R$ {{object.valor_devido}}.
             </p>
 
             <p>
@@ -469,14 +458,14 @@
                 <div class="col-10" style="height:350px !important;">
                     <div class="row font-weight-bold">
                         <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${index + 1}/${emprestimo.qtd_parcelas}</div>
-                        <div class="col-7 mt-3">Vencimento: ${parcela.vencimento} </div>
+                        <div class="col-7 mt-3">Vencimento: ${moment(parcela.vencimento).format("DD/MM/YYYY")} </div>
                         <div class="col-2 border border-dark mt-3 d-flex justify-content-center">R$ {{object.valor_prestacao}}</div>
                     </div>
                     <div class="row">
                         <div class="col-11 mt-3 d-flex justify-content-center">
                             <p class="text-justify h5 pt-3">                     
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>  ${moment(parcela.vencimento).format("DD")} de ${moment(parcela.vencimento).format("MM")} de ${moment(parcela.vencimento).format("YYYY")} </u>&nbsp&nbsp pagarei por esta única via de NOTA PROMISSÓRIA 
-                                a JOSIMERIO DE ABREU SILVA, CPF 029.388.274-66 ou à sua ordem, a quantia de <u> ${real} reais e ${centavos} centavos</u> 
+                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>${moment(parcela.vencimento).format("DD")} de ${moment(parcela.vencimento).format("MMMM")} de ${moment(parcela.vencimento).format("YYYY")}</u> pagarei por esta única via de NOTA PROMISSÓRIA 
+                                a JOSIMERIO DE ABREU SILVA, CPF 029.388.274-66 ou à sua ordem, a quantia de <u> ${extensoNumber('{{object.valor_prestacao}}')}</u> 
                                 em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.
                             </p>
                         </div>
@@ -524,18 +513,18 @@
         </div>
     </div>
 
-    <div id = "promissoria"></div>
-    
+    <footer>
+        AGORA VAI.
+    </footer>
+
     
 {% endblock content %}
 
 {% block js %}
 
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
-{% comment %} <script src="{% static 'js/contrato.js' %}" crossorigin="anonymous"></script> {% endcomment %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+<script src="{% static 'js/moment.js' %}"></script>
 <script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/extenso.min.js' %}"></script>
 
 <script>
     moment.locale('pt-br')
@@ -555,10 +544,14 @@
                 valor_prestacao: {{object.valor_prestacao|safe}},
                 parcelas: [],
             },
-            real: '',
-            centavos: '',
 		},
 		methods: {
+            extensoNumber(number) {
+                return extenso(number, { 
+                    mode: 'currency',
+                    number: { decimal: 'informal' }, 
+                })
+            },
             getParcelas() {
                 let base_date = moment(this.emprestimo.dataEmprestimo)
 
@@ -577,75 +570,28 @@
                     }
 
                     this.emprestimo.parcelas.push({						
-                        vencimento: vencimento.format("DD/MM/YYYY"),
+                        vencimento: vencimento.format("YYYY/MM/DD"),
                         valor_parcela: this.emprestimo.valor_prestacao
                     })
                 }
 			},
-            stringExtenso(c) {
-                var ex = [
-                    ["zero", "um", "dois", "três", "quatro", "cinco", "seis", "sete", "oito", "nove", "dez", "onze", "doze", "treze", "quatorze", "quinze", "dezesseis", "dezessete", "dezoito", "dezenove"],
-                    ["dez", "vinte", "trinta", "quarenta", "cinquenta", "sessenta", "setenta", "oitenta", "noventa"],
-                    ["cem", "cento", "duzentos", "trezentos", "quatrocentos", "quinhentos", "seiscentos", "setecentos", "oitocentos", "novecentos"],
-                    ["mil", "milhão", "bilhão", "trilhão", "quadrilhão", "quintilhão", "sextilhão", "setilhão", "octilhão", "nonilhão", "decilhão", "undecilhão", "dodecilhão", "tredecilhão", "quatrodecilhão", "quindecilhão", "sedecilhão", "septendecilhão", "octencilhão", "nonencilhão"]
-                ];
-                var a, n, v, i, n = c.replace(c ? /[^,\d]/g : /\D/g, "").split(","), e = " e ", $ = "real", d = "centavo", sl;
-                for(var f = n.length - 1, l, j = -1, r = [], s = [], t = ""; ++j <= f; s = []){
-                    j && (n[j] = (("." + n[j]) * 1).toFixed(2).slice(2));
-                    if(!(a = (v = n[j]).slice((l = v.length) % 3).match(/\d{3}/g), v = l % 3 ? [v.slice(0, l % 3)] : [], v = a ? v.concat(a) : v).length) continue;
-                    for(a = -1, l = v.length; ++a < l; t = ""){
-                        if(!(i = v[a] * 1)) continue;
-                        i % 100 < 20 && (t += ex[0][i % 100]) ||
-                        i % 100 + 1 && (t += ex[1][(i % 100 / 10 >> 0) - 1] + (i % 10 ? e + ex[0][i % 10] : ""));
-                        s.push((i < 100 ? t : !(i % 100) ? ex[2][i == 100 ? 0 : i / 100 >> 0] : (ex[2][i / 100 >> 0] + e + t)) +
-                        ((t = l - a - 2) > -1 ? " " + (i > 1 && t > 0 ? ex[3][t].replace("ão", "ões") : ex[3][t]) : ""));
-                    }
-                    a = ((sl = s.length) > 1 ? (a = s.pop(), s.join(" ") + e + a) : s.join("") || ((!j && (n[j + 1] * 1 > 0) || r.length) ? "" : ex[0][0]));
-                    a && r.push(a + (c ? (" " + (v.join("") * 1 > 1 ? j ? d + "s" : (/0{6,}$/.test(n[0]) ? "de " : "") + $.replace("l", "is") : j ? d : $)) : ""));
-                }
-                return r.join(e);
-            }
         },
 		mounted() {
             this.getParcelas()
-            this.real = this.stringExtenso(String(((this.emprestimo.valorTotal * this.emprestimo.qtd_parcelas).toFixed(2)).split(".")[0]))
-            this.centavos = this.stringExtenso(String(`${'0.'}${((this.emprestimo.valorTotal * this.emprestimo.qtd_parcelas).toFixed(2)).split(".")[1]}`))
-    
-            if (this.centavos == "zero")
-                $('#h1').html(this.real+" reais");
-            if (this.centavos != "zero")
-                $('#h1').html(this.real+" reais e "+this.centavos+" centavos");
-            {%comment%}
-            setTimeout(()=>{
-                var totalPages = Math.ceil(document.body.scrollHeight / 842);  
-                //842px A4 pageheight for 72dpi, 1123px A4 pageheight for 96dpi,
-                let j=0
-                for (var i = 1; i <= totalPages; i++) {
-                    var pageNumberDiv = document.createElement("div");
-                    var pageNumber = document.createTextNode("Page " + i + " of " + totalPages);
-                    pageNumberDiv.style.position = "absolute";
-                    pageNumberDiv.style.top = (i*1550)+j + "px";
-                    j+=(30 + (i+1))
-                    //297mm A4 pageheight; 0,5px unknown needed necessary correction value; 
-                    //additional wanted 40px margin from bottom(own element height included)
-                    //pageNumberDiv.style.height = "16px";
-                    pageNumberDiv.appendChild(pageNumber);
-                    document.body.insertBefore(pageNumberDiv, document.getElementById("content"));
-                    pageNumberDiv.style.left = "calc(100% - (" + pageNumberDiv.offsetWidth + "px + 30px))";
-                }            
-            }, 1000)
-            {%endcomment%}
-            
+            window.addEventListener('beforeprint', (event) => {
+                setTimeout(() => {
+                    $("footer").each((index, el) => {
+                        $(el).text(index + 1)
+                        console.log("Aqui", $(el).text(index + 1))
+                    })
+                }, 1000)
+            });
         },
 		watch: {
 			
 		},
 	})
-
-    
     
 </script>
-
-
 
 {% endblock js %}
