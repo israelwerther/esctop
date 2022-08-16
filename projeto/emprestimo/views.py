@@ -155,10 +155,22 @@ class EsctopEmprestimoContratoPromissoria(DetailView):
         return self.request.user.is_superuser
 
     model=Emprestimo
-    template_name='impressos/esctop_contrato_e_promissoria.html'
+    template_name='impressos_esctop/esctop_contrato_e_promissoria.html'
     
     def get_context_data(self, **kwargs):
         context = super(EsctopEmprestimoContratoPromissoria, self).get_context_data(**kwargs)
+		
+        return context
+        
+class CredcoopEmprestimoContratoPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos_credcoop/credcoop_contrato_e_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopEmprestimoContratoPromissoria, self).get_context_data(**kwargs)
 		
         return context
 

@@ -151,7 +151,53 @@
     </div>
     <div class="col-5 card card-body">
         <div style="position: -webkit-sticky; position: sticky; top: 60px;">
-        <span>
+            <div class="row">
+                <div class="col-5">
+                    <div class="btn-group" role="group">
+                        <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                            <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                            <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>
+                        </a>
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Imprimir
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            {% if object.cliente %}
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                            {% endif %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
+                            {% if object.cliente_cnpj %}  
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="btn-group" role="group">
+                        <a type="button" class="btn btn-outline-danger active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
+                            <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
+                            <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>
+                        </a>
+                        <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Renegociação
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                            {% if object.cliente %}
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                            {% endif %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória Renegociação</a>
+                            {% if object.cliente_cnpj %}  
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato Renegociação</a>
+                                {% comment %} <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a> {% endcomment %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {% comment %} <span>
             <h4 class="mt-2">Imprimir</h4>
             <div class="btn-group pb-1" role="group">
             <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -167,14 +213,15 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
                 <a href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato+Promissória</a>
             {% endif %}
+
         
             {% if object.cliente %}
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
             {% endif %}
             </div>
-        </span>
+        </span> {% endcomment %}
 
-        <span>
+        {% comment %} <span>
             <h4 class="mt-4">Renegociação</h4>
             <div class="btn-group" role="group">
                 <a type="button" class="btn btn-outline-success active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -190,7 +237,7 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato </a>
             {% endif %}        
             </div>
-        </span>        
+        </span>         {% endcomment %}
     </div>
     </div>
 </div>
