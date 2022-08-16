@@ -152,7 +152,7 @@
     <div class="col-5 card card-body">
         <div style="position: -webkit-sticky; position: sticky; top: 60px;">
             <div class="row">
-                <div class="col-5">
+                <div class="col-12">
                     <div class="btn-group" role="group">
                         <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
                             <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
@@ -165,15 +165,21 @@
                             {% if object.cliente %}
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
                             {% endif %}
+
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
+
                             {% if object.cliente_cnpj %}  
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a>
                             {% endif %}
+
+                            {% if object.cliente %}
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">Contrato</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-                <div class="col-5">
+                <div class="col-12 mt-2">
                     <div class="btn-group" role="group">
                         <a type="button" class="btn btn-outline-danger active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
                             <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
@@ -184,13 +190,18 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê Renegociação</a>
                             {% endif %}
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória Renegociação</a>
                             {% if object.cliente_cnpj %}  
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato Renegociação</a>
                                 {% comment %} <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a> {% endcomment %}
                             {% endif %}
+
+                            {% if object.cliente %}
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato Renegociação</a>
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>
@@ -237,7 +248,7 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato </a>
             {% endif %}        
             </div>
-        </span>         {% endcomment %}
+        </span>{% endcomment %}
     </div>
     </div>
 </div>
