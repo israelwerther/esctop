@@ -22,7 +22,7 @@
                 Valor do crédito
             </span>
             <br>
-            <span>R$ {{object.valor_emprestado}}</span>
+            <span>${currencyFormat({{object.valor_emprestado}})}</span>
         </div>
     </div>
 
@@ -114,7 +114,7 @@
                     <tr v-for="(parcela, index) in emprestimo.parcelas">
                         <td class="py-0" width="33%" style="border: 1px solid black !important;">${index+1}/${emprestimo.qtd_parcelas}</td>
                         <td class="py-0" width="33%" style="border: 1px solid black !important;">${moment(parcela.vencimento).format("DD/MM/YYYY")}</td>
-                        <td class="py-0" width="33%" style="border: 1px solid black !important;">R$ ${emprestimo.valor_prestacao}</td>
+                        <td class="py-0" width="33%" style="border: 1px solid black !important;">${currencyFormat(emprestimo.valor_prestacao)}</td>
                     </tr>
                 </tbody>
             </table>
@@ -160,9 +160,9 @@
                 <h5 class="mb-0 font-weight-bold my-2">DA COMPOSIÇÃO DO CRÉDITO</h5>
             </p>
             <p>
-                <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado R$ {{object.valor_mutuado}}, Taxa de Juros a.m 
+                <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado ${currencyFormat({{object.valor_mutuado}})}, Taxa de Juros a.m 
                 {{object.juros_ao_mes}}%, taxa de juros moratório {{object.juros_moratorio|floatformat:2}}% ao dia, multa por atraso: {{object.multa_por_atraso|floatformat:0}}%, 
-                valor do IOF total: R$ {{object.iof_real}}, Valor total devido: R$ {{object.valor_devido}}.
+                valor do IOF total: ${currencyFormat({{object.iof_real}})}, Valor total devido: ${currencyFormat({{object.valor_devido}})}.
             </p>
 
             <p>
@@ -447,7 +447,7 @@
                     <div class="row font-weight-bold">
                         <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${index + 1}/${emprestimo.qtd_parcelas}</div>
                         <div class="col-7 mt-3">Vencimento: ${moment(parcela.vencimento).format("DD/MM/YYYY")} </div>
-                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">R$ {{object.valor_prestacao}}</div>
+                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">${currencyFormat({{object.valor_prestacao}})}</div>
                     </div>
                     <div class="row">
                         <div class="col-11 mt-3 d-flex justify-content-center">
@@ -539,6 +539,9 @@
                     number: { decimal: 'informal' }, 
                 })
             },
+            currencyFormat(number) {
+                return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+            },
             getParcelas() {
                 let base_date = moment(this.emprestimo.dataEmprestimo)
 
@@ -570,7 +573,7 @@
             $(".pageBreak").slice(0, $(".pageBreak").length - 1).each(function() {
                 bottom -= 100;
                 botString = bottom.toString();
-                var $counter = $('h3.first').clone().removeClass('first');
+                var $counter = $('h3.first').text(' de ' + $(".pageBreak").length).clone().removeClass('first');
                 $counter.css("bottom", botString + "%");
                     ($counter).insertBefore('.insert');
                 });
