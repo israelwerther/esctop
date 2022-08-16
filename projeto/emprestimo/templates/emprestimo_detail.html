@@ -198,16 +198,16 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê Renegociação</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
                             {% endif %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória Renegociação</a>
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória</a>
                             {% if object.cliente_cnpj %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato Renegociação</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
                                 {% comment %} <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a> {% endcomment %}
                             {% endif %}
 
                             {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato Renegociação</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato</a>
                             {% endif %}
                         </div>
                     </div>
