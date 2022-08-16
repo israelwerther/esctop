@@ -193,7 +193,7 @@
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê Renegociação</a>
                             {% endif %}
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória Renegociação</a>
-                            {% if object.cliente_cnpj %}  
+                            {% if object.cliente_cnpj %}
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato Renegociação</a>
                                 {% comment %} <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a> {% endcomment %}
                             {% endif %}
