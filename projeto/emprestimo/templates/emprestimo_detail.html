@@ -13,6 +13,14 @@
     <div class="col-7 card card-body">        
             <table class="table table-user-information" style="text-transform: uppercase;">
                 <tbody>
+                    <th class="text-right">Cliente</th>
+                    {% if object.cliente %}
+                        <td>CREDCOOP</td>
+                    {% endif %}
+                    {% if object.cliente_cnpj %}
+                        <td>ESCTOP</td>
+                    {% endif %}
+
                     <tr>
                         <th class="text-right">Funcionario</th>
                         <td>{{ object.funcionario }}</td>
@@ -207,7 +215,9 @@
             </div>
         </div>
         
-        {% comment %} <span>
+        <br>
+        <br>
+        <span>
             <h4 class="mt-2">Imprimir</h4>
             <div class="btn-group pb-1" role="group">
             <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -229,9 +239,9 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
             {% endif %}
             </div>
-        </span> {% endcomment %}
+        </span>
 
-        {% comment %} <span>
+        <span>
             <h4 class="mt-4">Renegociação</h4>
             <div class="btn-group" role="group">
                 <a type="button" class="btn btn-outline-success active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -247,7 +257,7 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato </a>
             {% endif %}        
             </div>
-        </span>{% endcomment %}
+        </span>
     </div>
     </div>
 </div>
