@@ -458,43 +458,23 @@
                             </p>
                         </div>
                     </div>
-                    
-                    <div class="row mt-4">
-                        <div class="col-6 d-flex justify-content-center">
-                            <u class="h5"><b>{{object.cliente_cnpj.razao_social}}</b></u>
+
+                    <div class="row mt-4" style="margin-right:5px !important;">
+                        <div class="col-6">
+                            <p class="text-center m-0"><b><u>{{object.cliente_cnpj.razao_social}}</u></b></p>
+                            <p class="text-center m-0" style="font-size:12px !important;">EMITENTE</p>
+                            <p class="text-center m-0"><b>CNPJ:</b> {{object.cliente_cnpj.cnpj}}</p>
                         </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <u class="h5"><b>{{object.dt_emprestimo}}</b></u>
+                        <div class="col-5">
+                            <p class="text-center m-0"><b><u>{{object.dt_emprestimo}}</u></b></p>
+                            <p class="text-center m-0" style="font-size:12px !important;">DATA DA EMISSÃO</p>
+                            <p class="text-center m-0">____________________________________</p>
+                            <p class="text-center m-0" style="font-size:12px !important;">ASSINATURA DO EMITENTE</p>
+                        </div>
+                        <div class="col-1">
+
                         </div>
                     </div>
-
-                    <div class="row">
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6">EMITENTE</p>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <span class="h6">DATA DA EMISSÃO</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6"><b>CNPJ:</b> {{object.cliente_cnpj.cnpj}}</p>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h5">____________________</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6"></p>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6">ASSINATURA DO EMITENTE</p>
-                        </div>
-                    </div>
-
                 </div>
 
             </div>
