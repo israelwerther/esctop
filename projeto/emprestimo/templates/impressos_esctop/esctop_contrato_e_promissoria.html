@@ -22,7 +22,7 @@
                 Valor do crédito
             </span>
             <br>
-            <span>${currencyFormat({{object.valor_emprestado}})}</span>
+            <span>${currencyFormat(emprestimo.valor_emprestado)}</span>
         </div>
     </div>
 
@@ -160,9 +160,9 @@
                 <h5 class="mb-0 font-weight-bold my-2">DA COMPOSIÇÃO DO CRÉDITO</h5>
             </p>
             <p>
-                <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado ${currencyFormat({{object.valor_mutuado}})}, Taxa de Juros a.m 
+                <b> CLÁUSULA 1ª. </b> A integralidade do crédito é composta da seguinte forma: Valor mutuado ${currencyFormat(emprestimo.valor_mutuado)}, Taxa de Juros a.m 
                 {{object.juros_ao_mes}}%, taxa de juros moratório {{object.juros_moratorio|floatformat:2}}% ao dia, multa por atraso: {{object.multa_por_atraso|floatformat:0}}%, 
-                valor do IOF total: ${currencyFormat({{object.iof_real}})}, Valor total devido: ${currencyFormat({{object.valor_devido}})}.
+                valor do IOF total: ${currencyFormat({{object.iof_real}})}, Valor total devido: ${currencyFormat(emprestimo.valor_devido)}.
             </p>
 
             <p>
@@ -510,6 +510,9 @@
                 qtd_parcelas: {{object.qtd_parcelas|safe}},
                 valor_prestacao: {{object.valor_prestacao|safe}},
                 parcelas: [],
+                valor_emprestado: {{object.valor_emprestado|safe}},
+                valor_mutuado: {{object.valor_mutuado|safe}},
+                valor_devido: {{object.valor_devido|safe}},
             },
 		},
 		methods: {
