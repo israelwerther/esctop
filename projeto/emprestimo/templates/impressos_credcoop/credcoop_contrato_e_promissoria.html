@@ -228,8 +228,13 @@
                         <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
                     </template>
                     <template>
-                        <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
                     </template>
+                    {% if not object.cliente.fiador.nome %}
+                        <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
+                        <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                        <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                    {% endif %}
+
                 </div>
                 <div class="col-10" style="height:350px !important;">
                     <div class="row font-weight-bold">
