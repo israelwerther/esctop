@@ -64,4 +64,9 @@ class ClienteDelete(DeleteView):
     
 
     
-    
+# _______________________________________________________________________________
+
+class CredcoopFormulario(CreateView):
+    model=Cliente
+    template_name='credcoop_formulario.html'
+    form_class=ClienteForm

@@ -6,24 +6,36 @@
 <!-- ESTUDO COMPLETO DE FORMSET -->
 <!-- https://docs.djangoproject.com/en/3.0/topics/forms/formsets/ -->
 <!--  -->
+
+{% block css %}
+<style> 
+    .table td, .table th {             
+        padding-left: 10px;
+        padding-top: 0px;  
+        padding-bottom: 0px;  
+        border-top: 1px solid #000000;            
+        border-bottom: 1px solid #000000;            
+        border-left: 1px solid #000000;            
+        border-right: 1px solid #000000;
+    }
+
+    h3 {
+        background-color: rgba(228, 226, 226, 0.83);
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        border-radius: 1px;
+        text-align: center;
+    }
+</style>
+{% endblock css %}
+
 {% block content %}
-    <style> 
-        .table td, .table th {             
-            padding-left: 10px;
-            padding-top: 0px;  
-            padding-bottom: 0px;  
-            border-top: 1px solid #000000;            
-            border-bottom: 1px solid #000000;            
-            border-left: 1px solid #000000;            
-            border-right: 1px solid #000000;
-        }
-    </style>
 
     {% if emprestimo %}
         <h3>Editar {{emprestimo.cliente}}</h3>
         <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
     {% else %}  
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP ***TELA ANTIGA***</h3>
         <form action="{% url 'emprestimo:emprestimo_cnpj_add' %}" method="POST" novalidate>
     {% endif %}
 

@@ -191,8 +191,8 @@ class EmprestimoContratoCPFRenegociacao(UpdateView):
 
 
 @login_required
-def emprestimo_detail(request, pk):
-    template_name='emprestimo_detail.html'
+def emprestimo_detail_novo(request, pk):
+    template_name='emprestimo_detail_novo.html'
     obj=Emprestimo.objects.get(pk=pk)
     context={'object': obj}
     return render(request, template_name, context)
@@ -215,7 +215,7 @@ def emprestimo_pagamento(request, pk):
         emprestimopagamento = form.save(commit=False)
         emprestimopagamento.emprestimo = emprestimo
         emprestimopagamento.save()        
-    return redirect('emprestimo:emprestimo_detail', pk)
+    return redirect('emprestimo:emprestimo_detail_novo', pk)
    
    
 @login_required

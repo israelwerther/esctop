@@ -49,7 +49,7 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         return str(self.n_contrato)
     
     def get_absolute_url(self):
-        return reverse_lazy('emprestimo:emprestimo_detail', kwargs={'pk': self.pk})
+        return reverse_lazy('emprestimo:emprestimo_detail_novo', kwargs={'pk': self.pk})
 
     @hook('before_create')
     def gera_num_contrato(self):

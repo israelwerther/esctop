@@ -222,8 +222,8 @@
         <br>
         <br>
         <br>
-        <span>
-            <h4 class="mt-2">Imprimir</h4>
+        {% comment %} <span>
+            <h4 class="mt-2">Imprimi</h4>
             <div class="btn-group pb-1" role="group">
             <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
                 <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
@@ -244,9 +244,9 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
             {% endif %}
             </div>
-        </span>
+        </span> {% endcomment %}
 
-        <span>
+        {% comment %} <span>
             <h4 class="mt-4">Renegociação</h4>
             <div class="btn-group" role="group">
                 <a type="button" class="btn btn-outline-success active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
@@ -262,7 +262,7 @@
                 <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato </a>
             {% endif %}        
             </div>
-        </span>
+        </span> {% endcomment %}
     </div>
     </div>
 </div>

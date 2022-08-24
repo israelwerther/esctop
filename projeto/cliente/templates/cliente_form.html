@@ -2,8 +2,7 @@
 {% load widget_tweaks %}
 {% load static %}
 {% block js %}{% endblock js %}
-{% block content %}
-
+{% block css %}
 <style>
     .nav-tabs{
         border: 1px solid #c1c5c1;   
@@ -36,9 +35,22 @@
       
     .pl-5, .px-5 {
         padding: 10px!important;
-    }          
+    }
+    
+    h3 {
+        background-color: rgba(228, 226, 226, 0.83);
+        color: rgb(0, 0, 0);
+        padding: 5px;
+        border-radius: 1px;
+        text-align: center;
+    }
+  
     
 </style>
+{% endblock css %}
+
+{% block content %}
+
 
 <!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->
 
