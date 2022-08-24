@@ -75,7 +75,8 @@ class Cliente_cnpj(models.Model):
     rep_numero_casa       = models.CharField("Nº ", max_length=5, blank=True, null=True)
     rep_ponto_referencia  = models.CharField("Ponto de Referencia", max_length=100, blank=True, null=True)  
     #REPRESENTANTE FIADOR
-    fiador                = models.ForeignKey(Avalista, on_delete=models.PROTECT, blank=True, null=True)    
+    fiador                = models.ForeignKey(Avalista, on_delete=models.PROTECT, blank=True, null=True)
+    fiador_inativo        = models.BooleanField("Fiador inativo", default=False)
 
     class Meta:
         ordering = ('razao_social',)
