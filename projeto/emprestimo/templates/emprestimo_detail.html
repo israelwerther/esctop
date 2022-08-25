@@ -177,7 +177,9 @@
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
 
                             {% if object.cliente_cnpj %}  
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato' object.pk %}" target="_blank">
+                                    Contrato<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
                                     Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
                                 </a>
