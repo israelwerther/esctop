@@ -199,6 +199,19 @@ class CredcoopContratoPromissoria(DetailView):
     def get_context_data(self, **kwargs):
         context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
 		
+        return context       
+
+
+class CredcoopPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos_credcoop/credcoop_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
+		
         return context        
 
 

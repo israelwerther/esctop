@@ -219,7 +219,7 @@
     <div class="row my-2" :class="(index+1) % 4 == 0 && (index+1) >= 4 ? 'pageBreak':''" v-for="(parcela, index) in emprestimo.parcelas">
         <div class="col-12 border border-dark rounded-top rounded-bottom">
             <div class="row">
-                <div class="col-2 border border-danger">
+                <div class="col-2">
                     
                     {% if object.cliente.fiador.nome and object.cliente.fiador_inativo or not object.cliente.fiador.nome and not object.cliente.fiador_inativo or not object.cliente.fiador.nome and object.cliente.fiador_inativo %}
                         <div>

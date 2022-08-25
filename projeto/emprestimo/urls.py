@@ -34,12 +34,14 @@ urlpatterns = [
     path('<int:pk>/pagamento_list/', v.emprestimo_pagamento_list, name='emprestimo_pagamento_list'),
     path('simular/', v.EmprestimoCreateView.as_view(), name='form_emprestimo'),
 
+
+    # Novas impressões credcoop
+    path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),
+    path('<int:pk>/credcoop_contrato/', login_required(v.CredcoopContrato.as_view()), name='credcoop_contrato'),
+    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
+
     # Novas impressões esctop
     path('<int:pk>/esctop_contrato/', login_required(v.EsctopContrato.as_view()), name='esctop_contrato'),
     path('<int:pk>/esctop_contrato_e_promissoria/', login_required(v.EsctopContratoPromissoria.as_view()), name='esctop_contrato_e_promissoria'),
-
-    # Novas impressões credcoop
-    path('<int:pk>/credcoop_contrato/', login_required(v.CredcoopContrato.as_view()), name='credcoop_contrato'),
-    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
 
 ]
