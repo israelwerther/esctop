@@ -58,7 +58,7 @@
     /* STYLE DE CONTENT E TABS DOS TEMPLATES DE CADASTRO */
     body {
       font-family: Arial;
-      background: url("../templates/imagens/fundo.jpg");
+      background: url("{% static 'imagens/fundo.jpg' %}");
     }
 
     /* Style the tab */
@@ -295,10 +295,7 @@
           limpa_formulário_cep();
           alert("Formato de CEP inválido.");
         }
-      } //end if.
-      else {
-        //cep sem valor, limpa formulário.
-        limpa_formulário_cep();
+      } //end if./staticlário_cep();
       }
     };
     /*AUTOMATIZA A PESQUISA DE CEP*/
