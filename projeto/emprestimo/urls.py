@@ -7,6 +7,8 @@ app_name='emprestimo'
 
 urlpatterns = [
     path('', v.emprestimo_list, name='emprestimo_list'),
+    
+    path('add/', login_required(v.EmprestimoCreate.as_view()), name='emprestimo_add'),
     path('create_credcoop_composto/', login_required(v.EmprestimoCompostoCreateCredcoop.as_view()), name='create_credcoop_composto'),
 
     path('cnpj_add/', login_required(v.EmprestimoCNPJCreate.as_view()), name='emprestimo_cnpj_add'),
