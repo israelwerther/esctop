@@ -120,7 +120,6 @@
             </table>
         </div>
     </div>
-    <div class="pageBreak"></div>
     
     <div class="row mt-3">
         <div class="col-12 border border-dark">
@@ -164,6 +163,8 @@
                 {{object.juros_ao_mes}}%, taxa de juros moratório {{object.juros_moratorio|floatformat:2}}% ao dia, multa por atraso: {{object.multa_por_atraso|floatformat:0}}%, 
                 valor do IOF total: ${currencyFormat({{object.iof_real}})}, Valor total devido: ${currencyFormat(emprestimo.valor_devido)}.
             </p>
+
+            <div class="pageBreak"></div>
 
             <p>
                 <h5 class="mb-0 font-weight-bold my-2">DO CRÉDITO</h5>
@@ -232,8 +233,6 @@
         </div>
     </div>
 
-    <div class="pageBreak"></div>
-
     <div class="row mt-3">
         <div class="col-12">
             <p class="text-justify">
@@ -283,6 +282,8 @@
             </p>
         </div>
     </div>
+
+    <div class="pageBreak"></div>
 
     <p>
         <h5 class="mb-0 font-weight-bold my-2">DO DEVEDOR SOLIDÁRIO E DO FIADOR – QUANDO HOUVER</h5>
@@ -369,8 +370,6 @@
             </p>
         </div>
     </div>
-
-    <div class="pageBreak"></div>
 
     <p>
         <h5 class="mb-0 font-weight-bold my-2">DO FORO DE ELEIÇÃO</h5>
