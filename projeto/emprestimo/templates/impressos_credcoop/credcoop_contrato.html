@@ -215,7 +215,7 @@
 
     <div class="pageBreak"></div>
 
-    <h3 class="first"></h3>
+    <h3 class="first"> de 1</h3>
     <div class="insert"></div>
 
 {% endblock content %}
@@ -289,7 +289,8 @@
         },
 		mounted() {
             this.getParcelas()
-            var bottom = 0;
+            
+            {% comment %} var bottom = 0;
             $(document).ready(function() {
             $(".pageBreak").slice(0, $(".pageBreak").length - 1).each(function() {
                 bottom -= 100;
@@ -298,7 +299,7 @@
                 $counter.css("bottom", botString + "%");
                     ($counter).insertBefore('.insert');
                 });
-            });
+            }); {% endcomment %}
         },
 		watch: {
 			

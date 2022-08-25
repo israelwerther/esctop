@@ -179,14 +179,16 @@
                             {% if object.cliente_cnpj %}  
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                    Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                                    Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
                                 </a>
                             {% endif %}
 
                             {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato' object.pk %}" target="_blank" type="button">Contrato</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato' object.pk %}" target="_blank" type="button">
+                                    Contrato<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                    Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                                    Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
                                 </a>
                             {% endif %}
                         </div>
