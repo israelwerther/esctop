@@ -172,21 +172,30 @@
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             {% if object.cliente %}
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">
+                                    Promissória<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                             {% endif %}
 
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
-
+                            
                             {% if object.cliente_cnpj %}  
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_promissoria' object.pk %}" target="_blank">
+                                    Promissória<span class="badge badge-success mx-2">Novo</span>
+                                </a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato' object.pk %}" target="_blank">
+                                    Contrato<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                    Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                                    Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
                                 </a>
                             {% endif %}
 
                             {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">Contrato</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato' object.pk %}" target="_blank" type="button">
+                                    Contrato<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                    Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                                    Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
                                 </a>
                             {% endif %}
                         </div>
@@ -230,7 +239,6 @@
                 <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
             </svg></a>
             {% if object.cliente %}
-                <!-- <a href="{% url 'emprestimo:emprestimo_impress' object.pk %}" target="_blank" type="button" class="btn btn-warning">Carnê</a>     -->
                 <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Carnê</a>
             {% endif %}
                 <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Promissória</a>                

@@ -213,94 +213,11 @@
         </p>
     {% endif %}
 
-    
     <div class="pageBreak"></div>
 
-    <div class="row my-2" :class="(index+1) % 4 == 0 && (index+1) >= 4 ? 'pageBreak':''" v-for="(parcela, index) in emprestimo.parcelas">
-        <div class="col-12 border border-dark rounded-top rounded-bottom">
-            <div class="row">
-                <div class="col-2">
-                    
-                    {% if object.cliente.fiador.nome and object.cliente.fiador_inativo or not object.cliente.fiador.nome and not object.cliente.fiador_inativo or not object.cliente.fiador.nome and object.cliente.fiador_inativo %}
-                        <div>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                        </div>
-                    {% endif %}
-
-                    {% if object.cliente.fiador.nome and not object.cliente.fiador_inativo %}
-                        <div>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);"><b>&nbsp&nbspFIADOR:</b></a>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);"><b>&nbsp&nbsp${fiador_nome}</b></a>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);"><b>&nbsp&nbspCPF:</b>{{object.cliente.cpf}}</a>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                        </div>
-                    {% endif %}
-
-                </div>
-                
-                <div class="col-10" style="height:350px !important;">
-                    <div class="row font-weight-bold">
-                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${index + 1}/${emprestimo.qtd_parcelas}</div>
-                        <div class="col-7 mt-3">Vencimento: ${moment(parcela.vencimento).format("DD/MM/YYYY")} </div>
-                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">${currencyFormat(emprestimo.valor_prestacao)}</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-11 mt-3 d-flex justify-content-center">
-                            <p class="text-justify h5 pt-3">                     
-                                &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>${moment(parcela.vencimento).format("DD")} de ${moment(parcela.vencimento).format("MMMM")} de ${moment(parcela.vencimento).format("YYYY")}</u> pagarei por esta única via de NOTA PROMISSÓRIA 
-                                a JOSIMERIO DE ABREU SILVA, CPF 029.388.274-66 ou à sua ordem, a quantia de <u> ${inFullMoney('{{object.valor_prestacao}}')}</u> 
-                                em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.
-                            </p>
-                        </div>
-                    </div>
-                    
-                    <div class="row mt-4">
-                        <div class="col-6 d-flex justify-content-center text-center">
-                            <u class="h5"><b>{{object.cliente.nome}}</b></u>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <u class="h5"><b>{{object.dt_emprestimo}}</b></u>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6">EMITENTE</p>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <span class="h6">DATA DA EMISSÃO</span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6"><b>CPF:</b> {{object.cliente.cpf}}</p>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h5">____________________</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6"></p>
-                        </div>
-                        <div class="col-6 d-flex justify-content-center">
-                            <p class="h6">ASSINATURA DO EMITENTE</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h3 class="first"></h3>
+    <h3 class="first"> de 1</h3>
     <div class="insert"></div>
 
-    
 {% endblock content %}
 
 {% block js %}
@@ -372,7 +289,8 @@
         },
 		mounted() {
             this.getParcelas()
-            var bottom = 0;
+            
+            {% comment %} var bottom = 0;
             $(document).ready(function() {
             $(".pageBreak").slice(0, $(".pageBreak").length - 1).each(function() {
                 bottom -= 100;
@@ -381,7 +299,7 @@
                 $counter.css("bottom", botString + "%");
                     ($counter).insertBefore('.insert');
                 });
-            });
+            }); {% endcomment %}
         },
 		watch: {
 			

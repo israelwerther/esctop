@@ -7,9 +7,6 @@ app_name='emprestimo'
 
 urlpatterns = [
     path('', v.emprestimo_list, name='emprestimo_list'),
-    
-    path('add/', login_required(v.EmprestimoCreate.as_view()), name='emprestimo_add'),
-    path('create_credcoop/', login_required(v.EmprestimoCreateCredcoop.as_view()), name='create_credcoop'),
     path('create_credcoop_composto/', login_required(v.EmprestimoCompostoCreateCredcoop.as_view()), name='create_credcoop_composto'),
 
     path('cnpj_add/', login_required(v.EmprestimoCNPJCreate.as_view()), name='emprestimo_cnpj_add'),
@@ -18,7 +15,6 @@ urlpatterns = [
 
     path('cnpj_list', v.emprestimo_cnpj_list, name='emprestimo_cnpj_list'),
     path('<int:pk>/delete/', login_required(v.EmprestimoDelete.as_view()), name='emprestimo_delete'),
-    path('<int:pk>/impress/', login_required(v.EmprestimoImpress.as_view()), name='emprestimo_impress'),
     path('<int:pk>/carne/', login_required(v.EmprestimoCarne.as_view()), name='emprestimo_carne'),
     path('<int:pk>/promissoria/', login_required(v.EmprestimoPromissoria.as_view()), name='emprestimo_promissoria'),
     path('<int:pk>/promissoria_renegociacao/', login_required(v.EmprestimoPromissoriaRenegociacao.as_view()), name='emprestimo_promissoria_renegociacao'),
@@ -34,10 +30,15 @@ urlpatterns = [
     path('<int:pk>/pagamento_list/', v.emprestimo_pagamento_list, name='emprestimo_pagamento_list'),
     path('simular/', v.EmprestimoCreateView.as_view(), name='form_emprestimo'),
 
-    # Novas impressões esctop
-    path('<int:pk>/esctop_contrato_e_promissoria/', login_required(v.EsctopEmprestimoContratoPromissoria.as_view()), name='esctop_contrato_e_promissoria'),
 
     # Novas impressões credcoop
-    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopEmprestimoContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
+    path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),
+    path('<int:pk>/credcoop_contrato/', login_required(v.CredcoopContrato.as_view()), name='credcoop_contrato'),
+    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
+
+    # Novas impressões esctop
+    path('<int:pk>/esctop_promissoria/', login_required(v.EsctopPromissoria.as_view()), name='esctop_promissoria'),
+    path('<int:pk>/esctop_contrato/', login_required(v.EsctopContrato.as_view()), name='esctop_contrato'),
+    path('<int:pk>/esctop_contrato_e_promissoria/', login_required(v.EsctopContratoPromissoria.as_view()), name='esctop_contrato_e_promissoria'),
 
 ]

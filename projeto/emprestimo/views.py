@@ -28,29 +28,6 @@ def emprestimo_cnpj_list(request):
     return render(request, template_name, context)
 
 
-# (LoginRequiredMixin, CreateView):
-class EmprestimoCreate(CreateView):
-    model=Emprestimo
-    template_name='emprestimo_form.html'
-    form_class=EmprestimoForm
-    
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoCreate, self).form_valid(form_class)
-
-
-class EmprestimoCreateCredcoop(CreateView):
-    model=Emprestimo
-    template_name='emprestimo_form_credcoop.html'
-    form_class=EmprestimoForm
-    
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoCreateCredcoop, self).form_valid(form_class)
-
-
 class EmprestimoCompostoCreateCredcoop(CreateView):
     model=Emprestimo
     template_name='emprestimo_form_credcoop_composto.html'
@@ -121,12 +98,6 @@ class EmprestimoDelete(DeleteView):
     success_url = reverse_lazy('emprestimo:emprestimo_list')  
 
 
-class EmprestimoImpress(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_impress.html'
-    form_class=EmprestimoForm
-
-
 class EmprestimoCarne(UpdateView):
     model=Emprestimo
     template_name='emprestimo_carne.html'
@@ -150,7 +121,32 @@ class EmprestimoContratoCNPJ(UpdateView):
     form_class=EmprestimoForm
 
 
-class EsctopEmprestimoContratoPromissoria(DetailView):
+class EsctopPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos_esctop/esctop_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopPromissoria, self).get_context_data(**kwargs)
+		
+        return context
+
+class EsctopContrato(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos_esctop/esctop_contrato.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopContrato, self).get_context_data(**kwargs)
+		
+        return context
+
+
+class EsctopContratoPromissoria(DetailView):
     def test_func(self):
         return self.request.user.is_superuser
 
@@ -158,11 +154,25 @@ class EsctopEmprestimoContratoPromissoria(DetailView):
     template_name='impressos_esctop/esctop_contrato_e_promissoria.html'
     
     def get_context_data(self, **kwargs):
-        context = super(EsctopEmprestimoContratoPromissoria, self).get_context_data(**kwargs)
+        context = super(EsctopContratoPromissoria, self).get_context_data(**kwargs)
 		
         return context
-        
-class CredcoopEmprestimoContratoPromissoria(DetailView):
+
+
+class CredcoopContrato(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos_credcoop/credcoop_contrato.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopContrato, self).get_context_data(**kwargs)
+		
+        return context
+
+
+class CredcoopContratoPromissoria(DetailView):
     def test_func(self):
         return self.request.user.is_superuser
 
@@ -170,9 +180,23 @@ class CredcoopEmprestimoContratoPromissoria(DetailView):
     template_name='impressos_credcoop/credcoop_contrato_e_promissoria.html'
     
     def get_context_data(self, **kwargs):
-        context = super(CredcoopEmprestimoContratoPromissoria, self).get_context_data(**kwargs)
+        context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
 		
-        return context
+        return context       
+
+
+class CredcoopPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='impressos_credcoop/credcoop_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
+		
+        return context        
+
 
 class EmprestimoContratoCNPJRenegociacao(UpdateView):
     model=Emprestimo
