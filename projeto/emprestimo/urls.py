@@ -38,6 +38,7 @@ urlpatterns = [
     path('<int:pk>/esctop_contrato_e_promissoria/', login_required(v.EsctopEmprestimoContratoPromissoria.as_view()), name='esctop_contrato_e_promissoria'),
 
     # Novas impressões credcoop
-    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopEmprestimoContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
+    path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
+    path('<int:pk>/credcoop_contrato/', login_required(v.CredcoopContrato.as_view()), name='credcoop_contrato'),
 
 ]
