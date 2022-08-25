@@ -431,16 +431,24 @@
         <div class="col-12 border border-dark rounded-top rounded-bottom">
             <div class="row">
                 <div class="col-2" style="height:350px !important;">
-                    <template v-if="fiador">
-                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbspFiador:</a>
-                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp${fiador_nome}</a>
-                    </template>
-                    <template>
-                        <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
-                    </template>
-                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                    <a style=" writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
-                    <!-- <p style=" transform: rotate(-90deg); padding-bottom:300px !important; margin-left:150px">_________________________</p> -->
+
+                    {% if object.cliente_cnpj.fiador.fiador_nome and object.cliente_cnpj.fiador_inativo or not object.cliente_cnpj.fiador.fiador_nome and not object.cliente_cnpj.fiador_inativo or not object.cliente_cnpj.fiador.fiador_nome and object.cliente_cnpj.fiador_inativo %}
+                        <div>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp</a>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                        </div>
+                    {% endif %}
+
+                    {% if object.cliente_cnpj.fiador.fiador_nome and not object.cliente_cnpj.fiador_inativo %}
+                        <div>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);"><b>&nbsp&nbspFIADOR:</b></a>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);"><b>&nbsp&nbsp${fiador_nome}</b></a>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                            <a style="writing-mode: vertical-lr; transform: rotate(180deg);">&nbsp&nbsp____________________________________&nbsp&nbsp&nbsp</a>
+                        </div>
+                    {% endif %}
+
                 </div>
                 <div class="col-10" style="height:350px !important;">
                     <div class="row font-weight-bold">

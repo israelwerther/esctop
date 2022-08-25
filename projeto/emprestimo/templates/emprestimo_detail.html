@@ -172,13 +172,16 @@
                         <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                             {% if object.cliente %}
                                 <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">
+                                    Promissória<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                             {% endif %}
 
-                            <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">
-                                Promissória<span class="badge badge-success mx-2">Novo</span>
-                            </a>
-
+                            
                             {% if object.cliente_cnpj %}  
+                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_promissoria' object.pk %}" target="_blank">
+                                    Promissória<span class="badge badge-success mx-2">Novo</span>
+                                </a>
                                 <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato' object.pk %}" target="_blank">
                                     Contrato<span class="badge badge-success mx-2">Novo</span>
                                 </a>
