@@ -62,10 +62,17 @@ def emprestimo_cnpj_list(request):
 
 
 # Credcoop Impressos
-class EmprestimoCarne(UpdateView):
+class CredcoopContratoPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
     model=Emprestimo
-    template_name='credcoop_impressos/emprestimo_carne.html'
-    form_class=EmprestimoForm
+    template_name='credcoop_impressos/credcoop_contrato_e_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
+		
+        return context
 
 
 class CredcoopContrato(DetailView):
@@ -81,19 +88,6 @@ class CredcoopContrato(DetailView):
         return context
 
 
-class CredcoopContratoPromissoria(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='credcoop_impressos/credcoop_contrato_e_promissoria.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
-		
-        return context
-
-
 class CredcoopPromissoria(DetailView):
     def test_func(self):
         return self.request.user.is_superuser
@@ -105,6 +99,12 @@ class CredcoopPromissoria(DetailView):
         context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
 		
         return context
+
+
+class EmprestimoCarne(UpdateView):
+    model=Emprestimo
+    template_name='credcoop_impressos/emprestimo_carne.html'
+    form_class=EmprestimoForm
 
 
 # Esctop Impressos
@@ -146,30 +146,8 @@ class EsctopContratoPromissoria(DetailView):
         return context
 
 ############################################################################################################
-class EmprestimoCNPJCreate(CreateView):
-    model=Emprestimo
-    template_name='emprestimo_cnpj_form.html'
-    form_class=EmprestimoForm
-    
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoCNPJCreate, self).form_valid(form_class)        
-    
-
-class EmprestimoCreateEsctop(CreateView):
-    model=Emprestimo
-    template_name='emprestimo_form_esctop.html'
-    form_class=EmprestimoForm
-    
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoCreateEsctop, self).form_valid(form_class)
-    
 
 
-    
 # class EmprestimoUpdate(UpdateView):
 #     model=Emprestimo
 #     template_name='emprestimo_form.html'

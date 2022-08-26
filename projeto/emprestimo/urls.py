@@ -7,10 +7,6 @@ app_name='emprestimo'
 
 urlpatterns = [
     
-    
-
-    path('cnpj_add/', login_required(v.EmprestimoCNPJCreate.as_view()), name='emprestimo_cnpj_add'),
-    path('create_esctop/', login_required(v.EmprestimoCreateEsctop.as_view()), name='create_esctop'),
     path('create_esctop_composto/', login_required(v.EmprestimoCompostoCreateEsctop.as_view()), name='create_esctop_composto'),
 
     path('cnpj_list', v.emprestimo_cnpj_list, name='emprestimo_cnpj_list'),
@@ -37,7 +33,7 @@ urlpatterns = [
     # Credcoop
     path('create_credcoop_composto/', login_required(v.EmprestimoCompostoCreateCredcoop.as_view()), name='create_credcoop_composto'),
     path('', v.emprestimo_list, name='emprestimo_list'),
-    
+
     # Impressões Credcoop
     path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),
     path('<int:pk>/credcoop_contrato/', login_required(v.CredcoopContrato.as_view()), name='credcoop_contrato'),
