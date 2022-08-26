@@ -21,10 +21,6 @@ urlpatterns = [
     path('<int:pk>/contrato_cpf_renegociacao/', login_required(v.EmprestimoContratoCPFRenegociacao.as_view()), name='emprestimo_contrato_cpf_renegociacao'),
     path('<int:pk>/', v.emprestimo_detail, name='emprestimo_detail'),
 
-    # Lembrar de verificar necessidade de manter esta url abaixo ou talvez criar uma tela oculta de edião de meprestimo
-    # para treino apenas.
-    # path('<int:pk>/edit/', login_required(v.EmprestimoUpdate.as_view()), name='emprestimo_edit'),
-
     path('<int:pk>/pagamento_add/', v.emprestimo_pagamento_add, name='emprestimo_pagamento_add'),
     path('<int:pk>/pagamento/', v.emprestimo_pagamento, name='emprestimo_pagamento'),
     path('<int:pk>/pagamento_list/', v.emprestimo_pagamento_list, name='emprestimo_pagamento_list'),

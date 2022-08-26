@@ -9,14 +9,9 @@
 
 {% block content %}
     <div class="card card-body">
-        <div class="card card-body">
-        {% if emprestimo %}
-        <h3>Editar {{emprestimo.cliente}}</h3>
-        <form action="{% url 'emprestimo:emprestimo_edit' emprestimo.pk %}" method="POST" novalidate>
-        {% else %}
+        <div class="card card-body">        
         <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP {{form.erros}}</h3>
-        <form method="POST" novalidate>
-        {% endif %}
+        <form method="POST" novalidate>        
         {% csrf_token %}
             <div class="row">
                 <div class="col-sm-6">

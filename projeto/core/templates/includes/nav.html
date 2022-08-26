@@ -86,15 +86,10 @@
 						aria-haspopup="true" aria-expanded="false">
 						Empréstimo
 					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">						
-						{% comment %} <a class="dropdown-item" href="{% url 'emprestimo:create_credcoop'%}">CREDCOOP(Antigo)</a> {% endcomment %}
-						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop_composto'%}">CREDCOOP
-							{% comment %} <span class="badge badge-success">Novo</span> {% endcomment %}
-						</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop_composto'%}">CREDCOOP</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop_composto'%}">ESCTOP
-							{% comment %} <span class="badge badge-success">Novo</span> {% endcomment %}
-						</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop_composto'%}">ESCTOP</a>
 						{% comment %} <div class="dropdown-divider"></div>		
 						<a class="dropdown-item" href="{% url 'emprestimo:form_emprestimo'%}">SIMULAR
 							<span class="badge badge-success">Novo</span>
