@@ -62,6 +62,12 @@ def emprestimo_cnpj_list(request):
 
 
 # Credcoop Impressos
+class EmprestimoCarne(UpdateView):
+    model=Emprestimo
+    template_name='credcoop_impressos/emprestimo_carne.html'
+    form_class=EmprestimoForm
+
+
 class CredcoopContrato(DetailView):
     def test_func(self):
         return self.request.user.is_superuser
@@ -99,6 +105,7 @@ class CredcoopPromissoria(DetailView):
         context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
 		
         return context
+
 
 # Esctop Impressos
 class EsctopPromissoria(DetailView):
@@ -138,7 +145,7 @@ class EsctopContratoPromissoria(DetailView):
 		
         return context
 
-
+############################################################################################################
 class EmprestimoCNPJCreate(CreateView):
     model=Emprestimo
     template_name='emprestimo_cnpj_form.html'
@@ -180,10 +187,7 @@ class EmprestimoDelete(DeleteView):
     success_url = reverse_lazy('emprestimo:emprestimo_list')  
 
 
-class EmprestimoCarne(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_carne.html'
-    form_class=EmprestimoForm
+
     
 
 class EmprestimoPromissoria(UpdateView):
