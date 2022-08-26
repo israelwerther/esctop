@@ -30,7 +30,6 @@ urlpatterns = [
     path('<int:pk>/pagamento_list/', v.emprestimo_pagamento_list, name='emprestimo_pagamento_list'),
     path('simular/', v.EmprestimoCreateView.as_view(), name='form_emprestimo'),
 
-
     # Novas impressões credcoop
     path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),
     path('<int:pk>/credcoop_contrato/', login_required(v.CredcoopContrato.as_view()), name='credcoop_contrato'),

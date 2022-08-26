@@ -121,50 +121,13 @@ class EmprestimoContratoCNPJ(UpdateView):
     form_class=EmprestimoForm
 
 
-class EsctopPromissoria(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='impressos_esctop/esctop_promissoria.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(EsctopPromissoria, self).get_context_data(**kwargs)
-		
-        return context
-
-class EsctopContrato(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='impressos_esctop/esctop_contrato.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(EsctopContrato, self).get_context_data(**kwargs)
-		
-        return context
-
-
-class EsctopContratoPromissoria(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='impressos_esctop/esctop_contrato_e_promissoria.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(EsctopContratoPromissoria, self).get_context_data(**kwargs)
-		
-        return context
-
-
+# Credcoop Impressos
 class CredcoopContrato(DetailView):
     def test_func(self):
         return self.request.user.is_superuser
 
     model=Emprestimo
-    template_name='impressos_credcoop/credcoop_contrato.html'
+    template_name='credcoop_impressos/credcoop_contrato.html'
     
     def get_context_data(self, **kwargs):
         context = super(CredcoopContrato, self).get_context_data(**kwargs)
@@ -177,12 +140,12 @@ class CredcoopContratoPromissoria(DetailView):
         return self.request.user.is_superuser
 
     model=Emprestimo
-    template_name='impressos_credcoop/credcoop_contrato_e_promissoria.html'
+    template_name='credcoop_impressos/credcoop_contrato_e_promissoria.html'
     
     def get_context_data(self, **kwargs):
         context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
 		
-        return context       
+        return context
 
 
 class CredcoopPromissoria(DetailView):
@@ -190,12 +153,50 @@ class CredcoopPromissoria(DetailView):
         return self.request.user.is_superuser
 
     model=Emprestimo
-    template_name='impressos_credcoop/credcoop_promissoria.html'
+    template_name='credcoop_impressos/credcoop_promissoria.html'
     
     def get_context_data(self, **kwargs):
         context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
 		
-        return context        
+        return context
+
+# Esctop Impressos
+class EsctopPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='esctop_impressos/esctop_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopPromissoria, self).get_context_data(**kwargs)
+		
+        return context
+
+class EsctopContrato(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='esctop_impressos/esctop_contrato.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopContrato, self).get_context_data(**kwargs)
+		
+        return context
+
+
+class EsctopContratoPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='esctop_impressos/esctop_contrato_e_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopContratoPromissoria, self).get_context_data(**kwargs)
+		
+        return context
 
 
 class EmprestimoContratoCNPJRenegociacao(UpdateView):
