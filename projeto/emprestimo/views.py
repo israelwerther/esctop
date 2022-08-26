@@ -11,26 +11,10 @@ from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils import timezone
 from django.http import JsonResponse
 
-
-@login_required
-def emprestimo_list(request):    
-    template_name='emprestimo_list.html'  
-    objects=Emprestimo.objects.all()
-    context={'object_list': objects}
-    return render(request, template_name, context)
-
-
-@login_required
-def emprestimo_cnpj_list(request):    
-    template_name='emprestimo_cnpj_list.html'
-    objects=Emprestimo.objects.all()
-    context={'object_list': objects}
-    return render(request, template_name, context)
-
-
+# Credcoop
 class EmprestimoCompostoCreateCredcoop(CreateView):
     model=Emprestimo
-    template_name='emprestimo_form_credcoop_composto.html'
+    template_name='credcoop/emprestimo_form_credcoop_composto.html'
     form_class=EmprestimoForm
 
     def get_context_data(self, **kwargs):
@@ -44,31 +28,18 @@ class EmprestimoCompostoCreateCredcoop(CreateView):
         return super(EmprestimoCompostoCreateCredcoop, self).form_valid(form_class)
 
 
-class EmprestimoCNPJCreate(CreateView):
-    model=Emprestimo
-    template_name='emprestimo_cnpj_form.html'
-    form_class=EmprestimoForm
-    
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoCNPJCreate, self).form_valid(form_class)        
-    
+@login_required
+def emprestimo_list(request):    
+    template_name='credcoop/emprestimo_list.html'  
+    objects=Emprestimo.objects.all()
+    context={'object_list': objects}
+    return render(request, template_name, context)
 
-class EmprestimoCreateEsctop(CreateView):
-    model=Emprestimo
-    template_name='emprestimo_form_esctop.html'
-    form_class=EmprestimoForm
-    
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoCreateEsctop, self).form_valid(form_class)
-    
 
+# Esctop
 class EmprestimoCompostoCreateEsctop(CreateView):
     model=Emprestimo
-    template_name='emprestimo_form_esctop_composto.html'
+    template_name='esctop/emprestimo_form_esctop_composto.html'
     form_class=EmprestimoForm
 
     def get_context_data(self, **kwargs):
@@ -80,45 +51,14 @@ class EmprestimoCompostoCreateEsctop(CreateView):
         obj = form.save(commit=False)
         obj.funcionario = self.request.user
         return super(EmprestimoCompostoCreateEsctop, self).form_valid(form)
-    
-class EmprestimoUpdate(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_form.html'
-    form_class=EmprestimoForm
-
-    def form_valid(self, form_class):
-        obj = form_class.save(commit=False)
-        obj.funcionario = self.request.user
-        return super(EmprestimoUpdate, self).form_valid(form_class)
-
-    
-class EmprestimoDelete(DeleteView):
-    model=Emprestimo
-    template_name ='emprestimo_delete.html'    
-    success_url = reverse_lazy('emprestimo:emprestimo_list')  
 
 
-class EmprestimoCarne(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_carne.html'
-    form_class=EmprestimoForm
-    
-
-class EmprestimoPromissoria(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_promissoria.html'
-    form_class=EmprestimoForm
-
-class EmprestimoPromissoriaRenegociacao(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_promissoria_renegociacao.html'
-    form_class=EmprestimoForm
-
-
-class EmprestimoContratoCNPJ(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_contrato_cnpj.html'
-    form_class=EmprestimoForm
+@login_required
+def emprestimo_cnpj_list(request):    
+    template_name='esctop/emprestimo_cnpj_list.html'
+    objects=Emprestimo.objects.all()
+    context={'object_list': objects}
+    return render(request, template_name, context)
 
 
 # Credcoop Impressos
@@ -197,6 +137,73 @@ class EsctopContratoPromissoria(DetailView):
         context = super(EsctopContratoPromissoria, self).get_context_data(**kwargs)
 		
         return context
+
+
+class EmprestimoCNPJCreate(CreateView):
+    model=Emprestimo
+    template_name='emprestimo_cnpj_form.html'
+    form_class=EmprestimoForm
+    
+    def form_valid(self, form_class):
+        obj = form_class.save(commit=False)
+        obj.funcionario = self.request.user
+        return super(EmprestimoCNPJCreate, self).form_valid(form_class)        
+    
+
+class EmprestimoCreateEsctop(CreateView):
+    model=Emprestimo
+    template_name='emprestimo_form_esctop.html'
+    form_class=EmprestimoForm
+    
+    def form_valid(self, form_class):
+        obj = form_class.save(commit=False)
+        obj.funcionario = self.request.user
+        return super(EmprestimoCreateEsctop, self).form_valid(form_class)
+    
+
+
+    
+# class EmprestimoUpdate(UpdateView):
+#     model=Emprestimo
+#     template_name='emprestimo_form.html'
+#     form_class=EmprestimoForm
+
+#     def form_valid(self, form_class):
+#         obj = form_class.save(commit=False)
+#         obj.funcionario = self.request.user
+#         return super(EmprestimoUpdate, self).form_valid(form_class)
+
+    
+class EmprestimoDelete(DeleteView):
+    model=Emprestimo
+    template_name ='emprestimo_delete.html'    
+    success_url = reverse_lazy('emprestimo:emprestimo_list')  
+
+
+class EmprestimoCarne(UpdateView):
+    model=Emprestimo
+    template_name='emprestimo_carne.html'
+    form_class=EmprestimoForm
+    
+
+class EmprestimoPromissoria(UpdateView):
+    model=Emprestimo
+    template_name='emprestimo_promissoria.html'
+    form_class=EmprestimoForm
+
+class EmprestimoPromissoriaRenegociacao(UpdateView):
+    model=Emprestimo
+    template_name='emprestimo_promissoria_renegociacao.html'
+    form_class=EmprestimoForm
+
+
+class EmprestimoContratoCNPJ(UpdateView):
+    model=Emprestimo
+    template_name='emprestimo_contrato_cnpj.html'
+    form_class=EmprestimoForm
+
+
+
 
 
 class EmprestimoContratoCNPJRenegociacao(UpdateView):
