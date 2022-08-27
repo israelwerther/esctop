@@ -72,8 +72,8 @@
                         <label class="checkbox-inline"> {{form.online.label}} 
                             <input type="checkbox" value="online" id="online" name="online" onclick="checkUncheck()">
                         </label>
-                    </div>    
-                </div>    
+                    </div>
+                </div>
                 <div class="col-sm-2 d-none">
                     <div class="form-group">
                         <label for="" >Boleto</label>
@@ -118,7 +118,8 @@
         </form>
     </div>    
     
-    <script src="{% static 'js/testesjs.js' %}"></script> 
+    <script src="{% static 'js/testesjs.js' %}"></script>
+    <script src="{% static 'js/calculos.js' %}"></script>
     <script>
     $(document).ready(function () {
         $('#cliente').select2();
