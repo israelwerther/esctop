@@ -42,14 +42,14 @@
                     <div class="col-sm-4">
                         <label for="">{{form.dt_emprestimo.label}}</label>   
                         <div class="form-group">
-                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" onblur="somar()"%}                    
+                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" onblur="somar()" %}                    
                         </div>                  
                     </div> 
                 {% else %}
                     <div class="col-sm-4">
                         <label for="">{{form.dt_emprestimo.label}}</label>   
                         <div class="form-group">
-                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" type="date" onchange="somar()"%}                    
+                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" type="date" onchange="somar()" onblur="somar()" %}
                         </div>                  
                     </div> 
                 {% endif %}
@@ -123,6 +123,24 @@
     $(document).ready(function () {
         $('#cliente_cnpj').select2();
     });
+
+    const dateInput = document.getElementById('dataselecionada');
+	// ✅ Using the visitor's timezone
+	dateInput.value = formatDate();
+	console.log(formatDate());
+	function padTo2Digits(num) {
+		return num.toString().padStart(2, '0');
+	}
+	function formatDate(date = new Date()) {
+		return [
+			date.getFullYear(),
+			padTo2Digits(date.getMonth() + 1),
+			padTo2Digits(date.getDate()),
+		].join('-');
+	}
+	// ✅ Using UTC (universal coordinated time)
+	// dateInput.value = new Date().toISOString().split('T')[0];
+	// console.log(new Date().toISOString().split('T')[0]);	
     
     //VERIFICAR A FUNCIONALIDADE DESSE SCRIPT!!!!!!!!!!!!!!
     function toFixed(num, fixed) {

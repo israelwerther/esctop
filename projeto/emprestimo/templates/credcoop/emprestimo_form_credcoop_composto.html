@@ -8,133 +8,152 @@
 {% endblock css %}
 
 {% block content %}
-    <div class="card card-body">
-        <div class="card card-body">        
-        <h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP {{form.erros}}</h3>
-        <form method="POST" novalidate>        
-        {% csrf_token %}
-            <div class="row">
-                <div class="col-sm-6">
-                    <label for="">Cliente Credcoop</label>
-                    <select id="cliente" class="form-control" name="cliente">
-                        <option id="foo">----------------</option>
-                        {% for cliente in clientes %}
-                            <option value="{{cliente.pk}}" {% if cliente.pk|stringformat:'s' in clientes %} selected="selected" {% endif %}>
-                                {{ cliente.nome }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                {{form.errors}}
-                <div class="col-sm-6"> 
-                    <label for="">{{form.valor_emprestado.label}}</label>
-                    <div class="form-group">
-                        {% render_field form.valor_emprestado class="form-control form-control-sm" id="valor_emprestado" onchange="somar()"%}
-                    </div>
-                </div>        
-                <div class="col-sm-4">                    
-                    <label for="" class="required" >{{form.qtd_parcelas.label}} </label>                
-                    <div class="form-group" >                
-                        {% render_field form.qtd_parcelas value="0" class="form-control form-control-sm" id="qtd_parcelas" onclick="somar()"%}
-                    </div>
-                </div>
+	<div class="card card-body">
+		<div class="card card-body">        
+		<h3>CADASTRAR UM EMPRÉSTIMO CREDCOOP {{form.erros}}</h3>
+		<form method="POST" novalidate>        
+		{% csrf_token %}
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="">Cliente Credcoop</label>
+					<select id="cliente" class="form-control" name="cliente">
+						<option id="foo">----------------</option>
+						{% for cliente in clientes %}
+							<option value="{{cliente.pk}}" {% if cliente.pk|stringformat:'s' in clientes %} selected="selected" {% endif %}>
+								{{ cliente.nome }}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+				{{form.errors}}
+				<div class="col-sm-6"> 
+					<label for="">{{form.valor_emprestado.label}}</label>
+					<div class="form-group">
+						{% render_field form.valor_emprestado class="form-control form-control-sm" id="valor_emprestado" onchange="somar()"%}
+					</div>
+				</div>        
+				<div class="col-sm-4">                    
+					<label for="" class="required" >{{form.qtd_parcelas.label}} </label>
+					<div class="form-group" >                
+						{% render_field form.qtd_parcelas value="0" class="form-control form-control-sm" id="qtd_parcelas" onclick="somar()" onblur="somar()"%}
+					</div>
+				</div>
 
-                {% if object.pk %} 
-                    <div class="col-sm-4">
-                        <label for="">{{form.dt_emprestimo.label}}</label>   
-                        <div class="form-group">
-                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" onblur="somar()"%}                    
-                        </div>                  
-                    </div> 
-                {% else %}
-                    <div class="col-sm-4">
-                        <label for="">{{form.dt_emprestimo.label}}</label>   
-                        <div class="form-group">
-                            {% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" type="date" onchange="somar()"%}                    
-                        </div>                  
-                    </div> 
-                {% endif %}
+				{% if object.pk %} 
+					<div class="col-sm-4">
+						<label for="">{{form.dt_emprestimo.label}}</label>   
+						<div class="form-group">
+							{% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" onblur="somar()"%}                    
+						</div>                  
+					</div> 
+				{% else %}
+					<div class="col-sm-4">
+						<label for="">{{form.dt_emprestimo.label}}</label>
+						<div class="form-group">
+							{% render_field form.dt_emprestimo class="form-control form-control-sm" id="dataselecionada" type="date" onchange="somar()"%}                    
+						</div>                  
+					</div>
+				{% endif %}
 
-                <div class="col-sm-4"> 
-                    <label for="">{{form.valor_prestacao.label}}</label>
-                    <div class="form-group" id="res">
-                        {% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control form-control-sm" id="prestacao" %}
-                    </div>
-                </div>
-            </div>
-        </div>
-            
-        <div class="card card-body mt-2">
-            <h4>OPÇÕES DO EMPRÉSTIMO</h4>
-            <div class="row">                
-                <div class="col-sm-2"> 
-                    <div class="form-group">
-                        <label class="checkbox-inline"> {{form.online.label}} 
-                            <input type="checkbox" value="online" id="online" name="online" onclick="checkUncheck()">
-                        </label>
-                    </div>
-                </div>
-                <div class="col-sm-2 d-none">
-                    <div class="form-group">
-                        <label for="" >Boleto</label>
-                        {% render_field form.boleto class="form-control" %}
-                        <label class="checkbox-inline"> {{form.boleto.label}} <input type="checkbox" value="boleto" id="boleto" name="boleto" checked></label>
-                    </div>
-                </div>
-                <div class="col-sm-2 d-none">
-                    <div class="form-group">
-                        <label class="checkbox-inline"> {{form.presencial.label}}
-                            <input type="checkbox" value="presencial" id="presencial" name="presencial" checked>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card card-body mt-2 mb-5">
-            <div class="row">
-                <div class="col">
-                    {% if emprestimo %}   
-                        <button type="submit" class="btn btn-success" >Salvar Alterações</button>
-                        <a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>
-                    {% else %}
-                        <a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
-                        <button type="submit" class="btn btn-success pull-right m-1" onclick="somar()">Cadastrar</button>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
+				<div class="col-sm-4">
+					<label for="">{{form.valor_prestacao.label}}</label>
+					<div class="form-group" id="res">
+						{% render_field form.valor_prestacao|append_attr:"readonly:readonly" class="form-control form-control-sm" id="prestacao" %}
+					</div>
+				</div>
+			</div>
+		</div>
+			
+		<div class="card card-body mt-2">
+			<h4>OPÇÕES DO EMPRÉSTIMO</h4>
+			<div class="row">                
+				<div class="col-sm-2"> 
+					<div class="form-group">
+						<label class="checkbox-inline"> {{form.online.label}} 
+							<input type="checkbox" value="online" id="online" name="online" onclick="checkUncheck()">
+						</label>
+					</div>
+				</div>
+				<div class="col-sm-2 d-none">
+					<div class="form-group">
+						<label for="" >Boleto</label>
+						{% render_field form.boleto class="form-control" %}
+						<label class="checkbox-inline"> {{form.boleto.label}} <input type="checkbox" value="boleto" id="boleto" name="boleto" checked></label>
+					</div>
+				</div>
+				<div class="col-sm-2 d-none">
+					<div class="form-group">
+						<label class="checkbox-inline"> {{form.presencial.label}}
+							<input type="checkbox" value="presencial" id="presencial" name="presencial" checked>
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card card-body mt-2 mb-5">
+			<div class="row">
+				<div class="col">
+					{% if emprestimo %}   
+						<button type="submit" class="btn btn-success" >Salvar Alterações</button>
+						<a href="{% url 'emprestimo:emprestimo_pagamento_add' emprestimo.pk %}" class="btn btn-primary">Realizar pagamento </a>
+					{% else %}
+						<a href="{% url 'emprestimo:emprestimo_list' %}" type="button" class="btn btn-danger pull-right m-1">Cancelar</a>
+						<button type="submit" class="btn btn-success pull-right m-1" onclick="somar()">Cadastrar</button>
+					{% endif %}
+				</div>
+			</div>
+		</div>
 
-        <!-- ELEMENTOS OCULTOS -->
-        {% render_field form.valor_multa class="form-control" id="multa" type="hidden" %}
-        {% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" type="hidden" %}
-        {% render_field form.valor_mutuado class="form-control" id="valor_mutuado" type="hidden" %}
-        {% render_field form.juros_ao_mes class="form-control" id="juros_ao_mes" type="hidden" %}
-        {% render_field form.juros_moratorio class="form-control" id="juros_moratorio" type="hidden" %}
-        {% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" type="hidden" %}
-        {% render_field form.iof_real class="form-control" id="iof_real" type="hidden" %}
-        {% render_field form.valor_devido class="form-control" id="valor_devido" type="hidden"%}
-        {% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}
-        <!-- ELEMENTOS OCULTOS -->
-        </form>
-    </div>    
-    
-    <script src="{% static 'js/testesjs.js' %}"></script>
-    <script src="{% static 'js/calculos.js' %}"></script>
-    <script>
-    $(document).ready(function () {
-        $('#cliente').select2();
-    });
-    
-    //VERIFICAR A FUNCIONALIDADE DESSE SCRIPT!!!!!!!!!!!!!!
-    function toFixed(num, fixed) {
-        var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
-        return num.toString().match(re)[0];
-    }
+		<!-- ELEMENTOS OCULTOS -->
+		{% render_field form.valor_multa class="form-control" id="multa" type="hidden" %}
+		{% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" type="hidden" %}
+		{% render_field form.valor_mutuado class="form-control" id="valor_mutuado" type="hidden" %}
+		{% render_field form.juros_ao_mes class="form-control" id="juros_ao_mes" type="hidden" %}
+		{% render_field form.juros_moratorio class="form-control" id="juros_moratorio" type="hidden" %}
+		{% render_field form.multa_por_atraso class="form-control" id="multa_por_atraso" type="hidden" %}
+		{% render_field form.iof_real class="form-control" id="iof_real" type="hidden" %}
+		{% render_field form.valor_devido class="form-control" id="valor_devido" type="hidden"%}
+		{% render_field form.n_contrato class="form-control" id="n_contrato" type="hidden" %}
+		<!-- ELEMENTOS OCULTOS -->
+		</form>
+	</div>
+	
+	
+<script src="{% static 'js/testesjs.js' %}"></script>
+<script src="{% static 'js/calculos.js' %}"></script>
+<script>
+	$(document).ready(function () {
+		$('#cliente').select2();
+	});
 
-    truncateDecimals = function (number) {
-        return Math[number < 0 ? 'ceil' : 'floor'](number);
-    };
-    
+	const dateInput = document.getElementById('dataselecionada');
+	// ✅ Using the visitor's timezone
+	dateInput.value = formatDate();
+	console.log(formatDate());
+	function padTo2Digits(num) {
+		return num.toString().padStart(2, '0');
+	}
+	function formatDate(date = new Date()) {
+		return [
+			date.getFullYear(),
+			padTo2Digits(date.getMonth() + 1),
+			padTo2Digits(date.getDate()),
+		].join('-');
+	}
+	// ✅ Using UTC (universal coordinated time)
+	// dateInput.value = new Date().toISOString().split('T')[0];
+	// console.log(new Date().toISOString().split('T')[0]);	
+	
+	//VERIFICAR A FUNCIONALIDADE DESSE SCRIPT!!!!!!!!!!!!!!
+	function toFixed(num, fixed) {
+		var re = new RegExp('^-?\\d+(?:\.\\d{0,' + (fixed || -1) + '})?');
+		return num.toString().match(re)[0];
+	}
+
+	truncateDecimals = function (number) {
+		return Math[number < 0 ? 'ceil' : 'floor'](number);
+	};
+	
 </script>
 
 {% endblock content %}
