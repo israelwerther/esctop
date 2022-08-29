@@ -4,49 +4,36 @@
 
 {% block content %}
 
+
 <div class="row" style="position: -webkit-sticky; position: sticky; top: 50px; z-index:5">
     <div class="col-12 card card-body">
         <h1>Emprestimo Nº {{ object.n_contrato }}</h1>
+        {% if object.cliente %}
+            <h2>Cliente: <strong>CREDCOOP</strong></h2>
+        {% endif %}
+        {% if object.cliente_cnpj %}
+        <h2>Cliente: <strong>ESCTOP</strong></h2>
+        {% endif %}
     </div>
 </div>
 <div class="row mt-1">
     <div class="col-sm-12 col-md-9 card card-body">        
         <table style="text-transform: uppercase;">
             <tbody>
-                <th class="text-right">Cliente</th>
-                {% if object.cliente %}
-                    <td>CREDCOOP</td>
-                {% endif %}
-                {% if object.cliente_cnpj %}
-                    <td>ESCTOP</td>
-                {% endif %}
-
+                
                 <tr>
                     <th class="text-right">Funcionario</th>
                     <td>{{ object.funcionario }}</td>
                 </tr>
-                <tr>
-                    <th class="text-right">Nº Contrato</th>
-                    <td>{{ object.n_contrato }}</td>
-                </tr>
-    
+                    
                 {% if object.cliente %}
                 <tr>
                     <th class="text-right">Cliente</th>
-                    <td>{{ object.cliente }}</td>
-                </tr>
-                <tr>
-                    <th class="text-right">CPF</th>
-                    <td>{{ object.cliente.cpf }}</td>
-                </tr>
-                {% else %}
-                <tr>
-                    <th class="text-right">Cliente</th>
-                    <td>{{ object.cliente_cnpj }}</td>
+                    <td>{{ object.cliente_cnpj|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">CNPJ</th>
-                    <td>{{ object.cliente_cnpj.cnpj }}</td>
+                    <td>{{ object.cliente_cnpj.cnpj|default:"" }}</td>
                 </tr>
                 {% endif %}
     
@@ -85,23 +72,23 @@
                 </tr>      
                 <tr>
                     <th class="text-right">Banco</th>
-                    <td class="text-left">{{ object.cliente.banco }}</td>
+                    <td class="text-left">{{ object.cliente.banco|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Tipo de Conta</th>
-                    <td class="text-left">{{ object.cliente.tipo_de_conta }}</td>
+                    <td class="text-left">{{ object.cliente.tipo_de_conta|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Agência</th>
-                    <td class="text-left">{{ object.cliente.agencia }}</td>
+                    <td class="text-left">{{ object.cliente.agencia|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Conta</th>
-                    <td class="text-left">{{ object.cliente.conta }}</td>
+                    <td class="text-left">{{ object.cliente.conta|default:"" }}</td>
                 </tr> 
                 <tr>
                     <th class="text-right">PIX</th>
-                    <td class="text-left">{{ object.cliente.tipo_de_chave_pix }} | {{ object.cliente.chave_pix }}</td>
+                    <td class="text-left">{{ object.cliente.tipo_de_chave_pix|default:"" }} | {{ object.cliente.chave_pix|default:"" }}</td>
                 </tr>         
                 {% else %}
                 <tr>
@@ -156,69 +143,17 @@
     </div>
 
     <div class="col-sm-12 col-md-3 card card-body" style="position: -webkit-sticky; position: sticky; top: 60px;">
-        {% comment %} <div class="dropdown">
-            <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Imprimir
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                {% if object.cliente %}
-                    <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
-                {% endif %}
-
-                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
-
-                {% if object.cliente_cnpj %}  
-                    <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
-                    <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
-                        Contrato+Promissória<span class="badge badge-success mx-2">New</span>
-                    </a>
-                {% endif %}
-
-                {% if object.cliente %}
-                    <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">Contrato</a>
-                    <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
-                        Contrato+Promissória<span class="badge badge-success mx-2">New</span>
-                    </a>
-                {% endif %}
-            </div>
-        </div>     {% endcomment %}
-
-        {% comment %} <div class="dropdown">
-            <button id="btnGroupDrop1" type="button" class=" mt-1 btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Renegociação
-            </button>
-
-            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                {% if object.cliente %}
-                    <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
-                {% endif %}
-
-                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória</a>
-
-                {% if object.cliente_cnpj %}
-                    <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
-                    
-                {% endif %}
-
-                {% if object.cliente %}
-                    <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato</a>
-                {% endif %}
-            </div>
-        </div> {% endcomment %}
-
-
         <div class="accordion" id="accordionExample">
             
             <div class="card">
-                <div class="card-header" id="headingTwo">
+                <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
-                        <button class="btn btn-primary btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button class="btn btn-primary btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Imprimir
                         </button>
                     </h2>
                 </div>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body">
                         {% if object.cliente %}
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
@@ -243,15 +178,15 @@
               </div>
             </div>
             <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header" id="headingTwo">
                   <h2 class="mb-0">
-                    <button class="btn btn-primary btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn btn-primary btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                       Renegociação
                     </button>
                   </h2>
                 </div>
             
-                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                     <div class="card-body">
                         {% if object.cliente %}
                         <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
@@ -261,7 +196,7 @@
   
                         {% if object.cliente_cnpj %}
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
-                        {% comment %} <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a> {% endcomment %}
+                        
                         {% endif %}
   
                         {% if object.cliente %}
@@ -270,11 +205,15 @@
                     </div>
                 </div>
             </div>
-        <div>
+        <div class="pt-3">
             <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="mt-1 btn btn-danger btn-block ">Deletar</a>
-        </div>               
-    </div>
+        </div>
+        <div>
+            <button onclick="history.back()" class="mt-1 btn btn-secondary btn-block ">Voltar</button>
+        </div>
+               
 </div>
+
 
 
 
