@@ -77,8 +77,8 @@
 						<a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">CLIENTE ESCTOP</a>
 						<a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">FIADOR ESCTOP</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{% url 'emprestimo:emprestimo_list' %}">EMPRÉSTIMO CREDCOOP</a>
-						<a class="dropdown-item" href="{% url 'emprestimo:emprestimo_cnpj_list' %}">EMPRÉSTIMO ESCTOP</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:credcoop_emprestimo_list' %}">EMPRÉSTIMO CREDCOOP</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:esctop_emprestimo_list' %}">EMPRÉSTIMO ESCTOP</a>
 					</div>
 				</li>
 				<li class="nav-item dropdown">
@@ -87,9 +87,10 @@
 						Empréstimo
 					</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="{% url 'emprestimo:create_credcoop_composto'%}">CREDCOOP</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:credcoop_emprestimo_form'%}">CREDCOOP</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="{% url 'emprestimo:create_esctop_composto'%}">ESCTOP</a>
+						<a class="dropdown-item" href="{% url 'emprestimo:esctop_emprestimo_form'%}">ESCTOP</a>
+						
 						{% comment %} <div class="dropdown-divider"></div>		
 						<a class="dropdown-item" href="{% url 'emprestimo:form_emprestimo'%}">SIMULAR
 							<span class="badge badge-success">Novo</span>

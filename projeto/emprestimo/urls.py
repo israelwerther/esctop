@@ -6,10 +6,7 @@ from projeto.emprestimo import views as v
 app_name='emprestimo' 
 
 urlpatterns = [
-    
-    path('create_esctop_composto/', login_required(v.EmprestimoCompostoCreateEsctop.as_view()), name='create_esctop_composto'),
 
-    path('cnpj_list', v.emprestimo_cnpj_list, name='emprestimo_cnpj_list'),
     path('<int:pk>/delete/', login_required(v.EmprestimoDelete.as_view()), name='emprestimo_delete'),
     path('<int:pk>/carne/', login_required(v.EmprestimoCarne.as_view()), name='emprestimo_carne'),
     path('<int:pk>/promissoria/', login_required(v.EmprestimoPromissoria.as_view()), name='emprestimo_promissoria'),
@@ -27,8 +24,8 @@ urlpatterns = [
     path('simular/', v.EmprestimoCreateView.as_view(), name='form_emprestimo'),
 
     # Credcoop
-    path('create_credcoop_composto/', login_required(v.EmprestimoCompostoCreateCredcoop.as_view()), name='create_credcoop_composto'),
-    path('', v.emprestimo_list, name='emprestimo_list'),
+    path('credcoop-emprestimo-form/', login_required(v.CredcoopEmprestimoCreate.as_view()), name='credcoop_emprestimo_form'),
+    path('credcoop-emprestimo-list/', v.credcoop_emprestimo_list, name='credcoop_emprestimo_list'),
 
     # Impressões Credcoop
     path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),
@@ -36,6 +33,8 @@ urlpatterns = [
     path('<int:pk>/credcoop_contrato_e_promissoria/', login_required(v.CredcoopContratoPromissoria.as_view()), name='credcoop_contrato_e_promissoria'),
 
     # Esctop
+    path('esctop-emprestimo-form/', login_required(v.EsctopEmprestimoCreate.as_view()), name='esctop_emprestimo_form'),
+    path('esctop-emprestimo-list/', v.esctop_emprestimo_list, name='esctop_emprestimo_list'),
 
     # Impressões Esctop
     path('<int:pk>/esctop_promissoria/', login_required(v.EsctopPromissoria.as_view()), name='esctop_promissoria'),

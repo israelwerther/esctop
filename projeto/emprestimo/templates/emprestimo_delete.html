@@ -10,9 +10,9 @@
             {% csrf_token %}
             <input type="submit" class="btn btn-danger" value="Sim">
             {% if object.cliente_cnpj %}
-                <a href="{% url 'emprestimo:emprestimo_cnpj_list' %}" class="btn btn-primary">Não</a>
+                <a href="{% url 'emprestimo:esctop_emprestimo_list' %}" class="btn btn-primary">Não</a>
             {% else %} 
-                <a href="{% url 'emprestimo:emprestimo_list' %}" class="btn btn-primary">Não</a>
+                <a href="{% url 'emprestimo:credcoop_emprestimo_list' %}" class="btn btn-primary">Não</a>
             {% endif %}
         </form>
     </div>
