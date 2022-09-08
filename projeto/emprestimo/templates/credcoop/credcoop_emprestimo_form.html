@@ -74,6 +74,12 @@
 						</label>
 					</div>
 				</div>
+				<div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="">{{form.renegociar.label}} </label>
+                        <label>{{form.renegociar}}</label>
+                    </div>
+                </div>
 				<div class="col-sm-2 d-none">
 					<div class="form-group">
 						<label for="" >Boleto</label>
@@ -104,6 +110,8 @@
 			</div>
 		</div>
 
+		
+
 		<!-- ELEMENTOS OCULTOS -->
 		{% render_field form.valor_multa class="form-control" id="multa" type="hidden" %}
 		{% render_field form.juros_ao_dia class="form-control" id="juros_ao_dia" type="hidden" %}
@@ -122,6 +130,7 @@
 <script src="{% static 'js/testesjs.js' %}"></script>
 <script src="{% static 'js/calculos.js' %}"></script>
 <script>
+
 	$(document).ready(function () {
 		$('#cliente').select2();
 	});

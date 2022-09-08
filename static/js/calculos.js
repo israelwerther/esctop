@@ -36,7 +36,7 @@ function somar(){
     parcela = ((valor_emprestado*(1+juros)**(qtd_parcelas)).toFixed(2)/qtd_parcelas) .toFixed(2)
 
     //> encargos[i]
-    encargos[0] = Math.round((valor_emprestado*juros)*100)/100    
+    encargos[0] = Math.round((valor_emprestado*juros)*100)/100
     if (qtd_parcelas > 1) {
         for(let i=1; i<qtd_parcelas; i++){
             somatorio_encargos_anteriores += encargos[i-1]

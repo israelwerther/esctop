@@ -57,7 +57,10 @@
             <h5 class="mb-0 font-weight-bold my-2"> II.1-REPRESENTANTE MUTUÁRIA</h5>
             <p class="text-justify">
                 Nome: {{object.cliente_cnpj.rep_nome}}, CPF: {{object.cliente_cnpj.rep_cpf}}, 
-                RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, ssp - rn, Nacionalidade: BRASILEIRA, Estado Civil: Casado Endereço: Avenida das Fronteiras, 1289, Nossa Senhora da Apresentação, Natal-RN, CEP: 59114-275
+                RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, {{object.cliente_cnpj.rep_orgao_emissor}}, 
+                Nacionalidade: {{object.cliente_cnpj.rep_nacionalidade}}, Estado Civil: {{object.cliente_cnpj.rep_estado_civil}} 
+                Endereço: {{object.cliente_cnpj.rep_rua}}, {{object.cliente_cnpj.rep_numero_casa}}, {{object.cliente_cnpj.rep_bairro}}, 
+                {{object.cliente_cnpj.rep_cidade}}-{{object.cliente_cnpj.rep_uf}}, CEP: {{object.cliente_cnpj.rep_cep}}
             </p>
         </div>
 
@@ -447,6 +450,8 @@
 		data: {
             fiador: "{{object.cliente_cnpj.fiador|default:''}}",
             fiador_nome: "{{object.cliente_cnpj.fiador.fiador_nome}}",
+            renegociar: "{{object.renegociar}}",
+
             controls: {
                 passou_por_fevereiro: false,
             },
@@ -472,20 +477,31 @@
                 return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             },
             getParcelas() {
-                let base_date = moment(this.emprestimo.dataEmprestimo)
+                let data_do_emprestimo = moment(this.emprestimo.dataEmprestimo)
+                let vencimento
 
-                let vencimento = base_date.add(0, 'month')
+                if(this.renegociar == "False"){
+                    vencimento = data_do_emprestimo.add(0, 'month')
+                }
+                if(this.renegociar == "True"){
+                    vencimento = data_do_emprestimo.add(-1, 'month')
+                }
 
                 for (let i = 0 ; i < this.emprestimo.qtd_parcelas; i++) {
 
-                    if(this.emprestimo.dataEmprestimo.month() == 0 && this.emprestimo.dataEmprestimo.date() >= 29) {
-                        vencimento = base_date.date(1).add(i == 0 ? 2:1, 'month')
-
-                    } else if(vencimento.daysInMonth() == 28 && moment(base_date).date() > 28){
-                        vencimento = base_date.date(1).add(1, 'month')
+                    if(vencimento.format("DD") == 30 && vencimento.format("MM") == 1){
+                        console.log("Entrou 1")
+                        vencimento = data_do_emprestimo.add(2, 'day')
+                        vencimento = data_do_emprestimo.add(1, 'month')
                     }
-                    else {
-                        vencimento = base_date.add(1, 'month')
+                    else if(vencimento.format("DD") == 31 && vencimento.format("MM") == 1){
+                        console.log("Entrou 2")
+                        vencimento = data_do_emprestimo.add(1, 'day')
+                        vencimento = data_do_emprestimo.add(1, 'month')
+                    }
+                    else{
+                        console.log("Entrou ultimo")
+                        vencimento = data_do_emprestimo.add(1, 'month')
                     }
 
                     this.emprestimo.parcelas.push({						

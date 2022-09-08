@@ -75,6 +75,12 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
+                        <label for="">{{form.renegociar.label}} </label>
+                        <label>{{form.renegociar}}</label>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
                         <label for="" >Boleto</label>
                         {% render_field form.boleto class="form-control" %}
                         <label class="checkbox-inline"> {{form.boleto.label}} <input type="checkbox" value="boleto" id="boleto" name="boleto" onclick="somar()"></label>
