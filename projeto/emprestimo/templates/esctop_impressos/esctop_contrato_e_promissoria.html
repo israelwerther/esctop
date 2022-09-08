@@ -508,6 +508,8 @@
 		data: {
             fiador: "{{object.cliente_cnpj.fiador|default:''}}",
             fiador_nome: "{{object.cliente_cnpj.fiador.fiador_nome}}",
+            renegociar: "{{object.renegociar}}",
+
             controls: {
                 passou_por_fevereiro: false,
             },
@@ -533,20 +535,26 @@
                 return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             },
             getParcelas() {
-                let base_date = moment(this.emprestimo.dataEmprestimo)
+                let data_do_emprestimo = moment(this.emprestimo.dataEmprestimo)
+                let vencimento
 
-                let vencimento = base_date.add(0, 'month')
+                if(this.renegociar == "False"){
+                    vencimento = data_do_emprestimo.add(0, 'month')
+                }
+                if(this.renegociar == "True"){
+                    vencimento = data_do_emprestimo.add(-1, 'month')
+                }
 
                 for (let i = 0 ; i < this.emprestimo.qtd_parcelas; i++) {
 
                     if(this.emprestimo.dataEmprestimo.month() == 0 && this.emprestimo.dataEmprestimo.date() >= 29) {
-                        vencimento = base_date.date(1).add(i == 0 ? 2:1, 'month')
+                        vencimento = data_do_emprestimo.date(1).add(i == 0 ? 2:1, 'month')
 
-                    } else if(vencimento.daysInMonth() == 28 && moment(base_date).date() > 28){
-                        vencimento = base_date.date(1).add(1, 'month')
+                    } else if(vencimento.daysInMonth() == 28 && moment(data_do_emprestimo).date() > 28){
+                        vencimento = data_do_emprestimo.date(1).add(1, 'month')
                     }
                     else {
-                        vencimento = base_date.add(1, 'month')
+                        vencimento = data_do_emprestimo.add(1, 'month')
                     }
 
                     this.emprestimo.parcelas.push({						
