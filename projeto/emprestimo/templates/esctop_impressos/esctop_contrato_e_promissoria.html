@@ -57,7 +57,10 @@
             <h5 class="mb-0 font-weight-bold my-2"> II.1-REPRESENTANTE MUTUÁRIA</h5>
             <p class="text-justify">
                 Nome: {{object.cliente_cnpj.rep_nome}}, CPF: {{object.cliente_cnpj.rep_cpf}}, 
-                RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, ssp - rn, Nacionalidade: BRASILEIRA, Estado Civil: Casado Endereço: Avenida das Fronteiras, 1289, Nossa Senhora da Apresentação, Natal-RN, CEP: 59114-275
+                RG/órgão Emissor: {{object.cliente_cnpj.rep_rg}}, {{object.cliente_cnpj.rep_orgao_emissor}}, 
+                Nacionalidade: {{object.cliente_cnpj.rep_nacionalidade}}, Estado Civil: {{object.cliente_cnpj.rep_estado_civil}} 
+                Endereço: {{object.cliente_cnpj.rep_rua}}, {{object.cliente_cnpj.rep_numero_casa}}, {{object.cliente_cnpj.rep_bairro}}, 
+                {{object.cliente_cnpj.rep_cidade}}-{{object.cliente_cnpj.rep_uf}}, CEP: {{object.cliente_cnpj.rep_cep}}
             </p>
         </div>
 
