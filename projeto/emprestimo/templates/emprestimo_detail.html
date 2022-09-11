@@ -16,6 +16,7 @@
         {% endif %}
     </div>
 </div>
+
 <div class="row mt-1">
     <div class="col-sm-12 col-md-9 card card-body">        
         <table style="text-transform: uppercase;">
@@ -93,7 +94,7 @@
                 {% else %}
                 <tr>
                     <th class="text-right">E-mail</th>
-                    <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
+                    <td class="text-left lower_all">{{ object.cliente_cnpj.email|default:"" }}</td>
                 </tr>
                 <tr>            
                     <th class="text-right">Fiador</th>
@@ -105,7 +106,7 @@
                 </tr>
                 <tr>
                     <th class="text-right">E-Mail do Fiador</th>
-                    <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
+                    <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Banco</th>
@@ -142,7 +143,7 @@
         </table>        
     </div>
 
-    <div class="col-sm-12 col-md-3 card card-body" style="position: -webkit-sticky; position: sticky; top: 60px;">
+    <div class="col-sm-12 col-md-3 card card-body" >
         <div class="accordion" id="accordionExample">
             
             <div class="card">
@@ -175,15 +176,16 @@
                             </a>
                         {% endif %}
                     </div>
-              </div>
-            </div>
+                </div>
+            </div><!-- card -->
+
             <div class="card">
                 <div class="card-header" id="headingTwo">
-                  <h2 class="mb-0">
-                    <button class="btn btn-primary btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                      Renegociação
-                    </button>
-                  </h2>
+                    <h2 class="mb-0">
+                        <button class="btn btn-primary btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Renegociação
+                        </button>
+                    </h2>
                 </div>
             
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
@@ -191,28 +193,30 @@
                         {% if object.cliente %}
                         <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
                         {% endif %}
-  
+
                         <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória</a>
-  
+
                         {% if object.cliente_cnpj %}
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
                         
                         {% endif %}
-  
+
                         {% if object.cliente %}
                             <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato</a>
                         {% endif %}
                     </div>
                 </div>
+            </div><!-- card -->
+            
+            <div class="pt-3">
+                <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="mt-1 btn btn-danger btn-block ">Deletar</a>
             </div>
-        <div class="pt-3">
-            <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="mt-1 btn btn-danger btn-block ">Deletar</a>
-        </div>
-        <div>
-            <button onclick="history.back()" class="mt-1 btn btn-secondary btn-block ">Voltar</button>
-        </div>
-               
-</div>
+            <div>
+                <button onclick="history.back()" class="mt-1 btn btn-secondary btn-block ">Voltar</button>
+            </div>
+        </div><!-- accordion -->
+    </div>
+</div><!-- row -->
 
 
 
