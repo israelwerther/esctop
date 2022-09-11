@@ -1,279 +1,221 @@
 {% extends "base.html" %}
 {% load static %}
-{% load widget_tweaks %}
+{% comment %} {% load widget_tweaks %} {% endcomment %}
 
 {% block content %}
 
+
 <div class="row" style="position: -webkit-sticky; position: sticky; top: 50px; z-index:5">
-    <div class="col-7 card card-body">
+    <div class="col-12 card card-body">
         <h1>Emprestimo Nº {{ object.n_contrato }}</h1>
+        {% if object.cliente %}
+            <h2>Cliente: <strong>CREDCOOP</strong></h2>
+        {% endif %}
+        {% if object.cliente_cnpj %}
+        <h2>Cliente: <strong>ESCTOP</strong></h2>
+        {% endif %}
     </div>
 </div>
 <div class="row mt-1">
-    <div class="col-7 card card-body">        
-            <table class="table table-user-information" style="text-transform: uppercase;">
-                <tbody>
+    <div class="col-sm-12 col-md-9 card card-body">        
+        <table style="text-transform: uppercase;">
+            <tbody>
+                
+                <tr>
+                    <th class="text-right">Funcionario</th>
+                    <td>{{ object.funcionario }}</td>
+                </tr>
+                    
+                {% if object.cliente %}
+                <tr>
                     <th class="text-right">Cliente</th>
-                    {% if object.cliente %}
-                        <td>CREDCOOP</td>
+                    <td>{{ object.cliente_cnpj|default:"" }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">CNPJ</th>
+                    <td>{{ object.cliente_cnpj.cnpj|default:"" }}</td>
+                </tr>
+                {% endif %}
+    
+                <tr>
+                    <th class="text-right">Valor</th>
+                    <td>{{ object.valor_emprestado }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Parcelas</th>
+                    <td>{{ object.qtd_parcelas }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Prestacao</th>
+                    <td>{{ object.valor_prestacao }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Data do Empréstimo</th>
+                    <td type="form-control">{{ object.dt_emprestimo }}</td>                               
+                </tr>  
+                {% if object.cliente %}
+                <tr>
+                    <th class="text-right">E-mail</th>
+                    <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Fiador</th>
+                    <td class="text-left" type="form-control">{{ object.cliente.fiador }}</td>
+                </tr>                
+                <tr>
+                    <th class="text-right">CPF do Fiador</th>
+                    <td class="text-left" type="form-control">{{ object.cliente.fiador.cpf }}</td>
+                </tr>                 
+                <tr>
+                    <th class="text-right">E-Mail do Fiador</th>
+                    <td class="text-left lower_all" type="form-control">{{ object.cliente.fiador.email }}</td>
+                </tr>      
+                <tr>
+                    <th class="text-right">Banco</th>
+                    <td class="text-left">{{ object.cliente.banco|default:"" }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Tipo de Conta</th>
+                    <td class="text-left">{{ object.cliente.tipo_de_conta|default:"" }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Agência</th>
+                    <td class="text-left">{{ object.cliente.agencia|default:"" }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Conta</th>
+                    <td class="text-left">{{ object.cliente.conta|default:"" }}</td>
+                </tr> 
+                <tr>
+                    <th class="text-right">PIX</th>
+                    <td class="text-left">{{ object.cliente.tipo_de_chave_pix|default:"" }} | {{ object.cliente.chave_pix|default:"" }}</td>
+                </tr>         
+                {% else %}
+                <tr>
+                    <th class="text-right">E-mail</th>
+                    <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
+                </tr>
+                <tr>            
+                    <th class="text-right">Fiador</th>
+                    <td class="text-left">{{ object.cliente_cnpj.fiador }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">CPF do Fiador</th>
+                    <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">E-Mail do Fiador</th>
+                    <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Banco</th>
+                    <td class="text-left">{{ object.cliente_cnpj.banco }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Tipo de Conta</th>
+                    <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Agência</th>
+                    <td class="text-left">{{ object.cliente_cnpj.agencia }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Conta</th>
+                    <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
+                </tr>
+                <tr>
+                    <th class="text-right">PIX</th>
+                    <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
+                </tr>
+                {% endif %}
+                <tr>
+                    {% if object.presencial %}
+                        <th class="text-right">Modalidade</th>
+                        <td class="text-left">Presencial</td>
+                    {% endif %}  
+                    {% if object.online %}
+                        <th class="text-right">Modalidade</th>
+                        <td class="text-left">online</td>
                     {% endif %}
-                    {% if object.cliente_cnpj %}
-                        <td>ESCTOP</td>
-                    {% endif %}
-
-                    <tr>
-                        <th class="text-right">Funcionario</th>
-                        <td>{{ object.funcionario }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Nº Contrato</th>
-                        <td>{{ object.n_contrato }}</td>
-                    </tr>
-        
-                    {% if object.cliente %}
-                    <tr>
-                        <th class="text-right">Cliente</th>
-                        <td>{{ object.cliente }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">CPF</th>
-                        <td>{{ object.cliente.cpf }}</td>
-                    </tr>
-                    {% else %}
-                    <tr>
-                        <th class="text-right">Cliente</th>
-                        <td>{{ object.cliente_cnpj }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">CNPJ</th>
-                        <td>{{ object.cliente_cnpj.cnpj }}</td>
-                    </tr>
-                    {% endif %}
-        
-                    <tr>
-                        <th class="text-right">Valor</th>
-                        <td>{{ object.valor_emprestado }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Parcelas</th>
-                        <td>{{ object.qtd_parcelas }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Prestacao</th>
-                        <td>{{ object.valor_prestacao }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Data do Empréstimo</th>
-                        <td type="form-control">{{ object.dt_emprestimo }}</td>                               
-                    </tr>  
-                    {% if object.cliente %}
-                    <tr>
-                        <th class="text-right">E-mail</th>
-                        <td class="text-left lower_all" type="form-control">{{ object.cliente.email }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Fiador</th>
-                        <td class="text-left" type="form-control">{{ object.cliente.fiador }}</td>
-                    </tr>                
-                    <tr>
-                        <th class="text-right">CPF do Fiador</th>
-                        <td class="text-left" type="form-control">{{ object.cliente.fiador.cpf }}</td>
-                    </tr>                 
-                    <tr>
-                        <th class="text-right">E-Mail do Fiador</th>
-                        <td class="text-left lower_all" type="form-control">{{ object.cliente.fiador.email }}</td>
-                    </tr>      
-                    <tr>
-                        <th class="text-right">Banco</th>
-                        <td class="text-left">{{ object.cliente.banco }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Tipo de Conta</th>
-                        <td class="text-left">{{ object.cliente.tipo_de_conta }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Agência</th>
-                        <td class="text-left">{{ object.cliente.agencia }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Conta</th>
-                        <td class="text-left">{{ object.cliente.conta }}</td>
-                    </tr> 
-                    <tr>
-                        <th class="text-right">PIX</th>
-                        <td class="text-left">{{ object.cliente.tipo_de_chave_pix }} | {{ object.cliente.chave_pix }}</td>
-                    </tr>         
-                    {% else %}
-                    <tr>
-                        <th class="text-right">E-mail</th>
-                        <td class="text-left lower_all">{{ object.cliente_cnpj.email }}</td>
-                    </tr>
-                    <tr>            
-                        <th class="text-right">Fiador</th>
-                        <td class="text-left">{{ object.cliente_cnpj.fiador }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">CPF do Fiador</th>
-                        <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">E-Mail do Fiador</th>
-                        <td class="text-left lower_all">{{ object.cliente_cnpj.fiador.fiador_email }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Banco</th>
-                        <td class="text-left">{{ object.cliente_cnpj.banco }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Tipo de Conta</th>
-                        <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Agência</th>
-                        <td class="text-left">{{ object.cliente_cnpj.agencia }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">Conta</th>
-                        <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
-                    </tr>
-                    <tr>
-                        <th class="text-right">PIX</th>
-                        <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
-                    </tr>
-                    {% endif %}
-                    <tr>
-                        {% if object.presencial %}
-                            <th class="text-right">Modalidade</th>
-                            <td class="text-left">Presencial</td>
-                        {% endif %}  
-                        {% if object.online %}
-                            <th class="text-right">Modalidade</th>
-                            <td class="text-left">online</td>
-                        {% endif %}
-                    </tr>
-                </tbody>
-            </table>
-        <span class="pull-left">
-            <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>    
-        </span>
+                </tr>
+            </tbody>
+        </table>        
     </div>
-    <div class="col-5 card card-body">
-        <div style="position: -webkit-sticky; position: sticky; top: 60px;">
-            <div class="row">
-                <div class="col-12">
-                    <div class="btn-group" role="group">
-                        <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
-                            <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
-                            <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>
-                        </a>
-                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+    <div class="col-sm-12 col-md-3 card card-body" style="position: -webkit-sticky; position: sticky; top: 60px;">
+        <div class="accordion" id="accordionExample">
+            
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-primary btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                             Imprimir
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
-                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">
-                                    Promissória<span class="badge badge-success mx-2">Novo</span>
-                                </a>
-                            {% endif %}
-
-                            
-                            {% if object.cliente_cnpj %}  
-                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_promissoria' object.pk %}" target="_blank">
-                                    Promissória<span class="badge badge-success mx-2">Novo</span>
-                                </a>
-                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato' object.pk %}" target="_blank">
-                                    Contrato<span class="badge badge-success mx-2">Novo</span>
-                                </a>
-                                <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                    Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
-                                </a>
-                            {% endif %}
-
-                            {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato' object.pk %}" target="_blank" type="button">
-                                    Contrato<span class="badge badge-success mx-2">Novo</span>
-                                </a>
-                                <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                    Contrato+Promissória<span class="badge badge-success mx-2">Novo</span>
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
+                    </h2>
                 </div>
-                <div class="col-12 mt-2">
-                    <div class="btn-group" role="group">
-                        <a type="button" class="btn btn-outline-danger active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
-                            <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
-                            <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/></svg>
-                        </a>
-                        <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Renegociação
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                            {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
-                            {% endif %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória</a>
-                            {% if object.cliente_cnpj %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
-                                {% comment %} <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">Contrato+Promissória</a> {% endcomment %}
-                            {% endif %}
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body">
+                        {% if object.cliente %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                        {% endif %}
 
-                            {% if object.cliente %}
-                                <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato</a>
-                            {% endif %}
-                        </div>
+                        <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
+
+                        {% if object.cliente_cnpj %}  
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
+                            <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
+                                Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                            </a>
+                        {% endif %}
+
+                        {% if object.cliente %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">Contrato</a>
+                            <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
+                                Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                            </a>
+                        {% endif %}
+                    </div>
+              </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                  <h2 class="mb-0">
+                    <button class="btn btn-primary btn-block text-center" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Renegociação
+                    </button>
+                  </h2>
+                </div>
+            
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        {% if object.cliente %}
+                        <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
+                        {% endif %}
+  
+                        <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória</a>
+  
+                        {% if object.cliente_cnpj %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
+                        
+                        {% endif %}
+  
+                        {% if object.cliente %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+        <div class="pt-3">
+            <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="mt-1 btn btn-danger btn-block ">Deletar</a>
         </div>
-        <br>
-        <br>
-        <br>
-        <span>
-            <h4 class="mt-2">Imprimir</h4>
-            <div class="btn-group pb-1" role="group">
-            <a type="button" class="btn btn-outline-primary active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
-                <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
-                <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-            </svg></a>
-            {% if object.cliente %}
-                <a href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Carnê</a>
-            {% endif %}
-                <a href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Promissória</a>                
-            {% if object.cliente_cnpj %}  
-                <a href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
-                <a href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato+Promissória</a>
-            {% endif %}
-
-        
-            {% if object.cliente %}
-                <a href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button" class="btn btn-outline-primary">Contrato</a>
-            {% endif %}
-            </div>
-        </span>
-
-        <span>
-            <h4 class="mt-4">Renegociação</h4>
-            <div class="btn-group" role="group">
-                <a type="button" class="btn btn-outline-success active"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer-fill" viewBox="0 0 16 16">
-                    <path d="M5 1a2 2 0 0 0-2 2v1h10V3a2 2 0 0 0-2-2H5zm6 8H5a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1z"/>
-                    <path d="M0 7a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2h-1v-2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v2H2a2 2 0 0 1-2-2V7zm2.5 1a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z"/>
-                </svg></a>
-                <a href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success">Promissória Renegociação</a>
-            {% if object.cliente_cnpj %}
-                <a href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato Renegociação </a>
-            {% endif %}
-        
-            {% if object.cliente %}
-                <a href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button" class="btn btn-outline-success"> Contrato </a>
-            {% endif %}        
-            </div>
-        </span>
-    </div>
-    </div>
+        <div>
+            <button onclick="history.back()" class="mt-1 btn btn-secondary btn-block ">Voltar</button>
+        </div>
+               
 </div>
+
+
+
 
 
 {% endblock content %}
