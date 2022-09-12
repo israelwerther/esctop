@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 {% comment %} {% load widget_tweaks %} {% endcomment %}
 {% block js %}{% endblock js %}
+
+{% block css %}
+
+    <style>
+        div, .table{
+            color: white;
+        }
+    </style>
+
+{% endblock css %}
+
 {% block content %}
 
 
@@ -45,7 +56,7 @@
             </tr>
             {% endfor %}
         </tbody>
-        </table>
+    </table>
     {% else %}
         <p class="alert alert-warning">Sem Clientes cadastrados</p>
     {% endif %}

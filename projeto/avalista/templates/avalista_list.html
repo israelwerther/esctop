@@ -3,14 +3,24 @@
 {% block content %}
 
 <style>
-    thead{
-        background-color: rgb(165, 165, 165);
+    div, .table{
+        color: white;
+    }
+
+    .btn-success1 {
+        background-color: #5eaa84;
+        color: #2C3D4E;
+    }
+
+    .btn-success1:hover {
+        background-color: #549c78;
+        color: #2C3D4E;
     }   
 </style>
 
 <div class="class page-header">  
     <div class="float-right">
-        <a href="{% url 'avalista:avalista_add' %}" type="button" class="btn btn-success">Cadastrar Fiador</a>
+        <a href="{% url 'avalista:avalista_add' %}" type="button" class="btn btn-success1">Cadastrar Fiador</a>
     </div>
     
     <div>

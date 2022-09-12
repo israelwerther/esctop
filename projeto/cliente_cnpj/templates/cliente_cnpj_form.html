@@ -5,6 +5,10 @@
 {% block content %}
 
 <style>
+    div {
+        color: white;
+    }
+
     .nav-tabs {
         border: 1px solid #c1c5c1;
     }
@@ -16,7 +20,7 @@
     .tab-pane {
         border: 1px solid #c1c5c1;
         padding: 15px;
-        text-shadow: 1px 1px 1px #a79f9f;
+        
     }
 
     a:link {
@@ -25,12 +29,12 @@
     }
 
     a:hover {
-        color: #1c910c;
+        color: #5eaa84;
     }
 
     a:active {
         /* links ativos */
-        color: #98e998;
+        color: #2C3D4E;
     }
 
     .aTab {
@@ -40,8 +44,8 @@
 
     .nav-tabs .nav-item.show .nav-link,
     .nav-tabs .nav-link.active {
-        /* background-image: linear-gradient(15deg, #67dc6f 0%, #1c910c 100%); */
-        background-color: #b9edb5;
+        background-color: #5eaa84;
+        color: #2C3D4E;
     }
 
     .pl-5,
@@ -56,6 +60,17 @@
         border-radius: 1px;
         text-align: center;
     }
+
+    .btn-success1 {
+        background-color: #5eaa84;
+        color: #2C3D4E;
+    }
+
+    .btn-success1:hover {
+        background-color: #549c78;
+        color: #2C3D4E;
+    }
+
 </style>
 
 <form method="POST">
@@ -78,7 +93,7 @@
                     {% if object.pk %}
                         <li class="nav-item ml-auto" role="presentation">
                             <label for="salvarCliente">
-                                <a class="nav-link btn btn-success" role="tab" aria-selected="true" style="margin:0;">
+                                <a class="nav-link btn btn-success1" role="tab" aria-selected="true" style="margin:0;">
                                     <span class="fa fa-save"></span>
                                     Salvar
                                 </a>
@@ -87,7 +102,7 @@
                     {% else %}
                         <li class="nav-item ml-auto" role="presentation">
                             <label for="cadastrarCliente">
-                                <a class="nav-link btn btn-success"  role="tab" aria-selected="true">
+                                <a class="nav-link btn btn-success1"  role="tab" aria-selected="true">
                                     <span class="fa fa-save"></span>
                                     Cadastrar
                                 </a>
