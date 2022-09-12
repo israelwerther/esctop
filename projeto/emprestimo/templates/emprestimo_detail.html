@@ -145,12 +145,41 @@
 
     <div class="col-sm-12 col-md-3 card card-body" >
         <div class="accordion" id="accordionExample">
+
+            <div class="card">
+                <div class="card-header" id="heading1">
+                    <h2 class="mb-0">
+                        <button class="btn btn-primary btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                            Imprimir<span class="badge badge-success mx-2">Novo</span>
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">Promissória</a>
+
+                        {% if object.cliente_cnpj %}  
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
+                            <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
+                                Contrato+Promissória
+                            </a>
+                        {% endif %}
+
+                        {% if object.cliente %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato' object.pk %}" target="_blank" type="button">Contrato</a>
+                            <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
+                                Contrato+Promissória
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div><!-- card -->
             
             <div class="card">
                 <div class="card-header" id="headingOne">
                     <h2 class="mb-0">
                         <button class="btn btn-primary btn-block text-center collapsed" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Imprimir
+                            Imprimir<span class="badge badge-success mx-2">Antigo</span>
                         </button>
                     </h2>
                 </div>
@@ -163,18 +192,16 @@
                         <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
 
                         {% if object.cliente_cnpj %}  
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">Contrato</a>
-                            <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                Contrato+Promissória<span class="badge badge-success mx-2">New</span>
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">
+                                Contrato
                             </a>
                         {% endif %}
 
                         {% if object.cliente %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">Contrato</a>
-                            <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
-                                Contrato+Promissória<span class="badge badge-success mx-2">New</span>
-                            </a>
+                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">
+                                Contrato</a>
                         {% endif %}
+                        
                     </div>
                 </div>
             </div><!-- card -->
