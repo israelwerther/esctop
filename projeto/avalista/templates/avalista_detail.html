@@ -2,15 +2,18 @@
 {% block content %}
 
 <style>
-.options{
-    color: aqua;
-}
-/* .direita{
-    text-align: right;
-}
-.esquerda{
-    text-align: left;
-} */
+    div{
+        color:white;
+    }
+    .options{
+        color: aqua;
+    }
+    /* .direita{
+        text-align: right;
+    }
+    .esquerda{
+        text-align: left;
+    } */
 </style>
 
 
@@ -48,7 +51,7 @@
             <input  value="{{ object.fiador_orgao_emissor }}" readonly class="form-control">
         </div>
     </div>
-    <div class="col-sm-6"> 
+    {% comment %} <div class="col-sm-6"> 
         <div class="form-group">
             <label></label>
             <input  value="{{ object. }}" readonly class="form-control">
@@ -89,7 +92,7 @@
             <label></label>
             <input  value="{{ object. }}" readonly class="form-control">
         </div>
-    </div>
+    </div> {% endcomment %}
     
     
 </div>
