@@ -21,23 +21,29 @@
     <div class="col-sm-12 col-md-9 card card-body">        
         <table style="text-transform: uppercase;">
             <tbody>
-                
+
+                {% if object.cliente %}
+                    <tr>
+                        <th class="text-right">Nome</th>
+                        <td>{{ object.cliente.nome }}</td>
+                    </tr>
+                {% endif %}
+
+                {% if object.cliente_cnpj %}
+                    <tr>
+                        <th class="text-right">Cliente</th>
+                        <td>{{ object.cliente_cnpj }}</td>
+                    </tr>
+                    <tr>
+                        <th class="text-right">CNPJ</th>
+                        <td>{{ object.cliente_cnpj.cnpj }}</td>
+                    </tr>
+                {% endif %}
+
                 <tr>
                     <th class="text-right">Funcionario</th>
                     <td>{{ object.funcionario }}</td>
-                </tr>
-                    
-                {% if object.cliente %}
-                <tr>
-                    <th class="text-right">Cliente</th>
-                    <td>{{ object.cliente_cnpj|default:"" }}</td>
-                </tr>
-                <tr>
-                    <th class="text-right">CNPJ</th>
-                    <td>{{ object.cliente_cnpj.cnpj|default:"" }}</td>
-                </tr>
-                {% endif %}
-    
+                </tr>    
                 <tr>
                     <th class="text-right">Valor</th>
                     <td>{{ object.valor_emprestado }}</td>
