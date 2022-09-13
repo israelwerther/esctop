@@ -1,16 +1,16 @@
-<style>
+{% comment %} <style>
 	footer {	
 		background-image: white;
-        position:relative;
+        position: relative ;
         bottom:0;
         width:100%;
         
 	}
-</style>
+</style> {% endcomment %}
 
-<footer class="bg-light text-center text-lg-start">
+<footer class="text-center text-lg-start fixed-bottom" style="background-color: #2C3D4E";>
     <div class="text-center p-3 footerVerde">	
-        <a class="text-dark" href="#">© 2022 Copyright: ESCTOP</a>
+        <a class="text-white" href="#">© 2022 Copyright: ESCTOP</a>
     </div>
 </footer>
 
@@ -61,11 +61,9 @@
                         </li>
                     {% endif %}                        
                 </ul>
-
             </div>
         </div>
     </div>
-
     <div class="tab-content  pt-5" id="myTabContent">
         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
            
@@ -80,7 +78,6 @@
             
         </div>
     </div>
-
     {% if object.pk %}
     <div class="saveFixadoDiv invisible">
         <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
@@ -95,5 +92,4 @@
         </button>
     </div>
     {% endif %}
-
 </form>  -->
