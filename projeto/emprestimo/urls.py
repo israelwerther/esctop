@@ -25,7 +25,7 @@ urlpatterns = [
 
     # Credcoop
     path('credcoop-emprestimo-form/', login_required(v.CredcoopEmprestimoCreate.as_view()), name='credcoop_emprestimo_form'),
-    path('credcoop-emprestimo-list/', v.credcoop_emprestimo_list, name='credcoop_emprestimo_list'),
+    path('credcoop-emprestimo-list/', login_required(v.CredcoopEmprestimoList.as_view()), name='credcoop_emprestimo_list'),
 
     # Impressões Credcoop
     path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),

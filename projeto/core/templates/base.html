@@ -56,12 +56,13 @@
     }
 
     /* STYLE DE CONTENT E TABS DOS TEMPLATES DE CADASTRO */
-    {% comment %} body {
+    body {
       font-family: Arial;
-      background: url("{% static 'imagens/fundo.jpg' %}");
-      background-attachment: fixed;
+      background-color: #5eaa8449;
+      {% comment %} background: url("{% static 'imagens/fundo.jpg' %}"); {% endcomment %}
+      {% comment %} background-attachment: fixed; {% endcomment %}
       
-    } {% endcomment %}
+    }
 
     /* Style the tab */
     .tab {
@@ -210,6 +211,10 @@
         opacity: 1; 
       } 
     }
+
+    .noHover{
+      pointer-events: none;
+    }
     
   </style>
   <!-- MEUS CSS -->
@@ -220,15 +225,12 @@
   
   {% include "includes/nav.html" %}
   
-  <div id="app" class="container">
+  <div id="app" class="container pb-5 mb-5">
     {% block content %}{% endblock content %}
   </div>
+
   {% include "includes/footer.html" %}
   
-
-  
-
- 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   
   {% block js %}{% endblock js %}

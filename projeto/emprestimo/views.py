@@ -1,7 +1,11 @@
+from genericpath import exists
 from django.shortcuts import render, resolve_url, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, TemplateView, DetailView, ListView
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
+
+from django.db.models.query_utils import Q
 
 from .models import Emprestimo, EmprestimoPagamento, Cliente, Cliente_cnpj
 from .forms import EmprestimoForm, EmprestimoPagamentoForm
@@ -28,12 +32,38 @@ class CredcoopEmprestimoCreate(CreateView):
         return super(CredcoopEmprestimoCreate, self).form_valid(form_class)
 
 
-@login_required
-def credcoop_emprestimo_list(request):    
+class CredcoopEmprestimoList(ListView):
+    model=Emprestimo
     template_name='credcoop/credcoop_emprestimo_list.html'
-    objects=Emprestimo.objects.all()
-    context={'object_list': objects}
-    return render(request, template_name, context)
+    paginate_by = 20
+    context_object_name = "objects"
+
+    def get_queryset(self):
+        queryset=super().get_queryset()
+        
+        # Filtra apenas clientes credcoop existentes 
+        queryset = Emprestimo.objects.filter(
+            cliente__isnull=False
+        )
+
+        if self.request.GET.get('search_by'):
+            queryset = queryset.filter(
+                Q(
+                    Q(n_contrato__icontains=self.request.GET.get('search_by'))|
+					Q(cliente__nome__icontains=self.request.GET.get('search_by'))
+                )
+            )
+
+        return queryset
+
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopEmprestimoList, self).get_context_data(**kwargs)
+        context['params'] = self.request.META['QUERY_STRING']
+		
+        context['search_by'] = self.request.GET.get('search_by')		
+
+        return context
 
 
 # Esctop
