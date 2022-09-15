@@ -21,11 +21,21 @@ class CredcoopClienteList(ListView):
         if self.request.GET.get('search_by'):
             queryset = queryset.filter(
                 Q(
-                    Q(nome__icontains=self.request.GET.get('search_by'))
+                    Q(nome__icontains=self.request.GET.get('search_by'))|
+                    Q(rg__icontains=self.request.GET.get('search_by'))|
+                    Q(cpf__icontains=self.request.GET.get('search_by'))
                 )
             )
 
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopClienteList, self).get_context_data(**kwargs)
+        context['params'] = self.request.META['QUERY_STRING']
+		
+        context['search_by'] = self.request.GET.get('search_by')		
+
+        return context
 
 
 @login_required
