@@ -2,39 +2,38 @@
 
 {% block content %}
 
-    <div class="row card card-body">
-        <div class="col-12">
-            <h2 class="text-uppercase">Lista de Clientes Credcoop</h2>
-        </div>
+<div class="row card card-body">
+    <div class="col-12">
+        <h2 class="text-uppercase">Lista de Clientes Credcoop</h2>
     </div>
-    <div class="row card card-body">
-        <div class="col-12">
-            <form id="formSubmit" method="get" onsubmit="setDate()">
-                <div class="row">            
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="search_by">Pesquisar</label>
-                            <input type="text" name="search_by" maxlength="255" class="form-control" value="{{search_by|default:''}}" placeholder="Ex: Nome do cliente, RG, CPF...">
-                        </div>
+</div>
+<div class="row card card-body">
+    <div class="col-12">
+        <form id="formSubmit" method="get" onsubmit="setDate()">
+            <div class="row">            
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="search_by">Pesquisar</label>
+                        <input type="text" name="search_by" maxlength="255" class="form-control" value="{{search_by|default:''}}" placeholder="Ex: Nome do cliente, RG, CPF...">
                     </div>
                 </div>
-                <div class="row mx-0 pb-3">
-                    <div class="col-md-12">
-                        <div class="text-right">
-                            <button class="btn btn-success btn-rounded" type="submit">
-                                <i class="os-icon os-icon-ui-37"></i>
-                                <span>Filtrar</span>
-                            </button>
-                            <a class="btn btn-primary btn-rounded" href="{% url 'cliente:credcoop_cliente_list' %}">
-                                <span >Limpar filtro</span>
-                            </a>
-                        </div>
+            </div>
+            <div class="row mx-0 pb-3">
+                <div class="col-md-12">
+                    <div class="text-right">
+                        <button class="btn btn-success btn-rounded" type="submit">
+                            <i class="os-icon os-icon-ui-37"></i>
+                            <span>Filtrar</span>
+                        </button>
+                        <a class="btn btn-primary btn-rounded" href="{% url 'cliente:credcoop_cliente_list' %}">
+                            <span >Limpar filtro</span>
+                        </a>
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
-
+</div>
 
 <div class="class page-header" >
     {% if object_list %}
@@ -42,7 +41,7 @@
     <div class="row card card-body">
         <div class="col-12">
             <div class="table-responsive mg-t-20">
-                <table class="table table-striped table-hover maiusculo">
+                <table class="table table-striped table-hover text-uppercase">
                     <thead class="thead btn-primary noHover">
                         <tr style="height: 25px;line-height: 25px;">
                             <th>Nome</th>                    
@@ -53,12 +52,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {% for object in objects  %}   
+                        {% for object in objects  %}
                         <tr>
-                            <td class="maiusculo">{{object.nome}}</td>                                        
-                            <td class="maiusculo">{{ object.rg }}</td>
-                            <td class="maiusculo">{{ object.data_nasc }}</td>                                     
-                            <td class="maiusculo">{{ object.cpf }}</td> 
+                            <td>{{object.nome}}</td>                                        
+                            <td>{{ object.rg }}</td>
+                            <td>{{ object.data_nasc }}</td>                                     
+                            <td>{{ object.cpf }}</td> 
                             <td style="text-align:center"> 
                                 <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a> 
                             </td>                    

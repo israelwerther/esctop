@@ -98,7 +98,7 @@
 						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">CLIENTES</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="{% url 'cliente:credcoop_cliente_list' %}">CREDCOOP</a></li>
-								<li><a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">ESCTOP</a></li>
+								<li><a class="dropdown-item" href="{% url 'cliente_cnpj:esctop_cliente_list' %}">ESCTOP</a></li>
 							</ul>
 						</li>
 						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR</a>
@@ -114,32 +114,7 @@
 						</li>
 					</ul>
 				</li>
-
-							
-				{% comment %} <li class="nav-item dropdown ">
-					<a class=" nav-link dropdown-toggle" style="text-transform: uppercase;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Consulta
-					</a>					
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">						
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">CLIENTES</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'cliente:cliente_list' %}">CREDCOOP</a></li>
-								<li><a class="dropdown-item" href="{% url 'cliente_cnpj:cliente_cnpj_list' %}">ESCTOP</li>
-							</ul>
-						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">ESCTOP</a></li>								
-							</ul>
-						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">EMPRÉSTIMOS</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'emprestimo:emprestimo_list' %}">CREDCOOP</li>
-								<li><a class="dropdown-item" href="{% url 'emprestimo:emprestimo_cnpj_list' %}">ESCTOP</a></li>
-							</ul>
-						</li>
-					</ul>					
-				</li> {% endcomment %}
+				
 				<li class="nav-item dropdown">
 					<a class=" nav-link dropdown-toggle" style="text-transform: uppercase;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Usuário

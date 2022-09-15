@@ -1,18 +1,43 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from .models import Cliente_cnpj
 from projeto.avalista.models import Avalista
 from .forms import Cliente_cnpjForm
 from projeto.avalista.forms import AvalistaForm
 
-@login_required
-def cliente_cnpj_list(request):
+from django.db.models.query_utils import Q
+
+
+class EsctopClienteList(ListView):
+    model=Cliente_cnpj
     template_name='cliente_cnpj_list.html'
-    objects=Cliente_cnpj.objects.all()
-    context={'object_list': objects}
-    return render(request, template_name, context)    
+    paginate_by = 20
+    context_object_name = "objects"
+
+    def get_queryset(self):
+        queryset=super().get_queryset()
+
+        if self.request.GET.get('search_by'):
+            queryset = queryset.filter(
+                Q(
+                    Q(razao_social__icontains=self.request.GET.get('search_by'))|
+                    Q(nome_fantasia__icontains=self.request.GET.get('search_by'))|
+                    Q(cnpj__icontains=self.request.GET.get('search_by'))
+                )
+            )
+
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopClienteList, self).get_context_data(**kwargs)
+        context['params'] = self.request.META['QUERY_STRING']
+		
+        context['search_by'] = self.request.GET.get('search_by')		
+
+        return context
+
 
 
 @login_required

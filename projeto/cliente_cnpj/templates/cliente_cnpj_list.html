@@ -2,45 +2,74 @@
 
 {% block content %}
 
-<div class="class page-header" >
-    <span class="float-right" >    
-        <a href="{% url 'core:fiador_decision' %}" >
-            <button type="button" class="btn btn-success">
-                <span class="fa fa-plus"></span>Adicionar Clientes
-            </button>
-        </a>
-    </span>
-        
-    <div>
-        <h2>Lista de Clientes Esctop</h2>
-    </div>    
+<div class="row card card-body">
+    <div class="col-12">
+        <h2 class="text-uppercase">Lista de Clientes esctop</h2>
+    </div>
+</div>
+<div class="row card card-body">
+    <div class="col-12">
+        <form id="formSubmit" method="get" onsubmit="setDate()">
+            <div class="row">            
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="search_by">Pesquisar</label>
+                        <input type="text" name="search_by" maxlength="255" class="form-control" value="{{search_by|default:''}}" placeholder="Ex: Nome do cliente, Razão Social, CNPJ...">
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0 pb-3">
+                <div class="col-md-12">
+                    <div class="text-right">
+                        <button class="btn btn-success btn-rounded" type="submit">
+                            <i class="os-icon os-icon-ui-37"></i>
+                            <span>Filtrar</span>
+                        </button>
+                        <a class="btn btn-primary btn-rounded" href="{% url 'cliente_cnpj:esctop_cliente_list' %}">
+                            <span >Limpar filtro</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="class page-header">
     
-    {% if object_list %}
+    {% if objects %}
     
-    <table class="table table-striped table-hover">
-        <thead class="thead">
-            <tr>
-                <th>Razão Social</th>                    
-                <th>Fundação</th>
-                <th>Forma Constituição</th>                                        
-                <th>Inscrição Estadual</th>   
-                <th></th>                                
-            </tr>
-        </thead>
-        <tbody>
-            {% for object in object_list  %}   
-            <tr>
-                <td class="maiusculo">{{object.razao_social}}</td>                                        
-                <td class="maiusculo">{{ object.fundacao }}</td>
-                <td class="maiusculo">{{ object.forma_constituicao }}</td>                                     
-                <td class="maiusculo">{{ object.inscricao_estadual }}</td>
-                <td style="text-align:center"> 
-                    <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a> 
-                </td>                    
-            </tr>
-            {% endfor %}
-        </tbody>
-        </table>
+    <div class="row card card-body">
+        <div class="col-12">
+            <div class="table-responsive mg-t-20">
+                <table class="table table-striped table-hover text-uppercase">
+                    <thead class="thead">
+                        <tr>
+                            <th>Razão Social</th>                    
+                            <th>Fundação</th>
+                            <th>Forma Constituição</th>                                        
+                            <th>Inscrição Estadual</th>   
+                            <th></th>                                
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in objects  %}   
+                        <tr>
+                            <td class="maiusculo">{{object.razao_social}}</td>                                        
+                            <td class="maiusculo">{{ object.fundacao }}</td>
+                            <td class="maiusculo">{{ object.forma_constituicao }}</td>
+                            <td class="maiusculo">{{ object.inscricao_estadual|default:"" }}</td>
+                            <td style="text-align:center"> 
+                                <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a> 
+                            </td>                    
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {% include 'includes/pagination.html' %}
+    </div>
     {% else %}
         <p class="alert alert-warning">Sem Clientes cadastrados</p>
     {% endif %}
