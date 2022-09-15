@@ -24,6 +24,7 @@ class EsctopClienteList(ListView):
                 Q(
                     Q(razao_social__icontains=self.request.GET.get('search_by'))|
                     Q(nome_fantasia__icontains=self.request.GET.get('search_by'))|
+                    Q(rep_nome__icontains=self.request.GET.get('search_by'))|
                     Q(cnpj__icontains=self.request.GET.get('search_by'))
                 )
             )
