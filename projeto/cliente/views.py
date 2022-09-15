@@ -1,17 +1,31 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.core.paginator import Paginator
 from .models import Cliente
 from .forms import ClienteForm
 
-@login_required
-def cliente_list(request):
+from django.db.models.query_utils import Q
+
+
+class CredcoopClienteList(ListView):
+    model=Cliente
     template_name='cliente_list.html'
-    objects=Cliente.objects.all()
-    context={'object_list': objects}
-    return render(request, template_name, context)
+    paginate_by = 20
+    context_object_name = "objects"
+
+    def get_queryset(self):
+        queryset=super().get_queryset()
+
+        if self.request.GET.get('search_by'):
+            queryset = queryset.filter(
+                Q(
+                    Q(nome__icontains=self.request.GET.get('search_by'))
+                )
+            )
+
+        return queryset
 
 
 @login_required

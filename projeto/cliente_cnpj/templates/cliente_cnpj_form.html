@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% load  static %}
-{% block js %}{% endblock js %}
+
 {% block content %}
 
 <style>
@@ -522,3 +522,10 @@
 
 
 {% endblock content %}
+
+
+{% block js %}
+    
+    <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+
+{% endblock js %}

@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
 {% load static %}
-{% block js %}{% endblock js %}
-{% block content %}
 
+{% block css %}
 <style>
     .nav-tabs{
         border: 1px solid #c1c5c1;   
@@ -33,12 +32,16 @@
         /* background-image: linear-gradient(15deg, #67dc6f 0%, #1c910c 100%); */
         background-color: #b9edb5;
     }
-      
+    
     .pl-5, .px-5 {
         padding: 10px!important;
     }          
     
 </style>
+{% endblock css %}
+
+{% block content %}
+
 
 <!-- https://www.schoolofnet.com/forum/topico/como-enviar-a-mensagem-de-sucesso-ou-erro-para-o-formulario-8495 -->
 
@@ -494,3 +497,9 @@
 </form>
 
 {% endblock content %}
+
+{% block js %}
+    
+    <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+
+{% endblock js %}

@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% load widget_tweaks %}
-{% block js %}{% endblock js %}
-{% block content %}
+{% load static %}
 
+{% block css %}
 <style>
     .nav-tabs {
         border: 1px solid #c1c5c1;
@@ -48,6 +48,10 @@
         padding: 10px !important;
     }
 </style>
+{% endblock css %}
+
+{% block content %}
+
 
 <form method="POST" novalidate>
     {% csrf_token %}    
@@ -86,7 +90,7 @@
 
     <div class="tab-content  pt-5" id="myTabContent">
         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
-        <h3>DADOS DO FIADOR (ESCTOP)</h3>     
+        <h3>DADOS DO FIADOR (ESCTOP aqui)</h3>     
     <hr/>
     <div class="row" > 
         <div class="col-sm-6">                    
@@ -313,4 +317,12 @@
     
 </form>
 
+
 {% endblock content %}
+
+
+{% block js %}
+    
+    <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+
+{% endblock js %}
