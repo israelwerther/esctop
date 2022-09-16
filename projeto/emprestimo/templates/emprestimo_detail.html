@@ -132,7 +132,7 @@
                 </tr>
                 <tr>
                     <th class="text-right">PIX</th>
-                    <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix }} | {{ object.cliente_cnpj.chave_pix }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.tipo_de_chave_pix|default:"" }} | {{ object.cliente_cnpj.chave_pix|default:"" }}</td>
                 </tr>
                 {% endif %}
                 <tr>

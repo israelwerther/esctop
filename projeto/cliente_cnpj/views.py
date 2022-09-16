@@ -33,9 +33,9 @@ class EsctopClienteList(ListView):
     
     def get_context_data(self, **kwargs):
         context = super(EsctopClienteList, self).get_context_data(**kwargs)
-        context['params'] = self.request.META['QUERY_STRING']
-		
-        context['search_by'] = self.request.GET.get('search_by')		
+        context['params'] = self.request.META['QUERY_STRING']		
+        context['search_by'] = self.request.GET.get('search_by')
+        context['page_title'] = "Clientes Esctop"
 
         return context
 
