@@ -48,7 +48,8 @@ def cliente_detail(request, pk):
 
 class ClienteCreate(CreateView):
     model=Cliente
-    template_name='cliente_form.html'
+    template_name='credcoop_form.html'
+    #template_name='cliente_form.html'
     form_class=ClienteForm
 
 
