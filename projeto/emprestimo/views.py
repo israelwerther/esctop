@@ -94,15 +94,15 @@ class EsctopEmprestimoList(ListView):
         
         # Filtra apenas clientes esctop existentes 
         queryset = Emprestimo.objects.filter(
-            cliente__isnull=False
+            cliente_cnpj__isnull=False
         )
-
+        
         if self.request.GET.get('search_by'):
             queryset = queryset.filter(
                 Q(
-                    Q(cliente_cnpj__icontains=self.request.GET.get('search_by'))|
-					Q(n_contrato__icontains=self.request.GET.get('search_by'))
-                    
+                    Q(cliente_cnpj__razao_social__icontains=self.request.GET.get('search_by'))|
+					Q(n_contrato__icontains=self.request.GET.get('search_by'))|
+                    Q(cliente_cnpj__cnpj__icontains=self.request.GET.get('search_by'))                    
                 )
             )
 

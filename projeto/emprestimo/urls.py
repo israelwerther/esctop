@@ -34,7 +34,7 @@ urlpatterns = [
 
     # Esctop
     path('esctop-emprestimo-form/', login_required(v.EsctopEmprestimoCreate.as_view()), name='esctop_emprestimo_form'),
-    path('esctop-emprestimo-list/', v.esctop_emprestimo_list, name='esctop_emprestimo_list'),
+    path('emprestimos-esctop-list/', login_required(v.EsctopEmprestimoList.as_view()), name='esctop_emprestimo_list'),
     
     
     # Impressões Esctop
