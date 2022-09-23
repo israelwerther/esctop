@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% endblock css %}
+
 {% block content %}
 
 <div class="row card card-body">
@@ -22,7 +26,7 @@
                 <div class="col-md-12">
                     <div class="text-right">
                         <button class="btn btn-success btn-rounded" type="submit">
-                            <i class="os-icon os-icon-ui-37"></i>
+                            <i class="fa-solid fa-magnifying-glass"></i>
                             <span>Filtrar</span>
                         </button>
                         <a class="btn btn-primary btn-rounded" href="{% url 'cliente:credcoop_cliente_list' %}">
