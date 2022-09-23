@@ -83,6 +83,40 @@ class EsctopEmprestimoCreate(CreateView):
         return super(EsctopEmprestimoCreate, self).form_valid(form)
 
 
+class EsctopEmprestimoList(ListView):
+    model=Emprestimo
+    template_name='esctop/esctop_emprestimo_list.html'
+    paginate_by = 20
+    context_object_name = "objects"
+
+    def get_queryset(self):
+        queryset=super().get_queryset()
+        
+        # Filtra apenas clientes esctop existentes 
+        queryset = Emprestimo.objects.filter(
+            cliente__isnull=False
+        )
+
+        if self.request.GET.get('search_by'):
+            queryset = queryset.filter(
+                Q(
+                    Q(cliente_cnpj__icontains=self.request.GET.get('search_by'))|
+					Q(n_contrato__icontains=self.request.GET.get('search_by'))
+                    
+                )
+            )
+
+        return queryset
+
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopEmprestimoList, self).get_context_data(**kwargs)
+        context['params'] = self.request.META['QUERY_STRING']
+		
+        context['search_by'] = self.request.GET.get('search_by')		
+
+        return context
+
 @login_required
 def esctop_emprestimo_list(request):    
     template_name='esctop/esctop_emprestimo_list.html'

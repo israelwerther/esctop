@@ -1,4 +1,4 @@
-from django.contrib.auth.deAvalistacorators import login_required
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
@@ -21,9 +21,8 @@ class AvalistaList(ListView):
         if self.request.GET.get('search_by'):
             queryset = queryset.filter(
                 Q(
-                    Q(nome__icontains=self.request.GET.get('search_by'))|
-                    
-                    Q(cpf__icontains=self.request.GET.get('search_by'))
+                    Q(fiador_nome__icontains=self.request.GET.get('search_by'))|                    
+                    Q(fiador_cpf__icontains=self.request.GET.get('search_by'))
                 )
             )
 
