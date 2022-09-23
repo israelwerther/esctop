@@ -30,17 +30,17 @@
 <form method="POST" novalidate>
 	{% csrf_token %}
 	<div class="row mt-1">
-		<div class="col-sm-12 col-md-8 card card-body">
+		<div class="col-sm-12 col-md-9 card card-body">
 			<div class="accordion" id="accordion">
 				<div class="card">
 					<div class="card-header panel-heading" id="headingOne">
 						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-left text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								Collapsible Group Item #1<i class="fa-solid fa-plus float-right"></i>
+							<button class="btn btn-link btn-block text-center text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+								Dados pessoais<i id="icon-1" class="fa-solid fa-bars float-right"></i>
 							</button>
 						</h2>
-					</div>				
-					<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+					</div>
+					<div id="collapseOne" class="collapse colapseForm show" aria-labelledby="headingOne" data-parent="#accordion">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-sm-6">
@@ -81,12 +81,12 @@
 				<div class="card">
 					<div class="card-header panel-heading" id="headingTwo">
 						<h2 class="mb-0">
-						<button class="btn btn-link btn-block text-left collapsed text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							Collapsible Group Item #2<i class="fa-solid fa-plus float-right"></i>
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+							dados do local de trabalho<i class="fa-solid fa-bars float-right"></i>
 						</button>
 						</h2>
 					</div>
-					<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+					<div id="collapseTwo" class="collapse colapseForm" aria-labelledby="headingTwo" data-parent="#accordion">
 						<div class="card-body">
 						Some placeholder content for the second accordion panel. This panel is hidden by default.
 						</div>
@@ -96,12 +96,12 @@
 				<div class="card">
 					<div class="card-header panel-heading" id="headingThree">
 						<h2 class="mb-0">
-						<button class="btn btn-link btn-block text-left collapsed text-decoration-none" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							Collapsible Group Item #3<i class="fa-solid fa-plus float-right"></i>
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+							Dados bancários<i class="fa-solid fa-bars float-right"></i>
 						</button>
 						</h2>
 					</div>
-					<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+					<div id="collapseThree" class="collapse colapseForm" aria-labelledby="headingThree" data-parent="#accordion">
 						<div class="card-body">
 						And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
 						</div>
@@ -111,11 +111,14 @@
 			</div>
 		</div><!-- Accordion -->
 
-		<div class="col-sm-12 col-md-4 card card-body">
-			<button type="submit" class="btn btn-success">Cadastrar2</button>
-			<a class="nav-link btn btn-success"  aria-selected="true">
-				<span class="fa fa-save"></span>
-				Cadastrar1
+		<div class="col-sm-12 col-md-3 card card-body">
+			<a id="confirm" type="submit" class="btn btn-success my-2 text-uppercase font-weight-bold">
+				<i class="fa-solid fa-check"></i>
+				Cadastrar
+			</a>
+			<a id="cancel" class="btn btn-danger my-2 text-uppercase font-weight-bold">
+				<i class="fa-solid fa-x"></i>
+				Descartar
 			</a>
 		</div>
 
@@ -469,17 +472,46 @@
 {% endblock content %}
 {% block js %}
 <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-	$('#accordion .panel-heading').click(function () {
-		$(this).next().slideToggle(iconCallback);
-		$(".collapse").not($(this).next()).slideUp(iconCallback);
 
-		function iconCallback() {
-				var iconClass = $(this).is(':visible') ? 'fa-minus' : 'fa-plus';
-				$(this).prev().find('i').removeClass('fa-plus fa-minus').addClass(iconClass);
-		}
-});
+	$('#icon-1').click(function(){
+		console.log("Entrou icone")
+	});
+
+	$('#confirm').click(function(){
+		Swal.fire({
+			title: 'Salvar alterações?',
+			showCancelButton: true,
+			confirmButtonText: 'Cadastrar',
+			cancelButtonText: `Cancelar`,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire('Alterações descartadas!', '', 'success')
+				location.replace(href="{% url 'cliente:credcoop_add' %}")
+				console.log("Entrou 1")
+			}
+		})
+	});
+	
+	$('#cancel').click(function(){
+		Swal.fire({
+			title: 'Do you want to save the changes?',
+			showDenyButton: true,
+			showCancelButton: true,
+			confirmButtonText: 'Save',
+			denyButtonText: `Don't save`,
+		}).then((result) => {		
+			if (result.isConfirmed) {
+				Swal.fire('Saved!', '', 'success')
+				{% comment %} location.replace(href="{% url 'cliente:credcoop_add' %}") {% endcomment %}
+			} else if (result.isDenied) {
+				Swal.fire('Changes are not saved', '', 'info')
+			}
+		})
+		
+	});
 	
 </script>
 {% endblock js %}
