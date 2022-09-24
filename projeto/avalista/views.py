@@ -36,13 +36,6 @@ class AvalistaList(ListView):
 
         return context
 
-@login_required
-def avalista_list(request):    
-    objects = Avalista.objects.all()   
-    template_name='avalista_list.html'
-    context={'object_list': objects}
-    return render(request, template_name, context)
-
 
 @login_required
 def avalista_detail(request, pk):
