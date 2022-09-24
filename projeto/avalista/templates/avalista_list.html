@@ -2,45 +2,69 @@
 
 {% block content %}
 
-<style>
-    thead{
-        background-color: rgb(165, 165, 165);
-    }   
-</style>
+<div class="row card card-body">    
+    <div class="col-12">
+        <h2 class="text-uppercase">Lista de Fiadores Esctop</h2>
+    </div>
+</div>
+<div class="row card card-body">
+    <div class="col-12">
+        <form id="formSubmit" method="get" onsubmit="setDate()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="search_by">Pesquisar</label>
+                        <input type="text" name="search_by" maxlength="255" class="form-control" value="{{search_by|default:''}}" placeholder="Ex: Nome do fiador ou CPF">
+                    </div>
+                </div>
+            </div>
+            <div class="row mx-0 pb-3">
+                <div class="col-md-12">
+                    <div class="text-right">
+                        <button class="btn btn-success btn-rounded" type="submit">
+                            <i class="os-icon os-icon-ui-37"></i>
+                            <span>Filtrar</span>
+                        </button>
+                        <a class="btn btn-primary btn-rounded" href="{% url 'avalista:avalista_list' %}">
+                            <span >Limpar filtro</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
-<div class="class page-header">  
-    <div class="float-right">
-        <a href="{% url 'avalista:avalista_add' %}" type="button" class="btn btn-success">Cadastrar Fiador</a>
-    </div>
-    
-    <div>
-        <h2>Lista de Fiadores Esctop</h2>
-    </div>
-    
+<div class="class page-header">    
     {% if object_list %}
     
-    <table class="table table-striped table-hover">
-       
-        <thead class="thead">
-                <tr>
-                    <th>Fiador</th>                    
-                    <th>CPF</th>                                                   
-                    <th></th>                                                   
-                </tr>
-            </thead>
-            <tbody>
-                {% for object in object_list  %}   
-                <tr>                              
-                    <td class="maiusculo">{{ object.fiador_nome }}</td>
-                    <td class="maiusculo">{{ object.fiador_cpf }}</td>   
-                    <td style="text-align:center"> 
-                        <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a> 
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-      
-    </table>
+    <div class="row card card-body">
+        <div class="col-12">
+            <div class="table-responsive mg-t-20">
+                <table class="table table-striped table-hover text-uppercase">       
+                    <thead class="thead btn-primary noHover">
+                        <tr style="height: 25px;line-height: 25px;">
+                            <th>Fiador</th>                    
+                            <th>CPF</th>                                                   
+                            <th></th>                                                   
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for object in object_list  %}   
+                        <tr>                              
+                            <td>{{ object.fiador_nome }}</td>
+                            <td>{{ object.fiador_cpf }}</td>   
+                            <td style="text-align:center"> 
+                                <a href="{{ object.get_absolute_url}}" ><button class="btn btn-info">Gerenciar</button></a> 
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>                  
+                </table>
+            </div>
+        </div>
+        {% include 'includes/pagination.html' %}
+    </div>    
     {% else %}
         <p class="alert alert-warning">Sem Avalistas cadastrados</p>
     {% endif %}

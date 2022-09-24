@@ -4,8 +4,8 @@ from projeto.avalista import views as v
 
 app_name='avalista' 
 
-urlpatterns = [      
-    path('avalista/', v.avalista_list, name='avalista_list'),
+urlpatterns = [  
+    path('avalista-lista/', login_required(v.AvalistaList.as_view()), name='avalista_list'),
     path('<int:pk>/', v.avalista_detail, name='avalista_detail'),
     path('add/', login_required(v.AvalistaCreate.as_view()), name='avalista_add'),
     # path('decision/', v.avalista_decision, name='avalista_decision'),
