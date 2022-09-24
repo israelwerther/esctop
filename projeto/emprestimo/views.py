@@ -117,13 +117,6 @@ class EsctopEmprestimoList(ListView):
 
         return context
 
-@login_required
-def esctop_emprestimo_list(request):    
-    template_name='esctop/esctop_emprestimo_list.html'
-    objects=Emprestimo.objects.all()
-    context={'object_list': objects}
-    return render(request, template_name, context)
-
 
 # Credcoop Impressos
 class CredcoopContratoPromissoria(DetailView):
