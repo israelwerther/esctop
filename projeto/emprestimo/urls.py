@@ -25,7 +25,7 @@ urlpatterns = [
 
     # Credcoop
     path('credcoop-emprestimo-form/', login_required(v.CredcoopEmprestimoCreate.as_view()), name='credcoop_emprestimo_form'),
-    path('emprestimos-credcoop/', login_required(v.CredcoopEmprestimoList.as_view()), name='credcoop_emprestimo_list'),
+    path('emprestimos-credcoop-list/', login_required(v.CredcoopEmprestimoList.as_view()), name='credcoop_emprestimo_list'),
 
     # Impressões Credcoop
     path('<int:pk>/credcoop_promissoria/', login_required(v.CredcoopPromissoria.as_view()), name='credcoop_promissoria'),
@@ -34,8 +34,9 @@ urlpatterns = [
 
     # Esctop
     path('esctop-emprestimo-form/', login_required(v.EsctopEmprestimoCreate.as_view()), name='esctop_emprestimo_form'),
-    path('esctop-emprestimo-list/', v.esctop_emprestimo_list, name='esctop_emprestimo_list'),
-
+    path('emprestimos-esctop-list/', login_required(v.EsctopEmprestimoList.as_view()), name='esctop_emprestimo_list'),
+    
+    
     # Impressões Esctop
     path('<int:pk>/esctop_promissoria/', login_required(v.EsctopPromissoria.as_view()), name='esctop_promissoria'),
     path('<int:pk>/esctop_contrato/', login_required(v.EsctopContrato.as_view()), name='esctop_contrato'),

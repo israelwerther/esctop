@@ -1,17 +1,40 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.core.paginator import Paginator
 from .models import Avalista
 from .forms import AvalistaForm
 
+from django.db.models.query_utils import Q
 
-@login_required
-def avalista_list(request):    
-    objects = Avalista.objects.all()   
+
+class AvalistaList(ListView):
+    model=Avalista
     template_name='avalista_list.html'
-    context={'object_list': objects}
-    return render(request, template_name, context)
+    paginate_by = 20
+    context_object_name = "objects"
+
+    def get_queryset(self):
+        queryset=super().get_queryset()
+
+        if self.request.GET.get('search_by'):
+            queryset = queryset.filter(
+                Q(
+                    Q(fiador_nome__icontains=self.request.GET.get('search_by'))|                    
+                    Q(fiador_cpf__icontains=self.request.GET.get('search_by'))
+                )
+            )
+
+        return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super(AvalistaList, self).get_context_data(**kwargs)
+        context['params'] = self.request.META['QUERY_STRING']
+		
+        context['search_by'] = self.request.GET.get('search_by')		
+
+        return context
 
 
 @login_required
