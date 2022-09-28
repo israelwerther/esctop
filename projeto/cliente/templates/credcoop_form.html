@@ -73,6 +73,50 @@
 										{% render_field form.orgao_emissor class="form-control form-control-sm text-uppercase" %}
 									</div>
 								</div>
+
+								<div class="col-sm-6">
+									<label for="" class="required">{{form.data_nasc.label}}</label>
+									{% render_field form.data_nasc class="form-control form-control-sm" type="date"%}
+										<small class="form-text text-muted">
+											{{ form.data_nasc.help_text }}
+										</small>
+									{% if form.data_nasc.errors %}
+										<label class="text-danger">
+										{{ form.data_nasc.errors.0 }}</label>
+									{% endif %}
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.naturalidade.label}}</label>
+										{% render_field form.naturalidade class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.nacionalidade.label}}</label>
+										{% render_field form.nacionalidade class="form-control form-control-sm" value="BRASILEIRA" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.estado_civil.label}}</label>
+										{% render_field form.estado_civil class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.nome_da_mae.label}}</label>
+										{% render_field form.nome_da_mae class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.nome_do_pai.label}}</label>
+										{% render_field form.nome_do_pai class="form-control form-control-sm" %}
+									</div>
+								</div>
+
 							</div>
 						</div>
 					</div>
@@ -127,9 +171,9 @@
 		</div><!-- Accordion -->
 
 		<div class="col-sm-12 col-md-3 card card-body">
-			<a id="confirm" type="submit" class="btn btn-success my-2 text-uppercase font-weight-bold">
+			<button id="confirm" type="submit" class="btn btn-success my-2 text-uppercase font-weight-bold">
 				<i class="fa-solid fa-check"> Cadastrar</i>
-			</a>
+			</button>
 			<a id="cancel" class="btn btn-danger my-2 text-uppercase font-weight-bold">
 				<i class="fa-solid fa-x"> Descartar</i>
 			</a>
@@ -192,57 +236,8 @@
 		<div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
 			<h3>DADOS DO FIADOR (CREDCOOP)</h3>
 			<div class="row">
-				
-				
-				
 
-				{% if object.pk %}
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="" class="required">{{form.data_nasc.label}}</label>
-						{% render_field form.data_nasc class="form-control form-control-sm date-mask-placeholder" %}
-					</div>
-				</div>
-				{% else %}
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="" class="required">{{form.data_nasc.label}}</label>
-						{% render_field form.data_nasc class="form-control form-control-sm" type="date" %}
-					</div>
-				</div>
-				{% endif %}
-
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="" class="required">{{form.naturalidade.label}}</label>
-						{% render_field form.naturalidade class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="" class="required">{{form.nacionalidade.label}}</label>
-						{% render_field form.nacionalidade class="form-control form-control-sm" value="BRASILEIRA" %}
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="" class="required">{{form.estado_civil.label}}</label>
-						{% render_field form.estado_civil class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="" class="required">{{form.nome_da_mae.label}}</label>
-						{% render_field form.nome_da_mae class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="form-group">
-						<label for="">{{form.nome_do_pai.label}}</label>
-						{% render_field form.nome_do_pai class="form-control form-control-sm" %}
-					</div>
-				</div>
-			</div>
+				
 			<h3>ENDEREÇO</h3>
 			<div class="row">
 				<div class="col-sm-2">
@@ -485,44 +480,71 @@
 
 {% endblock content %}
 {% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
 <script src="{% static 'bootstrap/js/toggle-accordion.js' %}"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'js/vue.js' %}"></script>
+
+
 
 <script>
-
-	$('#confirm').click(function(){
-		Swal.fire({
-			title: 'Salvar alterações?',
-			showCancelButton: true,
-			confirmButtonText: 'Cadastrar',
-			cancelButtonText: `Cancelar`,
-		}).then((result) => {
-			if (result.isConfirmed) {
-				Swal.fire('Alterações descartadas!', '', 'success')
-				location.replace(href="{% url 'cliente:credcoop_add' %}")
-				console.log("Entrou 1")
-			}
-		})
-	});
-	
-	$('#cancel').click(function(){
-		Swal.fire({
-			title: 'Do you want to save the changes?',
-			showDenyButton: true,
-			showCancelButton: true,
-			confirmButtonText: 'Save',
-			denyButtonText: `Don't save`,
-		}).then((result) => {		
-			if (result.isConfirmed) {
-				Swal.fire('Saved!', '', 'success')
-				{% comment %} location.replace(href="{% url 'cliente:credcoop_add' %}") {% endcomment %}
-			} else if (result.isDenied) {
-				Swal.fire('Changes are not saved', '', 'info')
-			}
-		})
+	var app = new Vue({
+		delimiters: ['${', '}'],
+		el: '#app',
+		data: {
 		
-	});
+		},
+		methods: {
+		},
+		
+		mounted: function () {
+			toggleAccordion()
+
+			$('#confirm').click(function(){
+				Swal.fire({
+					title: 'Salvar alterações?',
+					showCancelButton: true,
+					confirmButtonText: 'Cadastrar',
+					cancelButtonText: `Cancelar`,
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire('Alterações descartadas!', '', 'success')
+						location.replace(href="{% url 'cliente:credcoop_add' %}")
+						console.log("Entrou 1")
+					}
+				})
+			});
+			
+			$('#cancel').click(function(){
+				Swal.fire({
+					title: 'Do you want to save the changes?',
+					showDenyButton: true,
+					confirmButtonText: 'Descartar alterações',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {		
+					if (result.isConfirmed) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Alterações descartadas',
+							showConfirmButton: false,
+							timer: 1500
+						})
+						setTimeout(() => {location.replace(href="{% url 'cliente:credcoop_cliente_list' %}")}, 2000);
+					} else if (result.isDenied) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Alterações descartadas',
+							showConfirmButton: false,
+							timer: 1500
+						})
+					}
+				})
+				
+			});
+			
+		}
+	})
 	
 </script>
+
 {% endblock js %}

@@ -57,7 +57,7 @@ class FiadorCreate(CreateView):
     model=Cliente       
     template_name='fiador_form.html'
     form_class=ClienteForm
-    success_url = reverse_lazy('cliente:credcoop_add')
+    success_url = reverse_lazy('cliente:credcoop_cliente_list')
 
     
 # def ClienteCreate(request):
