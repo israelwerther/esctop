@@ -33,14 +33,14 @@
 		<div class="col-sm-12 col-md-9 card card-body">
 			<div class="accordion" id="accordion">
 				<div class="card">
-					<div class="card-header panel-heading" id="headingOne">
-						<h2 class="mb-0">
-							<button class="btn btn-link btn-block text-center text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								Dados pessoais<i id="icon-1" class="fa-solid fa-bars float-right"></i>
+					<div class="card-header panel-heading" id="heading-1">
+						<h2 class="mb-0" id="h2-icon-1">
+							<button class="btn btn-link btn-block text-center text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+								Dados pessoais<i id="icon-1" class="fa-solid fa-minus float-right"></i>
 							</button>
 						</h2>
 					</div>
-					<div id="collapseOne" class="collapse colapseForm show" aria-labelledby="headingOne" data-parent="#accordion">
+					<div id="collapse-1" class="collapse colapseForm show" aria-labelledby="heading-1" data-parent="#accordion">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-sm-6">
@@ -79,14 +79,14 @@
 				</div><!-- Accordion 1 -->
 
 				<div class="card">
-					<div class="card-header panel-heading" id="headingTwo">
-						<h2 class="mb-0">
-						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-							dados do local de trabalho<i class="fa-solid fa-bars float-right"></i>
+					<div class="card-header panel-heading" id="heading-2">
+						<h2 class="mb-0" id="h2-icon-2">
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+							dados do local de trabalho<i id="icon-2" class="fa-solid fa-plus float-right"></i>
 						</button>
 						</h2>
 					</div>
-					<div id="collapseTwo" class="collapse colapseForm" aria-labelledby="headingTwo" data-parent="#accordion">
+					<div id="collapse-2" class="collapse colapseForm" aria-labelledby="heading-2" data-parent="#accordion">
 						<div class="card-body">
 						Some placeholder content for the second accordion panel. This panel is hidden by default.
 						</div>
@@ -94,31 +94,44 @@
 				</div><!-- Accordion 2 -->
 
 				<div class="card">
-					<div class="card-header panel-heading" id="headingThree">
-						<h2 class="mb-0">
-						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-							Dados bancários<i class="fa-solid fa-bars float-right"></i>
+					<div class="card-header panel-heading" id="heading-3">
+						<h2 class="mb-0" id="h2-icon-3">
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+							Dados bancários<i id="icon-3" class="fa-solid fa-plus float-right"></i>
 						</button>
 						</h2>
 					</div>
-					<div id="collapseThree" class="collapse colapseForm" aria-labelledby="headingThree" data-parent="#accordion">
+					<div id="collapse-3" class="collapse colapseForm" aria-labelledby="heading-3" data-parent="#accordion">
 						<div class="card-body">
 						And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
 						</div>
 					</div>
 				</div><!-- Accordion 3 -->
 
+				<div class="card">
+					<div class="card-header panel-heading" id="heading-4">
+						<h2 class="mb-0" id="h2-icon-4">
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
+							Referências e observações<i id="icon-4" class="fa-solid fa-plus float-right"></i>
+						</button>
+						</h2>
+					</div>
+					<div id="collapse-4" class="collapse colapseForm" aria-labelledby="heading-4" data-parent="#accordion">
+						<div class="card-body">
+						And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+						</div>
+					</div>
+				</div><!-- Accordion 4 -->
+
 			</div>
 		</div><!-- Accordion -->
 
 		<div class="col-sm-12 col-md-3 card card-body">
 			<a id="confirm" type="submit" class="btn btn-success my-2 text-uppercase font-weight-bold">
-				<i class="fa-solid fa-check"></i>
-				Cadastrar
+				<i class="fa-solid fa-check"> Cadastrar</i>
 			</a>
 			<a id="cancel" class="btn btn-danger my-2 text-uppercase font-weight-bold">
-				<i class="fa-solid fa-x"></i>
-				Descartar
+				<i class="fa-solid fa-x"> Descartar</i>
 			</a>
 		</div>
 
@@ -174,7 +187,8 @@
 		</div>
 	</div>
 	<!-- ############################################################################################################ -->
-	<div class="tab-content  pt-5" id="myTabContent">
+
+	<div class="tab-content pt-5" id="myTabContent">
 		<div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
 			<h3>DADOS DO FIADOR (CREDCOOP)</h3>
 			<div class="row">
@@ -466,19 +480,16 @@
 			</button>
 		</div>
 		{% endif %}
-
+	</div>
 </form> {% endcomment %}
 
 {% endblock content %}
 {% block js %}
 <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+<script src="{% static 'bootstrap/js/toggle-accordion.js' %}"></script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-
-	$('#icon-1').click(function(){
-		console.log("Entrou icone")
-	});
 
 	$('#confirm').click(function(){
 		Swal.fire({
