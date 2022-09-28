@@ -457,7 +457,7 @@
                     <div class="row font-weight-bold">
                         <div class="col-2 border border-dark mt-3 d-flex justify-content-center">N° ${index + 1}/${emprestimo.qtd_parcelas}</div>
                         <div class="col-7 mt-3">Vencimento: ${moment(parcela.vencimento).format("DD/MM/YYYY")} </div>
-                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">${currencyFormat({{object.valor_prestacao}})}</div>
+                        <div class="col-2 border border-dark mt-3 d-flex justify-content-center">${currencyFormat(emprestimo.valor_prestacao)}</div>
                     </div>
                     <div class="row">
                         <div class="col-11 mt-3 d-flex justify-content-center">

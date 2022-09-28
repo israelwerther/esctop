@@ -162,9 +162,8 @@
                 </div>
                 <div id="collapse1" class="collapse" aria-labelledby="heading1" data-parent="#accordionExample">
                     <div class="card-body">
-                        <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">Promissória</a>
-
                         {% if object.cliente_cnpj %}  
+                            <a class="dropdown-item" href="{% url 'emprestimo:esctop_promissoria' object.pk %}" target="_blank">Promissória</a>
                             <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato' object.pk %}" target="_blank">Contrato</a>
                             <a class="dropdown-item" href="{% url 'emprestimo:esctop_contrato_e_promissoria' object.pk %}" target="_blank">
                                 Contrato+Promissória
@@ -172,6 +171,7 @@
                         {% endif %}
 
                         {% if object.cliente %}
+                            <a class="dropdown-item" href="{% url 'emprestimo:credcoop_promissoria' object.pk %}" target="_blank">Promissória</a>
                             <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato' object.pk %}" target="_blank" type="button">Contrato</a>
                             <a class="dropdown-item" href="{% url 'emprestimo:credcoop_contrato_e_promissoria' object.pk %}" target="_blank">
                                 Contrato+Promissória
