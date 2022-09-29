@@ -27,7 +27,7 @@
 
 
 <!--Accordion wrapper-->
-<form method="POST" novalidate>
+<form method="POST" novalidate id="myForm">
 	{% csrf_token %}
 	<div class="row mt-1">
 		<div class="col-sm-12 col-md-9 card card-body">
@@ -43,12 +43,15 @@
 					<div id="collapse-1" class="collapse colapseForm show" aria-labelledby="heading-1" data-parent="#accordion">
 						<div class="card-body">
 							<div class="row">
+								<div class="col-12">
+									<h3>DADOS DO CLIENTE</h3>
+								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="" class="required">{{form.nome.label}} </label>
+										<label class="required">{{form.nome.label}} </label>
 										{% render_field form.nome class="form-control form-control-sm" %}
 										{% if form.nome.errors %}
-											<small class="text-danger">{{form.nome.errors}}</small> 
+											<small class="text-danger">{{form.nome.errors}}</small>
 										{% endif %}
 									</div>
 								</div>
@@ -73,7 +76,6 @@
 										{% render_field form.orgao_emissor class="form-control form-control-sm text-uppercase" %}
 									</div>
 								</div>
-
 								<div class="col-sm-6">
 									<label for="" class="required">{{form.data_nasc.label}}</label>
 									{% render_field form.data_nasc class="form-control form-control-sm" type="date"%}
@@ -85,7 +87,6 @@
 										{{ form.data_nasc.errors.0 }}</label>
 									{% endif %}
 								</div>
-
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="" class="required">{{form.naturalidade.label}}</label>
@@ -116,6 +117,114 @@
 										{% render_field form.nome_do_pai class="form-control form-control-sm" %}
 									</div>
 								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.conjuge_nome.label}}</label>
+										{% render_field form.conjuge_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.conjuge_cpf.label}}</label>
+										{% render_field form.conjuge_cpf class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.conjuge_telefone.label}}</label>
+										{% render_field form.conjuge_telefone class="form-control form-control-sm" %}
+									</div>
+								</div>
+							
+								<div class="col-12">
+									<h3>ENDEREÇO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.cep.label}} </label>
+										{% render_field form.cep class="form-control form-control-sm" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rua.label}} </label>
+										{% render_field form.rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.numero_casa.label}} </label>
+										{% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text" id="numero_casa" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.bairro.label}} </label>
+										{% render_field form.bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.cidade.label}} </label>
+										{% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.uf.label}} </label>
+										{% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.complemento.label}} </label>
+										{% render_field form.complemento class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.ponto_referencia.label}} </label>
+										{% render_field form.ponto_referencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>CONTATO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.contato1.label}} </label>
+										{% render_field form.contato1 class="form-control form-control-sm phone-mask" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.contato2.label}} </label>
+										{% render_field form.contato2 class="form-control form-control-sm phone-mask" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.celular1.label}} </label>
+										{% render_field form.celular1 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label class="checkbox-inline"> {{form.whatsapp1.label}} <input type="checkbox"
+												value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.celular2.label}} </label>
+										{% render_field form.celular2 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label class="checkbox-inline"> {{form.whatsapp2.label}} <input type="checkbox"
+												value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.email.label}} </label>
+										{% render_field form.email class="form-control form-control-sm lower_all" %}
+									</div>
+								</div>
 
 							</div>
 						</div>
@@ -132,7 +241,95 @@
 					</div>
 					<div id="collapse-2" class="collapse colapseForm" aria-labelledby="heading-2" data-parent="#accordion">
 						<div class="card-body">
-						Some placeholder content for the second accordion panel. This panel is hidden by default.
+							<div class="row">
+								<div class="col-12">
+									<h3>DADOS DA EMPRESA</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.nome_fantasia.label}} </label>
+										{% render_field form.nome_fantasia class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.contato1_trabalho.label}} </label>
+										{% render_field form.contato1_trabalho class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.contato2_trabalho.label}} </label>
+										{% render_field form.contato2_trabalho class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.celular1_trabalho.label}} </label>
+										{% render_field form.celular1_trabalho class="form-control form-control-sm" %}
+										<label class="checkbox-inline"> {{form.whatsapp1_trabalho.label}} <input type="checkbox" value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.celular2_trabalho.label}} </label>
+										{% render_field form.celular2_trabalho class="form-control form-control-sm" %}
+										<label class="checkbox-inline"> {{form.whatsapp2_trabalho.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
+									</div>
+								</div>
+								<div class="col-12">
+									<h3>ENDEREÇO DA EMPRESA</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cep2">{{form.cep_trabalho.label}} </label>
+										{% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep2" type="text"%}
+				
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="logradouro">{{form.rua_trabalho.label}} </label>
+										{% render_field form.rua_trabalho class="form-control form-control-sm" id="logradouro" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="bairro2">{{form.bairro_trabalho.label}} </label>
+										{% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro2" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="uf2">{{form.uf_trabalho.label}} </label>
+										{% render_field form.uf_trabalho class="form-control form-control-sm" id="uf2" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cidade2">{{form.cidade_trabalho.label}} </label>
+										{% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade2" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.numero_casa_trabalho.label}} </label>
+										{% render_field form.numero_casa_trabalho class="form-control form-control-sm" type="text" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="">{{form.referencia_trabalho.label}} </label>
+										{% render_field form.referencia_trabalho class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="">{{form.obs_trabalho.label}} </label>
+										{% render_field form.obs_trabalho class="form-control form-control-sm" style="height: 100px;"%}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- Accordion 2 -->
@@ -233,198 +430,8 @@
 	<!-- ############################################################################################################ -->
 
 	<div class="tab-content pt-5" id="myTabContent">
-		<div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
-			<h3>DADOS DO FIADOR (CREDCOOP)</h3>
-			<div class="row">
-
-				
-			<h3>ENDEREÇO</h3>
-			<div class="row">
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="" class="required">{{form.cep.label}} </label>
-						{% render_field form.cep class="form-control form-control-sm" name="cep" type="text" id="cep"
-						value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="" class="required">{{form.rua.label}} </label>
-						{% render_field form.rua class="form-control form-control-sm" name="rua" type="text" id="rua"
-						size="60" %}
-					</div>
-				</div>
-				<div class="col-sm-1">
-					<div class="form-group">
-						<label for="" class="required">{{form.numero_casa.label}} </label>
-						{% render_field form.numero_casa class="form-control form-control-sm" name="rua" type="text"
-						id="rua" size="60" %}
-					</div>
-				</div>
-				<div class="col-sm-5">
-					<div class="form-group">
-						<label for="" class="required">{{form.bairro.label}} </label>
-						{% render_field form.bairro class="form-control form-control-sm" name="bairro" type="text"
-						id="bairro" size="40" %}
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="" class="required">{{form.cidade.label}} </label>
-						{% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text"
-						id="cidade" size="40"%}
-					</div>
-				</div>
-				<div class="col-sm-1">
-					<div class="form-group">
-						<label for="" class="required">{{form.uf.label}} </label>
-						{% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf"
-						size="2"%}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.complemento.label}} </label>
-						{% render_field form.complemento class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.ponto_referencia.label}} </label>
-						{% render_field form.ponto_referencia class="form-control form-control-sm" %}
-					</div>
-				</div>
-			</div>
-			<h3>CONTATO</h3>
-			<div class="row">
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.contato1.label}} </label>
-						{% render_field form.contato1 class="form-control form-control-sm phone-mask" type="text"%}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.contato2.label}} </label>
-						{% render_field form.contato2 class="form-control form-control-sm phone-mask" type="text"%}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.celular1.label}} </label>
-						{% render_field form.celular1 class="form-control form-control-sm cel-phone-mask" type="text"%}
-						<label class="checkbox-inline"> {{form.whatsapp1.label}} <input type="checkbox"
-								value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.celular2.label}} </label>
-						{% render_field form.celular2 class="form-control form-control-sm cel-phone-mask" type="text"%}
-						<label class="checkbox-inline"> {{form.whatsapp2.label}} <input type="checkbox"
-								value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.email.label}} </label>
-						{% render_field form.email class="form-control form-control-sm lower_all" %}
-					</div>
-				</div>
-			</div>
-
-		</div>
 		<div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.nome_fantasia.label}} </label>
-						{% render_field form.nome_fantasia class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.contato1_trabalho.label}} </label>
-						{% render_field form.contato1_trabalho class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.contato2_trabalho.label}} </label>
-						{% render_field form.contato2_trabalho class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.celular1_trabalho.label}} </label>
-						{% render_field form.celular1_trabalho class="form-control form-control-sm" %}
-						<label class="checkbox-inline"> {{form.whatsapp1_trabalho.label}} <input type="checkbox"
-								value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.celular2_trabalho.label}} </label>
-						{% render_field form.celular2_trabalho class="form-control form-control-sm" %}
-						<label class="checkbox-inline"> {{form.whatsapp2_trabalho.label}} <input type="checkbox"
-								value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="cep2">{{form.cep_trabalho.label}} </label>
-						{% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep2"
-						type="text"%}
-
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="logradouro">{{form.rua_trabalho.label}} </label>
-						{% render_field form.rua_trabalho class="form-control form-control-sm" id="logradouro"
-						type="text"%}
-					</div>
-				</div>
-				<div class="col-sm-5">
-					<div class="form-group">
-						<label for="bairro2">{{form.bairro_trabalho.label}} </label>
-						{% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro2"
-						type="text"%}
-					</div>
-				</div>
-				<div class="col-sm-1">
-					<div class="form-group">
-						<label for="uf2">{{form.uf_trabalho.label}} </label>
-						{% render_field form.uf_trabalho class="form-control form-control-sm" id="uf2" type="text"%}
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="form-group">
-						<label for="cidade2">{{form.cidade_trabalho.label}} </label>
-						{% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade2"
-						type="text"%}
-					</div>
-				</div>
-				<div class="col-sm-1">
-					<div class="form-group">
-						<label for="">{{form.numero_casa_trabalho.label}} </label>
-						{% render_field form.numero_casa_trabalho class="form-control form-control-sm" type="text"
-						size="60" %}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.referencia_trabalho.label}} </label>
-						{% render_field form.referencia_trabalho class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.obs_trabalho.label}} </label>
-						{% render_field form.obs_trabalho class="form-control form-control-sm" style="height: 100px;"%}
-					</div>
-				</div>
-			</div>
+			
 		</div>
 		<div class="tab-pane fade show" id="tab3" role="tabpanel" aria-labelledby="home-tab">
 			<div class="row">
@@ -482,7 +489,6 @@
 {% block js %}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
-<script src="{% static 'bootstrap/js/toggle-accordion.js' %}"></script>
 <script src="{% static 'js/vue.js' %}"></script>
 
 
@@ -498,7 +504,89 @@
 		},
 		
 		mounted: function () {
-			toggleAccordion()
+
+			$('#id_nome').focus()
+			$('#h2-icon-1').click(function(){
+				if($('#icon-1').hasClass('fa-minus')){
+					$('#icon-1').toggleClass('fa-minus fa-plus')
+				}
+				else if($('#icon-1').hasClass('fa-plus')){
+					$('#icon-1').toggleClass('fa-minus fa-plus')
+					setTimeout(() => {$('#id_nome').focus()	}, 1000);
+					if($('#icon-2').hasClass('fa-minus')){
+						$('#icon-2').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-3').hasClass('fa-minus')){
+						$('#icon-3').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-4').hasClass('fa-minus')){
+						$('#icon-4').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+		
+			$('#h2-icon-2').click(function(){
+				if($('#icon-2').hasClass('fa-minus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+				}
+				else if($('#icon-2').hasClass('fa-plus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+
+					{% comment %} $('html, body').animate({
+						scrollTop: $("#myForm").offset().top
+					}, 1000); {% endcomment %}
+
+					{% comment %} window.scrollTo({top: 0}); {% endcomment %}
+
+					setTimeout(() => {$('#id_nome_fantasia').focus()}, 1000);
+					if($('#icon-1').hasClass('fa-minus')){
+						$('#icon-1').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-3').hasClass('fa-minus')){
+						$('#icon-3').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-4').hasClass('fa-minus')){
+						$('#icon-4').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+		
+			$('#h2-icon-3').click(function(){
+				if($('#icon-3').hasClass('fa-minus')){
+					$('#icon-3').toggleClass('fa-minus fa-plus')			
+				}
+				else if($('#icon-3').hasClass('fa-plus')){
+					$('#icon-3').toggleClass('fa-minus fa-plus')
+					if($('#icon-1').hasClass('fa-minus')){
+						$('#icon-1').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-2').hasClass('fa-minus')){
+						$('#icon-2').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-4').hasClass('fa-minus')){
+						$('#icon-4').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+		
+			$('#h2-icon-4').click(function(){
+					if($('#icon-4').hasClass('fa-minus')){
+						$('#icon-4').toggleClass('fa-minus fa-plus')			
+					}
+					else if($('#icon-4').hasClass('fa-plus')){
+						$('#icon-4').toggleClass('fa-minus fa-plus')
+						if($('#icon-1').hasClass('fa-minus')){
+							$('#icon-1').toggleClass('fa-minus fa-plus')
+						}
+						if($('#icon-2').hasClass('fa-minus')){
+							$('#icon-2').toggleClass('fa-minus fa-plus')
+						}
+						if($('#icon-3').hasClass('fa-minus')){
+							$('#icon-3').toggleClass('fa-minus fa-plus')
+						}
+					}
+				});			
+			
 
 			$('#confirm').click(function(){
 				Swal.fire({
