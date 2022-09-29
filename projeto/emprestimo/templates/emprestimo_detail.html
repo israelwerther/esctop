@@ -104,11 +104,11 @@
                 </tr>
                 <tr>            
                     <th class="text-right">Fiador</th>
-                    <td class="text-left">{{ object.cliente_cnpj.fiador }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.fiador|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">CPF do Fiador</th>
-                    <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.fiador.fiador_cpf|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">E-Mail do Fiador</th>
@@ -116,19 +116,19 @@
                 </tr>
                 <tr>
                     <th class="text-right">Banco</th>
-                    <td class="text-left">{{ object.cliente_cnpj.banco }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.banco|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Tipo de Conta</th>
-                    <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.tipo_de_conta|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Agência</th>
-                    <td class="text-left">{{ object.cliente_cnpj.agencia }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.agencia|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">Conta</th>
-                    <td class="text-left">{{ object.cliente_cnpj.conta }}</td>
+                    <td class="text-left">{{ object.cliente_cnpj.conta|default:"" }}</td>
                 </tr>
                 <tr>
                     <th class="text-right">PIX</th>
