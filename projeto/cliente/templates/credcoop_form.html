@@ -27,8 +27,9 @@
 
 
 <!--Accordion wrapper-->
-<form method="POST" novalidate id="myForm">
+<form method="POST" novalidate id="myForm" >
 	{% csrf_token %}
+	{{form.errors}}
 	<div class="row mt-1">
 		<div class="col-sm-12 col-md-9 card card-body">
 			<div class="accordion" id="accordion">
@@ -68,29 +69,34 @@
 									<div class="form-group">
 										<label for="" class="required">{{form.rg.label}} </label>
 										{% render_field form.rg class="form-control form-control-sm" %}
+										{% if form.rg.errors %}
+											<small class="text-danger">{{form.rg.errors}}</small>
+										{% endif %}
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="" class="required">{{form.orgao_emissor.label}} </label>
 										{% render_field form.orgao_emissor class="form-control form-control-sm text-uppercase" %}
+										{% if form.orgao_emissor.errors %}
+											<small class="text-danger">{{form.orgao_emissor.errors}}</small>
+										{% endif %}
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<label for="" class="required">{{form.data_nasc.label}}</label>
 									{% render_field form.data_nasc class="form-control form-control-sm" type="date"%}
-										<small class="form-text text-muted">
-											{{ form.data_nasc.help_text }}
-										</small>
 									{% if form.data_nasc.errors %}
-										<label class="text-danger">
-										{{ form.data_nasc.errors.0 }}</label>
+										<small class="text-danger">{{form.data_nasc.errors}}</small>
 									{% endif %}
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="" class="required">{{form.naturalidade.label}}</label>
 										{% render_field form.naturalidade class="form-control form-control-sm" %}
+										{% if form.naturalidade.errors %}
+											<small class="text-danger">{{form.naturalidade.errors}}</small>
+										{% endif %}
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -101,7 +107,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="" class="required">{{form.estado_civil.label}}</label>
+										<label for="">{{form.estado_civil.label}}</label>
 										{% render_field form.estado_civil class="form-control form-control-sm" %}
 									</div>
 								</div>
@@ -109,6 +115,9 @@
 									<div class="form-group">
 										<label for="" class="required">{{form.nome_da_mae.label}}</label>
 										{% render_field form.nome_da_mae class="form-control form-control-sm" %}
+										{% if form.nome_da_mae.errors %}
+											<small class="text-danger">{{form.nome_da_mae.errors}}</small>
+										{% endif %}
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -153,7 +162,7 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="" class="required">{{form.numero_casa.label}} </label>
+										<label for="">{{form.numero_casa.label}} </label>
 										{% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text" id="numero_casa" size="60" %}
 									</div>
 								</div>
@@ -177,13 +186,13 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="" class="required">{{form.complemento.label}} </label>
+										<label for="">{{form.complemento.label}} </label>
 										{% render_field form.complemento class="form-control form-control-sm" %}
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="" class="required">{{form.ponto_referencia.label}} </label>
+										<label for="">{{form.ponto_referencia.label}} </label>
 										{% render_field form.ponto_referencia class="form-control form-control-sm" %}
 									</div>
 								</div>
@@ -207,16 +216,14 @@
 									<div class="form-group">
 										<label for="">{{form.celular1.label}} </label>
 										{% render_field form.celular1 class="form-control form-control-sm cel-phone-mask" type="text"%}
-										<label class="checkbox-inline"> {{form.whatsapp1.label}} <input type="checkbox"
-												value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.whatsapp1}}</label>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">{{form.celular2.label}} </label>
 										{% render_field form.celular2 class="form-control form-control-sm cel-phone-mask" type="text"%}
-										<label class="checkbox-inline"> {{form.whatsapp2.label}} <input type="checkbox"
-												value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.whatsapp2}}</label>
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -245,7 +252,7 @@
 								<div class="col-12">
 									<h3>DADOS DA EMPRESA</h3>
 								</div>
-								<div class="col-sm-6">
+								<div class="col-sm-12">
 									<div class="form-group">
 										<label for="">{{form.nome_fantasia.label}} </label>
 										{% render_field form.nome_fantasia class="form-control form-control-sm" %}
@@ -267,14 +274,14 @@
 									<div class="form-group">
 										<label for="">{{form.celular1_trabalho.label}} </label>
 										{% render_field form.celular1_trabalho class="form-control form-control-sm" %}
-										<label class="checkbox-inline"> {{form.whatsapp1_trabalho.label}} <input type="checkbox" value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
+										<label class="checkbox-inline"><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> {{form.whatsapp1_trabalho.label}} <input type="checkbox" value="whatsapp1" id="whatsapp1" name="whatsapp1"></label>
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">{{form.celular2_trabalho.label}} </label>
 										{% render_field form.celular2_trabalho class="form-control form-control-sm" %}
-										<label class="checkbox-inline"> {{form.whatsapp2_trabalho.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
+										<label class="checkbox-inline"><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> {{form.whatsapp2_trabalho.label}} <input type="checkbox" value="whatsapp2" id="whatsapp2" name="whatsapp2"></label>
 									</div>
 								</div>
 								<div class="col-12">
@@ -317,7 +324,7 @@
 										{% render_field form.numero_casa_trabalho class="form-control form-control-sm" type="text" size="60" %}
 									</div>
 								</div>
-								<div class="col-sm-12">
+								<div class="col-sm-6">
 									<div class="form-group">
 										<label for="">{{form.referencia_trabalho.label}} </label>
 										{% render_field form.referencia_trabalho class="form-control form-control-sm" %}
@@ -344,7 +351,59 @@
 					</div>
 					<div id="collapse-3" class="collapse colapseForm" aria-labelledby="heading-3" data-parent="#accordion">
 						<div class="card-body">
-						And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+							<div class="row">
+								<div class="col-12">
+									<h3>BANCO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.banco.label}} </label>
+										{% render_field form.banco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.n_operacao.label}} </label>
+										{% render_field form.n_operacao class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.tipo_de_conta.label}} </label>
+										{% render_field form.tipo_de_conta class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.agencia.label}} </label>
+										{% render_field form.agencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.conta.label}} </label>
+										{% render_field form.conta class="form-control form-control-sm" %}
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<h3>PIX</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.tipo_de_chave_pix.label}}</label>
+										{% render_field form.tipo_de_chave_pix class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.chave_pix.label}}</label>
+										{% render_field form.chave_pix class="form-control form-control-sm" %}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div><!-- Accordion 3 -->
@@ -359,20 +418,94 @@
 					</div>
 					<div id="collapse-4" class="collapse colapseForm" aria-labelledby="heading-4" data-parent="#accordion">
 						<div class="card-body">
-						And lastly, the placeholder content for the third and final accordion panel. This panel is hidden by default.
+							<div class="row">
+								<div class="col-12">
+									<h3>REFERÊNCIAS</h3>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref1_nome.label}}</label>
+										{% render_field form.ref1_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref1_contato.label}}</label>
+										{% render_field form.ref1_contato class="form-control form-control-sm cel-phone-mask" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref1_parentesco.label}}</label>
+										{% render_field form.ref1_parentesco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref2_nome.label}}</label>
+										{% render_field form.ref2_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref2_contato.label}}</label>
+										{% render_field form.ref2_contato class="form-control form-control-sm cel-phone-mask" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref2_parentesco.label}}</label>
+										{% render_field form.ref2_parentesco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref3_nome.label}}</label>
+										{% render_field form.ref3_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref3_contato.label}}</label>
+										{% render_field form.ref3_contato class="form-control form-control-sm cel-phone-mask" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref3_parentesco.label}}</label>
+										{% render_field form.ref3_parentesco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-12">
+									<h3>FIADOR</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador.label}}</label>
+										{% render_field form.fiador class="form-control form-control-sm" %}
+										<label>Inativar fiador {{form.fiador_inativo}}</label>
+									</div>
+								</div>
+							</div>						
 						</div>
 					</div>
 				</div><!-- Accordion 4 -->
-
 			</div>
 		</div><!-- Accordion -->
-
+		
 		<div class="col-sm-12 col-md-3 card card-body">
-			<button id="confirm" type="submit" class="btn btn-success my-2 text-uppercase font-weight-bold">
-				<i class="fa-solid fa-check"> Cadastrar</i>
-			</button>
+			{% if object %}
+				<a id="save" class="btn btn-success my-2 text-uppercase font-weight-bold">
+					<i class="fa-solid fa-floppy-disk mx-2"></i>Salvar
+				</a>
+			{% else %}
+				<a id="add" class="btn btn-success my-2 text-uppercase font-weight-bold">
+					<i class="fa-solid fa-floppy-disk mx-2"></i>Cadastrar
+				</a>
+			{% endif %}
+
 			<a id="cancel" class="btn btn-danger my-2 text-uppercase font-weight-bold">
-				<i class="fa-solid fa-x"> Descartar</i>
+				<i class="fa-solid fa-xmark mx-2"></i>Descartar
 			</a>
 		</div>
 
@@ -380,110 +513,6 @@
 
 </form> 
 <!-- Accordion wrapper -->
-
-{% comment %} <form method="POST">
-	{% csrf_token %}
-	<div class="row fixed-top my-5" style="padding: 5px;border: none;">
-		<div class="col">
-			<div class="container " style="margin-top: 3px;">
-				<ul class="nav nav-tabs bg-white px-5 py-2" id="myTab" role="tablist">
-					<li class="nav-item " role="presentation">
-						<a class="nav-link aTab active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">
-							Dados Pessoais
-						</a>
-					</li>
-					<li class="nav-item" role="presentation">
-						<a class="nav-link aTab" data-toggle="tab" href="#tab2" role="tab" aria-selected="true">
-							Dados do Local de Trabalho
-						</a>
-					</li>
-					<li class="nav-item" role="presentation">
-						<a class="nav-link aTab" data-toggle="tab" href="#tab3" role="tab" aria-selected="true">
-							Dados Bancários
-						</a>
-					</li>
-
-					{% if object.pk %}
-					<li class="nav-item ml-auto" role="presentation">
-						<label for="salvarCliente">
-							<a class="nav-link btn btn-success" role="tab" aria-selected="true" style="margin:0;">
-								<span class="fa fa-save"></span>
-								Salvar
-							</a>
-						</label>
-					</li>
-					{% else %}
-					<li class="nav-item ml-auto" role="presentation">
-						<label for="cadastrarCliente">
-							<a class="nav-link btn btn-success" role="tab" aria-selected="true">
-								<span class="fa fa-save"></span>
-								Cadastrar
-							</a>
-						</label>
-					</li>
-					{% endif %}
-				</ul>
-
-			</div>
-		</div>
-	</div>
-	<!-- ############################################################################################################ -->
-
-	<div class="tab-content pt-5" id="myTabContent">
-		<div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">
-			
-		</div>
-		<div class="tab-pane fade show" id="tab3" role="tabpanel" aria-labelledby="home-tab">
-			<div class="row">
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.banco.label}} </label>
-						{% render_field form.banco class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.n_operacao.label}} </label>
-						{% render_field form.n_operacao class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-4">
-					<div class="form-group">
-						<label for="">{{form.tipo_de_conta.label}} </label>
-						{% render_field form.tipo_de_conta class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.agencia.label}} </label>
-						{% render_field form.agencia class="form-control form-control-sm" %}
-					</div>
-				</div>
-				<div class="col-sm-2">
-					<div class="form-group">
-						<label for="">{{form.conta.label}} </label>
-						{% render_field form.conta class="form-control form-control-sm" %}
-					</div>
-				</div>
-			</div>
-		</div>
-
-		{% if object.pk %}
-		<div class="saveFixadoDiv invisible">
-			<button class="btn btn-dark saveFixado" id="salvarCliente">
-				<span class="fa fa-save"></span>
-			</button>
-		</div>
-
-		{% else %}
-		<div class="saveFixadoDiv invisible">
-			<button class="btn btn-dark saveFixado" id="cadastrarCliente">
-				<span class="fa fa-save"></span>
-			</button>
-		</div>
-		{% endif %}
-	</div>
-</form> {% endcomment %}
 
 {% endblock content %}
 {% block js %}
@@ -498,14 +527,23 @@
 		delimiters: ['${', '}'],
 		el: '#app',
 		data: {
-		
+			hasError: [
+				{% for error in form.errors %}
+					{
+						errors: "{{error}}"
+					},          
+				{% endfor %}
+			],
 		},
 		methods: {
 		},
 		
 		mounted: function () {
+			$('#id_data_nasc').val('{{form.data_nasc.value|safe}}')
+
 
 			$('#id_nome').focus()
+
 			$('#h2-icon-1').click(function(){
 				if($('#icon-1').hasClass('fa-minus')){
 					$('#icon-1').toggleClass('fa-minus fa-plus')
@@ -532,12 +570,6 @@
 				else if($('#icon-2').hasClass('fa-plus')){
 					$('#icon-2').toggleClass('fa-minus fa-plus')
 
-					{% comment %} $('html, body').animate({
-						scrollTop: $("#myForm").offset().top
-					}, 1000); {% endcomment %}
-
-					{% comment %} window.scrollTo({top: 0}); {% endcomment %}
-
 					setTimeout(() => {$('#id_nome_fantasia').focus()}, 1000);
 					if($('#icon-1').hasClass('fa-minus')){
 						$('#icon-1').toggleClass('fa-minus fa-plus')
@@ -557,6 +589,7 @@
 				}
 				else if($('#icon-3').hasClass('fa-plus')){
 					$('#icon-3').toggleClass('fa-minus fa-plus')
+					setTimeout(() => {$('#id_banco').focus()	}, 1000);
 					if($('#icon-1').hasClass('fa-minus')){
 						$('#icon-1').toggleClass('fa-minus fa-plus')
 					}
@@ -570,35 +603,63 @@
 			});
 		
 			$('#h2-icon-4').click(function(){
-					if($('#icon-4').hasClass('fa-minus')){
-						$('#icon-4').toggleClass('fa-minus fa-plus')			
-					}
-					else if($('#icon-4').hasClass('fa-plus')){
-						$('#icon-4').toggleClass('fa-minus fa-plus')
-						if($('#icon-1').hasClass('fa-minus')){
-							$('#icon-1').toggleClass('fa-minus fa-plus')
-						}
-						if($('#icon-2').hasClass('fa-minus')){
-							$('#icon-2').toggleClass('fa-minus fa-plus')
-						}
-						if($('#icon-3').hasClass('fa-minus')){
-							$('#icon-3').toggleClass('fa-minus fa-plus')
-						}
-					}
-				});			
-			
+				if($('#icon-4').hasClass('fa-minus')){
+					$('#icon-4').toggleClass('fa-minus fa-plus')			
+				}
+				else if($('#icon-4').hasClass('fa-plus')){
 
-			$('#confirm').click(function(){
+					$('#icon-4').toggleClass('fa-minus fa-plus')
+					setTimeout(() => {$('#id_ref1_nome').focus()	}, 1000);
+
+					if($('#icon-1').hasClass('fa-minus')){
+						$('#icon-1').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-2').hasClass('fa-minus')){
+						$('#icon-2').toggleClass('fa-minus fa-plus')
+					}
+					if($('#icon-3').hasClass('fa-minus')){
+						$('#icon-3').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+
+
+			if (this.hasError.length > 0){
 				Swal.fire({
-					title: 'Salvar alterações?',
-					showCancelButton: true,
+					icon: 'error',
+					title: 'Você esqueceu de preencher campos obrigatórios',
+				})
+			}
+
+
+			$('#add').click(function(){
+				Swal.fire({
+					title: 'Cadastrar cliente?',
+					showDenyButton: true,
 					confirmButtonText: 'Cadastrar',
-					cancelButtonText: `Cancelar`,
+					denyButtonText: 'Cancelar',
 				}).then((result) => {
 					if (result.isConfirmed) {
-						Swal.fire('Alterações descartadas!', '', 'success')
-						location.replace(href="{% url 'cliente:credcoop_add' %}")
-						console.log("Entrou 1")
+						Swal.fire('', '', 'success')
+						setTimeout(() => {
+							$('form').submit();
+						}, 2000);
+					}
+				})
+			});
+
+			$('#save').click(function(){
+				Swal.fire({
+					title: 'Salvar cliente?',
+					showDenyButton: true,
+					confirmButtonText: 'Salvar alterações',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire('', '', 'success')
+						setTimeout(() => {
+							$('form').submit();
+						}, 2000);
 					}
 				})
 			});

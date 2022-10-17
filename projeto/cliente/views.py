@@ -47,9 +47,27 @@ def cliente_detail(request, pk):
 
 
 class ClienteCreate(CreateView):
+    model=Cliente    
+    template_name='cliente_form.html'
+    form_class=ClienteForm
+
+
+class CredcoopCreate(CreateView):
     model=Cliente
     template_name='credcoop_form.html'
-    #template_name='cliente_form.html'
+    form_class=ClienteForm
+
+
+class CredcoopUpdate(UpdateView):
+    model=Cliente
+    template_name='credcoop_form.html'
+    form_class = ClienteForm
+    #fazer aqui receber o form dos emprestimos filtrados apenas dele
+
+
+class CredcoopFiadorCreate(CreateView):
+    model=Cliente
+    template_name='credcoop_decision.html'
     form_class=ClienteForm
 
 
@@ -84,7 +102,7 @@ class ClienteUpdate(UpdateView):
 class ClienteDelete(DeleteView):
     model=Cliente
     template_name ='cliente_delete.html'    
-    success_url = reverse_lazy('cliente:cliente_list')
+    success_url = reverse_lazy('cliente:credcoop_cliente_list')
     
 
     
