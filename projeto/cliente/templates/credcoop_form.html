@@ -29,8 +29,8 @@
 <!--Accordion wrapper-->
 <form method="POST" novalidate id="myForm" >
 	{% csrf_token %}
-	{{form.errors}}
 	<div class="row mt-1">
+		
 		<div class="col-sm-12 col-md-9 card card-body">
 			<div class="accordion" id="accordion">
 				<div class="card">
@@ -508,6 +508,7 @@
 				<i class="fa-solid fa-xmark mx-2"></i>Descartar
 			</a>
 		</div>
+		
 
 	</div>
 
@@ -650,7 +651,7 @@
 
 			$('#save').click(function(){
 				Swal.fire({
-					title: 'Salvar cliente?',
+					title: 'Salvar alterações?',
 					showDenyButton: true,
 					confirmButtonText: 'Salvar alterações',
 					denyButtonText: 'Cancelar',
@@ -670,7 +671,7 @@
 					showDenyButton: true,
 					confirmButtonText: 'Descartar alterações',
 					denyButtonText: 'Cancelar',
-				}).then((result) => {		
+				}).then((result) => {
 					if (result.isConfirmed) {
 						Swal.fire({
 							icon: 'success',
@@ -682,15 +683,13 @@
 					} else if (result.isDenied) {
 						Swal.fire({
 							icon: 'success',
-							title: 'Alterações descartadas',
+							title: 'Alasdasdterações descartadas',
 							showConfirmButton: false,
 							timer: 1500
 						})
 					}
 				})
-				
 			});
-			
 		}
 	})
 	
