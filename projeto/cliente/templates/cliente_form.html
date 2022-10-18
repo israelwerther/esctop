@@ -197,14 +197,14 @@
             <div class="row">
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="" class="required">{{form.cep.label}} </label>
-                        {% render_field form.cep class="form-control form-control-sm" name="cep" type="text" id="cep" value="" size="10" maxlength="9" onblur="pesquisacep(this.value);"%}
+                        <label for="cep_1" class="required">{{form.cep.label}} </label>
+                        {% render_field form.cep class="form-control form-control-sm" name="cep_1" type="text" id="cep_1" value="" size="10" maxlength="9" onblur="pesquisacep_1(this.value);" %}
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
-                        <label for="" class="required">{{form.rua.label}} </label>
-                        {% render_field form.rua class="form-control form-control-sm" name="rua" type="text" id="rua" size="60" %}
+                        <label for="rua_1" class="required">{{form.rua.label}} </label>
+                        {% render_field form.rua class="form-control form-control-sm" name="rua_1" type="text" id="rua_1" size="60" %}
                     </div>
                 </div>
                 <div class="col-sm-1">
@@ -216,19 +216,19 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label for="" class="required">{{form.bairro.label}} </label>
-                        {% render_field form.bairro class="form-control form-control-sm" name="bairro" type="text" id="bairro" size="40" %}
+                        {% render_field form.bairro class="form-control form-control-sm" name="bairro_1" type="text" id="bairro_1" size="40" %}
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
                         <label for="" class="required">{{form.cidade.label}} </label>
-                        {% render_field form.cidade class="form-control form-control-sm" name="cidade" type="text" id="cidade" size="40"%}
+                        {% render_field form.cidade class="form-control form-control-sm" name="cidade_1" type="text" id="cidade_1" size="40"%}
                     </div>
                 </div>
                 <div class="col-sm-1">
                     <div class="form-group">
                         <label for="" class="required">{{form.uf.label}} </label>
-                        {% render_field form.uf class="form-control form-control-sm" name="uf" type="text" id="uf" size="2"%}
+                        {% render_field form.uf class="form-control form-control-sm" name="uf_1" type="text" id="uf_1" size="2"%}
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -317,14 +317,14 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label for="cep2">{{form.cep_trabalho.label}}</label>
-                        {% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep2" type="text"%}
+                        <label for="cep_2">{{form.cep_trabalho.label}}</label>
+                        {% render_field form.cep_trabalho class="form-control form-control-sm cep-mask" id="cep_2" type="text" onblur="pesquisacep_2(this.value);" %}
                     </div>
                 </div>
                 <div class="col-sm-4">
                     <div class="form-group">
                         <label for="logradouro">{{form.rua_trabalho.label}}</label>
-                        {% render_field form.rua_trabalho class="form-control form-control-sm" id="logradouro" type="text"%}
+                        {% render_field form.rua_trabalho class="form-control form-control-sm" id="rua_2" type="text"%}
                     </div>
                 </div>
                 <div class="col-sm-1">
@@ -336,19 +336,19 @@
                 <div class="col-sm-5">
                     <div class="form-group">
                         <label for="bairro2">{{form.bairro_trabalho.label}}</label>
-                        {% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro2" type="text"%}
+                        {% render_field form.bairro_trabalho class="form-control form-control-sm" id="bairro_2" type="text"%}
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="form-group">
-                        <label for="cidade2">{{form.cidade_trabalho.label}}</label>
-                        {% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade2" type="text"%}
+                        <label for="cidade_2">{{form.cidade_trabalho.label}}</label>
+                        {% render_field form.cidade_trabalho class="form-control form-control-sm" id="cidade_2" type="text"%}
                     </div>
                 </div>
                 <div class="col-sm-1">
                     <div class="form-group">
-                        <label for="uf2">{{form.uf_trabalho.label}}</label>
-                        {% render_field form.uf_trabalho class="form-control form-control-sm" id="uf2" type="text"%}
+                        <label for="uf_2">{{form.uf_trabalho.label}}</label>
+                        {% render_field form.uf_trabalho class="form-control form-control-sm" id="uf_2" type="text"%}
                     </div>
                 </div>
                 <div class="col-sm-4">
@@ -501,5 +501,6 @@
 {% block js %}
     
     <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+    <script src="{% static 'js/cep.js' %}"></script>
 
 {% endblock js %}
