@@ -29,6 +29,12 @@
 <!--Accordion wrapper-->
 <form method="POST" novalidate id="myForm" >
 	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-9">
+
+		</div>
+	</div>
 	<div class="row mt-1">
 		
 		<div class="col-sm-12 col-md-9 card card-body">
@@ -492,24 +498,31 @@
 				</div><!-- Accordion 4 -->
 			</div>
 		</div><!-- Accordion -->
-		
-		<div class="col-sm-12 col-md-3 card card-body">
-			
-			{% if object %}
-				<a id="save" class="btn btn-success my-2 text-uppercase font-weight-bold">
-					<i class="fa-solid fa-floppy-disk mx-2"></i>Salvar
-				</a>
-			{% else %}
-				<a id="add" class="btn btn-success my-2 text-uppercase font-weight-bold">
-					<i class="fa-solid fa-floppy-disk mx-2"></i>Cadastrar
-				</a>
-			{% endif %}
 
-			<a id="cancel" class="btn btn-danger my-2 text-uppercase font-weight-bold">
-				<i class="fa-solid fa-xmark mx-2"></i>Descartar
-			</a>
-		</div>
+		<div class="col-sm-12 col-md-3">
+			<div style="position: -webkit-sticky; position: sticky; top: 80px;">
+				<div class="card card-body m-0">
+					
+
+						{% if object %}
+							<a id="save" class="btn btn-success btn-block my-2 text-uppercase font-weight-bold">
+								<i class="fa-solid fa-floppy-disk mx-2"></i>Salvar
+							</a>
+						{% else %}
+							<a id="add" class="btn btn-success btn-block my-2 text-uppercase font-weight-bold">
+								<i class="fa-solid fa-floppy-disk mx-2"></i>Cadastrar
+							</a>
+						{% endif %}
 		
+						<a id="cancel" class="btn btn-danger btn-block my-2 text-uppercase font-weight-bold">
+							<i class="fa-solid fa-xmark mx-2"></i>Descartar
+						</a>
+
+					
+				</div>
+			
+			</div>
+		</div>
 
 	</div>
 
@@ -684,7 +697,7 @@
 					} else if (result.isDenied) {
 						Swal.fire({
 							icon: 'success',
-							title: 'Alasdasdterações descartadas',
+							title: 'Alterações descartadas',
 							showConfirmButton: false,
 							timer: 1500
 						})

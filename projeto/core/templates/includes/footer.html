@@ -1,95 +1,63 @@
-{% comment %} <style>
-	footer {	
-		background-image: white;
-        position: relative ;
-        bottom:0;
-        width:100%;
-        
-	}
-</style> {% endcomment %}
+<style>
+    header,
+    section,
+    footer {
+        display: block;
+    }
 
-<footer class="text-center text-lg-start fixed-bottom" style="background-color: #2C3D4E";>
-    <div class="text-center p-3 footerVerde">	
-        <a class="text-white" href="#">© 2022 Copyright: ESCTOP</a>
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        margin-top: 40px;
+    }
+
+    body {
+        width: 100%;
+        display: -moz-box;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+
+        -moz-box-orient: vertical;
+        -webkit-box-orient: vertical;
+        -moz-box-direction: normal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+        flex-direction: column;
+    }
+
+    section {
+        -moz-box-flex: 1;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+
+        background: #fff;
+    }
+
+    header {
+        background: orange;
+    }
+
+    footer {
+        background-image: linear-gradient(15deg, #2C3D4E 0%, #5eaa84 100%);
+    }
+</style>
+
+<section></section>
+{%load static%}
+<footer class="d-flex flex-lg-row flex-column text-lg-start text-center" style="background-color: #7edffb;">
+    <div class="container d-flex flex-lg-row flex-column py-lg-10 py-5 align-items-center gy-2">
+
+        <div class="container mb-lg-0 mb-5 d-flex flex-column">
+            <h6 class="text-white fs-20 lh-1">© 2022 Esctop Todos os direitos reservados</h6>
+        </div>
     </div>
+
+    <!-- /.container -->
 </footer>
-
-<!-- <form method="POST">
-    {% csrf_token %}    
-    <div class="row fixed-top my-5" style="padding: 5px;border: none;">
-        <div class="col">
-            <div class="container " style="margin-top: 3px;">
-                <ul class="nav nav-tabs bg-white px-5 py-2" id="myTab" role="tablist">
-                    <li class="nav-item liTab" role="presentation">
-                        <a class="nav-link aTab active" data-toggle="tab" href="#tab1" role="tab" aria-selected="true">
-                            Dados Pessoais
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link aTab" data-toggle="tab" href="#tab2" role="tab" aria-selected="true">
-                            Dados do Local de Trabalho
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link aTab" data-toggle="tab" href="#tab3" role="tab" aria-selected="true">
-                            Dados Bancários
-                        </a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link aTab" data-toggle="tab" href="#tab4" role="tab" aria-selected="true">
-                            Referências e Observações
-                        </a>
-                    </li>
-    
-                    {% if object.pk %}
-                        <li class="nav-item ml-auto" role="presentation">
-                            <label for="salvarCliente">
-                                <a class="nav-link btn btn-success" role="tab" aria-selected="true" style="margin:0;">
-                                    <span class="fa fa-save"></span>
-                                    Salvar
-                                </a>
-                            </label>
-                        </li>
-                    {% else %}
-                        <li class="nav-item ml-auto" role="presentation">
-                            <label for="cadastrarCliente">
-                                <a class="nav-link btn btn-success"  role="tab" aria-selected="true">
-                                    <span class="fa fa-save"></span>
-                                    Cadastrar
-                                </a>
-                            </label>
-                        </li>
-                    {% endif %}                        
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="tab-content  pt-5" id="myTabContent">
-        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="home-tab">
-           
-        </div>
-        <div class="tab-pane fade show" id="tab2" role="tabpanel" aria-labelledby="home-tab">           
-            
-        </div>
-        <div class="tab-pane fade show" id="tab3" role="tabpanel" aria-labelledby="home-tab">
-            
-        </div>
-        <div class="tab-pane fade show" id="tab4" role="tabpanel" aria-labelledby="home-tab">
-            
-        </div>
-    </div>
-    {% if object.pk %}
-    <div class="saveFixadoDiv invisible">
-        <button class="btn btn-dark saveFixado" float="right" id="salvarCliente">
-            <span class="fa fa-save"></span>            
-        </button>
-    </div>
-    
-    {% else %}
-    <div class="saveFixadoDiv invisible">
-        <button class="btn btn-dark saveFixado" float="right" id="cadastrarCliente">
-            <span class="fa fa-save"></span>           
-        </button>
-    </div>
-    {% endif %}
-</form>  -->
