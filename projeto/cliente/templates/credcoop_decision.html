@@ -4,12 +4,40 @@
 
 
 {% block content %}
-<div class="jumbotron">
-    <div class="container">
-        <h1>(CREDCOOP)</h1>
+
+<div class="row">
+	<div class="col">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'cliente:credcoop_decision' %}">Cliente</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Credcoop</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+
+<h1 class="text-center mt-4 mb-4">CREDCOOP</h1>
+<div class="">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                <h5 class="card-title">Cadastre um Cliente</h5> 
+                {% comment %} <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>  {% endcomment %}
+                <a href="#" class="btn btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">Cadastrar Cliente</a>
+                </div>
+            </div>
+            </div>
+        <div class="col-sm-6">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                <h5 class="card-title">Cadastre um Fiador</h5>
+                {% comment %} <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> {% endcomment %}
+                <a href="{% url 'cliente:fiador_add' %}" class="btn btn btn-primary btn-lg btn-block">Cadastrar Fiador</a>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="button" class="btn btn-success m-4" data-toggle="modal" data-target="#exampleModal"
-        data-whatever="@mdo"><span class="fa fa-plus"></span> Cadastrar</button>
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
