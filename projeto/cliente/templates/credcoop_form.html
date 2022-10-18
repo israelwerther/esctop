@@ -705,14 +705,7 @@
 							timer: 1500
 						})
 						setTimeout(() => {location.replace(href="{% url 'cliente:credcoop_cliente_list' %}")}, 2000);
-					} else if (result.isDenied) {
-						Swal.fire({
-							icon: 'success',
-							title: 'Alterações descartadas',
-							showConfirmButton: false,
-							timer: 1500
-						})
-					}
+					} 
 				})
 			});
 		}
