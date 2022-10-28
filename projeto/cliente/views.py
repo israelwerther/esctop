@@ -73,9 +73,15 @@ class CredcoopUpdate(UpdateView):
     def get_context_data(self, **kwargs):
         context = super(CredcoopUpdate, self).get_context_data(**kwargs)
         context['fiadores'] = Cliente.objects.all()
-        print("Estoi aqui")
+
+        # fitrinho = Cliente.objects.filter(
+        #     fiador__nome__contains='ALCILENE'
+        # )
+
+        # qs = Cliente.objects.filter()
+
+        print("Estoi aqui = ", context['fiadores'])
         return context
-        #fazer aqui receber o form dos emprestimos filtrados apenas dele
 
 
 class CredcoopFiadorCreate(CreateView):

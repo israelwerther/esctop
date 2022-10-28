@@ -493,24 +493,27 @@
 										{% render_field form.ref3_parentesco class="form-control form-control-sm" %}
 									</div>
 								</div>
-								
+
 								<div class="col-sm-6">
-									
 									<label for="">{{form.fiador.label}}</label>
-									<select autocomplete="false" id="fiador" class="form-control" name="fiador" style="width: 100% !important;">
+									{% comment %} <select autocomplete="false" id="fiador" class="form-control" name="fiador" style="width: 100% !important;">
 										
-										{% for fiador in fiadores %}
-										<option value="{{fiador.pk}}" {% if fiador.pk|stringformat:'s' in school_select %} selected="selected" {% endif %}>
+										{% for fiador in form.fiador.field.queryset.all %}
+										<option value="{{fiador.pk}}" {% if fiador == object.fiador %} selected="selected" {% endif %}>
 											{{ fiador.nome }}
 										</option>
 										{% endfor %}
 
-									</select>
-								</div>					
-								{% comment %} <div class="col-sm-6">
+									</select> {% endcomment %}
+									{% render_field form.fiador class="form-control form-control-sm" %}
+								</div>
+
+								{% comment %} 
+								<div class="col-sm-6">
 									<label for="">{{form.fiador.label}}</label>
 									{% render_field form.fiador class="form-control form-control-sm" %}
-								</div>								 {% endcomment %}
+								</div>								 
+								{% endcomment %}
 							</div>						
 						</div>
 					</div>
@@ -717,7 +720,7 @@
 
  <script>
 	$(document).ready(function () {
-		$('#fiador').select2();
+		$('#id_fiador').select2({width:"100%"});
 	});
 </script> 
 
