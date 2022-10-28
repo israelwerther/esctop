@@ -44,7 +44,7 @@
 
 	<div class="row">
 		<div class="col-9">
-
+			{{form.errors}}
 		</div>
 	</div>
 	<div class="row mt-1">
@@ -493,23 +493,31 @@
 										{% render_field form.ref3_parentesco class="form-control form-control-sm" %}
 									</div>
 								</div>
-								<div class="col-12">
-									<h3>FIADOR</h3>
-								</div>
+								
 								<div class="col-sm-6">
-									<div class="form-group">
-										<label for="">{{form.fiador.label}}</label>
-										{% render_field form.fiador class="form-control form-control-sm" %}
-										<label>Inativar fiador {{form.fiador_inativo}}</label>
-									</div>
-								</div>
+									
+									<label for="">{{form.fiador.label}}</label>
+									<select autocomplete="false" id="fiador" class="form-control" name="fiador" style="width: 100% !important;">
+										
+										{% for fiador in fiadores %}
+										<option value="{{fiador.pk}}" {% if fiador.pk|stringformat:'s' in school_select %} selected="selected" {% endif %}>
+											{{ fiador.nome }}
+										</option>
+										{% endfor %}
+
+									</select>
+								</div>					
+								{% comment %} <div class="col-sm-6">
+									<label for="">{{form.fiador.label}}</label>
+									{% render_field form.fiador class="form-control form-control-sm" %}
+								</div>								 {% endcomment %}
 							</div>						
 						</div>
 					</div>
 				</div><!-- Accordion 4 -->
 			</div>
 		</div><!-- Accordion -->
-
+		
 		<div class="col-sm-12 col-md-3 p-0">
 			<div style="position: -webkit-sticky; position: sticky; top: 65px;">
 				<div class="card card-body">
@@ -526,16 +534,12 @@
 						<a id="cancel" class="btn btn-danger btn-block my-2 text-uppercase font-weight-bold">
 							<i class="fa-solid fa-xmark mx-2"></i>Descartar
 						</a>
-
-					
 				</div>
-			
 			</div>
 		</div>
-		
-
 	</div>
-
+	
+	
 </form> 
 <!-- Accordion wrapper -->
 
@@ -544,9 +548,7 @@
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
 <script src="{% static 'js/vue.js' %}"></script>
-
-
-
+<script src="{% static 'js/cep.js' %}"></script>
 
 <script>
 	var app = new Vue({
@@ -713,6 +715,12 @@
 	
 </script>
 
-<script src="{% static 'js/cep.js' %}"></script>
+ <script>
+	$(document).ready(function () {
+		$('#fiador').select2();
+	});
+</script> 
+
+
 
 {% endblock js %}

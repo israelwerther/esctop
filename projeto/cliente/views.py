@@ -57,12 +57,25 @@ class CredcoopCreate(CreateView):
     template_name='credcoop_form.html'
     form_class=ClienteForm
 
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopCreate, self).get_context_data(**kwargs)
+
+        context['fiadores'] = Cliente.objects.all()
+        print("Estoi aqui")
+        return context
+
 
 class CredcoopUpdate(UpdateView):
     model=Cliente
     template_name='credcoop_form.html'
     form_class = ClienteForm
-    #fazer aqui receber o form dos emprestimos filtrados apenas dele
+
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopUpdate, self).get_context_data(**kwargs)
+        context['fiadores'] = Cliente.objects.all()
+        print("Estoi aqui")
+        return context
+        #fazer aqui receber o form dos emprestimos filtrados apenas dele
 
 
 class CredcoopFiadorCreate(CreateView):
