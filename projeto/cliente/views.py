@@ -66,6 +66,13 @@ class CredcoopUpdate(UpdateView):
 
 
 class CredcoopFiadorCreate(CreateView):
+    model=Cliente       
+    template_name='credcoop_fiador_form.html'
+    form_class=ClienteForm
+    success_url = reverse_lazy('cliente:credcoop_cliente_list')
+
+
+class CredcoopDecision(CreateView):
     model=Cliente
     template_name='credcoop_decision.html'
     form_class=ClienteForm
