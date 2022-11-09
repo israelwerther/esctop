@@ -34,6 +34,8 @@ ALLOWED_HOSTS = [
     'escback1.herokuapp.com', 
     'escback2.herokuapp.com',
     'escback3.herokuapp.com',
+    '165.227.81.127:8000',
+    '165.227.81.127',
 ]
 
 # Application definition
