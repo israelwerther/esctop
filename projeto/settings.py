@@ -27,16 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = [
-    'localhost', 
-    '127.0.0.1',
-    'esctop.herokuapp.com', 
-    'escback1.herokuapp.com', 
-    'escback2.herokuapp.com',
-    'escback3.herokuapp.com',
-    '165.227.81.127:8000',
-    '165.227.81.127',
-]
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='*', cast=Csv())
 
 # Application definition
 
