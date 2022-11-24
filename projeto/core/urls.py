@@ -1,5 +1,6 @@
 from django.urls import path
 from projeto.core import views as v
+from projeto.core.views import SignUpView
 
 
 app_name = 'core'
@@ -10,4 +11,5 @@ urlpatterns = [
     path('cliente_select/', v.cliente_select, name='cliente_select'),
     path('fiador_decision/', v.fiador_decision, name='fiador_decision'),
     path('fiador_decision_1/', v.fiador_decision_1, name='fiador_decision_1'),
+    path('registro/', SignUpView.as_view(), name='register'),
 ]

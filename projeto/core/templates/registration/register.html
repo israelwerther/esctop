@@ -29,7 +29,7 @@
             <div class="d-flex justify-content-center mt-5 card card-body">
                 
                 <div class="d-flex justify-content-center py-3">
-                    <h3 id="form-title">ESCTOP</h3>
+                    <h3 id="form-title">REGISTRE-SE</h3>
                 </div>
                 <div class="d-flex justify-content-center">
                     
@@ -46,23 +46,42 @@
                         </div>
                         <div class="mb-3 text-center  text-uppercase">
                             <div class="input-group">
-                                <div class="input-group-text"><i class="fa-solid fa-key"></i></div>
-                                <input type="password" class="form-control" name="password" autocomplete="current-password" required="" id="id_password" placeholder="{{form.password.label}}">
+                                <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
+                                <input type="email" class="form-control" name="email" autocomplete="current-email" required="" id="id_email" placeholder="{{form.email.label}}">
                             </div>
-                            {% if form.password.errors %}
-                                <small class="text-danger">{{form.password.errors}}</small>
+                            {% if form.email.errors %}
+                                <small class="text-danger">{{form.email.errors}}</small>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 text-center  text-uppercase">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fa-solid fa-key"></i></div>
+                                <input type="password1" class="form-control" name="password1" autocomplete="current-password1" required="" id="id_password1" placeholder="{{form.password1.label}}">
+                            </div>
+                            {% if form.password1.errors %}
+                                <small class="text-danger">{{form.password1.errors}}</small>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 text-center  text-uppercase">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fa-solid fa-key"></i></div>
+                                <input type="password2" class="form-control" name="password2" autocomplete="current-password2" required="" id="id_password2" placeholder="{{form.password2.label}}">
+                            </div>
+                            {% if form.password2.errors %}
+                                <small class="text-danger">{{form.password2.errors}}</small>
                             {% endif %}
                         </div>
                         
                         <div class="d-grid gap-2">
                             <button class="btn btn-primary" type="submit">Entrar</button>
                         </div>
+            
                     </form>
                 </div>
                 
                 <div class="mt-4">
                     <div class="d-flex justify-content-center links">
-                        <a href="{% url 'core:register' %}" class="ml-2">Criar uma conta? </a>
+                        <a href="{% url 'login' %}" class="ml-2">Já tem uma conta? </a>
                     </div>
                 </div>
                 
@@ -75,7 +94,3 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
-
-
-
-

@@ -2,8 +2,9 @@ from datetime import date
 
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+from django.urls import reverse
 
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from projeto.cliente.models import Cliente
@@ -11,6 +12,8 @@ from projeto.cliente_cnpj.models import Cliente_cnpj
 from projeto.avalista.models import Avalista
 
 from itertools import chain
+
+from .forms import CreateUserForm, User
 
 
 class Index(LoginRequiredMixin, TemplateView):
@@ -27,8 +30,6 @@ class Index(LoginRequiredMixin, TemplateView):
             data_nasc__day=date.today().day
         )
 
-        print("==============================================", aniversariantes_credcoop)
-
         aniversariantes_representante_esctop = Cliente_cnpj.objects.filter(
             rep_data_nasc__month=date.today().month,
             rep_data_nasc__day=date.today().day
@@ -44,8 +45,6 @@ class Index(LoginRequiredMixin, TemplateView):
         context['total_aniversariantes'] = total_aniversariantes
 
         return context
-
-
 
 
 class Aniversariantes(LoginRequiredMixin, TemplateView):
@@ -92,6 +91,16 @@ def fiador_decision(request):
 @login_required
 def fiador_decision_1(request):
     return render(request, 'fiador_decision_1.html')
+
+
+class SignUpView(CreateView):
+    form_class = CreateUserForm
+    template_name = 'registration/register.html'
+    queryset = User.objects.all()
+
+    def get_success_url(self):
+        return reverse('login')
+
 
 index = Index.as_view()
 aniversariantes = Aniversariantes.as_view()
