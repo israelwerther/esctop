@@ -51,3 +51,4 @@ urllib3==1.25.8
 webencodings==0.5.1
 wrapt==1.12.1
 django-lifecycle==0.9.6
+whitenoise==6.2.0
