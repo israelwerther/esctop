@@ -79,6 +79,7 @@ class Cliente(models.Model):
     fiador_inativo        = models.BooleanField("Fiador inativo", default=False)
 
     upload = models.FileField(upload_to='uploads/', blank=True, null=True)
+    
 
     class Meta:
         ordering = ('nome',) #confirme se é a organização e apague o coment
