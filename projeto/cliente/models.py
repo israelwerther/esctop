@@ -77,9 +77,11 @@ class Cliente(models.Model):
 
     fiador                = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     fiador_inativo        = models.BooleanField("Fiador inativo", default=False)
-
-    upload = models.FileField(upload_to='uploads/', blank=True, null=True)
     
+    #Documentos
+    identification_document = models.FileField("Documento de identificação", upload_to='uploads/', blank=True, null=True)
+    proof_of_address = models.FileField("Comprovante de residência", upload_to='uploads/', blank=True, null=True)
+
 
     class Meta:
         ordering = ('nome',) #confirme se é a organização e apague o coment
