@@ -79,8 +79,7 @@ class Cliente(models.Model):
     fiador_inativo        = models.BooleanField("Fiador inativo", default=False)
     
     #Documentos
-    identification_document = models.FileField("Documento de identificação", upload_to='uploads/', blank=True, null=True)
-    proof_of_address = models.FileField("Comprovante de residência", upload_to='uploads/', blank=True, null=True)
+    
 
 
     class Meta:
