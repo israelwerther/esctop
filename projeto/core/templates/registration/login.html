@@ -1,126 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<title>Document</title>
-<style>
-    .content {
-        padding-top: 0px;
-        padding-bottom: 30px;
-        width: 100%;
-        margin-top: 10px;
-        background-color: #f2f2f2;
-        margin: auto;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-    body{
-        padding-top: 50px;
-        background-color: #f2f2f2;
-    }
+    <title>Login</title>
 
-    .center {
-        margin: auto;
-        width: 50%;
-        border: 3px solid rgba(255, 255, 255, 0.932);
-        padding: 10px;
-        text-align: center;
-        background-color: white;
-        border-radius: 13px;
-    }
-
-    input[type=text], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-    }
-    input[type=password], select {
-        width: 100%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;        
-    }
-
-    input[type=submit] {
-        width: 100%;
-        background-color: #4CAF50;
-        color: white;
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-        background-color: #45a049;
-    }
-
-    div {
-        border-radius: 5px;
-        background-color: white;
-        padding: 20px;
-    }
-    .fontemaior{
-        font-size: 36px;
-        padding: 0;
-        margin-right: auto;       
-    }
-    
-</style>
+    <style>
+        html {
+            min-height: 100%;
+        }
+        
+        body {
+            background: rgba(0, 128, 0, 0.3) /* Green background with 30% opacity */
+        }
+        ul {
+            list-style-type: none !important;
+            padding-left: 0 !important;
+            font-size: small;
+        }
+    </style>
 </head>
 <body>
-
-    
-    <div class="content">
-    {% if form.errors %}
-        <p style="color: red;">Seu usuário ou senha não estão corretos. Tente novamente.</p>
-    {% endif %}
-    {% if next %}
-        {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
-        {% else %}
-        <p>Faça login para acessar o sistema</p>
-        {% endif %}
-    {% endif %}
-    
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}       
-        <div class="col-sm-4 center jumbotron jumbotron-fluid shadow rounded">   
-            <a class="fontemaior">CREDCOOP</a><br>                 
-            <div class="form-group">                
-                <a>{{ form.username.label_tag }}</a>
-                <a>{{ form.username }}</a>                
-                <a>{{ form.password.label_tag }}</a>
-                <a>{{ form.password }}</a>
+    <div class="row d-flex justify-content-center">
+        <div class="col " style="max-width: 500px !important;">
+            <div class="d-flex justify-content-center mt-5 card card-body">
+                
+                <div class="d-flex justify-content-center py-3">
+                    <h3 id="form-title">ESCTOP</h3>
+                </div>
+                <div class="d-flex justify-content-center">
+                    
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="mb-3 text-center text-uppercase">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fa-solid fa-user-large"></i></div>
+                                <input type="text" class="form-control" id="id_username" name="username" placeholder="{{form.username.label}}" autofocus="">
+                            </div>
+                            {% if form.username.errors %}
+                                <small class="text-danger">{{form.username.errors}}</small>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 text-center  text-uppercase">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fa-solid fa-key"></i></div>
+                                <input type="password" class="form-control" name="password" autocomplete="current-password" required="" id="id_password" placeholder="{{form.password.label}}">
+                            </div>
+                            {% if form.password.errors %}
+                                <small class="text-danger">{{form.password.errors}}</small>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-primary" type="submit">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="mt-4">
+                    <div class="d-flex justify-content-center links">
+                        <a href="#" class="ml-2">Criar uma conta? </a>
+                    </div>
+                </div>
+                
             </div>
-            <div class="form-group">
-                <input type="submit" value="login" class="btn btn-success">
-                <input type="hidden" name="next" value="{{ next }}">
-                {# Assumes you setup the password_reset view in your URLconf #}
-                <p><a href="{% url 'password_reset' %}">Esqueceu sua senha?</a></p>
-            </div>
-         </div>            
-    </form>
     
-
-</div>
-
+        </div>
+    </div>
 
     
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
-
 
 
 
