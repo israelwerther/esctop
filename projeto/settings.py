@@ -43,9 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Apps de terceiros
     'widget_tweaks',
-    'bootstrapform',
+    # 'bootstrapform',
     'datetimepicker',
-    'bootstrap_modal_forms',
+    # 'bootstrap_modal_forms',
     'dbbackup',
     
     #Minhas apps
