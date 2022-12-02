@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     #Apps de terceiros
     'widget_tweaks',
     # 'bootstrapform',
-    'datetimepicker',
+    # 'datetimepicker',
     # 'bootstrap_modal_forms',
     'dbbackup',
     
