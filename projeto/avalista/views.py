@@ -53,7 +53,13 @@ class AvalistaCreate(CreateView):
     model=Avalista
     template_name='avalista_form.html'
     form_class=AvalistaForm   
-    
+
+
+class EsctopFiadorCreate(CreateView):
+    model=Avalista
+    template_name='avalista_form_novo.html'
+    form_class=AvalistaForm
+
 
 class AvalistaUpdate(UpdateView):
     model=Avalista

@@ -90,7 +90,12 @@
 								<li><a class="dropdown-item" href="{% url 'core:fiador_decision' %}">ESCTOP</a></li>
 							</ul>
 						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR</a>
+						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR<span class="badge badge-success mx-2">Novo</span></a>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="{% url 'avalista:fiador_esctop_add' %}">ESCTOP</a></li>								
+							</ul>
+						</li>
+						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR<span class="badge badge-warning mx-2">Antigo</span></a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="{% url 'avalista:avalista_add' %}">ESCTOP</a></li>								
 							</ul>

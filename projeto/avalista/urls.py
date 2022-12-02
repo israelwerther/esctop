@@ -12,5 +12,7 @@ urlpatterns = [
     path('<int:pk>/edit/', login_required(v.AvalistaUpdate.as_view()), name='avalista_edit'),
     # path('avalista_add/', login_required(v.AvalistaCreate.as_view()), name='avalista_add'),
     path('<int:pk>/delete/', login_required(v.AvalistaDelete.as_view()), name='avalista_delete'),
+    # NOVO
+    path('formulario-fiador-esctop/', login_required(v.EsctopFiadorCreate.as_view()), name='fiador_esctop_add'),
 
 ]
