@@ -77,6 +77,10 @@ class Cliente(models.Model):
 
     fiador                = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     fiador_inativo        = models.BooleanField("Fiador inativo", default=False)
+    
+    #Documentos
+    
+
 
     class Meta:
         ordering = ('nome',) #confirme se é a organização e apague o coment
