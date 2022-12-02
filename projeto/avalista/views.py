@@ -52,18 +52,25 @@ def avalista_detail(request, pk):
 class AvalistaCreate(CreateView):
     model=Avalista
     template_name='avalista_form.html'
-    form_class=AvalistaForm   
-
-
-class EsctopFiadorCreate(CreateView):
-    model=Avalista
-    template_name='avalista_form_novo.html'
-    form_class=AvalistaForm
+    form_class=AvalistaForm 
 
 
 class AvalistaUpdate(UpdateView):
     model=Avalista
     template_name='avalista_form.html'
+    form_class = AvalistaForm
+    success_url = reverse_lazy('avalista:avalista_list')
+
+
+class EsctopAvalistaCreate(CreateView):
+    model=Avalista
+    template_name='esctop_avalista_form.html'
+    form_class=AvalistaForm
+
+
+class EsctopFiadorUpdate(UpdateView):
+    model=Avalista
+    template_name='esctop_avalista_form.html'
     form_class = AvalistaForm
     success_url = reverse_lazy('avalista:avalista_list')
 

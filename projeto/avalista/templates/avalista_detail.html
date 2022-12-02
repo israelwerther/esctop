@@ -18,6 +18,7 @@
     <a href="{% url 'avalista:avalista_list' %}" type="button" class="btn btn-secondary">Voltar</a>
     <a href="{% url 'cliente_cnpj:cliente_cnpj_add' %}" type="button" class="btn btn-info">Cadastrar Cliente Esctop</a>
     <a href="{% url 'avalista:avalista_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
+    <a href="{% url 'avalista:esctop_avalista_edit' object.pk %}" type="button" class="btn btn-info">Editar<span class="badge badge-success mx-2">Novo</span></a>
     <a href="{% url 'avalista:avalista_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
 </span>
 

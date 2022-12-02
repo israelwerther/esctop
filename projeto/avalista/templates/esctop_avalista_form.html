@@ -30,7 +30,7 @@
 	<div class="col p-0">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="#">Cliente</a></li>
+				<li class="breadcrumb-item"><a href="#">Avalista</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Cadastro de Avalista Esctop</li>
 			</ol>
 		</nav>
@@ -222,9 +222,9 @@
 
 				<div class="card">
 					<div class="card-header panel-heading" id="heading-3">
-						<h2 class="mb-0" id="h2-icon-3">
+						<h2 class="mb-0" id="h2-icon-2">
 						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-							Dados bancários<i id="icon-3" class="fa-solid fa-plus float-right"></i>
+							Dados bancários<i id="icon-2" class="fa-solid fa-plus float-right"></i>
 						</button>
 						</h2>
 					</div>
@@ -360,30 +360,19 @@
 					if($('#icon-2').hasClass('fa-minus')){
 						$('#icon-2').toggleClass('fa-minus fa-plus')
 					}
-					if($('#icon-3').hasClass('fa-minus')){
-						$('#icon-3').toggleClass('fa-minus fa-plus')
-					}
-					if($('#icon-4').hasClass('fa-minus')){
-						$('#icon-4').toggleClass('fa-minus fa-plus')
-					}
 				}
 			});
 		
-			$('#h2-icon-3').click(function(){
-				if($('#icon-3').hasClass('fa-minus')){
-					$('#icon-3').toggleClass('fa-minus fa-plus')			
+			$('#h2-icon-2').click(function(){
+				if($('#icon-2').hasClass('fa-minus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
 				}
-				else if($('#icon-3').hasClass('fa-plus')){
-					$('#icon-3').toggleClass('fa-minus fa-plus')
-					setTimeout(() => {$('#id_banco').focus()	}, 1000);
+				else if($('#icon-2').hasClass('fa-plus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+
+					setTimeout(() => {$('#id_banco').focus()}, 1000);
 					if($('#icon-1').hasClass('fa-minus')){
 						$('#icon-1').toggleClass('fa-minus fa-plus')
-					}
-					if($('#icon-2').hasClass('fa-minus')){
-						$('#icon-2').toggleClass('fa-minus fa-plus')
-					}
-					if($('#icon-4').hasClass('fa-minus')){
-						$('#icon-4').toggleClass('fa-minus fa-plus')
 					}
 				}
 			});
