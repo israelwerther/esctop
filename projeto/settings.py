@@ -14,6 +14,8 @@ import os
 from decouple import config, Csv
 from dj_database_url import parse as dburl
 from google.oauth2 import service_account
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -175,3 +177,19 @@ DBBACKUP_STORAGE_OPTIONS = {
     "blob_chunk_size": 1024 * 1024,
     "location": 'esctopdb/'
 }
+
+sentry_sdk.init(
+    dsn=config('SENTRY_DSN', default='default'),
+    integrations=[
+        DjangoIntegration(),
+    ],
+
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    # We recommend adjusting this value in production.
+    traces_sample_rate=0.1,
+
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True
+)
