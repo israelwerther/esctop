@@ -28,12 +28,12 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV PYTHONUNBUFFERED 1
 
-RUN mkdir /app
 
-WORKDIR /app
 
-COPY requirements.txt /app/
 
-COPY . /app/
+
+COPY requirements.txt .
+
+COPY . .
 
 RUN pip install --upgrade pip && pip install -r requirements.txt
