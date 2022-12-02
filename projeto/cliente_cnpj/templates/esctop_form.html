@@ -1,0 +1,676 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load  static %}
+
+{% block css %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<style> 
+	.form-control:focus {
+		color: #495057;
+		background-color: #fff;
+		border-color: #5eaa84 !important;
+		outline: 0;
+		box-shadow: none !important;
+	}
+
+	.btn-link {        
+		box-shadow: none !important;
+	}
+
+    .select2-results__option--selectable {
+        text-transform: uppercase;
+    }
+
+</style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col p-0">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'cliente:credcoop_decision' %}">Cliente</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Cadastro de cliente Esctop</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+
+<label class="text-secondary mt-2">Cadastre um cliente Esctop</label>
+
+<!--Accordion wrapper-->
+<form method="POST" novalidate id="myForm" >
+	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-9">
+
+		</div>
+	</div>
+	<div class="row mt-1">
+		
+		<div class="col-sm-12 col-md-9 card card-body">
+			<div class="accordion" id="accordion">
+				<div class="card">
+					<div class="card-header panel-heading" id="heading-1">
+						<h2 class="mb-0" id="h2-icon-1">
+							<button class="btn btn-link btn-block text-center text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+								EMPRESA<i id="icon-1" class="fa-solid fa-minus float-right"></i>
+							</button>
+						</h2>
+					</div>
+					<div id="collapse-1" class="collapse colapseForm show" aria-labelledby="heading-1" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12">
+									<h3>DADOS DA EMPRESA</h3>
+                                    <hr>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.razao_social.label}} </label>
+										{% render_field form.razao_social class="form-control form-control-sm" %}
+                                        <small class="text-danger">{{form.razao_social.errors}}</small>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label>{{form.nome_fantasia.label}} </label>
+										{% render_field form.nome_fantasia class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.cnpj.label}} </label>
+										{% render_field form.cnpj class="form-control form-control-sm" %}
+										<small class="text-danger">{{form.cnpj.errors}}</small>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.fundacao.label}} </label>
+										{% render_field form.fundacao class="form-control form-control-sm"  type="date" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.inscricao_estadual.label}} </label>
+										{% render_field form.inscricao_estadual class="form-control form-control-sm" %}
+										<small class="text-danger">{{form.inscricao_estadual.errors}}</small>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.inscricao_municipal.label}} </label>
+										{% render_field form.inscricao_municipal class="form-control form-control-sm" %}
+										<small class="text-danger">{{form.inscricao_municipal.errors}}</small>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.fiador.label}} </label>
+										{% render_field form.fiador class="form-control form-control-sm" %}
+										<label>Inativar fiador {{form.fiador_inativo}}</label>
+										<small class="text-danger">{{form.fiador.errors}}</small>
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>ENDEREÇO</h3>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cep_1" class="required"> {{form.cep.label}} </label>
+										{% render_field form.cep class="form-control form-control-sm" name="cep_1" type="text" id="cep_1" size="10" maxlength="9" onblur="pesquisacep_1(this.value);" %}
+                                        {% if form.errors %}
+                                            <small class="text-danger">{{form.cep.errors}}</small>
+                                        {% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="rua_1" class="required">{{form.rua.label}} </label>
+										{% render_field form.rua class="form-control form-control-sm" name="rua_1" type="text" id="rua_1" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.numero_casa.label}} </label>
+										{% render_field form.numero_casa class="form-control form-control-sm" name="numero_casa" type="text" id="numero_casa" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="bairro_1" class="required">{{form.bairro.label}} </label>
+										{% render_field form.bairro class="form-control form-control-sm" name="bairro_1" type="text" id="bairro_1" size="40" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cidade_1" class="required">{{form.cidade.label}} </label>
+										{% render_field form.cidade class="form-control form-control-sm" name="cidade_1" type="text" id="cidade_1" size="40"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="uf_1" class="required">{{form.uf.label}} </label>
+										{% render_field form.uf class="form-control form-control-sm" name="uf_1" type="text" id="uf_1" size="2"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.complemento.label}} </label>
+										{% render_field form.complemento class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.ponto_referencia.label}} </label>
+										{% render_field form.ponto_referencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>CONTATO</h3>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.contato1.label}} </label>
+										{% render_field form.contato1 class="form-control form-control-sm phone-mask" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.contato2.label}} </label>
+										{% render_field form.contato2 class="form-control form-control-sm phone-mask" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.celular1.label}} </label>
+										{% render_field form.celular1 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.whatsapp1}}</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.celular2.label}} </label>
+										{% render_field form.celular2 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.whatsapp2}}</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.email.label}} </label>
+										{% render_field form.email class="form-control form-control-sm lower_all" %}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>DADOS BANCÁRIOS</h3>
+								</div>
+
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.banco.label}} </label>
+										{% render_field form.banco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.n_operacao.label}} </label>
+										{% render_field form.n_operacao class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.tipo_de_conta.label}} </label>
+										{% render_field form.tipo_de_conta class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.agencia.label}} </label>
+										{% render_field form.agencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.conta.label}} </label>
+										{% render_field form.conta class="form-control form-control-sm" %}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>REFERÊNCIAS</h3>
+								</div>
+
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref1_nome.label}}</label>
+										{% render_field form.ref1_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref1_contato.label}}</label>
+										{% render_field form.ref1_contato class="form-control form-control-sm cel-phone-mask" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref1_parentesco.label}}</label>
+										{% render_field form.ref1_parentesco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref2_nome.label}}</label>
+										{% render_field form.ref2_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref2_contato.label}}</label>
+										{% render_field form.ref2_contato class="form-control form-control-sm cel-phone-mask" %}
+									</div>
+								</div> 
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref2_parentesco.label}}</label>
+										{% render_field form.ref2_parentesco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref3_nome.label}}</label>
+										{% render_field form.ref3_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref3_contato.label}}</label>
+										{% render_field form.ref3_contato class="form-control form-control-sm cel-phone-mask" %}
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="">{{form.ref3_parentesco.label}}</label>
+										{% render_field form.ref3_parentesco class="form-control form-control-sm" %}
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div><!-- Accordion 1 -->
+
+				<div class="card">
+					<div class="card-header panel-heading" id="heading-2">
+						<h2 class="mb-0" id="h2-icon-2">
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase text-truncate" type="button" data-toggle="collapse" data-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
+							Representante<i id="icon-2" class="fa-solid fa-plus float-right"></i>
+						</button>
+						</h2>
+					</div>
+					<div id="collapse-2" class="collapse colapseForm" aria-labelledby="heading-2" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12">
+									<h3>DADOS DO REPRESENTANTE</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.rep_nome.label}} </label>
+										{% render_field form.rep_nome class="form-control form-control-sm" %}
+										{% if form.rep_nome.errors %}
+											<small class="text-danger">{{form.rep_nome.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rep_cpf.label}} </label>
+										{% render_field form.rep_cpf class="form-control form-control-sm cpf-mask" type="text"%}
+										{% if form.rep_cpf.errors %}
+											<small class="text-danger">{{form.rep_cpf.errors}}</small> 
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rep_rg.label}} </label>
+										{% render_field form.rep_rg class="form-control form-control-sm" %}
+										{% if form.rep_rg.errors %}
+											<small class="text-danger">{{form.rep_rg.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rep_orgao_emissor.label}} </label>
+										{% render_field form.rep_orgao_emissor class="form-control form-control-sm text-uppercase" %}
+										{% if form.rep_orgao_emissor.errors %}
+											<small class="text-danger">{{form.rep_orgao_emissor.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<label for="" class="required">{{form.rep_data_nasc.label}}</label>
+									{% render_field form.rep_data_nasc class="form-control form-control-sm" type="date"%}
+									{% if form.rep_data_nasc.errors %}
+										<small class="text-danger">{{form.rep_data_nasc.errors}}</small>
+									{% endif %}
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rep_naturalidade.label}}</label>
+										{% render_field form.rep_naturalidade class="form-control form-control-sm" %}
+										{% if form.rep_naturalidade.errors %}
+											<small class="text-danger">{{form.rep_naturalidade.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rep_nacionalidade.label}}</label>
+										{% render_field form.rep_nacionalidade class="form-control form-control-sm" value="BRASILEIRA" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_estado_civil.label}}</label>
+										{% render_field form.rep_estado_civil class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.rep_mae.label}}</label>
+										{% render_field form.rep_mae class="form-control form-control-sm" %}
+										{% if form.rep_mae.errors %}
+											<small class="text-danger">{{form.rep_mae.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_pai.label}}</label>
+										{% render_field form.rep_pai class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_conjuge_nome.label}}</label>
+										{% render_field form.rep_conjuge_nome class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_conjuge_cpf.label}}</label>
+										{% render_field form.rep_conjuge_cpf class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_conjuge_telefone.label}}</label>
+										{% render_field form.rep_conjuge_telefone class="form-control form-control-sm" %}
+									</div>
+								</div>
+							
+								<div class="col-12">
+									<h3>ENDEREÇO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cep_2" class="required">{{form.rep_cep.label}} </label>
+										{% render_field form.rep_cep class="form-control form-control-sm" name="cep_2" type="text" id="cep_2" size="10" maxlength="9" onblur="pesquisacep_2(this.value);" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="rua_2" class="required">{{form.rep_rua.label}} </label>
+										{% render_field form.rep_rua class="form-control form-control-sm" name="rua_2" type="text" id="rua_2" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_numero_casa.label}} </label>
+										{% render_field form.rep_numero_casa class="form-control form-control-sm" name="numero_casa" type="text" id="numero_casa" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="bairro_2" class="required">{{form.rep_bairro.label}} </label>
+										{% render_field form.rep_bairro class="form-control form-control-sm" name="bairro_2" type="text" id="bairro_2" size="40" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="cidade_2" class="required">{{form.rep_cidade.label}} </label>
+										{% render_field form.rep_cidade class="form-control form-control-sm" name="cidade_2" type="text" id="cidade_2" size="40"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="uf_2" class="required">{{form.rep_uf.label}} </label>
+										{% render_field form.rep_uf class="form-control form-control-sm" name="uf_2" type="text" id="uf_2" size="2"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_complemento.label}} </label>
+										{% render_field form.rep_complemento class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_ponto_referencia.label}} </label>
+										{% render_field form.rep_ponto_referencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>CONTATO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_contato1.label}} </label>
+										{% render_field form.rep_contato1 class="form-control form-control-sm phone-mask" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_celular1.label}} </label>
+										{% render_field form.rep_celular1 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.rep_whatsapp1}}</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_celular2.label}} </label>
+										{% render_field form.rep_celular2 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.rep_whatsapp2}}</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.rep_email.label}} </label>
+										{% render_field form.rep_email class="form-control form-control-sm lower_all" %}
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div><!-- Accordion 2 -->
+
+				
+			</div>
+		</div><!-- Accordion -->
+
+		<div class="col-sm-12 col-md-3 p-0">
+			<div style="position: -webkit-sticky; position: sticky; top: 65px;">
+				<div class="card card-body">
+						{% if object %}
+							<a id="save" class="btn btn-success btn-block my-2 text-uppercase font-weight-bold">
+								<i class="fa-solid fa-floppy-disk mx-2"></i>Salvar
+							</a>
+						{% else %}
+							<a id="add" class="btn btn-success btn-block my-2 text-uppercase font-weight-bold">
+								<i class="fa-solid fa-floppy-disk mx-2"></i>Cadastrar
+							</a>
+						{% endif %}
+		
+						<a id="cancel" class="btn btn-danger btn-block my-2 text-uppercase font-weight-bold">
+							<i class="fa-solid fa-xmark mx-2"></i>Descartar
+						</a>
+
+					
+				</div>
+			
+			</div>
+		</div>
+		
+
+	</div>
+
+</form> 
+<!-- Accordion wrapper -->
+
+
+{% endblock content %}
+
+
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/cep.js' %}"></script>
+
+
+<script>
+	var app = new Vue({
+		delimiters: ['${', '}'],
+		el: '#app',
+		data: {
+			hasError: [
+				{% for error in form.errors %}
+					{
+						errors: "{{error}}"
+					},          
+				{% endfor %}
+			],
+		},
+		methods: {
+		},
+		
+		mounted: function () {
+			$('#id_fundacao').val('{{form.fundacao.value|safe}}')
+
+			$('#id_razao_social').focus()
+
+			$('#h2-icon-1').click(function(){
+				if($('#icon-1').hasClass('fa-minus')){
+					$('#icon-1').toggleClass('fa-minus fa-plus')
+				}
+				else if($('#icon-1').hasClass('fa-plus')){
+					$('#icon-1').toggleClass('fa-minus fa-plus')
+					setTimeout(() => {$('#id_razao_social').focus()	}, 1000);
+					if($('#icon-2').hasClass('fa-minus')){
+						$('#icon-2').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+		
+			$('#h2-icon-2').click(function(){
+				if($('#icon-2').hasClass('fa-minus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+				}
+				else if($('#icon-2').hasClass('fa-plus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+
+					setTimeout(() => {$('#id_rep_nome').focus()}, 1000);
+					if($('#icon-1').hasClass('fa-minus')){
+						$('#icon-1').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+					
+			if (this.hasError.length > 0){
+				Swal.fire({
+					icon: 'error',
+					title: 'Você esqueceu de preencher campos obrigatórios',
+				})
+			}
+
+
+			$('#add').click(function(){
+				Swal.fire({
+					title: 'Cadastrar cliente?',
+					showDenyButton: true,
+					confirmButtonText: 'Cadastrar',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire('', '', 'success')
+						setTimeout(() => {
+							$('form').submit();
+						}, 2000);
+					}
+				})
+			});
+
+			$('#save').click(function(){
+				Swal.fire({
+					title: 'Salvar alterações?',
+					showDenyButton: true,
+					confirmButtonText: 'Salvar alterações',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire('', '', 'success')
+						setTimeout(() => {
+							$('form').submit();
+						}, 2000);
+					}
+				})
+			});
+			
+			$('#cancel').click(function(){
+				Swal.fire({
+					title: 'Você quer descartas as alterações feitas?',
+					showDenyButton: true,
+					confirmButtonText: 'Descartar alterações',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Alterações descartadas',
+							showConfirmButton: false,
+							timer: 1500
+						})
+						setTimeout(() => {location.replace(href="{% url 'cliente_cnpj:esctop_cliente_list' %}")}, 2000);
+					} 
+				})
+			});
+		}
+	})
+	
+</script>
+
+<script>
+	$(document).ready(function () {
+		$('#id_fiador').select2({
+            width:"100%",
+        });
+	});
+</script>
+
+{% endblock js %}

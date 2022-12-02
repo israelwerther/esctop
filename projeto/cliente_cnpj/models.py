@@ -6,7 +6,7 @@ from projeto.core.models import Banco, Chave_PIX, Tipo_de_conta
 
 
 class Cliente_cnpj(models.Model):
-    razao_social          = models.CharField("Razão Social", max_length=50, blank=True, null=True)
+    razao_social          = models.CharField("Razão Social", max_length=50, blank=False, null=True)
     nome_fantasia         = models.CharField("Nome Fantasia", max_length=50, blank=True, null=True)
     cnpj                  = models.CharField("CNPJ", max_length=36, unique=True, blank=True, null=True)
     fundacao              = models.DateField("Fundação",max_length=8, blank=True, null=True)      
@@ -87,9 +87,9 @@ class Cliente_cnpj(models.Model):
     def get_absolute_url(self):
         return reverse_lazy('cliente_cnpj:cliente_cnpj_detail', kwargs={'pk': self.pk})
 
-    def save(self, force_insert=False, force_update=False):
-        self.razao_social = self.razao_social.upper()
-        super(Cliente_cnpj, self).save(force_insert, force_update)
+    # def save(self, force_insert=False, force_update=False):
+    #     self.razao_social = self.razao_social.upper()
+    #     super(Cliente_cnpj, self).save(force_insert, force_update)
 
 
 # CRIAR UM TEMPLATE PRA RECEBER ESTES DOIS JÁ SALVOS
