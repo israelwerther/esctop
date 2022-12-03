@@ -12,18 +12,9 @@ urlpatterns = [
     path('<int:pk>/edit/', login_required(v.Cliente_cnpjUpdate.as_view()), name='cliente_cnpjupdate'),    
     # path('<int:pk>/edit/', v.cliente_cnpjupdate, name='cliente_cnpjupdate'),
     path('<int:pk>/delete/', login_required(v.Cliente_cnpjDelete.as_view()), name='cliente_cnpj_delete'),
-<<<<<<< HEAD
-    # NOVO
-    path('esctop-decision/', login_required(v.EsctopDecision.as_view()), name='esctop_decision'),
-    path('formulario-cliente-esctop/', login_required(v.EsctopCreate.as_view()), name='esctop_add'),
-    path('<int:pk>/atualiza-cliente-esctop/', login_required(v.EsctopUpdate.as_view()), name='esctop_update'),
-
-    
-=======
 
     # novo
     path('esctop-decision/', login_required(v.EsctopDecision.as_view()), name='esctop_decision'),
     path('formulario-cliente-esctop/', login_required(v.EsctopCreate.as_view()), name='esctop_add'),
     path('<int:pk>/atualiza-cliente-esctop/', login_required(v.EsctopUpdate.as_view()), name='esctop_update'),
->>>>>>> master
 ]
