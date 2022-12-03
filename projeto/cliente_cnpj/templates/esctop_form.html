@@ -20,6 +20,13 @@
 		box-shadow: none !important;
 	}
 
+<<<<<<< HEAD
+=======
+    .select2-results__option--selectable {
+        text-transform: uppercase;
+    }
+
+>>>>>>> master
 </style>
 {% endblock css %}
 
@@ -55,23 +62,38 @@
 					<div class="card-header panel-heading" id="heading-1">
 						<h2 class="mb-0" id="h2-icon-1">
 							<button class="btn btn-link btn-block text-center text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+<<<<<<< HEAD
 								DADOS DA EMPRESA (ESCTOP)<i id="icon-1" class="fa-solid fa-minus float-right"></i>
+=======
+								EMPRESA<i id="icon-1" class="fa-solid fa-minus float-right"></i>
+>>>>>>> master
 							</button>
 						</h2>
 					</div>
 					<div id="collapse-1" class="collapse colapseForm show" aria-labelledby="heading-1" data-parent="#accordion">
 						<div class="card-body">
 							<div class="row">
+<<<<<<< HEAD
 
 								<div class="col-12">
 									<h3>DADOS DO CLIENTE</h3>
 								</div>
 
+=======
+								<div class="col-12">
+									<h3>DADOS DA EMPRESA</h3>
+                                    <hr>
+								</div>
+>>>>>>> master
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label class="required">{{form.razao_social.label}} </label>
 										{% render_field form.razao_social class="form-control form-control-sm" %}
+<<<<<<< HEAD
 										<small class="text-danger">{{form.razao_social.errors}}</small>
+=======
+                                        <small class="text-danger">{{form.razao_social.errors}}</small>
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -90,8 +112,12 @@
 								<div class="col-sm-6">
 									<div class="form-group">
 										<label class="required">{{form.fundacao.label}} </label>
+<<<<<<< HEAD
 										{% render_field form.fundacao class="form-control form-control-sm" %}
 										<small class="text-danger">{{form.fundacao.errors}}</small>
+=======
+										{% render_field form.fundacao class="form-control form-control-sm"  type="date" %}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -123,8 +149,16 @@
 
 								<div class="col-sm-6">
 									<div class="form-group">
+<<<<<<< HEAD
 										<label for="cep_1" class="required">{{form.cep.label}} </label>
 										{% render_field form.cep class="form-control form-control-sm" name="cep_1" type="text" id="cep_1" size="10" maxlength="9" onblur="pesquisacep_1(this.value);" %}
+=======
+										<label for="cep_1" class="required"> {{form.cep.label}} </label>
+										{% render_field form.cep class="form-control form-control-sm" name="cep_1" type="text" id="cep_1" size="10" maxlength="9" onblur="pesquisacep_1(this.value);" %}
+                                        {% if form.errors %}
+                                            <small class="text-danger">{{form.cep.errors}}</small>
+                                        {% endif %}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -423,14 +457,24 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
+<<<<<<< HEAD
 										<label for="cep_1" class="required">{{form.rep_cep.label}} </label>
 										{% render_field form.rep_cep class="form-control form-control-sm" name="cep_1" type="text" id="cep_1" size="10" maxlength="9" onblur="pesquisacep_1(this.value);" %}
+=======
+										<label for="cep_2" class="required">{{form.rep_cep.label}} </label>
+										{% render_field form.rep_cep class="form-control form-control-sm" name="cep_2" type="text" id="cep_2" size="10" maxlength="9" onblur="pesquisacep_2(this.value);" %}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
+<<<<<<< HEAD
 										<label for="rua_1" class="required">{{form.rep_rua.label}} </label>
 										{% render_field form.rep_rua class="form-control form-control-sm" name="rua_1" type="text" id="rua_1" size="60" %}
+=======
+										<label for="rua_2" class="required">{{form.rep_rua.label}} </label>
+										{% render_field form.rep_rua class="form-control form-control-sm" name="rua_2" type="text" id="rua_2" size="60" %}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -441,20 +485,35 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
+<<<<<<< HEAD
 										<label for="bairro_1" class="required">{{form.rep_bairro.label}} </label>
 										{% render_field form.rep_bairro class="form-control form-control-sm" name="bairro_1" type="text" id="bairro_1" size="40" %}
+=======
+										<label for="bairro_2" class="required">{{form.rep_bairro.label}} </label>
+										{% render_field form.rep_bairro class="form-control form-control-sm" name="bairro_2" type="text" id="bairro_2" size="40" %}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
+<<<<<<< HEAD
 										<label for="cidade_1" class="required">{{form.rep_cidade.label}} </label>
 										{% render_field form.rep_cidade class="form-control form-control-sm" name="cidade_1" type="text" id="cidade_1" size="40"%}
+=======
+										<label for="cidade_2" class="required">{{form.rep_cidade.label}} </label>
+										{% render_field form.rep_cidade class="form-control form-control-sm" name="cidade_2" type="text" id="cidade_2" size="40"%}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
+<<<<<<< HEAD
 										<label for="uf_1" class="required">{{form.rep_uf.label}} </label>
 										{% render_field form.rep_uf class="form-control form-control-sm" name="uf_1" type="text" id="uf_1" size="2"%}
+=======
+										<label for="uf_2" class="required">{{form.rep_uf.label}} </label>
+										{% render_field form.rep_uf class="form-control form-control-sm" name="uf_2" type="text" id="uf_2" size="2"%}
+>>>>>>> master
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -566,8 +625,12 @@
 		},
 		
 		mounted: function () {
+<<<<<<< HEAD
 			$('#id_data_nasc').val('{{form.data_nasc.value|safe}}')
 
+=======
+			$('#id_fundacao').val('{{form.fundacao.value|safe}}')
+>>>>>>> master
 
 			$('#id_razao_social').focus()
 
@@ -577,6 +640,7 @@
 				}
 				else if($('#icon-1').hasClass('fa-plus')){
 					$('#icon-1').toggleClass('fa-minus fa-plus')
+<<<<<<< HEAD
 					setTimeout(() => {$('#id_nome').focus()	}, 1000);
 					if($('#icon-2').hasClass('fa-minus')){
 						$('#icon-2').toggleClass('fa-minus fa-plus')
@@ -590,6 +654,15 @@
 				}
 			});
 		
+=======
+					setTimeout(() => {$('#id_razao_social').focus()	}, 1000);
+					if($('#icon-2').hasClass('fa-minus')){
+						$('#icon-2').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+
+>>>>>>> master
 			$('#h2-icon-2').click(function(){
 				if($('#icon-2').hasClass('fa-minus')){
 					$('#icon-2').toggleClass('fa-minus fa-plus')
@@ -597,6 +670,7 @@
 				else if($('#icon-2').hasClass('fa-plus')){
 					$('#icon-2').toggleClass('fa-minus fa-plus')
 
+<<<<<<< HEAD
 					setTimeout(() => {$('#id_nome_fantasia').focus()}, 1000);
 					if($('#icon-1').hasClass('fa-minus')){
 						$('#icon-1').toggleClass('fa-minus fa-plus')
@@ -610,6 +684,15 @@
 				}
 			});
 					
+=======
+					setTimeout(() => {$('#id_rep_nome').focus()}, 1000);
+					if($('#icon-1').hasClass('fa-minus')){
+						$('#icon-1').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+			
+>>>>>>> master
 			if (this.hasError.length > 0){
 				Swal.fire({
 					icon: 'error',
@@ -617,7 +700,10 @@
 				})
 			}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 			$('#add').click(function(){
 				Swal.fire({
 					title: 'Cadastrar cliente?',
@@ -664,7 +750,11 @@
 							showConfirmButton: false,
 							timer: 1500
 						})
+<<<<<<< HEAD
 						setTimeout(() => {location.replace(href="{% url 'cliente:credcoop_cliente_list' %}")}, 2000);
+=======
+						setTimeout(() => {location.replace(href="{% url 'cliente_cnpj:esctop_cliente_list' %}")}, 2000);
+>>>>>>> master
 					} 
 				})
 			});
@@ -673,6 +763,7 @@
 	
 </script>
 
+<<<<<<< HEAD
 
 <script>
 	$(document).ready(function () {
@@ -681,5 +772,14 @@
 </script> 
 
 
+=======
+<script>
+	$(document).ready(function () {
+		$('#id_fiador').select2({
+            width:"100%",
+        });
+	});
+</script>
+>>>>>>> master
 
 {% endblock js %}

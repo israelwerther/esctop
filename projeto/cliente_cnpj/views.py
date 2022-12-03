@@ -63,6 +63,23 @@ def cliente_cnpj_detail(request, pk):
     context={'object': obj}
     return render(request, template_name, context)
 
+class EsctopCreate(CreateView):
+    model=Cliente_cnpj
+    template_name='esctop_form.html'
+    form_class=Cliente_cnpjForm
+
+
+class EsctopUpdate(UpdateView):
+    model=Cliente_cnpj
+    template_name='esctop_form.html'
+    form_class = Cliente_cnpjForm
+
+
+class EsctopDecision(CreateView):
+    model=Cliente_cnpj
+    template_name='esctop_decision.html'
+    form_class=Cliente_cnpjForm
+
 
 class ClienteCnpjCreate(CreateView):
     model=Cliente_cnpj

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class ClienteCnpjConfig(AppConfig):
-    name = 'cliente_cnpj'
+    name = 'projeto.cliente_cnpj'
