@@ -74,7 +74,9 @@
 									<div class="form-group">
 										<label class="required">{{form.razao_social.label}} </label>
 										{% render_field form.razao_social class="form-control form-control-sm" %}
-                                        <small class="text-danger">{{form.razao_social.errors}}</small>
+										{% if form.razao_social.errors %}
+											<small class="text-danger">{{form.razao_social.errors}}</small>
+										{% endif %}
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -120,7 +122,9 @@
 								</div>
 
 								<div class="col-12">
+									<hr>
 									<h3>ENDEREÇO</h3>
+									<hr>
 								</div>
 
 								<div class="col-sm-6">
@@ -572,6 +576,7 @@
 		
 		mounted: function () {
 			$('#id_fundacao').val('{{form.fundacao.value|safe}}')
+			$('#id_rep_data_nasc').val('{{form.rep_data_nasc.value|safe}}')
 
 			$('#id_razao_social').focus()
 
