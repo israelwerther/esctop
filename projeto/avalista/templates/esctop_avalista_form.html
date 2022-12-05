@@ -65,6 +65,7 @@
 							<div class="row">
 								<div class="col-12">
 									<h3>DADOS DO AVALISTA</h3>
+                                    <hr>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -132,18 +133,20 @@
 								</div>								
 								
 								<div class="col-12">
+                                    <hr>
 									<h3>ENDEREÇO</h3>
+                                    <hr>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="fiador_cep_1" class="required">{{form.fiador_cep.label}} </label>
-										{% render_field form.fiador_cep class="form-control form-control-sm" name="fiador_cep_1" type="text" id="fiador_cep_1" size="10" maxlength="9" onblur="pesquisafiador_cep_1(this.value);" %}
+										<label for="cep_1" class="required">{{form.fiador_cep.label}} </label>
+										{% render_field form.fiador_cep class="form-control form-control-sm" name="cep_1" type="text" id="cep_1" size="10" maxlength="9" onblur="pesquisacep_1(this.value);" %}
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="fiador_rua_1" class="required">{{form.fiador_rua.label}} </label>
-										{% render_field form.fiador_rua class="form-control form-control-sm" name="fiador_rua_1" type="text" id="fiador_rua_1" size="60" %}
+										<label for="rua_1" class="required">{{form.fiador_rua.label}} </label>
+										{% render_field form.fiador_rua class="form-control form-control-sm" name="rua_1" type="text" id="rua_1" size="60" %}
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -154,20 +157,20 @@
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="fiador_bairro_1" class="required">{{form.fiador_bairro.label}} </label>
-										{% render_field form.fiador_bairro class="form-control form-control-sm" name="fiador_bairro_1" type="text" id="fiador_bairro_1" size="40" %}
+										<label for="bairro_1" class="required">{{form.fiador_bairro.label}} </label>
+										{% render_field form.fiador_bairro class="form-control form-control-sm" name="bairro_1" type="text" id="bairro_1" size="40" %}
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="fiador_cidade_1" class="required">{{form.fiador_cidade.label}} </label>
-										{% render_field form.fiador_cidade class="form-control form-control-sm" name="fiador_cidade_1" type="text" id="fiador_cidade_1" size="40"%}
+										<label for="cidade_1" class="required">{{form.fiador_cidade.label}} </label>
+										{% render_field form.fiador_cidade class="form-control form-control-sm" name="cidade_1" type="text" id="cidade_1" size="40"%}
 									</div>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
-										<label for="fiador_uf_1" class="required">{{form.fiador_uf.label}} </label>
-										{% render_field form.fiador_uf class="form-control form-control-sm" name="fiador_uf_1" type="text" id="fiador_uf_1" size="2"%}asd
+										<label for="uf_1" class="required">{{form.fiador_uf.label}} </label>
+										{% render_field form.fiador_uf class="form-control form-control-sm" name="uf_1" type="text" id="uf_1" size="2"%}asd
 									</div>
 								</div>
 								<div class="col-sm-6">
@@ -184,7 +187,9 @@
 								</div>
 
 								<div class="col-12">
+                                    <hr>
 									<h3>CONTATO</h3>
+                                    <hr>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -233,6 +238,7 @@
 							<div class="row">
 								<div class="col-12">
 									<h3>BANCO</h3>
+                                    <hr>
 								</div>
 								<div class="col-sm-6">
 									<div class="form-group">
@@ -345,7 +351,7 @@
 		},
 		
 		mounted: function () {
-			$('#id_data_nasc').val('{{form.data_nasc.value|safe}}')
+			$('#id_fiador_data_nasc').val('{{form.fiador_data_nasc.value|safe}}')
 
 
 			$('#id_fiador_nome').focus()
