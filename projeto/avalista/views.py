@@ -62,6 +62,19 @@ class AvalistaUpdate(UpdateView):
     success_url = reverse_lazy('avalista:avalista_list')
 
 
+class EsctopAvalistaCreate(CreateView):
+    model=Avalista
+    template_name='esctop_avalista_form.html'
+    form_class=AvalistaForm
+
+
+class EsctopFiadorUpdate(UpdateView):
+    model=Avalista
+    template_name='esctop_avalista_form.html'
+    form_class = AvalistaForm
+    success_url = reverse_lazy('avalista:avalista_list')
+
+
 class AvalistaDelete(DeleteView):
     model=Avalista
     template_name ='avalista_delete.html'    

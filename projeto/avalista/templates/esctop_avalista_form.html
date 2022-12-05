@@ -1,0 +1,445 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block css %}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<style> 
+	.form-control:focus {
+		color: #495057;
+		background-color: #fff;
+		border-color: #5eaa84 !important;
+		outline: 0;
+		box-shadow: none !important;
+	}
+
+	.btn-link {        
+		box-shadow: none !important;
+	}
+
+</style>
+{% endblock css %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col p-0">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#">Avalista</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Cadastro de Avalista Esctop</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+
+<label class="text-secondary mt-2">Cadastre um Avalista Esctop</label>
+
+<!--Accordion wrapper-->
+<form method="POST" novalidate id="myForm" >
+	{% csrf_token %}
+
+	<div class="row">
+		<div class="col-9">
+
+		</div>
+	</div>
+	<div class="row mt-1">
+		
+		<div class="col-sm-12 col-md-9 card card-body">
+			<div class="accordion" id="accordion">
+				<div class="card">
+					<div class="card-header panel-heading" id="heading-1">
+						<h2 class="mb-0" id="h2-icon-1">
+							<button class="btn btn-link btn-block text-center text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
+								Dados pessoais<i id="icon-1" class="fa-solid fa-minus float-right"></i>
+							</button>
+						</h2>
+					</div>
+					<div id="collapse-1" class="collapse colapseForm show" aria-labelledby="heading-1" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12">
+									<h3>DADOS DO AVALISTA</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label class="required">{{form.fiador_nome.label}} </label>
+										{% render_field form.fiador_nome class="form-control form-control-sm" %}
+										{% if form.fiador_nome.errors %}
+											<small class="text-danger">{{form.fiador_nome.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.fiador_cpf.label}} </label>
+										{% render_field form.fiador_cpf class="form-control form-control-sm fiador_cpf-mask" type="text"%}
+										{% if form.fiador_cpf.errors %}
+											<small class="text-danger">{{form.fiador_cpf.errors}}</small> 
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.fiador_rg.label}} </label>
+										{% render_field form.fiador_rg class="form-control form-control-sm" %}
+										{% if form.fiador_rg.errors %}
+											<small class="text-danger">{{form.fiador_rg.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.fiador_orgao_emissor.label}} </label>
+										{% render_field form.fiador_orgao_emissor class="form-control form-control-sm text-uppercase" %}
+										{% if form.fiador_orgao_emissor.errors %}
+											<small class="text-danger">{{form.fiador_orgao_emissor.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<label for="" class="required">{{form.fiador_data_nasc.label}}</label>
+									{% render_field form.fiador_data_nasc class="form-control form-control-sm" type="date"%}
+									{% if form.fiador_data_nasc.errors %}
+										<small class="text-danger">{{form.fiador_data_nasc.errors}}</small>
+									{% endif %}
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.fiador_naturalidade.label}}</label>
+										{% render_field form.fiador_naturalidade class="form-control form-control-sm" %}
+										{% if form.fiador_naturalidade.errors %}
+											<small class="text-danger">{{form.fiador_naturalidade.errors}}</small>
+										{% endif %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="" class="required">{{form.fiador_nacionalidade.label}}</label>
+										{% render_field form.fiador_nacionalidade class="form-control form-control-sm" value="BRASILEIRA" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_estado_civil.label}}</label>
+										{% render_field form.fiador_estado_civil class="form-control form-control-sm" %}
+									</div>
+								</div>								
+								
+								<div class="col-12">
+									<h3>ENDEREÇO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="fiador_cep_1" class="required">{{form.fiador_cep.label}} </label>
+										{% render_field form.fiador_cep class="form-control form-control-sm" name="fiador_cep_1" type="text" id="fiador_cep_1" size="10" maxlength="9" onblur="pesquisafiador_cep_1(this.value);" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="fiador_rua_1" class="required">{{form.fiador_rua.label}} </label>
+										{% render_field form.fiador_rua class="form-control form-control-sm" name="fiador_rua_1" type="text" id="fiador_rua_1" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_numero_casa.label}} </label>
+										{% render_field form.fiador_numero_casa class="form-control form-control-sm" name="fiador_numero_casa" type="text" id="fiador_numero_casa" size="60" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="fiador_bairro_1" class="required">{{form.fiador_bairro.label}} </label>
+										{% render_field form.fiador_bairro class="form-control form-control-sm" name="fiador_bairro_1" type="text" id="fiador_bairro_1" size="40" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="fiador_cidade_1" class="required">{{form.fiador_cidade.label}} </label>
+										{% render_field form.fiador_cidade class="form-control form-control-sm" name="fiador_cidade_1" type="text" id="fiador_cidade_1" size="40"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="fiador_uf_1" class="required">{{form.fiador_uf.label}} </label>
+										{% render_field form.fiador_uf class="form-control form-control-sm" name="fiador_uf_1" type="text" id="fiador_uf_1" size="2"%}asd
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_complemento.label}} </label>
+										{% render_field form.fiador_complemento class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_ponto_referencia.label}} </label>
+										{% render_field form.fiador_ponto_referencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+
+								<div class="col-12">
+									<h3>CONTATO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_contato1.label}} </label>
+										{% render_field form.fiador_contato1 class="form-control form-control-sm phone-mask" type="text"%}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_celular1.label}} </label>
+										{% render_field form.fiador_celular1 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.whatsapp1}}</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_celular2.label}} </label>
+										{% render_field form.fiador_celular2 class="form-control form-control-sm cel-phone-mask" type="text"%}
+										<label><i class="fa-brands fa-whatsapp" style="color:rgb(0, 163, 27) !important;"></i> WhatsApp {{form.whatsapp2}}</label>
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_email.label}} </label>
+										{% render_field form.fiador_email class="form-control form-control-sm lower_all" %}
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div><!-- Accordion 1 -->
+
+				
+
+				<div class="card">
+					<div class="card-header panel-heading" id="heading-3">
+						<h2 class="mb-0" id="h2-icon-2">
+						<button class="btn btn-link btn-block text-center collapsed text-decoration-none text-uppercase" type="button" data-toggle="collapse" data-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
+							Dados bancários<i id="icon-2" class="fa-solid fa-plus float-right"></i>
+						</button>
+						</h2>
+					</div>
+					<div id="collapse-3" class="collapse colapseForm" aria-labelledby="heading-3" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<div class="col-12">
+									<h3>BANCO</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.banco.label}} </label>
+										{% render_field form.banco class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_n_operacao.label}} </label>
+										{% render_field form.fiador_n_operacao class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.tipo_de_conta.label}} </label>
+										{% render_field form.tipo_de_conta class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_agencia.label}} </label>
+										{% render_field form.fiador_agencia class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.fiador_conta.label}} </label>
+										{% render_field form.fiador_conta class="form-control form-control-sm" %}
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-12">
+									<h3>PIX</h3>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.tipo_de_chave_pix.label}}</label>
+										{% render_field form.tipo_de_chave_pix class="form-control form-control-sm" %}
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="">{{form.chave_pix.label}}</label>
+										{% render_field form.chave_pix class="form-control form-control-sm" %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div><!-- Accordion 2 -->
+
+				
+			</div>
+		</div><!-- Accordion -->
+
+		<div class="col-sm-12 col-md-3 p-0">
+			<div style="position: -webkit-sticky; position: sticky; top: 65px;">
+				<div class="card card-body">
+						{% if object %}
+							<a id="save" class="btn btn-success btn-block my-2 text-uppercase font-weight-bold">
+								<i class="fa-solid fa-floppy-disk mx-2"></i>Salvar
+							</a>
+						{% else %}
+							<a id="add" class="btn btn-success btn-block my-2 text-uppercase font-weight-bold">
+								<i class="fa-solid fa-floppy-disk mx-2"></i>Cadastrar
+							</a>
+						{% endif %}
+		
+						<a id="cancel" class="btn btn-danger btn-block my-2 text-uppercase font-weight-bold">
+							<i class="fa-solid fa-xmark mx-2"></i>Descartar
+						</a>
+
+					
+				</div>
+			
+			</div>
+		</div>
+		
+
+	</div>
+
+</form> 
+<!-- Accordion wrapper -->
+
+{% endblock content %}
+{% block js %}
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static 'bootstrap/js/deactive_enter.js' %}"></script>
+<script src="{% static 'js/vue.js' %}"></script>
+<script src="{% static 'js/cep.js' %}"></script>
+
+
+<script>
+	var app = new Vue({
+		delimiters: ['${', '}'],
+		el: '#app',
+		data: {
+			hasError: [
+				{% for error in form.errors %}
+					{
+						errors: "{{error}}"
+					},          
+				{% endfor %}
+			],
+		},
+		methods: {
+		},
+		
+		mounted: function () {
+			$('#id_data_nasc').val('{{form.data_nasc.value|safe}}')
+
+
+			$('#id_fiador_nome').focus()
+
+			$('#h2-icon-1').click(function(){
+				if($('#icon-1').hasClass('fa-minus')){
+					$('#icon-1').toggleClass('fa-minus fa-plus')
+				}
+				else if($('#icon-1').hasClass('fa-plus')){
+					$('#icon-1').toggleClass('fa-minus fa-plus')
+					setTimeout(() => {$('#id_fiador_nome').focus()	}, 1000);
+					if($('#icon-2').hasClass('fa-minus')){
+						$('#icon-2').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+		
+			$('#h2-icon-2').click(function(){
+				if($('#icon-2').hasClass('fa-minus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+				}
+				else if($('#icon-2').hasClass('fa-plus')){
+					$('#icon-2').toggleClass('fa-minus fa-plus')
+
+					setTimeout(() => {$('#id_banco').focus()}, 1000);
+					if($('#icon-1').hasClass('fa-minus')){
+						$('#icon-1').toggleClass('fa-minus fa-plus')
+					}
+				}
+			});
+
+
+			if (this.hasError.length > 0){
+				Swal.fire({
+					icon: 'error',
+					title: 'Você esqueceu de preencher campos obrigatórios',
+				})
+			}
+
+
+			$('#add').click(function(){
+				Swal.fire({
+					title: 'Cadastrar Fiador?',
+					showDenyButton: true,
+					confirmButtonText: 'Cadastrar',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire('', '', 'success')
+						setTimeout(() => {
+							$('form').submit();
+						}, 2000);
+					}
+				})
+			});
+
+			$('#save').click(function(){
+				Swal.fire({
+					title: 'Salvar alterações?',
+					showDenyButton: true,
+					confirmButtonText: 'Salvar alterações',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire('', '', 'success')
+						setTimeout(() => {
+							$('form').submit();
+						}, 2000);
+					}
+				})
+			});
+			
+			$('#cancel').click(function(){
+				Swal.fire({
+					title: 'Você quer descartas as alterações feitas?',
+					showDenyButton: true,
+					confirmButtonText: 'Descartar alterações',
+					denyButtonText: 'Cancelar',
+				}).then((result) => {
+					if (result.isConfirmed) {
+						Swal.fire({
+							icon: 'success',
+							title: 'Alterações descartadas',
+							showConfirmButton: false,
+							timer: 1500
+						})
+						setTimeout(() => {location.replace(href="{% url 'cliente:credcoop_cliente_list' %}")}, 2000);
+					} 
+				})
+			});
+		}
+	})
+	
+</script>
+
+
+{% endblock js %}
