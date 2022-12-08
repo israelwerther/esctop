@@ -17,7 +17,7 @@
 <span class="pull-right">
     <a href="{% url 'avalista:avalista_list' %}" type="button" class="btn btn-secondary">Voltar</a>
     <a href="{% url 'cliente_cnpj:cliente_cnpj_add' %}" type="button" class="btn btn-info">Cadastrar Cliente Esctop</a>
-    <a href="{% url 'avalista:avalista_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
+    <a href="{% url 'avalista:esctop_avalista_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
     <a href="{% url 'avalista:avalista_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
 </span>
 
@@ -47,51 +47,7 @@
             <label>Orgão Emissor</label>
             <input  value="{{ object.fiador_orgao_emissor }}" readonly class="form-control">
         </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    <div class="col-sm-6"> 
-        <div class="form-group">
-            <label></label>
-            <input  value="{{ object. }}" readonly class="form-control">
-        </div>
-    </div>
-    
-    
+    </div>    
 </div>
 
 {% endblock content %}
