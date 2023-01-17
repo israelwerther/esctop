@@ -82,7 +82,7 @@ class Cliente_cnpj(models.Model):
         ordering = ('razao_social',)
         
     def __str__(self):
-        return self.razao_social
+        return self.razao_social if self.razao_social else "Sem razão social cadastrado"
     
     def get_absolute_url(self):
         return reverse_lazy('cliente_cnpj:cliente_cnpj_detail', kwargs={'pk': self.pk})

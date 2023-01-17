@@ -86,7 +86,7 @@ class Cliente(models.Model):
         ordering = ('nome',) #confirme se é a organização e apague o coment
 
     def __str__(self):
-        return self.nome
+        return self.nome if self.nome else "sem cliente credcoop"
     
     def get_absolute_url(self):
         return reverse_lazy('cliente:cliente_detail', kwargs={'pk': self.pk})

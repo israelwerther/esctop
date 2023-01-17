@@ -450,7 +450,7 @@
 		data: {
             fiador: "{{object.cliente_cnpj.fiador|default:''}}",
             fiador_nome: "{{object.cliente_cnpj.fiador.fiador_nome}}",
-            renegociar: "{{object.renegociar}}",
+            renegociar: {{object.renegociar|default:False|lower}},
 
             controls: {
                 passou_por_fevereiro: false,
@@ -478,37 +478,43 @@
                 return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
             },
             getParcelas() {
-                let data_do_emprestimo = moment(this.emprestimo.dataEmprestimo)
-                let vencimento
-
-                if(this.renegociar == "False"){
-                    vencimento = data_do_emprestimo.add(0, 'month')
+                let dataDoEmprestimo = Object.assign(moment(this.emprestimo.dataEmprestimo), {})
+                let diaVencimentoEmprestimo = dataDoEmprestimo.format("DD")
+                let vencimento = dataDoEmprestimo
+                let previousMonthIsFeb = false
+                
+                if(this.renegociar) {
+                    vencimento = dataDoEmprestimo.add(-1, 'month')
                 }
-                if(this.renegociar == "True"){
-                    vencimento = data_do_emprestimo.add(-1, 'month')
-                }
+                for (let i = 1 ; i <= this.emprestimo.qtd_parcelas; i++) {
 
-                for (let i = 0 ; i < this.emprestimo.qtd_parcelas; i++) {
-                    console.log("i = ", i)
-                    //console.log("i = ", vencimento)
+                    let lastDayOfMonth = vencimento.endOf('month').format("DD")
+                    
+                    let isLeapYear = vencimento.isLeapYear()
 
-                    if(vencimento.format("DD") == 30 && vencimento.format("MM") == 1){
-                        console.log("Entrou 1")
-                        vencimento = data_do_emprestimo.add(2, 'day')
-                        vencimento = data_do_emprestimo.add(1, 'month')
+                    // Adiciona mais um mês ao vencimento
+                    vencimento = dataDoEmprestimo.add(1, 'month').date(diaVencimentoEmprestimo)
+
+                    // Se for fevereiro entra aqui
+                    if(previousMonthIsFeb) {
+                        vencimento.month(2).date(diaVencimentoEmprestimo)
+
+                        if(diaVencimentoEmprestimo > 29) {
+                            // Altera a data do mês de fevereiro para 01
+                            this.emprestimo.parcelas[this.emprestimo.parcelas.length - 1].vencimento = moment(vencimento.format('YYYY-MM-DD')).month(2).date(1).format('YYYY-MM-DD')
+                        }
+                        previousMonthIsFeb = null
                     }
-                    else if(vencimento.format("DD") == 31 && vencimento.format("MM") == 1){
-                        console.log("Entrou 2")
-                        vencimento = data_do_emprestimo.add(1, 'day')
-                        vencimento = data_do_emprestimo.add(1, 'month')
-                    }
-                    else{
-                        console.log("Entrou ultimo")
-                        vencimento = data_do_emprestimo.add(1, 'month')
+
+
+
+                    //Verifica se o mês anterior é fevereiro
+                    if((vencimento.format("M") -1) == 2) {
+                        previousMonthIsFeb === false ? previousMonthIsFeb = true:undefined
                     }
 
                     this.emprestimo.parcelas.push({						
-                        vencimento: vencimento.format("YYYY/MM/DD"),
+                        vencimento: vencimento.format("YYYY-MM-DD"),
                         valor_parcela: this.emprestimo.valor_prestacao
                     })
                 }

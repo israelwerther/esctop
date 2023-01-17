@@ -12,7 +12,7 @@ from datetime import timedelta
 from django_lifecycle import LifecycleModelMixin, hook
 from django.utils import timezone
 
-class Emprestimo( LifecycleModelMixin, models.Model):
+class Emprestimo(LifecycleModelMixin, models.Model):
     funcionario          = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     cliente              = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
     cliente_cnpj         = models.ForeignKey(Cliente_cnpj, on_delete=models.CASCADE, null=True, blank=True)    
@@ -45,8 +45,9 @@ class Emprestimo( LifecycleModelMixin, models.Model):
         ordering = ('-dt_emprestimo',)
     # def __str__(self):
     #     return '{} - {} - {}'.format(self.pk, self.num_doc, self.created.strftime('%d-%m-%Y'))
+
     def __str__(self):
-        return str(self.n_contrato)
+        return self.n_contrato if self.n_contrato else "Sem número de contrato cadastrado"
     
     def get_absolute_url(self):
         return reverse_lazy('emprestimo:emprestimo_detail', kwargs={'pk': self.pk})

@@ -39,7 +39,7 @@ class Avalista(models.Model):
         ordering = ('fiador_nome',) 
     
     def __str__(self):
-        return str(self.fiador_nome)
+        return str(self.fiador_nome) if self.fiador_nome else "sem fiador"
     
     def get_absolute_url(self):
         return reverse_lazy('avalista:avalista_detail', kwargs={'pk': self.pk})
