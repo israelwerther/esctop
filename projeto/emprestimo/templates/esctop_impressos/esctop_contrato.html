@@ -502,7 +502,7 @@
                             if(isApr && previousParcela.date() == 1) {
                                 // Remove um mês do vencimento e seta o ultimo dia do mês para dia do vencimento
                                 vencimento.subtract(1, 'month')
-                                vencimento.date(vencimento.endOf('month').format("DD"))
+                                vencimento.date(diaVencimentoEmprestimo)
                             }
                         }
                         // Certifica-se de que vai sempre pegar o ultimo dia do mês caso o dia do 
