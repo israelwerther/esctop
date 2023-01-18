@@ -145,40 +145,42 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'core:index'
 LOGOUT_REDIRECT_URL = 'login'
 
-GS_DATA = {
-    "type": "service_account",
-    "project_id": config("GS_PROJECT_ID", default="GS_PROJECT_ID"),
-    "private_key_id": config("GS_PRIVATE_KEY_ID", default="GS_PRIVATE_KEY_ID"),
-    "client_email": config("GS_CLIENT_EMAIL", default="GS_CLIENT_EMAIL"),
-    "private_key": config("GS_PRIVATE_KEY", default="GS_PRIVATE_KEY").replace("\\n", "\n"),
-    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-    "token_uri": "https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/esctopservice%40esctop.iam.gserviceaccount.com"
-}
 
-GS_CREDENTIALS = service_account.Credentials.from_service_account_info(GS_DATA)
+
+if not DEBUG:
+    GS_DATA = {
+        "type": "service_account",
+        "project_id": config("GS_PROJECT_ID", default="GS_PROJECT_ID"),
+        "private_key_id": config("GS_PRIVATE_KEY_ID", default="GS_PRIVATE_KEY_ID"),
+        "client_email": config("GS_CLIENT_EMAIL", default="GS_CLIENT_EMAIL"),
+        "private_key": config("GS_PRIVATE_KEY", default="GS_PRIVATE_KEY").replace("\\n", "\n"),
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/esctopservice%40esctop.iam.gserviceaccount.com"
+    }
+    GS_CREDENTIALS = service_account.Credentials.from_service_account_info(GS_DATA)
+    DBBACKUP_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    DBBACKUP_STORAGE_OPTIONS = {
+        "bucket_name": config('GS_BACKUPS_BUCKET_NAME', default='GS_BACKUPS_BUCKET_NAME'),
+        "project_id": config("GS_PROJECT_ID", default="GS_PROJECT_ID"),
+        "blob_chunk_size": 1024 * 1024,
+        "location": 'esctopdb/'
+    }
     
-DBBACKUP_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-DBBACKUP_STORAGE_OPTIONS = {
-    "bucket_name": config('GS_BACKUPS_BUCKET_NAME', default='GS_BACKUPS_BUCKET_NAME'),
-    "project_id": config("GS_PROJECT_ID", default="GS_PROJECT_ID"),
-    "blob_chunk_size": 1024 * 1024,
-    "location": 'esctopdb/'
-}
+    sentry_sdk.init(
+        dsn=config('SENTRY_DSN', default='default'),
+        integrations=[
+            DjangoIntegration(),
+        ],
 
-sentry_sdk.init(
-    dsn=config('SENTRY_DSN', default='default'),
-    integrations=[
-        DjangoIntegration(),
-    ],
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production.
+        traces_sample_rate=0.1,
 
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate=0.1,
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True
+    )
 
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
