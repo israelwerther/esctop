@@ -92,9 +92,7 @@
                 </p>
             </div>
         {% endif %}
-        
     </div>
-
 
     {% comment %} QUADRO 02 - CRONOGRAMA DE REEMBOLSO {% endcomment %}
     <div class="row mt-3">
@@ -115,7 +113,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(parcela, index) in emprestimo.parcelas">
-                        <td class="py-0" width="33%" style="border: 1px solid black !important;">${String(index+1).padStart(2, '0')}/${emprestimo.qtd_parcelas}</td>
+                        <td class="py-0" width="33%" style="border: 1px solid black !important;">${String(index+1)}/${emprestimo.qtd_parcelas}</td>
                         <td class="py-0" width="33%" style="border: 1px solid black !important;">${moment(parcela.vencimento).format("DD/MM/YYYY")}</td>
                         <td class="py-0" width="33%" style="border: 1px solid black !important;">${currencyFormat(emprestimo.valor_prestacao)}</td>
                     </tr>
@@ -448,97 +446,14 @@
 		delimiters: ['${', '}'],
 		el: '#app',
 		data: {
-            fiador: "{{object.cliente_cnpj.fiador|default:''}}",
             fiador_nome: "{{object.cliente_cnpj.fiador.fiador_nome}}",
-            renegociar: {{object.renegociar|default:False|lower}},
-            emprestimo: {
-                dataEmprestimo: moment("{{object.dt_emprestimo|safe}}"),
-                valor_emprestado: {{object.valor_emprestado|safe}},
-                qtd_parcelas: {{object.qtd_parcelas|safe}},
-                valor_prestacao: {{object.valor_prestacao|safe}},
-                parcelas: [],
-                valor_mutuado: {{object.valor_mutuado|safe}},
-                valor_devido: {{object.valor_devido|safe}},
-                iof_real: {{object.iof_real|safe}},
-            },
+            {% include 'includes/emprestimo/contratos_data.js' with client=object.cliente_cnpj %}
 		},
 		methods: {
-            extensoNumber(number) {
-                return extenso(number, { 
-                    mode: 'currency',
-                    number: { decimal: 'informal' }, 
-                })
-            },
-            currencyFormat(number) {
-                return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-            },
-            getParcelas() {
-                let dataDoEmprestimo = Object.assign(moment(this.emprestimo.dataEmprestimo), {}) // Faz um cópia do dia do emprestimo
-                let diaVencimentoEmprestimo = dataDoEmprestimo.format("DD") // Pega o dia do vencimento do emprestimo
-                let vencimento = dataDoEmprestimo // Variável que salva o vencimento da parcela
-                
-                // Lógica anterior (Não foi alterada)
-                if(this.renegociar) {
-                    vencimento = dataDoEmprestimo.subtract(1, 'month')
-                }
-
-                for (let i = 1 ; i <= this.emprestimo.qtd_parcelas; i++) {
-                    vencimento = dataDoEmprestimo.add(1, 'month') // Vencimento da parcela com 1 mês a mais
-                    let isFeb = vencimento.month() == 1 // Verifica se é fevereiro
-                    let isApr = vencimento.month() == 3 // Verifica se é abril
-                    let lastDayOfMonth = vencimento.endOf('month').format("DD") // Pega o ultimo dia do mês da parcela
-                    let previousParcela = this.emprestimo.parcelas.at(-1) ? moment(this.emprestimo.parcelas.at(-1).vencimento) : null // Pega a parcela anterior
-                    let autoCalculateDates = diaVencimentoEmprestimo > (vencimento.isLeapYear() ? 29 : 28) ? false:true // Variável de controle para calculo automático das datas
-                    
-                    // Verifica se é fev ou abril
-                    if((isFeb || isApr) && !autoCalculateDates) {
-                        // Verifica se é ano bissexto e se o dia do emprestivo é maior do que 28 para não bissexto e 29 para bissexto 
-                        if(diaVencimentoEmprestimo > (vencimento.isLeapYear() ? 29 : 28)) {
-                            // se for Fevereiro aplica a regra de adicionar mais 1 mês e setar o dia 1
-                            if(isFeb) {
-                                vencimento.add(1, 'month').date(1)
-                            }
-                            // Se for abril e o dia da parcela anterior for 01 então entra nessa condição
-                            if(isApr && previousParcela.date() == 1) {
-                                // Remove um mês do vencimento e seta o ultimo dia do mês para dia do vencimento
-                                vencimento.subtract(1, 'month')
-                                vencimento.date(diaVencimentoEmprestimo)
-                            }
-                        }
-                        // Certifica-se de que vai sempre pegar o ultimo dia do mês caso o dia do 
-                        // emprestivo seja maior que o dia do vencimento da parcela
-                        if(vencimento.month() == 3 && vencimento.endOf('month').format("DD") > diaVencimentoEmprestimo) {
-                            vencimento.date(diaVencimentoEmprestimo)
-                        }
-
-                    } else {
-                        // Segue o fluxo de adição do ultimo dia do mês ou o dia do vencimento da parcela
-                        if(lastDayOfMonth > diaVencimentoEmprestimo) {
-                            vencimento.date(diaVencimentoEmprestimo)
-                        } else {
-                            vencimento.date(lastDayOfMonth)
-                        }
-                    }
-                    // Adiciona mais um parcela ao array de parcelas
-                    this.emprestimo.parcelas.push({						
-                        vencimento: vencimento.format("YYYY-MM-DD"),
-                        valor_parcela: this.emprestimo.valor_prestacao
-                    })
-                }
-			},
+            {% include 'includes/emprestimo/contratos.js' %}
         },
 		mounted() {
-            this.getParcelas()
-            var bottom = 0;
-            $(document).ready(function() {
-            $(".pageBreak").slice(0, $(".pageBreak").length - 1).each(function() {
-                bottom -= 100;
-                botString = bottom.toString();
-                var $counter = $('h3.first').text(' de ' + $(".pageBreak").length).clone().removeClass('first');
-                $counter.css("bottom", botString + "%");
-                    ($counter).insertBefore('.insert');
-                });
-            });
+            {% include 'includes/emprestimo/contratos_mounted.js' %}
         },
 		watch: {
 			

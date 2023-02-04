@@ -1,0 +1,13 @@
+fiador: "{{client.fiador|default:''}}",
+renegociar: {{object.renegociar|default:False|lower}},
+emprestimo: {
+    dataEmprestimo: moment("{{object.dt_emprestimo|safe}}"),
+    valor_emprestado: {{object.valor_emprestado|safe}},
+    qtd_parcelas: {{object.qtd_parcelas|safe}},
+    valor_prestacao: {{object.valor_prestacao|safe}},
+    parcelas: [],
+    valor_emprestado: {{object.valor_emprestado|safe}},
+    valor_mutuado: {{object.valor_mutuado|safe}},
+    valor_devido: {{object.valor_devido|safe}},
+    iof_real: {{object.iof_real|safe}},
+},

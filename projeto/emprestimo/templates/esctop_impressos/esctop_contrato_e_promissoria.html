@@ -463,7 +463,7 @@
                         <div class="col-11 mt-3 d-flex justify-content-center">
                             <p class="text-justify h5 pt-3">                     
                                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Ao(s) <u>${moment(parcela.vencimento).format("DD")} de ${moment(parcela.vencimento).format("MMMM")} de ${moment(parcela.vencimento).format("YYYY")}</u> pagarei por esta única via de NOTA PROMISSÓRIA 
-                                a ESCTOP - EMPRESA SIMPLES DE CRÉDITO LTDA, CNPJ 35.297.061/0001-47 ou à sua ordem, a quantia de <u> ${extensoNumber('{{object.valor_prestacao}}')}</u> 
+                                a ESCTOP - EMPRESA SIMPLES DE CRÉDITO LTDA, CNPJ 35.297.061/0001-47 ou à sua ordem, a quantia de <u> ${inFullMoney('{{object.valor_prestacao}}')}</u> 
                                 em moeda corrente deste país, pagável em ESCRITÓRIO NATAL/RN.
                             </p>
                         </div>
@@ -509,77 +509,14 @@
 		delimiters: ['${', '}'],
 		el: '#app',
 		data: {
-            fiador: "{{object.cliente_cnpj.fiador|default:''}}",
             fiador_nome: "{{object.cliente_cnpj.fiador.fiador_nome}}",
-            renegociar: "{{object.renegociar}}",
-
-            controls: {
-                passou_por_fevereiro: false,
-            },
-            emprestimo: {
-                dataEmprestimo: moment("{{object.dt_emprestimo|safe}}"),
-                valor_emprestado: {{object.valor_emprestado|safe}},
-                qtd_parcelas: {{object.qtd_parcelas|safe}},
-                valor_prestacao: {{object.valor_prestacao|safe}},
-                parcelas: [],
-                valor_emprestado: {{object.valor_emprestado|safe}},
-                valor_mutuado: {{object.valor_mutuado|safe}},
-                valor_devido: {{object.valor_devido|safe}},
-                iof_real: {{object.iof_real|safe}},
-            },
+            {% include 'includes/emprestimo/contratos_data.js' with client=object.cliente_cnpj %}
 		},
 		methods: {
-            extensoNumber(number) {
-                return extenso(number, { 
-                    mode: 'currency',
-                    number: { decimal: 'informal' }, 
-                })
-            },
-            currencyFormat(number) {
-                return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-            },
-            getParcelas() {
-                let data_do_emprestimo = moment(this.emprestimo.dataEmprestimo)
-                let vencimento
-
-                if(this.renegociar == "False"){
-                    vencimento = data_do_emprestimo.add(0, 'month')
-                }
-                if(this.renegociar == "True"){
-                    vencimento = data_do_emprestimo.add(-1, 'month')
-                }
-
-                for (let i = 0 ; i < this.emprestimo.qtd_parcelas; i++) {
-
-                    if(this.emprestimo.dataEmprestimo.month() == 0 && this.emprestimo.dataEmprestimo.date() >= 29) {
-                        vencimento = data_do_emprestimo.date(1).add(i == 0 ? 2:1, 'month')
-
-                    } else if(vencimento.daysInMonth() == 28 && moment(data_do_emprestimo).date() > 28){
-                        vencimento = data_do_emprestimo.date(1).add(1, 'month')
-                    }
-                    else {
-                        vencimento = data_do_emprestimo.add(1, 'month')
-                    }
-
-                    this.emprestimo.parcelas.push({						
-                        vencimento: vencimento.format("YYYY/MM/DD"),
-                        valor_parcela: this.emprestimo.valor_prestacao
-                    })
-                }
-			},
+            {% include 'includes/emprestimo/contratos.js' %}
         },
 		mounted() {
-            this.getParcelas()
-            var bottom = 0;
-            $(document).ready(function() {
-            $(".pageBreak").slice(0, $(".pageBreak").length - 1).each(function() {
-                bottom -= 100;
-                botString = bottom.toString();
-                var $counter = $('h3.first').text(' de ' + $(".pageBreak").length).clone().removeClass('first');
-                $counter.css("bottom", botString + "%");
-                    ($counter).insertBefore('.insert');
-                });
-            });
+            {% include 'includes/emprestimo/contratos_mounted.js' %}
         },
 		watch: {
 			
