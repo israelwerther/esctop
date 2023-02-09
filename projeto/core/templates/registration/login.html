@@ -10,7 +10,10 @@
     body {
         background: rgba(0, 128, 0, 0.3) /* Green background with 30% opacity */
     }
-    
+
+    .form-control:focus {
+        border-width: 1px !important;
+    }
 </style>
 {% endblock css %}
 
@@ -20,47 +23,64 @@
     <div class="col " style="max-width: 500px !important;">
         <div class="d-flex justify-content-center mt-5 card card-body">
             
-            <div class="d-flex justify-content-center mt-1">
-                <h3 id="form-title">ESCTOP</h3>
+            <div class="d-flex justify-content-center py-3 mt-1">
+                <h2 id="form-title">ESCTOP</h2>
             </div>
             <div class="d-flex justify-content-center">
                 <form method="POST" action="">
-                    {% csrf_token %}                    
-                    <div class="input-group mb-0">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fa-solid fa-user-large"></i>
-                            </div>
+                    {% csrf_token %}
+                    <div class="row" style="max-width: 350px !important;">
+                        <div class="col-12">
+                            {% if form.non_field_errors %}
+                                <p class="text-danger"><em>Seu <strong>usuário</strong> e <strong>senha</strong> não correspondem. Por favor, tente novamente.</em></p>
+                            {% endif %}
                         </div>
-                        <input type="text" class="form-control" id="id_username" name="username" placeholder="{{form.username.label}}" autofocus="">
-                    </div>
-                    {% if form.username.errors %}
-                        <small class="text-danger">{{form.username.errors}}</small>
-                    {% endif %}
-                    <div class="input-group mb-0 pt-2">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="fa-solid fa-key"></i>
+                        <div class="col-12">
+                            <div class="input-group mb-0">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa-solid fa-user-large"></i>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control {% if form.username.errors %}is-invalid{% endif %}" id="id_username" name="username" placeholder="Digite seu usuário" autofocus="">
                             </div>
+        
+                            {% if form.username.errors %}
+                                <small class="text-danger">{{form.username.errors}}</small>
+                            {% endif %}
+        
+                            <div class="input-group mb-0 pt-2">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <i class="fa-solid fa-key"></i>
+                                    </div>
+                                </div>
+                                <input type="password" class="form-control" name="password" autocomplete="current-password" id="id_password" placeholder="Digite sua senha">
+                            </div>
+        
+                            {% if form.password.errors %}
+                                <small class="text-danger">{{form.password.errors}}</small>
+                            {% endif %}
+
                         </div>
-                        <input type="password" class="form-control" name="password" autocomplete="current-password" id="id_password" placeholder="{{form.password.label}}">
                     </div>
-                    {% if form.password.errors %}
-                        <small class="text-danger">{{form.password.errors}}</small>
-                    {% endif %}
                     
-                    <div class="pt-4">
-                        <button class="btn btn-success btn-block" type="submit">Entrar</button>
+                    <div class="row py-4">
+                        <div class="col-12">
+                            <button class="btn btn-success btn-block" type="submit">Entrar</button>
+                        </div>
+                    </div>
+                    <div class="row py-4">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center links">
+                                <a href="#" class="ml-2">Criar uma conta? </a>
+                            </div>
+                        </div>
                     </div>
                 </form>
-                
             </div>
+
             
-            <div class="mt-2">
-                <div class="d-flex justify-content-center links">
-                    <a href="#" class="ml-2">Criar uma conta? </a>
-                </div>
-            </div>
             
         </div>
     </div>
