@@ -26,9 +26,8 @@
     <div class="col-sm-12">
         <span class="pull-right no-print">
             <a href="{% url 'cliente:credcoop_cliente_list' %}" type="button" class="btn btn-secondary">Voltar</a>
-            <a href="{% url 'cliente:cliente_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>                
             <a href="{% url 'cliente:credcoop_update' object.pk %}" type="button" class="btn btn-primary">
-                Editar<span class="badge badge-success mx-2">Novo</span>
+                Editar
             </a>                
             <a href="" type="button" onclick="window.print()" class="btn btn-warning no-print">Imprimir</a>
         </span>
