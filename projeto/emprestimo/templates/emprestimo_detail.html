@@ -189,50 +189,6 @@
                 </div>
             </div><!-- card -->
             
-            <div class="card">
-                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                        {% if object.cliente %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
-                        {% endif %}
-
-                        <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria' object.pk %}" target="_blank">Promissória</a>
-
-                        {% if object.cliente_cnpj %}  
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj' object.pk %}" target="_blank">
-                                Contrato
-                            </a>
-                        {% endif %}
-
-                        {% if object.cliente %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf' object.pk %}" target="_blank" type="button">
-                                Contrato</a>
-                        {% endif %}
-                        
-                    </div>
-                </div>
-            </div><!-- card -->
-
-            <div class="card">
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                        {% if object.cliente %}
-                        <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_carne' object.pk %}" target="_blank">Carnê</a>
-                        {% endif %}
-
-                        <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_promissoria_renegociacao' object.pk %}" target="_blank">Promissória</a>
-
-                        {% if object.cliente_cnpj %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cnpj_renegociacao' object.pk %}" target="_blank">Contrato</a>
-                        
-                        {% endif %}
-
-                        {% if object.cliente %}
-                            <a class="dropdown-item" href="{% url 'emprestimo:emprestimo_contrato_cpf_renegociacao' object.pk %}" target="_blank" type="button"> Contrato</a>
-                        {% endif %}
-                    </div>
-                </div>
-            </div><!-- card -->
             
             <div class="pt-3">
                 <a href="{% url 'emprestimo:emprestimo_delete' object.pk %}" type="button" class="mt-1 btn btn-danger btn-block ">Deletar</a>

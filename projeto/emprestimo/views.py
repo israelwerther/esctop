@@ -158,12 +158,6 @@ class CredcoopPromissoria(DetailView):
         return context
 
 
-class EmprestimoCarne(UpdateView):
-    model=Emprestimo
-    template_name='credcoop_impressos/emprestimo_carne.html'
-    form_class=EmprestimoForm
-
-
 # Esctop Impressos
 class EsctopPromissoria(DetailView):
     def test_func(self):
@@ -202,63 +196,11 @@ class EsctopContratoPromissoria(DetailView):
 		
         return context
 
-############################################################################################################
 
-
-# class EmprestimoUpdate(UpdateView):
-#     model=Emprestimo
-#     template_name='emprestimo_form.html'
-#     form_class=EmprestimoForm
-
-#     def form_valid(self, form_class):
-#         obj = form_class.save(commit=False)
-#         obj.funcionario = self.request.user
-#         return super(EmprestimoUpdate, self).form_valid(form_class)
-
-    
 class EmprestimoDelete(DeleteView):
     model=Emprestimo
     template_name ='emprestimo_delete.html'    
     success_url = reverse_lazy('emprestimo:esctop_emprestimo_list')  
-
-
-
-    
-
-class EmprestimoPromissoria(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_promissoria.html'
-    form_class=EmprestimoForm
-
-class EmprestimoPromissoriaRenegociacao(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_promissoria_renegociacao.html'
-    form_class=EmprestimoForm
-
-
-class EmprestimoContratoCNPJ(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_contrato_cnpj.html'
-    form_class=EmprestimoForm
-
-
-
-
-
-class EmprestimoContratoCNPJRenegociacao(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_contrato_cnpj_renegociacao.html'
-    form_class=EmprestimoForm
-
-class EmprestimoContratoCPF(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_contrato_cpf.html'
-    form_class=EmprestimoForm
-    
-class EmprestimoContratoCPFRenegociacao(UpdateView):
-    model=Emprestimo
-    template_name='emprestimo_contrato_cpf_renegociacao.html'
-    form_class=EmprestimoForm
 
 
 @login_required
@@ -287,8 +229,8 @@ def emprestimo_pagamento(request, pk):
         emprestimopagamento.emprestimo = emprestimo
         emprestimopagamento.save()        
     return redirect('emprestimo:emprestimo_detail', pk)
-   
-   
+
+
 @login_required
 def emprestimo_pagamento_list(request, pk):
     emprestimo = get_object_or_404(Emprestimo, pk=pk)
@@ -296,11 +238,3 @@ def emprestimo_pagamento_list(request, pk):
     emprestimos = emprestimo.emprestimopagamento_set.all()
     context = {'emprestimo': emprestimo, 'form': form, 'emprestimos': emprestimos } 
     return render(request, 'emprestimo_pagamento_list.html', context)
-
-
-class EmprestimoCreateView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):    
-    template_name = 'form_emprestimo.html'
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
