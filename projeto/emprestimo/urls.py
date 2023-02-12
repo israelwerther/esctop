@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 from projeto.emprestimo import views as v
-# from .views import emprestimo_pagamento
 
 app_name='emprestimo' 
 

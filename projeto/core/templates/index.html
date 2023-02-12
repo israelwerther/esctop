@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% block css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% endblock css %}
+
 {% block content %}
 <div class="jumbotron jumbotron-fluid shadow rounded">
     <div class="container">
@@ -7,13 +12,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-lg-3 col-sm-6 col-12">
-        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-            <div class="card-header"><h5>Aniversariantes de hoje</h5></div>
-            <div class="card-body">
+    <div class="col-lg-3 col-sm-6 col-12 d-flex align-items-center justify-content-center">
+        <div class="card border-success mb-3" style="max-width: 18rem;">
+            <div class="card-header card text-center">
+                <i class="fa-solid fa-calendar text-success"> Aniversariantes</i>
+            </div>
+            <div class="card-body text-success">
                 {% if total_aniversariantes > 0 %}
-                    <p class="card-title">{{total_aniversariantes}} Aniversariante(s)</p>
-                    <a href="{% url 'core:aniversariantes'%}" class="btn btn-primary">Ver lista</a>
+                    <p class="card-title">{{total_aniversariantes}} Aniversariante{% if total_aniversariantes != 1 %}(s){% endif %}</p>
+                    <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Ver lista</a>
                 {% else %}
                     <p class="card-text">Nenhum aniversariante hoje</p>
                 {% endif %}
