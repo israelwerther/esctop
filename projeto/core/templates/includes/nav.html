@@ -1,150 +1,129 @@
-<html>
+
 <style>
-	body {
-		margin: 0;
-		font-family: Arial, Helvetica, sans-serif;
-		margin-top: 65px;
-		/* text-transform: uppercase; */
-	}
-	.navBarVerde {
+	.navbar {
 		font-family: Noto Sans, sans-serif;
 		background-image: linear-gradient(15deg, #2C3D4E 0%, #5eaa84 100%);
 		font-weight: bold;
 	}
-	.navbar-light .navbar-brand {
-		color: rgb(255, 255, 255);		
-		opacity: 1.0;
-	}
-	.navbar-light .navbar-nav .nav-link {
-		color: rgb(255, 255, 255) !important;		
-		opacity: 1.0;
-	}
-	
-	.dropdown-item{
-		opacity: 1.0;
-	}
-	.dropdown-item:hover {
-		background-color: #2C3D4E !important;
-		color: white
-	}
 
-	a .nav-link{
-		left: auto !important;
-		right: 0px;
-	}	
-
-	.navbar-nav li:hover > ul.dropdown-menu {
+	.navbar-nav li:hover>ul.dropdown-menu {
 		display: block;
 	}
+
 	.dropdown-submenu {
-		position:relative;
+		position: relative;
 	}
+
 	.dropdown-submenu>.dropdown-menu {
-		top:0;
-		left:100%;
-		margin-top:-6px;
+		top: 0;
+		left: 100%;
+		margin-top: -6px;
 	}
-	
+
 	/* rotate caret on hover */
-	.dropdown-menu > li > a:hover:after {
+	.dropdown-menu>li>a:hover:after {
 		text-decoration: underline;
 		transform: rotate(-90deg);
-	} 
-	
+	}
 
-	
-	
+	.dropdown-item:focus, .dropdown-item:hover {
+		color: #16181b;
+		text-decoration: none;
+		background-color: transparent;
+	}
+
+	.navbar-toggler-icon {
+		background: 50%/100% 100% no-repeat;
+		
+	}
+
 </style>
 
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<nav class="navbar fixed-top navbar-expand-md navbar-light navBarVerde">
-		<a class="navbar-brand pb-2" href="{% url 'core:index' %}">INÍCIO</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNavDropdown">
-			<ul class="navbar-nav ">
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" style="text-transform: uppercase;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Cadastro
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">						
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">CLIENTES</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="{% url 'cliente:credcoop_decision' %}">
-										CREDCOOP
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="{% url 'cliente_cnpj:esctop_decision' %}">
-										ESCTOP
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="{% url 'avalista:esctop_avalista_add' %}">
-										ESCTOP
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">EMPRÉSTIMOS</a>
-							<ul class="dropdown-menu">
-								<li>
-									<a class="dropdown-item" href="{% url 'emprestimo:credcoop_emprestimo_form' %}">CREDCOOP</a></li>
-								<li><a class="dropdown-item" href="{% url 'emprestimo:esctop_emprestimo_form' %}">ESCTOP</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top ">
+	<a class="navbar-brand pb-2" href="{% url 'core:index' %}" style="color: rgba(255, 255, 255, 0.9) !important;">Início</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+		aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
 
-				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" style="text-transform: uppercase;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Consulta
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">						
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">CLIENTES</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'cliente:credcoop_cliente_list' %}">CREDCOOP</a></li>
-								<li><a class="dropdown-item" href="{% url 'cliente_cnpj:esctop_cliente_list' %}">ESCTOP</a></li>
-							</ul>
-						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">FIADOR</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">ESCTOP</a></li>								
-							</ul>
-						</li>
-						<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">EMPRÉSTIMOS</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="{% url 'emprestimo:credcoop_emprestimo_list' %}">CREDCOOP</a></li>
-								<li><a class="dropdown-item" href="{% url 'emprestimo:esctop_emprestimo_list' %}">ESCTOP</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
+	<div class="collapse navbar-collapse" id="navbarNavDropdown">
+		<ul class="navbar-nav">
+			<li class="nav-item dropdown">
+				<a class="nav-link" href="http://example.com" id="navbarDropdownMenuLink"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: rgba(255, 255, 255, 0.9) !important;">
+					Cadastro 1
+				</a>
 				
-				<li class="nav-item dropdown">
-					<a class=" nav-link dropdown-toggle" style="text-transform: uppercase;" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Usuário
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="{% url 'logout' %}">ENCERRAR SESSÃO</a></li>
-					</ul>
-				</li>	
-			</ul>
-			<ul class="navbar-nav ml-auto">
-				{% if user.is_authenticated %}
-					<a class="nav-link disabled" style=" color: rgb(240, 246, 255);">Olá, {{user.first_name}}!</a>
-				{% endif %}
-			</ul>
-		</div>
-	</nav>
 
-</head>
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Clientes</a>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'cliente:credcoop_decision' %}">Credcoop</a>
+							<a class="dropdown-item" href="{% url 'cliente_cnpj:esctop_decision' %}">Esctop</a>
+						</ul>
+					</li>
+					
+					<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Empréstimos</a>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'emprestimo:credcoop_emprestimo_form' %}">Credcoop</a>
+							<a class="dropdown-item" href="{% url 'emprestimo:esctop_emprestimo_form' %}">Esctop</a>
+						</ul>
+					</li>
 
-</html>
+					<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Fiador</a>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">Esctop</a>
+						</ul>
+					</li>						
+				</ul>
+			</li>
+
+			<li class="nav-item dropdown">
+				<div class="dropdown-submenu">
+					<button class="dropdown-item d-sm-none text-center" type="button" data-toggle="dropdown" 
+					aria-expanded="false" style="color: rgba(255, 255, 255, 0.9) !important;">Cadastro 2
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="#">Something else here</a>
+					</div>
+				</div>
+			</li>
+
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle d-none d-md-block" href="http://example.com" 
+					id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+					style="color: rgba(255, 255, 255, 0.9) !important;">Consulta
+				</a>
+
+				<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+					<li class="dropdown-submenu">
+						<a class="dropdown-item dropdown-toggle">Clientes</a>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'cliente:credcoop_cliente_list' %}">Credcoop</a>
+							<a class="dropdown-item" href="{% url 'cliente_cnpj:esctop_cliente_list' %}">Esctop</a>
+						</ul>
+					</li>
+					<li class="dropdown-submenu">
+						<a class="dropdown-item dropdown-toggle">Empréstimos</a>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'emprestimo:credcoop_emprestimo_list' %}">Credcoop</a>
+						</ul>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'emprestimo:esctop_emprestimo_list' %}">Esctop</a>
+						</ul>
+					</li>
+					<li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle">Fiador</a>
+						<ul class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'avalista:avalista_list' %}">Esctop</a>
+						</ul>
+					</li>
+				</ul>
+			</li>
+
+			
+
+		</ul>
+	</div>
+</nav>
