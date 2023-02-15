@@ -10,6 +10,12 @@ from projeto.avalista.forms import AvalistaForm
 from django.db.models.query_utils import Q
 
 
+class EsctopCreate(CreateView):
+    model=Cliente_cnpj
+    template_name='esctop_form.html'
+    form_class=Cliente_cnpjForm
+
+
 class EsctopClientList(ListView):
     model=Cliente_cnpj
     template_name='esctop_client_list.html'
@@ -43,12 +49,6 @@ class EsctopClientList(ListView):
 class EsctopDetail(DetailView):
     model=Cliente_cnpj
     template_name='esctop_detail.html'
-    form_class=Cliente_cnpjForm
-
-
-class EsctopCreate(CreateView):
-    model=Cliente_cnpj
-    template_name='esctop_form.html'
     form_class=Cliente_cnpjForm
 
 

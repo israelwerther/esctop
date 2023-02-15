@@ -9,9 +9,15 @@ from .forms import ClienteForm
 from django.db.models.query_utils import Q
 
 
+class CredcoopCreate(CreateView):
+    model=Cliente
+    template_name='credcoop_form.html'
+    form_class=ClienteForm
+
+
 class CredcoopClienteList(ListView):
     model=Cliente
-    template_name='cliente_list.html'
+    template_name='credcoop_client_list.html'
     paginate_by = 20
     context_object_name = "objects"
 
@@ -44,18 +50,6 @@ def cliente_detail(request, pk):
     obj=Cliente.objects.get(pk=pk)
     context={'object': obj}
     return render(request, template_name, context)
-
-
-class ClienteCreate(CreateView):
-    model=Cliente    
-    template_name='cliente_form.html'
-    form_class=ClienteForm
-
-
-class CredcoopCreate(CreateView):
-    model=Cliente
-    template_name='credcoop_form.html'
-    form_class=ClienteForm
 
 
 class CredcoopUpdate(UpdateView):
@@ -106,9 +100,9 @@ class ClienteUpdate(UpdateView):
     #fazer aqui receber o form dos emprestimos filtrados apenas dele
     
 
-class ClienteDelete(DeleteView):
+class CredcoopDelete(DeleteView):
     model=Cliente
-    template_name ='cliente_delete.html'    
+    template_name ='credcoop_delete.html'    
     success_url = reverse_lazy('cliente:credcoop_cliente_list')
     
 
