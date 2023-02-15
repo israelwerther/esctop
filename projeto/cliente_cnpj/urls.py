@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path
 from projeto.cliente_cnpj import views as v
 
-app_name='cliente_cnpj' 
+app_name='cliente_cnpj'
 
 urlpatterns = [
     path('clientes-esctop/', login_required(v.EsctopClienteList.as_view()), name='esctop_cliente_list'),

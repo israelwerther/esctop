@@ -2,7 +2,9 @@
 
 {% block css %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+<style>
+    
+</style>
 {% endblock css %}
 
 {% block content %}
@@ -12,8 +14,31 @@
     </div>
 </div>
 <div class="row">
+    {% comment %} <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
+        <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+            <div class="card-header card text-center">
+                <i class="fa-solid text-success"> esctop</i>
+            </div>
+            <div class="card-body text-success">,
+                <p class="badge badge-primary">Cadastre ou consulte clientes</p>
+                <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Acessar</a>
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
-        <div class="card border-success mb-3" style="max-width: 100%;">
+        <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+            <div class="card-header card text-center">
+                <i class="fa-solid fa-memo-circle-info text-success"> Credcoop</i>
+            </div>
+            <div class="card-body text-success">,
+                <p class="badge badge-primary">Cadastre ou consulte clientes</p>
+                <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Acessar</a>
+            </div>
+        </div>
+    </div> {% endcomment %}
+    <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
+        <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
             <div class="card-header card text-center">
                 <i class="fa-solid fa-calendar text-success"> Aniversariantes</i>
             </div>
@@ -22,11 +47,12 @@
                     <p class="badge badge-primary">{{total_aniversariantes}} Aniversariante{% if total_aniversariantes != 1 %}(s){% endif %}</p>
                     <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Ver lista</a>
                 {% else %}
-                    <p class="card-text">Nenhum aniversariante hoje</p>
+                    <p class="badge badge-primary">Nenhum aniversariante hoje</p>
                 {% endif %}
             </div>
         </div>
     </div>
+
 </div>
 
 {% endblock content %}

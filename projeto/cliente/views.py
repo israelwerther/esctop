@@ -40,7 +40,7 @@ class CredcoopClienteList(ListView):
 
 @login_required
 def cliente_detail(request, pk):
-    template_name='cliente_detail.html'
+    template_name='credcoop_detail.html'
     obj=Cliente.objects.get(pk=pk)
     context={'object': obj}
     return render(request, template_name, context)
