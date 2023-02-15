@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from .models import Cliente_cnpj
 from projeto.avalista.models import Avalista
 from .forms import Cliente_cnpjForm
@@ -40,12 +40,10 @@ class EsctopClientList(ListView):
         return context
 
 
-@login_required
-def cliente_cnpj_detail(request, pk):
+class EsctopDetail(DetailView):
+    model=Cliente_cnpj
     template_name='esctop_detail.html'
-    obj=Cliente_cnpj.objects.get(pk=pk)
-    context={'object': obj}
-    return render(request, template_name, context)
+    form_class=Cliente_cnpjForm
 
 
 class EsctopCreate(CreateView):
