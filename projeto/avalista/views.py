@@ -49,12 +49,6 @@ def avalista_detail(request, pk):
 #     return render(request, 'avalista_decision.html')
 
 
-class AvalistaCreate(CreateView):
-    model=Avalista
-    template_name='avalista_form.html'
-    form_class=AvalistaForm   
-    
-
 class AvalistaUpdate(UpdateView):
     model=Avalista
     template_name='avalista_form.html'

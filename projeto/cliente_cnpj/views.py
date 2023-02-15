@@ -10,9 +10,9 @@ from projeto.avalista.forms import AvalistaForm
 from django.db.models.query_utils import Q
 
 
-class EsctopClienteList(ListView):
+class EsctopClientList(ListView):
     model=Cliente_cnpj
-    template_name='cliente_cnpj_list.html'
+    template_name='esctop_client_list.html'
     paginate_by = 20
     context_object_name = "objects"
 
@@ -32,7 +32,7 @@ class EsctopClienteList(ListView):
         return queryset
     
     def get_context_data(self, **kwargs):
-        context = super(EsctopClienteList, self).get_context_data(**kwargs)
+        context = super(EsctopClientList, self).get_context_data(**kwargs)
         context['params'] = self.request.META['QUERY_STRING']		
         context['search_by'] = self.request.GET.get('search_by')
         context['page_title'] = "Clientes Esctop"
@@ -66,22 +66,9 @@ class EsctopDecision(CreateView):
     form_class=Cliente_cnpjForm
 
 
-class ClienteCnpjCreate(CreateView):
+class EsctopDelete(DeleteView):
     model=Cliente_cnpj
-    template_name='cliente_cnpj_form.html'
-    form_class=Cliente_cnpjForm
-
-
-class Cliente_cnpjUpdate(UpdateView):
-    model=Cliente_cnpj   
-    model1=Avalista   
-    template_name='cliente_cnpj_form.html'
-    form_class = Cliente_cnpjForm
-
-
-class Cliente_cnpjDelete(DeleteView):
-    model=Cliente_cnpj
-    template_name ='cliente_cnpj_delete.html'    
+    template_name ='esctop_delete.html'
     success_url = reverse_lazy('cliente_cnpj:cliente_cnpj_list')
 
 
