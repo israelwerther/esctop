@@ -85,7 +85,7 @@ class Cliente_cnpj(models.Model):
         return self.razao_social if self.razao_social else "Sem razão social cadastrado"
     
     def get_absolute_url(self):
-        return reverse_lazy('cliente_cnpj:cliente_cnpj_detail', kwargs={'pk': self.pk})
+        return reverse_lazy('cliente_cnpj:esctop_client_detail', kwargs={'pk': self.pk})
 
     # def save(self, force_insert=False, force_update=False):
     #     self.razao_social = self.razao_social.upper()

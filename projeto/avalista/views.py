@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 from django.core.paginator import Paginator
 from .models import Avalista
 from .forms import AvalistaForm
@@ -9,9 +9,21 @@ from .forms import AvalistaForm
 from django.db.models.query_utils import Q
 
 
-class AvalistaList(ListView):
+class EsctopAvalistaDelete(DeleteView):
     model=Avalista
-    template_name='avalista_list.html'
+    template_name ='esctop_avalista_delete.html'
+    success_url = reverse_lazy('avalista:esctop_avalista_list')
+
+
+class EsctopAvalistaCreate(CreateView):
+    model=Avalista
+    template_name='esctop_avalista_form.html'
+    form_class=AvalistaForm
+
+
+class EsctopAvalistaList(ListView):
+    model=Avalista
+    template_name='esctop_avalista_list.html'
     paginate_by = 20
     context_object_name = "objects"
 
@@ -29,7 +41,7 @@ class AvalistaList(ListView):
         return queryset
     
     def get_context_data(self, **kwargs):
-        context = super(AvalistaList, self).get_context_data(**kwargs)
+        context = super(EsctopAvalistaList, self).get_context_data(**kwargs)
         context['params'] = self.request.META['QUERY_STRING']
 		
         context['search_by'] = self.request.GET.get('search_by')		
@@ -37,39 +49,24 @@ class AvalistaList(ListView):
         return context
 
 
-@login_required
-def avalista_detail(request, pk):
-    template_name='avalista_detail.html'
-    obj=Avalista.objects.get(pk=pk)
-    context={'object': obj}
-    return render(request, template_name, context)
-
-# @login_required
-# def avalista_decision(request):
-#     return render(request, 'avalista_decision.html')
+class EsctopAvalistaDetail(DetailView):
+    model = Avalista
+    template_name = 'esctop_avalista_detail.html'
+    form_class=AvalistaForm
 
 
 class AvalistaUpdate(UpdateView):
     model=Avalista
     template_name='avalista_form.html'
     form_class = AvalistaForm
-    success_url = reverse_lazy('avalista:avalista_list')
-
-
-class EsctopAvalistaCreate(CreateView):
-    model=Avalista
-    template_name='esctop_avalista_form.html'
-    form_class=AvalistaForm
+    success_url = reverse_lazy('avalista:esctop_avalista_list')
 
 
 class EsctopFiadorUpdate(UpdateView):
     model=Avalista
     template_name='esctop_avalista_form.html'
     form_class = AvalistaForm
-    success_url = reverse_lazy('avalista:avalista_list')
+    success_url = reverse_lazy('avalista:esctop_avalista_list')
 
 
-class AvalistaDelete(DeleteView):
-    model=Avalista
-    template_name ='avalista_delete.html'    
-    success_url = reverse_lazy('avalista:avalista_list')
+

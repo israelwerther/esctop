@@ -42,7 +42,7 @@ class Avalista(models.Model):
         return str(self.fiador_nome) if self.fiador_nome else "sem fiador"
     
     def get_absolute_url(self):
-        return reverse_lazy('avalista:avalista_detail', kwargs={'pk': self.pk})
+        return reverse_lazy('avalista:esctop_avalista_detail', kwargs={'pk': self.pk})
 
     # def save(self, force_insert=False, force_update=False):
     #     self.fiador_nome = self.fiador_nome.upper()

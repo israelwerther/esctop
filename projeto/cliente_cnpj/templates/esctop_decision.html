@@ -32,7 +32,7 @@
                 <div class="card-body">
                 <h5 class="card-title">Cadastre um avalista</h5>
                 {% comment %} <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> {% endcomment %}
-                <a href="{% url 'avalista:esctop_avalista_add' %}" class="btn btn btn-primary btn-lg btn-block">Cadastrar Avalista</a>
+                <a href="{% url 'avalista:esctop_avalista_create' %}" class="btn btn btn-primary btn-lg btn-block">Cadastrar Avalista</a>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 <div class="modal-body">
                     <span class="pull-center">
                         <a href="{% url 'cliente_cnpj:esctop_add' %}" type="button" class="btn btn-success">SIM</a>
-                        <a href="{% url 'avalista:esctop_avalista_add' %}" type="button" class="btn btn-danger">NÃO</a>
+                        <a href="{% url 'avalista:esctop_avalista_create' %}" type="button" class="btn btn-danger">NÃO</a>
                     </span>
                 </div>
                 <div class="modal-footer">

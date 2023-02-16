@@ -15,9 +15,9 @@
 
 
 <span class="pull-right">
-    <a href="{% url 'avalista:avalista_list' %}" type="button" class="btn btn-secondary">Voltar</a>
-    <a href="{% url 'avalista:esctop_avalista_edit' object.pk %}" type="button" class="btn btn-info">Editar</a>
-    <a href="{% url 'avalista:avalista_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
+    <a href="{% url 'avalista:esctop_avalista_list' %}" type="button" class="btn btn-secondary">Voltar</a>
+    <a href="{% url 'avalista:esctop_avalista_update' object.pk %}" type="button" class="btn btn-info">Editar</a>
+    <a href="{% url 'avalista:esctop_avalista_delete' object.pk %}" type="button" class="btn btn-danger">Deletar</a>
 </span>
 
 <h2>DETALHES DO FIADOR <br> {{ object.avalista }}</h2>

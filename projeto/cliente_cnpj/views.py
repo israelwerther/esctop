@@ -16,6 +16,12 @@ class EsctopCreate(CreateView):
     form_class=Cliente_cnpjForm
 
 
+class EsctopDecision(CreateView):
+    model=Cliente_cnpj
+    template_name='esctop_decision.html'
+    form_class=Cliente_cnpjForm
+
+
 class EsctopClientList(ListView):
     model=Cliente_cnpj
     template_name='esctop_client_list.html'
@@ -56,12 +62,6 @@ class EsctopUpdate(UpdateView):
     model=Cliente_cnpj
     template_name='esctop_form.html'
     form_class = Cliente_cnpjForm
-
-
-class EsctopDecision(CreateView):
-    model=Cliente_cnpj
-    template_name='esctop_decision.html'
-    form_class=Cliente_cnpjForm
 
 
 class EsctopDelete(DeleteView):

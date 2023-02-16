@@ -77,9 +77,6 @@ class Cliente(models.Model):
 
     fiador                = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     fiador_inativo        = models.BooleanField("Fiador inativo", default=False)
-    
-    #Documentos
-    
 
 
     class Meta:
@@ -89,7 +86,7 @@ class Cliente(models.Model):
         return self.nome if self.nome else "sem cliente credcoop"
     
     def get_absolute_url(self):
-        return reverse_lazy('cliente:cliente_detail', kwargs={'pk': self.pk})
+        return reverse_lazy('cliente:credcoop_client_detail', kwargs={'pk': self.pk})
     
     def save(self, force_insert=False, force_update=False):
         self.nome = self.nome.upper()

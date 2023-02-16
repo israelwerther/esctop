@@ -9,10 +9,10 @@
         <form method="POST">
             {% csrf_token %}
             <input type="submit" class="btn btn-danger" value="Sim">
-            <a href="{% url 'avalista:avalista_list' %}" class="btn btn-primary">Não</a>
+            <a href="{% url 'avalista:esctop_avalista_list' %}" class="btn btn-primary">Não</a>
         </form>
     </div>
 </div>
-  
+
 {% endblock content %}
 
