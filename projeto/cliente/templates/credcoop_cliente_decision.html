@@ -33,7 +33,7 @@
                 <div class="card-body">
                 <h5 class="card-title">Cadastre um Fiador</h5>
                 {% comment %} <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> {% endcomment %}
-                <a href="{% url 'cliente:fiador_credcoop_add' %}" class="btn btn btn-primary btn-lg btn-block">Cadastrar Fiador</a>
+                <a href="{% url 'cliente:credcoop_fiador_create' %}" class="btn btn btn-primary btn-lg btn-block">Cadastrar Fiador</a>
                 </div>
             </div>
         </div>
@@ -51,8 +51,8 @@
                 </div>
                 <div class="modal-body">
                     <span class="pull-center">
-                        <a href="{% url 'cliente:credcoop_add' %}" type="button" class="btn btn-success">SIM</a>
-                        <a href="{% url 'cliente:fiador_credcoop_add' %}" type="button" class="btn btn-danger">NÃO</a>
+                        <a href="{% url 'cliente:credcoop_cliente_create' %}" type="button" class="btn btn-success">SIM</a>
+                        <a href="{% url 'cliente:credcoop_fiador_create' %}" type="button" class="btn btn-danger">NÃO</a>
                     </span>
                 </div>
                 <div class="modal-footer">

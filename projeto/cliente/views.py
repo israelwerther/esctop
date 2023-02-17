@@ -9,21 +9,41 @@ from .forms import ClienteForm
 from django.db.models.query_utils import Q
 
 
-class CredcoopCreate(CreateView):
+# Views do Cliente Credcoop
+class CredcoopClienteDecision(CreateView):
     model=Cliente
-    template_name='credcoop_form.html'
+    template_name='credcoop_cliente_decision.html'
     form_class=ClienteForm
 
 
-class CredcoopDecision(CreateView):
+class CredcoopClienteDelete(DeleteView):
     model=Cliente
-    template_name='credcoop_decision.html'
+    template_name ='credcoop_cliente_delete.html'    
+    success_url = reverse_lazy('cliente:credcoop_cliente_list')
+
+
+class CredcoopClienteDetail(DetailView):
+    model=Cliente
+    template_name='credcoop_cliente_detail.html'
     form_class=ClienteForm
+
+
+class CredcoopClienteCreate(CreateView):
+    model=Cliente
+    template_name='credcoop_cliente_form.html'
+    form_class=ClienteForm
+
+
+class CredcoopClienteUpdate(UpdateView):
+    model=Cliente
+    template_name='credcoop_cliente_form.html'
+    form_class = ClienteForm
+    #fazer aqui receber o form dos emprestimos filtrados apenas dele
 
 
 class CredcoopClienteList(ListView):
     model=Cliente
-    template_name='credcoop_client_list.html'
+    template_name='credcoop_cliente_list.html'
     paginate_by = 20
     context_object_name = "objects"
 
@@ -45,31 +65,12 @@ class CredcoopClienteList(ListView):
         context = super(CredcoopClienteList, self).get_context_data(**kwargs)
         context['params'] = self.request.META['QUERY_STRING']
 		
-        context['search_by'] = self.request.GET.get('search_by')		
+        context['search_by'] = self.request.GET.get('search_by')
 
         return context
 
 
-class CredcoopDetail(DetailView):
-    model=Cliente
-    template_name='credcoop_detail.html'
-    form_class=ClienteForm
-
-
-class CredcoopUpdate(UpdateView):
-    model=Cliente
-    template_name='credcoop_form.html'
-    form_class = ClienteForm
-    #fazer aqui receber o form dos emprestimos filtrados apenas dele
-
-
-class CredcoopDelete(DeleteView):
-    model=Cliente
-    template_name ='credcoop_delete.html'    
-    success_url = reverse_lazy('cliente:credcoop_cliente_list')
-
-
-# Views do Fiador
+# Views do Fiador Credcoop
 class CredcoopFiadorCreate(CreateView):
     model=Cliente       
     template_name='credcoop_fiador_form.html'

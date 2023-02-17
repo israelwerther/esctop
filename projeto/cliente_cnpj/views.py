@@ -10,21 +10,39 @@ from projeto.avalista.forms import AvalistaForm
 from django.db.models.query_utils import Q
 
 
-class EsctopCreate(CreateView):
+class EsctopClienteDecision(CreateView):
     model=Cliente_cnpj
-    template_name='esctop_form.html'
+    template_name='esctop_cliente_decision.html'
     form_class=Cliente_cnpjForm
 
 
-class EsctopDecision(CreateView):
+class EsctopClienteDelete(DeleteView):
     model=Cliente_cnpj
-    template_name='esctop_decision.html'
+    template_name ='esctop_cliente_delete.html'
+    success_url = reverse_lazy('cliente_cnpj:esctop_cliente_list')
+
+
+class EsctopClienteDetail(DetailView):
+    model=Cliente_cnpj
+    template_name='esctop_cliente_detail.html'
     form_class=Cliente_cnpjForm
+
+
+class EsctopClienteCreate(CreateView):
+    model=Cliente_cnpj
+    template_name='esctop_cliente_form.html'
+    form_class=Cliente_cnpjForm
+
+
+class EsctopClienteUpdate(UpdateView):
+    model=Cliente_cnpj
+    template_name='esctop_cliente_form.html'
+    form_class = Cliente_cnpjForm
 
 
 class EsctopClientList(ListView):
     model=Cliente_cnpj
-    template_name='esctop_client_list.html'
+    template_name='esctop_cliente_list.html'
     paginate_by = 20
     context_object_name = "objects"
 
@@ -52,22 +70,13 @@ class EsctopClientList(ListView):
         return context
 
 
-class EsctopDetail(DetailView):
-    model=Cliente_cnpj
-    template_name='esctop_detail.html'
-    form_class=Cliente_cnpjForm
 
 
-class EsctopUpdate(UpdateView):
-    model=Cliente_cnpj
-    template_name='esctop_form.html'
-    form_class = Cliente_cnpjForm
 
 
-class EsctopDelete(DeleteView):
-    model=Cliente_cnpj
-    template_name ='esctop_delete.html'
-    success_url = reverse_lazy('cliente_cnpj:cliente_cnpj_list')
+
+
+
 
 
 # ***********************NÃO APAGAR ESTA VIEW COMENTADA ABAIXO************************

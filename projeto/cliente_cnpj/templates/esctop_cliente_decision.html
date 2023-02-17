@@ -9,7 +9,7 @@
 	<div class="col">
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{% url 'cliente_cnpj:esctop_decision' %}">Cliente</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'cliente_cnpj:esctop_cliente_decision' %}">Cliente</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Esctop</li>
 			</ol>
 		</nav>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="modal-body">
                     <span class="pull-center">
-                        <a href="{% url 'cliente_cnpj:esctop_add' %}" type="button" class="btn btn-success">SIM</a>
+                        <a href="{% url 'cliente_cnpj:esctop_cliente_create' %}" type="button" class="btn btn-success">SIM</a>
                         <a href="{% url 'avalista:esctop_avalista_create' %}" type="button" class="btn btn-danger">NÃO</a>
                     </span>
                 </div>

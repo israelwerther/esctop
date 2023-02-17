@@ -15,10 +15,23 @@ class EsctopAvalistaDelete(DeleteView):
     success_url = reverse_lazy('avalista:esctop_avalista_list')
 
 
+class EsctopAvalistaDetail(DetailView):
+    model = Avalista
+    template_name = 'esctop_avalista_detail.html'
+    form_class=AvalistaForm
+
+
 class EsctopAvalistaCreate(CreateView):
     model=Avalista
     template_name='esctop_avalista_form.html'
     form_class=AvalistaForm
+
+
+class EsctopFiadorUpdate(UpdateView):
+    model=Avalista
+    template_name='esctop_avalista_form.html'
+    form_class = AvalistaForm
+    success_url = reverse_lazy('avalista:esctop_avalista_list')
 
 
 class EsctopAvalistaList(ListView):
@@ -47,26 +60,3 @@ class EsctopAvalistaList(ListView):
         context['search_by'] = self.request.GET.get('search_by')		
 
         return context
-
-
-class EsctopAvalistaDetail(DetailView):
-    model = Avalista
-    template_name = 'esctop_avalista_detail.html'
-    form_class=AvalistaForm
-
-
-class AvalistaUpdate(UpdateView):
-    model=Avalista
-    template_name='avalista_form.html'
-    form_class = AvalistaForm
-    success_url = reverse_lazy('avalista:esctop_avalista_list')
-
-
-class EsctopFiadorUpdate(UpdateView):
-    model=Avalista
-    template_name='esctop_avalista_form.html'
-    form_class = AvalistaForm
-    success_url = reverse_lazy('avalista:esctop_avalista_list')
-
-
-
