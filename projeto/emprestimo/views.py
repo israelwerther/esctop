@@ -4,9 +4,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, TemplateVie
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
-
 from django.db.models.query_utils import Q
-
 from .models import Emprestimo, EmprestimoPagamento, Cliente, Cliente_cnpj
 from .forms import EmprestimoForm, EmprestimoPagamentoForm
 from django.contrib.auth.decorators import login_required
@@ -66,6 +64,46 @@ class CredcoopEmprestimoList(ListView):
         return context
 
 
+# Credcoop Impressos
+class CredcoopContratoPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='credcoop_impressos/credcoop_contrato_e_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
+		
+        return context
+
+
+class CredcoopContrato(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='credcoop_impressos/credcoop_contrato.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopContrato, self).get_context_data(**kwargs)
+		
+        return context
+
+
+class CredcoopPromissoria(DetailView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model=Emprestimo
+    template_name='credcoop_impressos/credcoop_promissoria.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
+		
+        return context
+
+
 # Esctop
 class EsctopEmprestimoCreate(CreateView):
     model=Emprestimo
@@ -118,46 +156,6 @@ class EsctopEmprestimoList(ListView):
         return context
 
 
-# Credcoop Impressos
-class CredcoopContratoPromissoria(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='credcoop_impressos/credcoop_contrato_e_promissoria.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(CredcoopContratoPromissoria, self).get_context_data(**kwargs)
-		
-        return context
-
-
-class CredcoopContrato(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='credcoop_impressos/credcoop_contrato.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(CredcoopContrato, self).get_context_data(**kwargs)
-		
-        return context
-
-
-class CredcoopPromissoria(DetailView):
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    model=Emprestimo
-    template_name='credcoop_impressos/credcoop_promissoria.html'
-    
-    def get_context_data(self, **kwargs):
-        context = super(CredcoopPromissoria, self).get_context_data(**kwargs)
-		
-        return context
-
-
 # Esctop Impressos
 class EsctopPromissoria(DetailView):
     def test_func(self):
@@ -197,18 +195,21 @@ class EsctopContratoPromissoria(DetailView):
         return context
 
 
+# Templates
 class EmprestimoDelete(DeleteView):
     model=Emprestimo
     template_name ='emprestimo_delete.html'    
     success_url = reverse_lazy('emprestimo:esctop_emprestimo_list')  
 
 
-@login_required
-def emprestimo_detail(request, pk):
+class EmprestimoDetail(DetailView):
+    model=Emprestimo
     template_name='emprestimo_detail.html'
-    obj=Emprestimo.objects.get(pk=pk)
-    context={'object': obj}
-    return render(request, template_name, context)
+    form_class=EmprestimoForm
+
+
+
+
 
 
 @login_required
