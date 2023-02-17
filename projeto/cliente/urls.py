@@ -5,7 +5,7 @@ from projeto.cliente import views as v
 app_name='cliente' 
 
 urlpatterns = [
-    path('credcoop-decision/', login_required(v.CredcoopClienteDecision.as_view()), name='credcoop_decision'),
+    path('credcoop-escolha/', login_required(v.CredcoopClienteDecision.as_view()), name='credcoop_decision'),
     path('credcoop-delete/<int:pk>/', login_required(v.CredcoopClienteDelete.as_view()), name='credcoop_cliente_delete'),
     path('detalhes-cliente-credcoop/<int:pk>/', login_required(v.CredcoopClienteDetail.as_view()), name='credcoop_client_detail'),
     path('formulario-cliente-credcoop/', login_required(v.CredcoopClienteCreate.as_view()), name='credcoop_cliente_create'),
