@@ -113,6 +113,19 @@ class EsctopEmprestimoCreate(CreateView):
     def get_context_data(self, **kwargs):
         context = super(EsctopEmprestimoCreate, self).get_context_data(**kwargs)
         context['clientes_cnpj'] = Cliente_cnpj.objects.all()
+
+        context['total_loans_credcoop'] = Emprestimo.objects.filter(
+            cliente__cpf__isnull=False
+        ).count()
+
+        context['total_loans_esctop'] = Emprestimo.objects.filter(
+            cliente_cnpj__cnpj__isnull=False
+        ).count()
+
+        print("===============", context['total_loans_credcoop'])
+        print("===============", context['total_loans_esctop'])
+
+
         return context
     
     def form_valid(self, form):
@@ -206,10 +219,6 @@ class EmprestimoDetail(DetailView):
     model=Emprestimo
     template_name='emprestimo_detail.html'
     form_class=EmprestimoForm
-
-
-
-
 
 
 @login_required

@@ -27,8 +27,6 @@ class Index(LoginRequiredMixin, TemplateView):
             data_nasc__day=date.today().day
         )
 
-        print("==============================================", aniversariantes_credcoop)
-
         aniversariantes_representante_esctop = Cliente_cnpj.objects.filter(
             rep_data_nasc__month=date.today().month,
             rep_data_nasc__day=date.today().day
@@ -40,7 +38,6 @@ class Index(LoginRequiredMixin, TemplateView):
         )
 
         total_aniversariantes = aniversariantes_credcoop.count() + aniversariantes_representante_esctop.count() + aniversariantes_fiador_esctop.count()
-        
         context['total_aniversariantes'] = total_aniversariantes
 
         return context

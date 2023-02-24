@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block css %}
+<style>
+    .card:hover {
+        transform: scale(1.05);
+    }
+    
+</style>
+{% endblock css %}
+
+
+{% block content %}
+
+<div class="row">
+	<div class="col">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'core:index' %}">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Área do Cliente Credcoop</li>
+			</ol>
+		</nav>
+	</div>
+</div>
+
+<div class="row border border-dark p-3">
+    <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center" style="max-width: 100%">
+        <div class="card bg-white">
+            <div class="card-body">
+                <h5 class="card-title text-sm-left">Empréstimos</h5>
+                <a href="#" class="btn btn-primary btn-block">Cadastrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

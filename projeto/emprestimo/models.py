@@ -52,6 +52,14 @@ class Emprestimo(LifecycleModelMixin, models.Model):
     def get_absolute_url(self):
         return reverse_lazy('emprestimo:emprestimo_detail', kwargs={'pk': self.pk})
 
+    def get_total_loans_esctop(self):
+
+        total_loans_esctop = Emprestimo.objects.filter(
+            cliente=self.cliente
+        ).count()
+        print("================")
+        return total_loans_esctop
+
     @hook('before_create')
     def gera_num_contrato(self):
         modalidade = 1 if self.online else 0

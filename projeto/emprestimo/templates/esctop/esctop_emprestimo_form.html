@@ -10,7 +10,7 @@
 {% block content %}
     <div class="card card-body">
         <div class="card card-body">
-        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP</h3>
+        <h3>CADASTRAR UM EMPRÉSTIMO ESCTOP {{total_loans}}</h3>
         <form method="POST" novalidate>
         {% csrf_token %}
             <div class="row">

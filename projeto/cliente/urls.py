@@ -11,6 +11,7 @@ urlpatterns = [
     path('formulario-cliente-credcoop/', login_required(v.CredcoopClienteCreate.as_view()), name='credcoop_cliente_create'),
     path('atualiza-cliente-credcoop/<int:pk>/', login_required(v.CredcoopClienteUpdate.as_view()), name='credcoop_update'),
     path('clientes-credcoop/', login_required(v.CredcoopClienteList.as_view()), name='credcoop_cliente_list'),
+    path('dashboard-credcoop/', login_required(v.CredcoopDashboard.as_view()), name='credcoop_dashboard'),
 
     # Fiador
     path('formulario-fiador-credcoop/', login_required(v.CredcoopFiadorCreate.as_view()), name='credcoop_fiador_create'),

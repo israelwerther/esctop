@@ -1,58 +1,63 @@
 {% extends 'base.html' %}
 
 {% block css %}
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
-    
+    .card:hover {
+        transform: scale(1.05);
+    }
 </style>
 {% endblock css %}
 
 {% block content %}
-<div class="jumbotron jumbotron-fluid shadow rounded">
-    <div class="container">
-        <h1>Bem Vindo</h1>
-    </div>
+<div class="row">
+	<div class="col">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'core:index' %}">Início</a></li>
+                <li class="breadcrumb-item active" aria-current="page"></li>
+			</ol>
+		</nav>
+	</div>
 </div>
 <div class="row">
-    {% comment %} <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
-        <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
-            <div class="card-header card text-center">
-                <i class="fa-solid text-success"> esctop</i>
-            </div>
-            <div class="card-body text-success">,
-                <p class="badge badge-primary">Cadastre ou consulte clientes</p>
-                <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Acessar</a>
+    <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
+        <div class="card text-white bg-primary mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; border-radius: 0;">
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <h3 class="card-title text-uppercase">esctop</h3>
+                <a href="{% url 'cliente_cnpj:esctop_dashboard' %}" class="stretched-link"></a>
             </div>
         </div>
     </div>
-
-    <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
-        <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
-            <div class="card-header card text-center">
-                <i class="fa-solid fa-memo-circle-info text-success"> Credcoop</i>
-            </div>
-            <div class="card-body text-success">,
-                <p class="badge badge-primary">Cadastre ou consulte clientes</p>
-                <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Acessar</a>
-            </div>
-        </div>
-    </div> {% endcomment %}
-    <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
-        <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
-            <div class="card-header card text-center">
-                <i class="fa-solid fa-calendar text-success"> Aniversariantes</i>
-            </div>
-            <div class="card-body text-success">
-                {% if total_aniversariantes > 0 %}
-                    <p class="badge badge-primary">{{total_aniversariantes}} Aniversariante{% if total_aniversariantes != 1 %}(s){% endif %}</p>
-                    <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Ver lista</a>
-                {% else %}
-                    <p class="badge badge-primary">Nenhum aniversariante hoje</p>
-                {% endif %}
-            </div>
-        </div>
-    </div>
-
 </div>
+
+<div class="row">
+    <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
+        <div class="card text-white bg-primary mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; border-radius: 0;">
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <h3 class="card-title text-uppercase">credcoop</h3>
+                <a href="{% url 'cliente:credcoop_dashboard' %}" class="stretched-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
+    <div class="card border-success mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;">
+        <div class="card-header card text-center">
+            <i class="fa-solid fa-calendar text-success"> Aniversariantes</i>
+        </div>
+        <div class="card-body text-success">
+            {% if total_aniversariantes > 0 %}
+                <p class="badge badge-primary">{{total_aniversariantes}} Aniversariante{% if total_aniversariantes != 1 %}(s){% endif %}</p>
+                <a href="{% url 'core:aniversariantes'%}" class="btn btn-success btn-block">Ver lista</a>
+            {% else %}
+                <p class="badge badge-primary">Nenhum aniversariante hoje</p>
+            {% endif %}
+        </div>
+    </div>
+</div> {% endcomment %}
 
 {% endblock content %}

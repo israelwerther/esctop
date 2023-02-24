@@ -1,11 +1,12 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView, TemplateView
 from .models import Cliente_cnpj
 from projeto.avalista.models import Avalista
 from .forms import Cliente_cnpjForm
 from projeto.avalista.forms import AvalistaForm
+from projeto.emprestimo.models import Emprestimo
 
 from django.db.models.query_utils import Q
 
@@ -70,10 +71,22 @@ class EsctopClientList(ListView):
         return context
 
 
+class EsctopDashboard(TemplateView):
+    template_name='esctop_dashboard.html'
 
+    def test_func(self):
+        return self.request.user.is_superuser
+    
+    def get_context_data(self, **kwargs):
+        context = super(EsctopDashboard, self).get_context_data(**kwargs)
 
+        context['total_loans_esctop'] = Emprestimo.objects.filter(
+            cliente_cnpj__pk__isnull=False
+        ).count()
 
+        print("==============", context['total_loans_esctop'])
 
+        return context
 
 
 

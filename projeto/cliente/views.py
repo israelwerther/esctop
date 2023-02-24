@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView, TemplateView
 from django.core.paginator import Paginator
 from .models import Cliente
 from .forms import ClienteForm
@@ -76,3 +76,11 @@ class CredcoopFiadorCreate(CreateView):
     template_name='credcoop_fiador_form.html'
     form_class=ClienteForm
     success_url = reverse_lazy('cliente:credcoop_cliente_list')
+
+
+class CredcoopDashboard(TemplateView):
+    template_name='credcoop_dashboard.html'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
