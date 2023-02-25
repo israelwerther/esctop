@@ -1,32 +1,74 @@
 {% extends 'base.html' %}
 
 {% block css %}
+
 <style>
     .card:hover {
         transform: scale(1.05);
     }
-    
+
+    i {
+        font-size: 1.5em;
+    }
+
+
 </style>
 {% endblock css %}
 
 {% block content %}
 
 <div class="row">
-	<div class="col">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{% url 'core:index' %}">Início</a></li>
+    <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Início</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Área do Cliente Esctop</li>
-			</ol>
-		</nav>
-	</div>
+            </ol>
+        </nav>
+    </div>
 </div>
 
 <div class="row">
+    <div class="col-md-12">
+        
+        <div class="card-deck">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-regular fa-user"></i> Clientes</h5>
+                    <p class="card-text">300</p>
+                </div>
+            </div>
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa-solid fa-money-check-dollar"></i> Empréstimos</h5>
+                    <p class="card-text">R$ 1.000.000</p>
+                </div>
+            </div>
+            <div class="card bg-info text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Média de Juros</h5>
+                    <p class="card-text">10%</p>
+                </div>
+            </div>
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Valor Médio das Parcelas</h5>
+                    <p class="card-text">$500,00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% comment %} <div class="row">
     <div class="col-lg-3 col-sm-6 col-12 text-center d-sm-flex justify-content-center">
-        <div class="card text-white bg-primary mb-3" style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; border-radius: 0;">
+        <div class="card text-white bg-primary mb-3"
+            style="max-width: 100%; min-width: 250px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px; border-radius: 0;">
             <div class="card-body d-flex align-items-center justify-content-center">
-                <h3 class="card-title text-uppercase" >Empréstimos</h3>
+                <h3 class="card-title text-uppercase">Empréstimos</h3>
                 <a href="{% url 'emprestimo:esctop_emprestimo_list' %}" class="stretched-link"></a>
             </div>
         </div>
@@ -34,30 +76,71 @@
     <div class="col-lg-6 col-sm-6 col-12">
         <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Empréstimos</h5>
-              <div class="row">
-                <div class="col-6">
-                  <p class="card-text">Total</p>
-                  <h3 class="card-title">1.234</h3>
+                <h5 class="card-title">Empréstimos</h5>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="card-text">Total</p>
+                        <h3 class="card-title">1.234</h3>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text">Receita total:</p>
+                        <h3 class="card-title">$10.000</h3>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text">Pedidos pendentes:</p>
+                        <h3 class="card-title">23</h3>
+                    </div>
+                    <div class="col-6">
+                        <p class="card-text">Tempo médio de resposta:</p>
+                        <h3 class="card-title">2h 15min</h3>
+                    </div>
                 </div>
-                <div class="col-6">
-                  <p class="card-text">Receita total:</p>
-                  <h3 class="card-title">$10.000</h3>
-                </div>
-                <div class="col-6">
-                  <p class="card-text">Pedidos pendentes:</p>
-                  <h3 class="card-title">23</h3>
-                </div>
-                <div class="col-6">
-                  <p class="card-text">Tempo médio de resposta:</p>
-                  <h3 class="card-title">2h 15min</h3>
-                </div>
-              </div>
             </div>
-          </div>
-          
+        </div>
+
     </div><!-- col -->
-</div>
+
+</div> {% endcomment %}
+
+{% comment %} <section class="mt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Empréstimo</h2>
+                <p class="lead">Veja abaixo as informações do seu empréstimo:</p>
+                <ul class="list-group">
+                    <li class="list-group-item bg-primary text-white">
+                        <span class="font-weight-bold">Valor solicitado:</span>
+                        <span class="float-right">$10.000</span>
+                    </li>
+                    <li class="list-group-item bg-success text-white">
+                        <span class="font-weight-bold">Taxa de juros:</span>
+                        <span class="float-right">12% ao ano</span>
+                    </li>
+                    <li class="list-group-item bg-info text-white">
+                        <span class="font-weight-bold">Prazo:</span>
+                        <span class="float-right">36 meses</span>
+                    </li>
+                    <li class="list-group-item bg-warning text-white">
+                        <span class="font-weight-bold">Valor das parcelas:</span>
+                        <span class="float-right">$350,00</span>
+                    </li>
+                    <li class="list-group-item bg-danger text-white">
+                        <span class="font-weight-bold">Data do primeiro pagamento:</span>
+                        <span class="float-right">10/03/2023</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <img src="https://via.placeholder.com/500x300" class="img-fluid rounded">
+            </div>
+        </div>
+    </div>
+</section> {% endcomment %}
+
+
+
+
 
 
 {% endblock content %}

@@ -16,7 +16,11 @@
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" >
   
   <!-- Font-awesome -->
-  <link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  {% comment %} Comentei o font-awesome abaixo para observar se não afeta 
+  nenhuma tela para depois remover. será substituido pelo estilo acima. Remover o font-awesome antigo também {% endcomment %}
+  {% comment %} <link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}"> {% endcomment %}
 
   <!-- Select2 -->
   <link rel="stylesheet" href="{% static 'bootstrap/css/select2.min.css' %}" />
