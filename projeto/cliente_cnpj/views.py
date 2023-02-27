@@ -83,8 +83,10 @@ class EsctopDashboard(TemplateView):
         context['total_loans_esctop'] = Emprestimo.objects.filter(
             cliente_cnpj__pk__isnull=False
         ).count()
+        
+        context['total_clients_esctop'] = Cliente_cnpj.objects.all().count()
 
-        print("==============", context['total_loans_esctop'])
+        print("==============", context['total_clients_esctop'])
 
         return context
 

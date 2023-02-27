@@ -20,29 +20,23 @@
 {% block content %}
 
 <div class="row">
-	<div class="col p-0">
-		<nav aria-label="breadcrumb">
-			<ol class="breadcrumb">
-				<li class="breadcrumb-item"><a href="{% url 'cliente_cnpj:esctop_cliente_decision' %}">Cliente</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Cadastro de cliente Esctop</li>
-			</ol>
-		</nav>
-	</div>
-</div>
+    <div class="col">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'core:index' %}">Início</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'cliente_cnpj:esctop_dashboard' %}">Dashboard Esctop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Cadastro de Cliente Esctop</li>
+            </ol>
+        </nav>
+    </div>
+</div> <!-- breadcrumb -->
 
 <label class="text-secondary mt-2">Cadastre um cliente Esctop</label>
-
+<div class="mx-3">
 <!--Accordion wrapper-->
 <form method="POST" novalidate id="myForm" >
 	{% csrf_token %}
-
-	<div class="row">
-		<div class="col-9">
-
-		</div>
-	</div>
 	<div class="row mt-1">
-		
 		<div class="col-sm-12 col-md-9 card card-body">
 			<div class="accordion" id="accordion">
 				<div class="card">
@@ -545,7 +539,7 @@
 
 </form> 
 <!-- Accordion wrapper -->
-
+</div>
 
 {% endblock content %}
 
