@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     # 'datetimepicker',
     # 'bootstrap_modal_forms',
     'dbbackup',
+    'rest_framework',
     
     #Minhas apps
     'projeto.core',

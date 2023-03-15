@@ -11,4 +11,7 @@ urlpatterns = [
     path('formulario-cliente-esctop/', login_required(v.EsctopClienteCreate.as_view()), name='esctop_cliente_create'),
     path('atualiza-cliente-esctop/<int:pk>/', login_required(v.EsctopClienteUpdate.as_view()), name='esctop_cliente_update'),
     path('clientes-esctop/', login_required(v.EsctopClientList.as_view()), name='esctop_cliente_list'),
+    
+    # APIS
+    path('esctop-api/clientes/', login_required(v.EsctopClienteCreateAPI.as_view()), name='esctop_cliente_create_api'),
 ]

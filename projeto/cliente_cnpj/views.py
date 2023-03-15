@@ -6,8 +6,11 @@ from .models import Cliente_cnpj
 from projeto.avalista.models import Avalista
 from .forms import Cliente_cnpjForm
 from projeto.avalista.forms import AvalistaForm
-
 from django.db.models.query_utils import Q
+from rest_framework import generics
+from .serializers import Cliente_cnpjSerializer
+from rest_framework.renderers import JSONRenderer
+
 
 
 class EsctopClienteDecision(CreateView):
@@ -32,7 +35,12 @@ class EsctopClienteCreate(CreateView):
     model=Cliente_cnpj
     template_name='esctop_cliente_form.html'
     form_class=Cliente_cnpjForm
+    
 
+
+class EsctopClienteCreateAPI(generics.CreateAPIView):
+    serializer_class = Cliente_cnpjSerializer
+    # renderer_classes = [JSONRenderer]
 
 class EsctopClienteUpdate(UpdateView):
     model=Cliente_cnpj
