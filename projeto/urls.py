@@ -20,6 +20,9 @@ from django.conf import settings
 
 
 urlpatterns = [
+    # project    
+    path('accounts/', include('projeto.accounts.urls')),
+    path('admin/', admin.site.urls),
     path('', include('projeto.core.urls')),
     path('produto/', include('projeto.produto.urls')),
     path('emprestimo/', include('projeto.emprestimo.urls')),   
@@ -27,8 +30,12 @@ urlpatterns = [
     path('credcoop/', include('projeto.cliente.urls')),
     path('esctop/', include('projeto.cliente_cnpj.urls')),
     path('avalista/', include('projeto.avalista.urls')),
-    path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
-    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}), 
-    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}), 
+    path('accounts-user/', include('django.contrib.auth.urls')),
+    
+    # Files
+    re_path(r'^media/(?P<path>.*)$', serve,{'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
+    
+    # API
+    path('api/auth/', include('rest_framework.urls'))
 ]

@@ -32,10 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #Apps de terceiros
     'widget_tweaks',
-    # 'bootstrapform',
-    # 'datetimepicker',
-    # 'bootstrap_modal_forms',
     'dbbackup',
+    'rest_framework',
     
     #Minhas apps
     'projeto.core',
@@ -45,6 +43,10 @@ INSTALLED_APPS = [
     'projeto.cliente',
     'projeto.cliente_cnpj',
     'projeto.avalista',
+    # 'projeto.accounts',
+    
+    # API
+    'projeto.accounts.apps.AccountsConfig',
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -183,4 +185,12 @@ if not DEBUG:
         # django.contrib.auth) you may enable sending PII data.
         send_default_pii=True
     )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
+
 
