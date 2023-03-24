@@ -30,10 +30,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
     #Apps de terceiros
     'widget_tweaks',
     'dbbackup',
-    'rest_framework',
     
     #Minhas apps
     'projeto.core',
@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     # 'projeto.accounts',
     
     # API
+    'rest_framework',
     'projeto.accounts.apps.AccountsConfig',
+    'projeto.public.apps.PublicConfig',
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
