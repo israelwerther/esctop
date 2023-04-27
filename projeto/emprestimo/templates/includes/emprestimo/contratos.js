@@ -40,7 +40,7 @@ getParcelas() {
                     vencimento.add(1, 'month').date(1)
                 }
                 // Se for abril e o dia da parcela anterior for 01 então entra nessa condição
-                if(isApr && previousParcela.date() == 1) {
+                if(isApr && (previousParcela && previousParcela.date() == 1)) {
                     // Remove um mês do vencimento e seta o ultimo dia do mês para dia do vencimento
                     vencimento.subtract(1, 'month')
                     vencimento.date(diaVencimentoEmprestimo)
