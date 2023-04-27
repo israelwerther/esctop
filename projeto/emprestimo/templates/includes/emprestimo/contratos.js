@@ -45,6 +45,7 @@ getParcelas() {
                     vencimento.subtract(1, 'month')
                     vencimento.date(diaVencimentoEmprestimo)
                 }
+                //testando
             }
             // Certifica-se de que vai sempre pegar o ultimo dia do mês caso o dia do 
             // emprestivo seja maior que o dia do vencimento da parcela
