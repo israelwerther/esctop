@@ -11,10 +11,22 @@
     <div class="col-12">
         <form id="formSubmit" method="get" onsubmit="setDate()">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
                         <label for="search_by">Pesquisar</label>
                         <input type="text" name="search_by" maxlength="255" class="form-control" value="{{search_by|default:''}}" placeholder="Ex: Nome do cliente, contrato..." autofocus>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Data inicial:</label>
+                        <input type="date" name="data_inicial" class="form-control" value="{{data_inicial}}">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Data final:</label>
+                        <input type="date" name="data_final" class="form-control" value="{{data_final}}">
                     </div>
                 </div>
             </div>

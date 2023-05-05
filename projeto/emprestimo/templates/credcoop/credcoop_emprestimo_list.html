@@ -11,14 +11,38 @@
         <div class="col-12">
             <form id="formSubmit" method="get" onsubmit="setDate()">
                 <div class="row">            
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="search_by">Pesquisar</label>
                             <input type="text" name="search_by" maxlength="255" class="form-control" value="{{search_by|default:''}}" placeholder="Ex: Nome do cliente, Nº do contrato" autofocus>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Data inicial:</label>
+                            <input type="date" name="data_inicial" class="form-control" value="{{data_inicial}}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Data final:</label>
+                            <input type="date" name="data_final" class="form-control" value="{{data_final}}">
+                        </div>
+                    </div>
                 </div>
                 <div class="row pb-3">
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-success btn-rounded" type="submit">
+                            <i class="os-icon os-icon-ui-37"></i>
+                            <span>Filtrar</span>
+                        </button>
+                        <a class="btn btn-primary btn-rounded" href="{% url 'emprestimo:credcoop_emprestimo_list' %}">
+                            <span >Limpar filtro</span>
+                        </a>
+                    </div>
+                </div>
+                
+                {% comment %} <div class="row pb-3">
                     <div class="col-md-12">
                         <div class="text-right">
                             <button class="btn btn-success btn-rounded" type="submit">
@@ -30,7 +54,7 @@
                             </a>
                         </div>
                     </div>
-                </div>
+                </div> {% endcomment %}
             </form>
         </div>
     </div>

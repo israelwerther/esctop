@@ -12,6 +12,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils import timezone
 from django.http import JsonResponse
+from datetime import datetime, timedelta
 
 # Credcoop
 class CredcoopEmprestimoCreate(CreateView):
@@ -44,22 +45,33 @@ class CredcoopEmprestimoList(ListView):
             cliente__isnull=False
         )
 
-        if self.request.GET.get('search_by'):
+        search_by = self.request.GET.get('search_by')
+        if search_by:
             queryset = queryset.filter(
                 Q(
-                    Q(n_contrato__icontains=self.request.GET.get('search_by'))|
-					Q(cliente__nome__icontains=self.request.GET.get('search_by'))
+                    Q(n_contrato__icontains=search_by) |
+                    Q(cliente__nome__icontains=search_by)
                 )
             )
+
+        data_inicial = self.request.GET.get('data_inicial')
+        data_final = self.request.GET.get('data_final')
+        
+        if data_inicial and data_final:
+            data_inicial = datetime.strptime(data_inicial, '%Y-%m-%d')
+            data_final = datetime.strptime(data_final, '%Y-%m-%d')
+            data_final += timedelta(days=1)
+            queryset = queryset.filter(dt_emprestimo__range=(data_inicial, data_final))
 
         return queryset
 
     
     def get_context_data(self, **kwargs):
         context = super(CredcoopEmprestimoList, self).get_context_data(**kwargs)
-        context['params'] = self.request.META['QUERY_STRING']
-		
-        context['search_by'] = self.request.GET.get('search_by')		
+        context['params'] = self.request.META['QUERY_STRING']		
+        context['search_by'] = self.request.GET.get('search_by')
+        context['data_inicial'] = self.request.GET.get('data_inicial')
+        context['data_final'] = self.request.GET.get('data_final')
 
         return context
 
@@ -143,6 +155,15 @@ class EsctopEmprestimoList(ListView):
                     Q(cliente_cnpj__cnpj__icontains=self.request.GET.get('search_by'))                    
                 )
             )
+        
+        data_inicial = self.request.GET.get('data_inicial')
+        data_final = self.request.GET.get('data_final')
+        
+        if data_inicial and data_final:
+            data_inicial = datetime.strptime(data_inicial, '%Y-%m-%d')
+            data_final = datetime.strptime(data_final, '%Y-%m-%d')
+            data_final += timedelta(days=1)
+            queryset = queryset.filter(dt_emprestimo__range=(data_inicial, data_final))
 
         return queryset
 
@@ -150,8 +171,9 @@ class EsctopEmprestimoList(ListView):
     def get_context_data(self, **kwargs):
         context = super(EsctopEmprestimoList, self).get_context_data(**kwargs)
         context['params'] = self.request.META['QUERY_STRING']
-		
-        context['search_by'] = self.request.GET.get('search_by')		
+        context['search_by'] = self.request.GET.get('search_by')
+        context['data_inicial'] = self.request.GET.get('data_inicial')
+        context['data_final'] = self.request.GET.get('data_final')
 
         return context
 
