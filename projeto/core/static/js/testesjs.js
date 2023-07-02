@@ -61,12 +61,19 @@ function sequencial(){
 
 
 // função para marcar online quando presencial não está marcado
-function checkUncheck(){
-    if ($('#online').is(':checked') == true) {
-        $('#presencial').prop('checked', false);
+
+function handleCheckboxChange(checkbox) {
+    var presencialCheckbox = document.getElementById("customSwitch1");
+    var onlineCheckbox = document.getElementById("customSwitch2");
+
+    if (checkbox === presencialCheckbox && checkbox.checked) {
+      onlineCheckbox.checked = false;
+    } else if (checkbox === onlineCheckbox && checkbox.checked) {
+      presencialCheckbox.checked = false;
+    } else if (!presencialCheckbox.checked && !onlineCheckbox.checked) {
+      checkbox.checked = true;
     }
-    if($('#online').is(':checked') == false) {
-        $('#presencial').prop('checked', true);
-    }
-}
+  }
+    
+
 // função para marcar online quando presencial não está marcado

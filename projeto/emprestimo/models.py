@@ -24,7 +24,7 @@ class Emprestimo(LifecycleModelMixin, models.Model):
     n_contrato           = models.CharField("Nº Contrato", max_length=255, unique=True, blank=True, null=True)
     valor_multa          = models.DecimalField("Multa por atraso", max_digits=50, decimal_places=2, null=True, blank=True)
     juros_ao_dia         = models.DecimalField("Juros ao dia", max_digits=50, decimal_places=2, null=True, blank=True)
-    valor_mutuado        = models.DecimalField("Valor mutuado", max_digits=50, decimal_places=2, null=True, blank=True)
+    valor_mutuado        = models.DecimalField("Valor mutuado", max_digits=50, decimal_places=30, null=True, blank=True)
     juros_ao_mes         = models.DecimalField("Juros ao mês", max_digits=50, decimal_places=2, null=True, blank=True)
     juros_moratorio      = models.DecimalField("Juros Moratório", max_digits=50, decimal_places=4, null=True, blank=True)
     multa_por_atraso     = models.DecimalField("Multa por atraso", max_digits=50, decimal_places=3, null=True, blank=True)
