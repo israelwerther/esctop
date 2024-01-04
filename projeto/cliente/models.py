@@ -62,7 +62,7 @@ class Cliente(models.Model):
     conta                 = models.CharField("Nº conta",max_length=15, blank=True, null=True)   
     tipo_de_conta         = models.ForeignKey(Tipo_de_conta, on_delete=models.PROTECT,max_length=25, blank=True, null=True)
     tipo_de_chave_pix     = models.ForeignKey(Chave_PIX, on_delete=models.PROTECT,max_length=50, blank=True, null=True)
-    chave_pix             = models.CharField("Chave Pix", max_length=50, blank=True, null=True)   
+    chave_pix             = models.CharField("Chave Pix", max_length=255, blank=True, null=True)   
 
     # REFERÊNCIAS
     ref1_nome             = models.CharField("Nome", max_length=50, blank=True, null=True)
